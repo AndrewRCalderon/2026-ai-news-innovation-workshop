@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" class="briefing-deck">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Use Cases — Slides — Day 1 — AI Journalism Workshop</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/briefing.css">
+</head>
+<body class="briefing briefing-deck">
+
+  <div class="chrome-top">
+    <span class="chrome-eyebrow">
+      <a href="/">AI Journalism Workshop</a><span class="sep">·</span><a href="/day-1/">Day 1</a><span class="sep">·</span><a href="../03-use-cases.html">Use Cases</a><span class="sep">·</span>Slides
+    </span>
+    <div class="chrome-right">
+      <span class="chrome-counter" id="counter">01 / 08</span>
+      <button type="button" class="chrome-fs" id="fs-toggle" aria-label="Toggle fullscreen">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3"></path>
+          <path d="M21 8V5a2 2 0 0 0-2-2h-3"></path>
+          <path d="M3 16v3a2 2 0 0 0 2 2h3"></path>
+          <path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="deck">
+      <div class="track" id="track">
+
+        <section class="slide slide-cover" data-slide="cover">
+          <div class="slide-inner">
+            <h1 class="cover-title">Use Cases</h1>
+            <p class="cover-dek">Not everything is a good AI problem. Knowing which is the real skill.</p>
+            <div class="cover-meta"><span>10:00 AM</span><span class="div">·</span><span>30 MIN</span><span class="div">·</span><span>Lecture</span></div>
+            <ul class="cover-contents">
+              <li><button type="button" data-jump="s1"><span class="n">01</span> What Does AI Actually Do?</button></li>
+              <li><button type="button" data-jump="s2"><span class="n">02</span> Use Cases in Journalism</button></li>
+              <li><button type="button" data-jump="s3"><span class="n">03</span> Use Cases Outside Journalism</button></li>
+              <li><button type="button" data-jump="s4"><span class="n">04</span> Not a Good Use Case (Yet)</button></li>
+              <li><button type="button" data-jump="s5"><span class="n">05</span> The Pattern</button></li>
+              <li><button type="button" data-jump="s6"><span class="n">06</span> The Practical Question</button></li>
+            </ul>
+            <p class="cover-hint">→ or click to begin</p>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s1">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">What Does AI Actually Do?</h2></div>
+            <p class="lede">It's easy to get lost in abstractions. These are real, deployed use cases — not theoretical ones. Understanding what AI can actually do, and what it can't, is the difference between smart experimentation and wasting time.</p>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s2">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">Use Cases in Journalism</h2></div>
+            <dl class="roster">
+              <div class="roster-row"><dt>Data journalism</dt><dd>NYT's Cheatsheet rated 10,000 tax-registry names for investigative interest, and processed 500 hours of leaked audio in days. Catch: still verify yourself.</dd></div>
+              <div class="roster-row"><dt>Routine news</dt><dd>The AP went from 300 to 3,000–4,000 earnings reports a quarter, freeing ~20% of reporters' time. Catch: only works for templated content.</dd></div>
+              <div class="roster-row"><dt>Coverage auditing</dt><dd>THE CITY mapped four years of stories by neighborhood to check their own coverage gaps. Catch: verify AI's read of location and context.</dd></div>
+              <div class="roster-row"><dt>Headline ideation</dt><dd>Ask for ten angles, pick the strongest. Catch: AI headlines skew clichéd.</dd></div>
+              <div class="roster-row"><dt>Accessibility</dt><dd>"Explain this so a high schooler would understand." Catch: guarantees clarity, not accuracy.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s3">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">Use Cases Outside Journalism</h2></div>
+            <dl class="roster">
+              <div class="roster-row"><dt>Customer service</dt><dd>Handles routine questions so people focus on real complaints. Catch: needs human oversight.</dd></div>
+              <div class="roster-row"><dt>Content moderation</dt><dd>Flags spam for human review at scale. Catch: reflects training-data bias.</dd></div>
+              <div class="roster-row"><dt>Search & recommendation</dt><dd>Understands intent, not just keywords. Catch: can create filter bubbles.</dd></div>
+              <div class="roster-row"><dt>Video & audio</dt><dd>Transcribes and captions automatically. Catch: accuracy drops with noise and jargon.</dd></div>
+              <div class="roster-row"><dt>Sentiment analysis</dt><dd>Flags where anger concentrates across comments. Catch: misreads sarcasm.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s4">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Not a Good Use Case (Yet)</h2></div>
+            <ul class="field-notes">
+              <li><strong>Investigative reporting</strong> — can't call a source or earn a whistleblower's trust.</li>
+              <li><strong>Original breaking news</strong> — synthesizes existing information; it's always behind.</li>
+              <li><strong>Opinion requiring deep expertise</strong> — no credibility or unique perspective.</li>
+              <li><strong>Stories requiring human experience</strong> — that reporting is human work.</li>
+              <li><strong>Anything needing real-time accuracy</strong> — training data has a cutoff.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s5">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">05</span><h2 class="block-title">The Pattern</h2></div>
+            <div class="compare-grid">
+              <div class="compare-col is-primary">
+                <h3>Works When</h3>
+                <ul>
+                  <li>Repetitive and structured.</li>
+                  <li>High-quality input data.</li>
+                  <li>Speed matters more than perfection.</li>
+                  <li>Augments human work.</li>
+                  <li>You can verify the output.</li>
+                  <li>Mistakes are tolerable.</li>
+                </ul>
+              </div>
+              <div class="compare-col is-secondary">
+                <h3>Doesn't Work When</h3>
+                <ul>
+                  <li>Needs original reporting.</li>
+                  <li>Accuracy is non-negotiable.</li>
+                  <li>Needs to replace human judgment.</li>
+                  <li>Context and nuance are everything.</li>
+                  <li>Readers need to trust a human call.</li>
+                  <li>Needs real-world experience.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s6">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">06</span><h2 class="block-title">The Practical Question</h2></div>
+            <ul class="field-notes">
+              <li><strong>Research & preparation:</strong> yes.</li>
+              <li><strong>Analyzing datasets:</strong> yes.</li>
+              <li><strong>Drafting routine content:</strong> yes, if templated.</li>
+              <li><strong>Brainstorming:</strong> yes.</li>
+              <li><strong>Reporting & sourcing:</strong> no.</li>
+              <li><strong>Final accuracy checks:</strong> no.</li>
+              <li><strong>Adding credibility:</strong> no.</li>
+            </ul>
+            <blockquote class="pull-question">Knowing which problems are AI problems and which aren't — that's the skill.</blockquote>
+          </div>
+        </section>
+
+        <section class="slide slide-end" data-slide="end">
+          <div class="slide-inner">
+            <div class="end-mark">-30-</div>
+            <p class="end-line">That's where AI actually helps — and where it doesn't. Yet.</p>
+            <div class="end-links">
+              <a href="#" data-jump="cover">↺ Restart briefing</a>
+              <a href="../03-use-cases.html">← Back to Overview</a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <button type="button" class="edge-arrow edge-prev" id="prev-btn" aria-label="Previous section">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 4 7 12 15 20"></polyline></svg>
+    </button>
+    <button type="button" class="edge-arrow edge-next" id="next-btn" aria-label="Next section">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 4 17 12 9 20"></polyline></svg>
+    </button>
+    <div class="dot-nav" id="dots"></div>
+  </div>
+
+  <script src="/js/deck.js"></script>
+</body>
+</html>

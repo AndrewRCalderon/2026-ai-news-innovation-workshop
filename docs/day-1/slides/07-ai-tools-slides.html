@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" class="briefing-deck">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Tools — Slides — Day 1 — AI Journalism Workshop</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/briefing.css">
+</head>
+<body class="briefing briefing-deck">
+
+  <div class="chrome-top">
+    <span class="chrome-eyebrow">
+      <a href="/">AI Journalism Workshop</a><span class="sep">·</span><a href="/day-1/">Day 1</a><span class="sep">·</span><a href="../07-ai-tools.html">AI Tools</a><span class="sep">·</span>Slides
+    </span>
+    <div class="chrome-right">
+      <span class="chrome-counter" id="counter">01 / 09</span>
+      <button type="button" class="chrome-fs" id="fs-toggle" aria-label="Toggle fullscreen">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3"></path>
+          <path d="M21 8V5a2 2 0 0 0-2-2h-3"></path>
+          <path d="M3 16v3a2 2 0 0 0 2 2h3"></path>
+          <path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="deck">
+      <div class="track" id="track">
+
+        <section class="slide slide-cover" data-slide="cover">
+          <div class="slide-inner">
+            <h1 class="cover-title">AI Tools</h1>
+            <p class="cover-dek">The question isn't "are there tools?" There's one for almost everything. It's "which one should I use?"</p>
+            <div class="cover-meta"><span>2:30 PM</span><span class="div">·</span><span>120 MIN</span><span class="div">·</span><span>Hands-on</span></div>
+            <ul class="cover-contents">
+              <li><button type="button" data-jump="s1"><span class="n">01</span> Why This Matters</button></li>
+              <li><button type="button" data-jump="s2"><span class="n">02</span> Your Workshop Tech Stack</button></li>
+              <li><button type="button" data-jump="s3"><span class="n">03</span> How They Work Together</button></li>
+              <li><button type="button" data-jump="s4"><span class="n">04</span> The Broader Landscape</button></li>
+              <li><button type="button" data-jump="s5"><span class="n">05</span> Quick Reference</button></li>
+              <li><button type="button" data-jump="s6"><span class="n">06</span> Evaluating a New Tool</button></li>
+              <li><button type="button" data-jump="s7"><span class="n">07</span> For This Workshop</button></li>
+            </ul>
+            <p class="cover-hint">→ or click to begin</p>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s1">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">Why This Matters</h2></div>
+            <p class="lede">There's an AI tool for just about every task. Two goals here: a deep dive into your actual workshop stack, and a survey of the broader landscape so you can make informed choices later.</p>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s2">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">Your Workshop Tech Stack</h2></div>
+            <dl class="roster">
+              <div class="roster-row"><dt>VS Code</dt><dd>Your editor. Free, lightweight, and Claude Code integrates directly into it.</dd></div>
+              <div class="roster-row"><dt>Claude Code</dt><dd>Your AI pair programmer. Understands your codebase, writes code, runs commands. Plan Mode shows its plan before acting.</dd></div>
+              <div class="roster-row"><dt>GitHub</dt><dd>Your project home. Fork the workshop repo, build in <code>submissions/day-N/your-name/</code>, PR at day's end.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s3">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">How They Work Together</h2></div>
+            <p>A real session, start to finish:</p>
+            <ol class="history">
+              <li><span class="era">1</span><h3>Ideation</h3><p>Describe the problem in plain language.</p></li>
+              <li><span class="era">2</span><h3>Planning</h3><p>Claude Code shows its plan first.</p></li>
+              <li><span class="era">3</span><h3>Building</h3><p>It writes; you edit, ask, iterate.</p></li>
+              <li><span class="era">4</span><h3>Testing</h3><p>Run it locally, try it out.</p></li>
+              <li class="is-hinge"><span class="era">5</span><h3>Shipping</h3><p>Commit, PR, done.</p></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s4">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">The Broader Landscape</h2></div>
+            <h3>Text & Writing</h3>
+            <dl class="roster">
+              <div class="roster-row"><dt>Claude</dt><dd>Reasoning, writing, analysis. Free / $20mo.</dd></div>
+              <div class="roster-row"><dt>ChatGPT</dt><dd>General-purpose. Free / $20–200mo.</dd></div>
+              <div class="roster-row"><dt>Gemini</dt><dd>Google Workspace integration. Free / paid.</dd></div>
+              <div class="roster-row"><dt>Perplexity</dt><dd>Search with real-time web access. Free / $20mo.</dd></div>
+            </dl>
+            <h3>Coding & Development</h3>
+            <dl class="roster">
+              <div class="roster-row"><dt>Claude Code</dt><dd>Agentic coding. Included with Pro.</dd></div>
+              <div class="roster-row"><dt>GitHub Copilot</dt><dd>Inline autocomplete. Free / $10mo.</dd></div>
+              <div class="roster-row"><dt>Cursor</dt><dd>AI-native editor. Free / $20mo.</dd></div>
+              <div class="roster-row"><dt>Replit</dt><dd>Browser-based, no setup. Free / $13mo.</dd></div>
+            </dl>
+            <h3>Data, Images, Audio/Video, Research, Automation</h3>
+            <dl class="roster">
+              <div class="roster-row"><dt>Data & research</dt><dd>Claude file upload, Jupyter + Claude, Airtable, Zotero, Google Scholar.</dd></div>
+              <div class="roster-row"><dt>Images</dt><dd>DALL-E, Midjourney, Canva Magic Design.</dd></div>
+              <div class="roster-row"><dt>Audio & video</dt><dd>ElevenLabs, Descript, Synthesia.</dd></div>
+              <div class="roster-row"><dt>Automation</dt><dd>Make, Zapier.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s5">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">05</span><h2 class="block-title">Quick Reference</h2></div>
+            <ul class="field-notes">
+              <li><strong>Brainstorm or analyze:</strong> Claude, ChatGPT, Perplexity.</li>
+              <li><strong>Write code:</strong> Claude Code or Copilot.</li>
+              <li><strong>Analyze data:</strong> Claude or Jupyter + Claude.</li>
+              <li><strong>Generate images:</strong> DALL-E or Midjourney.</li>
+              <li><strong>Edit a transcript into audio:</strong> Descript.</li>
+              <li><strong>Research with sources:</strong> Perplexity.</li>
+              <li><strong>Automate workflows:</strong> Zapier or Make.</li>
+              <li><strong>Build a web app:</strong> Claude Code + GitHub.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s6">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">06</span><h2 class="block-title">Evaluating a New Tool</h2></div>
+            <ul class="field-notes">
+              <li>Does it solve a real problem?</li>
+              <li>What's the learning curve?</li>
+              <li>What's the cost?</li>
+              <li>Is there a free tier or trial?</li>
+              <li>Do I have the data it needs?</li>
+              <li>Is it actually better than what I already do?</li>
+            </ul>
+            <blockquote class="pull-question">Stick with tools you know until you have a clear reason to add a new one.</blockquote>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s7">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">07</span><h2 class="block-title">For This Workshop</h2></div>
+            <div class="compare-grid">
+              <div class="compare-col is-primary">
+                <h3>Required</h3>
+                <ul>
+                  <li>VS Code</li>
+                  <li>Claude Code</li>
+                  <li>GitHub</li>
+                </ul>
+              </div>
+              <div class="compare-col is-secondary">
+                <h3>Optional</h3>
+                <ul>
+                  <li>Claude, for brainstorming</li>
+                  <li>Perplexity, for research</li>
+                </ul>
+              </div>
+            </div>
+            <blockquote class="pull-question">Learn to use these three well. Everything else is optional.</blockquote>
+          </div>
+        </section>
+
+        <section class="slide slide-end" data-slide="end">
+          <div class="slide-inner">
+            <div class="end-mark">-30-</div>
+            <p class="end-line">Three tools, used well, beat ten tools used badly.</p>
+            <div class="end-links">
+              <a href="#" data-jump="cover">↺ Restart briefing</a>
+              <a href="../07-ai-tools.html">← Back to Overview</a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <button type="button" class="edge-arrow edge-prev" id="prev-btn" aria-label="Previous section">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 4 7 12 15 20"></polyline></svg>
+    </button>
+    <button type="button" class="edge-arrow edge-next" id="next-btn" aria-label="Next section">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 4 17 12 9 20"></polyline></svg>
+    </button>
+    <div class="dot-nav" id="dots"></div>
+  </div>
+
+  <script src="/js/deck.js"></script>
+</body>
+</html>
