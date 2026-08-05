@@ -1,0 +1,6 @@
+{
+  "name": "ai-journalism-workshop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI Journalism Workshop site — static docs/ site plus a serverless Claude proxy (see project/adr/0007)."
+}
