@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Tech Stack — Day 1 — AI Journalism Workshop</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/briefing.css">
+</head>
+<body class="briefing briefing-overview" data-day="1" data-session-id="day-1/08-explore-tech-stack">
+  <div id="nav"></div>
+
+  <main>
+    <div class="breadcrumb"><a href="/">Home</a> &gt; <a href="/day-1/">Day 1</a> &gt; Explore Tech Stack</div>
+
+    <header class="masthead">
+      <h1 class="masthead-title">Explore Tech Stack</h1>
+      <p class="masthead-dek">Hands-on, instructor-guided: get comfortable with the three tools you'll actually build with, before you start building.</p>
+      <div class="masthead-meta"><span id="topic-time">--</span><span class="div">·</span><span id="topic-duration">--</span><span class="div">·</span><span id="topic-type">--</span></div>
+    </header>
+
+    <nav class="toc" aria-label="Sections in this briefing">
+      <ol>
+        <li><a href="#s1"><span class="n">01</span> Why This Session</a></li>
+        <li><a href="#s2"><span class="n">02</span> Session Roadmap</a></li>
+        <li><a href="#s3"><span class="n">03</span> VS Code Walkthrough</a></li>
+        <li><a href="#s4"><span class="n">04</span> Claude Code: Best Practices &amp; Mindset</a></li>
+        <li><a href="#s5"><span class="n">05</span> GitHub Walkthrough</a></li>
+        <li><a href="#s6"><span class="n">06</span> How They Work Together</a></li>
+      </ol>
+    </nav>
+
+    <section class="slides-cta">
+      <p>Prefer to move through this section by section, presentation-style?</p>
+      <a class="slides-cta-link" href="slides/08-explore-tech-stack-slides.html">Open the slides →</a>
+    </section>
+
+    <article>
+      <section class="block reveal" id="s1">
+        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">Why This Session</h2></div>
+        <p class="lede">AI Tools gave you the landscape. This session is different: it's hands-on and instructor-guided, working through the three tools you'll actually use for the rest of the workshop — VS Code, Claude Code, and GitHub — so nothing is unfamiliar when it's time to build.</p>
+        <p>If you haven't completed <a href="/setup.html">pre-workshop setup</a> yet, do that first — this session assumes VS Code, Claude Code, and GitHub are already installed and signed in.</p>
+      </section>
+
+      <section class="block reveal" id="s2">
+        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">Session Roadmap</h2></div>
+        <p>90 minutes, three tools — this is practice time, not install time, since setup happened before today:</p>
+        <ol class="history">
+          <li><span class="era">20 MIN</span><h3>VS Code</h3><p>Orient in the editor — folders, files, the integrated terminal.</p></li>
+          <li class="is-hinge"><span class="era">45 MIN</span><h3>Claude Code</h3><p>The core of the session — describe a task, review the plan, watch it build, iterate.</p></li>
+          <li><span class="era">25 MIN</span><h3>GitHub</h3><p>Git/GitHub mechanics inside VS Code — staging, committing, pushing.</p></li>
+        </ol>
+      </section>
+
+      <section class="block reveal" id="s3">
+        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">VS Code Walkthrough</h2></div>
+        <p>Quick orientation — everyone should already have this installed:</p>
+        <ul class="field-notes">
+          <li>Open your project folder.</li>
+          <li>Find your way around: file explorer, editor pane, integrated terminal.</li>
+          <li>Open the terminal — this is where Claude Code commands run.</li>
+          <li>Open, edit, and save a file.</li>
+        </ul>
+      </section>
+
+      <section class="block reveal" id="s4">
+        <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Claude Code: Best Practices &amp; Mindset</h2></div>
+        <p class="lede">There isn't a fixed set of steps to memorize here — the real way to get good at Claude Code is to use it. What follows are guardrails, not a checklist: a few habits that make the difference between fighting the tool and working well with it. Once you've got these, the rest of today is practice.</p>
+        <ul class="field-notes">
+          <li><strong>Be specific.</strong> Vague asks get vague results. "Add filtering" is weaker than "add a dropdown that filters the article list by topic."</li>
+          <li><strong>Use Plan Mode for anything non-trivial.</strong> Review what it's about to do before it does it — that's the moment to catch a misunderstanding cheaply.</li>
+          <li><strong>Give it context.</strong> Point it at relevant files or explain the project rather than assuming it can guess what you mean.</li>
+          <li><strong>Work in small steps.</strong> A series of small, specific asks beats one giant one — easier to review, easier to course-correct.</li>
+          <li><strong>Always read the diff.</strong> You're still responsible for what ships, not Claude Code. Reviewing is part of the job, not optional.</li>
+          <li><strong>Clarify, don't fight.</strong> If the result is off, restate what you actually want rather than repeating the same prompt harder.</li>
+          <li><strong>Treat surprises as information.</strong> It won't be right every time — that's normal, not a sign you're doing something wrong.</li>
+        </ul>
+        <blockquote class="pull-question">The fastest way to get good at this is to use it. Treat today's project time as low-stakes practice.</blockquote>
+      </section>
+
+      <section class="block reveal" id="s5">
+        <div class="block-head"><span class="block-eyebrow">05</span><h2 class="block-title">GitHub Walkthrough</h2></div>
+        <p>The general mechanics of Git/GitHub inside VS Code — the actual workshop fork-and-submit workflow gets its own session right after this one:</p>
+        <ul class="field-notes">
+          <li>Open the <strong>Source Control</strong> panel (the branching icon in the left sidebar).</li>
+          <li>See which files have changed since your last commit.</li>
+          <li>Stage a change, write a commit message, and commit.</li>
+          <li>Push — sends your commits to GitHub.</li>
+        </ul>
+        <p>Next up: forking the actual workshop repo and setting up the branch/commit/PR workflow you'll use to submit your work.</p>
+      </section>
+
+      <section class="block reveal" id="s6">
+        <div class="block-head"><span class="block-eyebrow">06</span><h2 class="block-title">How They Work Together</h2></div>
+        <p>VS Code is your editor. Claude Code is your AI pair programmer. GitHub is your project home. Here's what a real session looks like — say you want to build a tool that analyzes news articles:</p>
+        <ol class="history">
+          <li><span class="era">1</span><h3>Ideation</h3><p>Describe the problem to Claude Code in plain language.</p></li>
+          <li><span class="era">2</span><h3>Planning</h3><p>Claude Code shows you a plan before touching anything.</p></li>
+          <li><span class="era">3</span><h3>Building</h3><p>It writes the code; you see it in VS Code, edit, ask questions, iterate.</p></li>
+          <li><span class="era">4</span><h3>Testing</h3><p>Claude Code can run your app locally so you can try it.</p></li>
+          <li class="is-hinge"><span class="era">5</span><h3>Shipping</h3><p>Commit to GitHub, open a PR. Done.</p></li>
+        </ol>
+      </section>
+    </article>
+
+    <footer class="topic-nav">
+      <a id="prev-link" href="#">← Previous</a>
+      <a href="/day-1/">Day 1 Overview</a>
+      <a id="next-link" href="#">Next →</a>
+    </footer>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/js/partials.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/topic-metadata.js"></script>
+  <script src="/js/reveal.js"></script>
+</body>
+</html>

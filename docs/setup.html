@@ -5,28 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Setup — AI Journalism Workshop</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/briefing.css">
 </head>
-<body>
+<body class="briefing">
   <div id="nav"></div>
 
   <main>
     <div class="breadcrumb"><a href="/">Home</a> &gt; Setup</div>
     <h1>Pre-Workshop Setup</h1>
+    <p class="lede">Please do this <strong>before Day 1</strong> — we won't have time to walk through installs live, and Day 1's hands-on session assumes you're already set up. It's normal for this to take 20–30 minutes. If something doesn't work, don't spend more than that fighting it — stop, note where you got stuck, and we'll sort it out first thing on Day 1.</p>
 
-    <p>Complete this checklist before Day 1:</p>
-    <ul>
-      <li>[ ] GitHub account created</li>
-      <li>[ ] Git installed locally</li>
-      <li>[ ] Editor set up (VS Code recommended)</li>
-      <li>[ ] Claude Code / VS Code extension installed and signed in with your workshop enterprise account</li>
-      <li>[ ] Able to run <code>git clone</code> and <code>git push</code></li>
+    <h2>1. VS Code</h2>
+    <p>Your code editor — this is where you'll write and see code.</p>
+    <ul class="field-notes">
+      <li>Download and install VS Code from <a href="https://code.visualstudio.com" target="_blank" rel="noopener">code.visualstudio.com</a> (it auto-detects your OS).</li>
+      <li>Open it once after installing, just to confirm it launches.</li>
     </ul>
 
+    <h2>2. Claude Code</h2>
+    <p>The AI coding assistant you'll build with, running inside VS Code.</p>
+    <ul class="field-notes">
+      <li>Confirm you have access to the workshop's Claude enterprise account — check your email for an invite. If you don't see one, flag it before Day 1, not on the morning of.</li>
+      <li>In VS Code, open the Extensions panel (the icon that looks like four squares in the left sidebar) and search for "Claude Code." Install it.</li>
+      <li>Sign in with your workshop account when prompted.</li>
+    </ul>
+
+    <h2>3. GitHub</h2>
+    <p>Two different things share this step, worth knowing apart: <strong>GitHub</strong> is the website where your code lives online. <strong>Git</strong> is the tool on your computer that tracks changes and sends them there. You need a GitHub account either way — how you install Git depends on whether you're comfortable with a command line.</p>
+
+    <p><strong>Create your account first:</strong></p>
+    <ul class="field-notes">
+      <li>Sign up for a free account at <a href="https://github.com" target="_blank" rel="noopener">github.com</a> if you don't already have one.</li>
+    </ul>
+
+    <p><strong>Then install Git — pick whichever fits you:</strong></p>
+    <ul class="field-notes">
+      <li><strong>Not sure, or never used a command line before?</strong> Install <a href="https://desktop.github.com" target="_blank" rel="noopener">GitHub Desktop</a>. It's a free app that lets you do everything for this workshop — clone a project, save changes, send them to GitHub — by clicking buttons, with no typed commands at all. This is the recommended option for most people. Sign in with your GitHub account once it's installed.</li>
+      <li><strong>Already comfortable with a terminal?</strong> Install Git directly. On Mac, open <strong>Terminal</strong> (search for it with Spotlight) and type <code>git --version</code> — the first time you do this, it'll prompt you to install Xcode Command Line Tools, which includes Git. On Windows, download it from <a href="https://git-scm.com" target="_blank" rel="noopener">git-scm.com</a>. GitHub's own step-by-step guide is at <a href="https://docs.github.com/en/get-started/getting-started-with-git/set-up-git" target="_blank" rel="noopener">docs.github.com</a> if you want more detail than this page gives.</li>
+    </ul>
+
+    <blockquote class="pull-question">You don't need to memorize Git commands for this workshop. Once Claude Code is set up (see above), you can ask it in plain English to save and submit your work, and it runs the underlying commands for you. This step is just about getting the accounts and apps installed.</blockquote>
+
+    <h2>4. Opening Claude Code and GitHub Inside VS Code</h2>
+    <p>Once all three are installed, this is how they fit together:</p>
+    <ul class="field-notes">
+      <li>Open a project folder in VS Code: <strong>File → Open Folder</strong>.</li>
+      <li>Claude Code lives in the sidebar — look for its icon, or open the Command Palette (<code>Cmd/Ctrl+Shift+P</code>) and type "Claude Code."</li>
+      <li>Git and GitHub show up in the <strong>Source Control</strong> panel (the branching-icon in the left sidebar). The first time you interact with a GitHub-hosted repo here, VS Code will prompt you to sign in to GitHub — follow that prompt.</li>
+    </ul>
+
+    <h2>5. Verify You're Ready</h2>
+    <ul class="field-notes">
+      <li><strong>If you installed GitHub Desktop:</strong> open it and confirm you're signed in to your GitHub account.</li>
+      <li><strong>If you installed Git directly:</strong> open Terminal and run <code>git --version</code> — it should print a version number, not an error.</li>
+      <li>Either way: open Claude Code once and confirm it opens without an error and shows you're signed in.</li>
+    </ul>
+    <blockquote class="pull-question">If that works, you're set for Day 1.</blockquote>
+
     <p>See the <a href="/resources.html">resources page</a> for links, and
-    <code>STUDENT_CLAUDE_GUIDE.md</code> in the repo root for day-specific
-    guidance to paste into your own Claude session.
-    <!-- TODO: link directly to the GitHub-hosted file once the org/repo is finalized -->
-    </p>
+    <a href="https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/blob/main/STUDENT_CLAUDE_GUIDE.md" target="_blank" rel="noopener"><code>STUDENT_CLAUDE_GUIDE.md</code></a>
+    for day-specific guidance to paste into your own Claude session. You'll fork
+    this same repo in the <a href="/day-1/09-fork-and-submit.html">Fork &amp; Submit</a>
+    session on Day 1.</p>
   </main>
 
   <div id="footer"></div>

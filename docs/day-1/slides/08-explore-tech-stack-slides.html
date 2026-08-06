@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" class="briefing-deck">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Tech Stack — Slides — Day 1 — AI Journalism Workshop</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/briefing.css">
+</head>
+<body class="briefing briefing-deck">
+
+  <div class="chrome-top">
+    <span class="chrome-eyebrow">
+      <a href="/">AI Journalism Workshop</a><span class="sep">·</span><a href="/day-1/">Day 1</a><span class="sep">·</span><a href="../08-explore-tech-stack.html">Explore Tech Stack</a><span class="sep">·</span>Slides
+    </span>
+    <div class="chrome-right">
+      <span class="chrome-counter" id="counter">01 / 08</span>
+      <button type="button" class="chrome-fs" id="fs-toggle" aria-label="Toggle fullscreen">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3"></path>
+          <path d="M21 8V5a2 2 0 0 0-2-2h-3"></path>
+          <path d="M3 16v3a2 2 0 0 0 2 2h3"></path>
+          <path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="deck">
+      <div class="track" id="track">
+
+        <section class="slide slide-cover" data-slide="cover">
+          <div class="slide-inner">
+            <h1 class="cover-title">Explore Tech Stack</h1>
+            <p class="cover-dek">Hands-on, instructor-guided: get comfortable with the three tools you'll actually build with, before you start building.</p>
+            <div class="cover-meta"><span>3:00 PM</span><span class="div">·</span><span>90 MIN</span><span class="div">·</span><span>Hands-on</span></div>
+            <ul class="cover-contents">
+              <li><button type="button" data-jump="s1"><span class="n">01</span> Why This Session</button></li>
+              <li><button type="button" data-jump="s2"><span class="n">02</span> Session Roadmap</button></li>
+              <li><button type="button" data-jump="s3"><span class="n">03</span> VS Code Walkthrough</button></li>
+              <li><button type="button" data-jump="s4"><span class="n">04</span> Claude Code: Best Practices</button></li>
+              <li><button type="button" data-jump="s5"><span class="n">05</span> GitHub Walkthrough</button></li>
+              <li><button type="button" data-jump="s6"><span class="n">06</span> How They Work Together</button></li>
+            </ul>
+            <p class="cover-hint">→ or click to begin</p>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s1">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">Why This Session</h2></div>
+            <p class="lede">AI Tools gave you the landscape. This one is hands-on and instructor-guided — working through VS Code, Claude Code, and GitHub so nothing is unfamiliar when it's time to build.</p>
+            <p>Haven't done <a href="/setup.html">pre-workshop setup</a> yet? Do that first — this assumes you're already installed and signed in.</p>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s2">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">Session Roadmap</h2></div>
+            <p>90 minutes, three tools — practice time, not install time:</p>
+            <ol class="history">
+              <li><span class="era">20 MIN</span><h3>VS Code</h3><p>Orient in the editor.</p></li>
+              <li class="is-hinge"><span class="era">45 MIN</span><h3>Claude Code</h3><p>The core of the session.</p></li>
+              <li><span class="era">25 MIN</span><h3>GitHub</h3><p>Git/GitHub mechanics inside VS Code.</p></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s3">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">VS Code Walkthrough</h2></div>
+            <ul class="field-notes">
+              <li>Open your project folder.</li>
+              <li>File explorer, editor pane, integrated terminal.</li>
+              <li>Open the terminal — Claude Code commands run here.</li>
+              <li>Open, edit, and save a file.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s4">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Claude Code: Best Practices &amp; Mindset</h2></div>
+            <p class="lede">Not a checklist — the real way to get good at this is to use it. Guardrails, then practice.</p>
+            <ul class="field-notes">
+              <li><strong>Be specific.</strong> Vague asks get vague results.</li>
+              <li><strong>Use Plan Mode</strong> for anything non-trivial.</li>
+              <li><strong>Give it context</strong> instead of assuming it can guess.</li>
+              <li><strong>Work in small steps.</strong></li>
+              <li><strong>Always read the diff.</strong> You're still responsible for the code.</li>
+              <li><strong>Clarify, don't fight.</strong></li>
+              <li><strong>Treat surprises as information</strong>, not failure.</li>
+            </ul>
+            <blockquote class="pull-question">The fastest way to get good at this is to use it.</blockquote>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s5">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">05</span><h2 class="block-title">GitHub Walkthrough</h2></div>
+            <p>General mechanics — the real fork-and-submit workflow is next.</p>
+            <ul class="field-notes">
+              <li>Open the Source Control panel.</li>
+              <li>See what's changed.</li>
+              <li>Stage, write a commit message, commit.</li>
+              <li>Push — sends commits to GitHub.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s6">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">06</span><h2 class="block-title">How They Work Together</h2></div>
+            <p>A real session, start to finish:</p>
+            <ol class="history">
+              <li><span class="era">1</span><h3>Ideation</h3><p>Describe the problem in plain language.</p></li>
+              <li><span class="era">2</span><h3>Planning</h3><p>Claude Code shows its plan first.</p></li>
+              <li><span class="era">3</span><h3>Building</h3><p>It writes; you edit, ask, iterate.</p></li>
+              <li><span class="era">4</span><h3>Testing</h3><p>Run it locally, try it out.</p></li>
+              <li class="is-hinge"><span class="era">5</span><h3>Shipping</h3><p>Commit, PR, done.</p></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="slide slide-end" data-slide="end">
+          <div class="slide-inner">
+            <div class="end-mark">-30-</div>
+            <p class="end-line">Three tools, hands on. Next stop: your own project.</p>
+            <div class="end-links">
+              <a href="#" data-jump="cover">↺ Restart briefing</a>
+              <a href="../08-explore-tech-stack.html">← Back to Overview</a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <button type="button" class="edge-arrow edge-prev" id="prev-btn" aria-label="Previous section">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 4 7 12 15 20"></polyline></svg>
+    </button>
+    <button type="button" class="edge-arrow edge-next" id="next-btn" aria-label="Next section">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 4 17 12 9 20"></polyline></svg>
+    </button>
+    <div class="dot-nav" id="dots"></div>
+  </div>
+
+  <script src="/js/deck.js"></script>
+</body>
+</html>
