@@ -8,6 +8,7 @@
   --orange-dark: #d97e2a;
   --text-primary: #2c2c2c;
   --text-secondary: #666;
+  --serif: Charter, "Iowan Old Style", "Georgia", "Times New Roman", serif;
 }
 
 * {
@@ -36,6 +37,13 @@ main {
   margin: 0 auto;
   padding: 1.5rem;
 }
+
+/* Home page — light alignment with the briefing template's editorial feel
+   (docs/css/briefing.css): same serif reading font, same --sp-* rhythm on
+   section spacing, no structural change to this page's markup. */
+#home { font-family: var(--serif); }
+#home main > p { font-size: 1.06rem; }
+#home main section + section { margin-top: 2.5rem; }
 
 /* Nav */
 .site-nav {

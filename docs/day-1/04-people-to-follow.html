@@ -21,13 +21,8 @@
 
     <nav class="toc" aria-label="Sections in this briefing">
       <ol>
-        <li><a href="#s1"><span class="n">01</span> Why Follow People</a></li>
-        <li><a href="#s2"><span class="n">02</span> Newsroom Leaders</a></li>
-        <li><a href="#s3"><span class="n">03</span> Technologists & Researchers</a></li>
-        <li><a href="#s4"><span class="n">04</span> Journalists & Practitioners</a></li>
-        <li><a href="#s5"><span class="n">05</span> Publications & Newsletters</a></li>
-        <li><a href="#s6"><span class="n">06</span> Communities & Events</a></li>
-        <li><a href="#s7"><span class="n">07</span> How to Use This List</a></li>
+        <li><a href="#s1"><span class="n">01</span> Drawing Inspiration From Others</a></li>
+        <li><a href="#s2"><span class="n">02</span> Who & What to Follow</a></li>
       </ol>
     </nav>
 
@@ -38,7 +33,7 @@
 
     <article>
       <section class="block reveal" id="s1">
-        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">Why Follow People</h2></div>
+        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">Drawing Inspiration From Others</h2></div>
         <p class="lede">AI moves fast — new tools launch, best practices shift, and what worked last month might be outdated next month. The best way to stay informed isn't reading news articles about AI, it's following people actively working on AI, journalism, and the intersection of the two.</p>
         <ul class="field-notes">
           <li>They document what they're building and why.</li>
@@ -49,65 +44,54 @@
       </section>
 
       <section class="block reveal" id="s2">
-        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">Newsroom Leaders</h2></div>
-        <dl class="roster">
-          <div class="roster-row"><dt>Zach Seward</dt><dd>Editorial director of AI Initiatives, The New York Times. Leads the team behind Cheatsheet; shares technical detail and editorial philosophy alike.</dd></div>
-          <div class="roster-row"><dt>Rubina Madan Fillion</dt><dd>Associate editorial director of AI Initiatives, NYT. Focuses on the editorial side of AI deployment, not just the tech.</dd></div>
-          <div class="roster-row"><dt>Marcus Whiten</dt><dd>Head of newsroom AI initiatives, The Washington Post. Leading one of the largest newsrooms' approach to AI integration.</dd></div>
-          <div class="roster-row"><dt>Nikita Roy</dt><dd>ICFJ Knight Fellow, host of the Newsroom Robots podcast. Curates the most important case studies and interviews practitioners directly.</dd></div>
-          <div class="roster-row"><dt>Matt Penneyacker</dt><dd>Program officer, Google News Initiative. Tracks what's working at scale across many newsrooms.</dd></div>
-        </dl>
+        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">Who & What to Follow</h2></div>
+        <div class="filter-pills" data-filters="#follow-table tbody tr">
+          <button type="button" class="filter-pill is-active" data-type="all">All</button>
+          <button type="button" class="filter-pill" data-type="Newsroom Leader">Newsroom Leader</button>
+          <button type="button" class="filter-pill" data-type="Technologist">Technologist</button>
+          <button type="button" class="filter-pill" data-type="Journalist">Journalist</button>
+          <button type="button" class="filter-pill" data-type="Critic">Critic</button>
+          <button type="button" class="filter-pill" data-type="Designer">Designer</button>
+          <button type="button" class="filter-pill" data-type="Publication">Publication</button>
+          <button type="button" class="filter-pill" data-type="Conference">Conference</button>
+          <button type="button" class="filter-pill" data-type="Open-source">Open-source</button>
+        </div>
+        <table class="resource-table" id="follow-table">
+          <thead><tr><th>Name</th><th>Type</th><th>What to know</th></tr></thead>
+          <tbody>
+            <tr data-type="Newsroom Leader"><td><a href="https://www.zachseward.com/" target="_blank" rel="noopener noreferrer">Zach Seward</a></td><td class="type">Newsroom Leader</td><td>Editorial director of AI Initiatives, The New York Times. Leads the team behind Cheatsheet; shares technical detail and editorial philosophy alike.</td></tr>
+            <tr data-type="Newsroom Leader"><td><a href="https://x.com/rubinafillion" target="_blank" rel="noopener noreferrer">Rubina Madan Fillion</a></td><td class="type">Newsroom Leader</td><td>Associate editorial director of AI Initiatives, NYT. Focuses on the editorial side of AI deployment, not just the tech.</td></tr>
+            <tr data-type="Newsroom Leader"><td><a href="https://www.niemanlab.org/2024/03/the-washington-posts-first-ai-strategy-editor-talks-llms-in-the-newsroom/" target="_blank" rel="noopener noreferrer">Phoebe Connelly</a></td><td class="type">Newsroom Leader</td><td>The Washington Post's first AI strategy editor. Leading one of the largest newsrooms' approach to AI integration.</td></tr>
+            <tr data-type="Newsroom Leader"><td><a href="https://www.newsroomrobots.com/" target="_blank" rel="noopener noreferrer">Nikita Roy</a></td><td class="type">Newsroom Leader</td><td>ICFJ Knight Fellow, host of the Newsroom Robots podcast. Curates the most important case studies and interviews practitioners directly.</td></tr>
+            <tr data-type="Newsroom Leader"><td><a href="https://jerseybee.org/about/" target="_blank" rel="noopener noreferrer">Simon Galperin</a></td><td class="type">Newsroom Leader</td><td>Founder and executive editor, The Jersey Bee — a small NJ nonprofit newsroom. Built AI-assisted publishing tools that let a roughly 1.5-person editorial team put out thousands of stories and newsletters.</td></tr>
+            <tr data-type="Newsroom Leader"><td><a href="https://ctmirror.org/author/aeichhorst/" target="_blank" rel="noopener noreferrer">Angela Eichhorst</a></td><td class="type">Newsroom Leader</td><td>AI Data Reporter/Product Developer, The Connecticut Mirror — a nonprofit regional newsroom. First person in this newly created role; builds tools to help cover 169 CT towns.</td></tr>
+            <tr data-type="Newsroom Leader"><td><a href="https://www.journalismfestival.com/speaker/matt-boggie" target="_blank" rel="noopener noreferrer">Matt Boggie</a></td><td class="type">Newsroom Leader</td><td>Chief Technology &amp; Product Officer, The Philadelphia Inquirer — a mid-size regional daily. Built "Dewey," an AI assistant covering the paper's full archive back to 1978.</td></tr>
+            <tr data-type="Technologist"><td><a href="https://dair-institute.org/" target="_blank" rel="noopener noreferrer">Timnit Gebru</a></td><td class="type">Technologist</td><td>Founder, DAIR (Distributed AI Research Institute). Studies AI bias and labor impact; asks hard questions about whose interests AI actually serves.</td></tr>
+            <tr data-type="Technologist"><td><a href="https://humancompatible.ai/" target="_blank" rel="noopener noreferrer">Stuart Russell</a></td><td class="type">Technologist</td><td>AI safety researcher, UC Berkeley. Works on alignment — making sure AI systems do what we actually want, long-term.</td></tr>
+            <tr data-type="Journalist"><td><a href="https://www.kashmirhill.com/bio" target="_blank" rel="noopener noreferrer">Kashmir Hill</a></td><td class="type">Journalist</td><td>The New York Times. Reports on the real-world impacts of AI and surveillance systems — what investigative journalism about AI looks like.</td></tr>
+            <tr data-type="Journalist"><td><a href="https://clivethompson.substack.com" target="_blank" rel="noopener noreferrer">Clive Thompson</a></td><td class="type">Journalist</td><td>Wired, Substack. Explains tech and AI in accessible ways — a model for writing about AI for non-experts.</td></tr>
+            <tr data-type="Journalist"><td><a href="https://warzel.substack.com/" target="_blank" rel="noopener noreferrer">Charlie Warzel</a></td><td class="type">Journalist</td><td>The Atlantic (Galaxy Brain newsletter). Connects AI to the larger cultural and political questions around it.</td></tr>
+            <tr data-type="Critic"><td><a href="https://faculty.washington.edu/ebender/" target="_blank" rel="noopener noreferrer">Emily M. Bender</a></td><td class="type">Critic</td><td>Computational linguist, University of Washington. Co-author of "On the Dangers of Stochastic Parrots"; co-hosts the podcast Mystery AI Hype Theater 3000.</td></tr>
+            <tr data-type="Critic"><td><a href="https://safiyaunoble.com/" target="_blank" rel="noopener noreferrer">Safiya Umoja Noble</a></td><td class="type">Critic</td><td>Professor, UCLA; author of "Algorithms of Oppression." Director of UCLA's Center on Race &amp; Digital Justice.</td></tr>
+            <tr data-type="Critic"><td><a href="https://karendhao.com/empire" target="_blank" rel="noopener noreferrer">Karen Hao</a></td><td class="type">Critic</td><td>Journalist and author of "Empire of AI"; leads the Pulitzer Center's AI Spotlight Series training journalists on AI coverage.</td></tr>
+            <tr data-type="Designer"><td><a href="https://jnd.org/" target="_blank" rel="noopener noreferrer">Don Norman</a></td><td class="type">Designer</td><td>Founding director, UC San Diego Design Lab; coined the term "user experience." Writes on AI as design collaborator vs. human-centered design.</td></tr>
+            <tr data-type="Designer"><td><a href="https://hcil.umd.edu/human-centered-ai/" target="_blank" rel="noopener noreferrer">Ben Shneiderman</a></td><td class="type">Designer</td><td>Emeritus professor, University of Maryland; author of "Human-Centered AI." His framework — human control paired with high automation — is widely cited in AI-UX design.</td></tr>
+            <tr data-type="Designer"><td><a href="https://kempnerinstitute.harvard.edu/people/our-people/fernanda-viegas/" target="_blank" rel="noopener noreferrer">Fernanda Viégas</a></td><td class="type">Designer</td><td>Professor, Harvard; co-founder of Google's PAIR (People + AI Research) initiative. Focuses on AI interpretability and preserving human agency.</td></tr>
+            <tr data-type="Publication"><td><a href="https://www.niemanlab.org" target="_blank" rel="noopener noreferrer">Nieman Lab</a></td><td class="type">Publication</td><td>Case studies and interviews with newsroom leaders on the future of journalism. Free.</td></tr>
+            <tr data-type="Publication"><td><a href="https://www.cjr.org" target="_blank" rel="noopener noreferrer">Columbia Journalism Review</a></td><td class="type">Publication</td><td>Long-form reporting on how newsrooms are using, and struggling with, AI.</td></tr>
+            <tr data-type="Publication"><td><a href="https://www.axios.com/signup/media-trends" target="_blank" rel="noopener noreferrer">Axios Media Trends</a></td><td class="type">Publication</td><td>Curated media, tech, and journalism trends.</td></tr>
+            <tr data-type="Publication"><td><a href="https://www.poynter.org" target="_blank" rel="noopener noreferrer">Poynter Institute</a></td><td class="type">Publication</td><td>Practical guides on using AI in newsrooms, plus ethics guidance.</td></tr>
+            <tr data-type="Publication"><td><a href="https://aiindex.stanford.edu" target="_blank" rel="noopener noreferrer">AI Index Report</a></td><td class="type">Publication</td><td>Annual, not journalism-specific, but the big-picture view of where AI capability is headed.</td></tr>
+            <tr data-type="Publication"><td><a href="https://reutersinstitute.politics.ox.ac.uk" target="_blank" rel="noopener noreferrer">Reuters Institute</a></td><td class="type">Publication</td><td>Global perspective on journalism trends, including AI adoption.</td></tr>
+            <tr data-type="Conference"><td><a href="https://www.journalismai.info/festival" target="_blank" rel="noopener noreferrer">JournalismAI Festival</a></td><td class="type">Conference</td><td>Annual, London — direct access to practitioners.</td></tr>
+            <tr data-type="Conference"><td><a href="https://www.journalists.org" target="_blank" rel="noopener noreferrer">Online News Association (ONA)</a></td><td class="type">Conference</td><td>Typically held in the fall.</td></tr>
+            <tr data-type="Conference"><td><a href="https://www.poynter.org/shop/" target="_blank" rel="noopener noreferrer">Poynter Institute Workshops</a></td><td class="type">Conference</td><td>In-person or online training.</td></tr>
+            <tr data-type="Open-source"><td><a href="https://github.com/topics/journalism" target="_blank" rel="noopener noreferrer">GitHub — journalism topic</a></td><td class="type">Open-source</td><td>Newsrooms increasingly open-source their AI tools here.</td></tr>
+            <tr data-type="Open-source"><td><a href="https://huggingface.co" target="_blank" rel="noopener noreferrer">Hugging Face</a></td><td class="type">Open-source</td><td>Hosts thousands of free models useful for text analysis.</td></tr>
+          </tbody>
+        </table>
       </section>
 
-      <section class="block reveal" id="s3">
-        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">Technologists & Researchers</h2></div>
-        <dl class="roster">
-          <div class="roster-row"><dt>Jeremy Sleight</dt><dd>Hugging Face. Advocates for open-source AI and ethical deployment — democratizing rather than concentrating access.</dd></div>
-          <div class="roster-row"><dt>Timnit Gebru</dt><dd>Founder, DAIR (Distributed AI Research Institute). Studies AI bias and labor impact; asks hard questions about whose interests AI actually serves.</dd></div>
-          <div class="roster-row"><dt>Stuart Russell</dt><dd>AI safety researcher, UC Berkeley. Works on alignment — making sure AI systems do what we actually want, long-term.</dd></div>
-        </dl>
-      </section>
-
-      <section class="block reveal" id="s4">
-        <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Journalists & Practitioners</h2></div>
-        <dl class="roster">
-          <div class="roster-row"><dt>Kashmir Hill</dt><dd>The New York Times. Reports on the real-world impacts of AI and surveillance systems — what investigative journalism about AI looks like.</dd></div>
-          <div class="roster-row"><dt>Clive Thompson</dt><dd>Wired, Substack. Explains tech and AI in accessible ways — a model for writing about AI for non-experts.</dd></div>
-          <div class="roster-row"><dt>Charlie Warzel</dt><dd>The New York Times (opinion). Connects AI to the larger cultural and political questions around it.</dd></div>
-        </dl>
-      </section>
-
-      <section class="block reveal" id="s5">
-        <div class="block-head"><span class="block-eyebrow">05</span><h2 class="block-title">Publications & Newsletters</h2></div>
-        <dl class="roster">
-          <div class="roster-row"><dt>Nieman Lab</dt><dd>niemanlab.org — case studies and interviews with newsroom leaders on the future of journalism. Free.</dd></div>
-          <div class="roster-row"><dt>Columbia Journalism Review</dt><dd>cjr.org — long-form reporting on how newsrooms are using, and struggling with, AI.</dd></div>
-          <div class="roster-row"><dt>The Whiteboard (Axios)</dt><dd>axios.com/newsletters — curated media, tech, and journalism trends.</dd></div>
-          <div class="roster-row"><dt>Poynter Institute</dt><dd>poynter.org — practical guides on using AI in newsrooms, plus ethics guidance.</dd></div>
-          <div class="roster-row"><dt>AI Index Report</dt><dd>aiindex.stanford.edu — annual, not journalism-specific, but the big-picture view of where AI capability is headed.</dd></div>
-          <div class="roster-row"><dt>Reuters Institute</dt><dd>reutersinstitute.ox.ac.uk — global perspective on journalism trends, including AI adoption.</dd></div>
-        </dl>
-      </section>
-
-      <section class="block reveal" id="s6">
-        <div class="block-head"><span class="block-eyebrow">06</span><h2 class="block-title">Communities & Events</h2></div>
-        <dl class="roster">
-          <div class="roster-row"><dt>Hashtags</dt><dd>#NewsroomAI, #JournalismAI (the LSE-based JournalismAI project), #AIEthics, #DataJournalism.</dd></div>
-          <div class="roster-row"><dt>Conferences</dt><dd>JournalismAI Festival (annual, London) — direct access to practitioners. Online News Association (ONA), typically fall. Poynter Institute workshops, in-person in Tampa or online.</dd></div>
-          <div class="roster-row"><dt>Open-source</dt><dd>Newsrooms increasingly open-source their AI tools on GitHub — search "journalism" + "AI." Hugging Face hosts thousands of free models useful for text analysis.</dd></div>
-        </dl>
-      </section>
-
-      <section class="block reveal" id="s7">
-        <div class="block-head"><span class="block-eyebrow">07</span><h2 class="block-title">How to Use This List</h2></div>
-        <p>Don't try to follow everyone at once. Pick 2–3 people and 1–2 newsletters to start; you'll discover other voices as you go.</p>
-        <dl class="roster">
-          <div class="roster-row"><dt>What newsrooms do</dt><dd>Nikita Roy, Zach Seward, Nieman Lab.</dd></div>
-          <div class="roster-row"><dt>Think critically</dt><dd>Timnit Gebru, Kashmir Hill, Charlie Warzel.</dd></div>
-          <div class="roster-row"><dt>Hands-on</dt><dd>Poynter resources, GitHub newsroom projects, JournalismAI case studies.</dd></div>
-          <div class="roster-row"><dt>Stay current</dt><dd>Reuters Institute reports, #NewsroomAI, Nieman Lab daily.</dd></div>
-        </dl>
-      </section>
     </article>
 
     <footer class="topic-nav">
@@ -123,5 +107,6 @@
   <script src="/js/nav.js"></script>
   <script src="/js/topic-metadata.js"></script>
   <script src="/js/reveal.js"></script>
+  <script src="/js/type-filter.js"></script>
 </body>
 </html>
