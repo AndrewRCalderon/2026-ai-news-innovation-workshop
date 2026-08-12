@@ -1403,6 +1403,23 @@ single-purpose, shippable URL.
 
 ## Change log
 
+- 2026-08-12 (latest, round 2) — Three more small fixes on `live`,
+  same "edit there directly, it's what's deployed" pattern as above:
+  (1) removed the redundant "Setup" breadcrumb sitting right above the
+  `<h1>` on `setup.html`. (2) Corrected the workshop's actual name
+  site-wide on `live`: "AI Journalism Workshop" → "**AI News Innovation
+  Workshop**", across `setup.html`, `setup-day-2.html`, `nav.html`, and
+  `footer.html` (all 4 occurrences that branch has). **This name is
+  still wrong everywhere on `review/full-site-audit-2`** — every page
+  title, the nav logo, the footer — that's the correct name for the
+  whole site, not just `live`'s pages, so this needs a full find/replace
+  across `review` too, not yet done. (3) Added the Tow-Knight Center for
+  Journalism Futures logo (`docs/assets/images/tow-knight-logo.png`,
+  supplied by the user from `~/Downloads`) to the nav bar next to the
+  workshop name, via a new `.site-nav-brand` flex wrapper in
+  `nav.html`/`style.css` (28px tall, width auto). All three verified
+  live via curl; the logo specifically confirmed as byte-identical to
+  the source file (21,555 bytes) once served.
 - 2026-08-12 (latest) — Two small requests on `live`'s setup pages: (1)
   added a real GitHub-connector walkthrough to `setup.html`'s GitHub
   section (find the `+` next to the message box → Connectors → GitHub →
