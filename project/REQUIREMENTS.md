@@ -1428,6 +1428,16 @@ single-purpose, shippable URL.
   Needs the same treatment whenever that branch's Day 1 rework actually
   ships — the two branches' setup pages are now genuinely divergent, not
   just differently-scoped.
+
+  **Follow-up, same day**: added a real walkthrough for connecting
+  Claude Desktop's GitHub connector to `live`'s `setup.html` (find the
+  `+` next to the message box → Connectors → GitHub → OAuth device-code
+  sign-in → confirm connected) — previously this was deliberately
+  deferred to the live Explore Claude Desktop session; now self-serve,
+  since it's just an OAuth sign-in with no install step. Steps sourced
+  from the same research already used to write Explore Claude Desktop's
+  "Connecting GitHub" section, not re-verified fresh. Checklist count
+  6 → 10. This widens the divergence from `review`'s copy noted above.
 - 2026-08-12 (later same day) — Even with production correctly tracking
   `live`, user found that clicking through the shared `nav.html`/
   `footer.html` from `setup.html` still reached the rest of the (old,
