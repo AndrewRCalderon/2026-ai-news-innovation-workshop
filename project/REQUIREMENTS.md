@@ -1403,6 +1403,47 @@ single-purpose, shippable URL.
 
 ## Change log
 
+- 2026-08-12 — User merged PR #2 into `main` directly (deviating from the
+  "don't merge yet" plan logged the day before). Vercel's production
+  deploy off `main` then hit a **team-membership** block (git commit
+  author wasn't recognized as a member of the connected Vercel team) —
+  resolved by making the GitHub repo public, per the already-decided
+  [ADR 0002](adr/0002-public-repo.md), which the repo had drifted from
+  (it was still private). That fixed the deploy, but exposed Vercel's
+  **Deployment Protection** login wall on top — and once that got sorted
+  (via a Vercel "Share Deployment" bypass link, initially), a bigger
+  problem surfaced: `main` now has the *entire* Day 1 restructure on it,
+  not just the reviewed-and-ready `setup.html`. Resolved by creating a
+  dedicated `live` branch instead — see
+  [ADR 0018](adr/0018-live-branch-for-partial-production-deploy.md) for
+  the full reasoning.
+
+  **Resolved, same day.** Vercel's dashboard has moved this setting under
+  "Environments" (not the classic "Settings → Git → Production Branch"
+  path); user set the Production environment to track `live`. That alone
+  didn't retroactively rebuild/promote anything — the stable production
+  URLs kept serving the old `main`-based deployment (confirmed live via
+  curl: today's new Product Discussion page was still reachable, and
+  Deployment Protection was off project-wide, so this was a real public
+  exposure of the in-review Day 1 content for a window, not just a
+  theoretical one — user opted to leave it exposed rather than re-protect
+  while sorting the setting out, judging it low-stakes). Pushed an empty
+  commit to `live` to force a fresh build once Production was actually
+  tracking it; that promoted correctly. **Verified via curl against both
+  candidate stable domains**: `setup.html` loads (200, correct title,
+  checklist present, checklist.js loads), today's `04-product-discussion`
+  404s as expected, and the old `05-project-ideation` (pre-rework) is
+  back, confirming production now serves the `live` branch, not `main`.
+  Link to send students: `https://2026-ai-news-innovation-workshop.vercel.app/setup.html`.
+- 2026-08-11 — Committed and pushed the full Day 1 restructure (Claude
+  Desktop pivot, schedule retiming, Adiel's PR #1 feedback, State of AI
+  tone pass) as one commit on `review/full-site-audit-2`, and opened
+  [PR #2](https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/pull/2)
+  against `main` — not to merge yet, but to give Vercel (just connected
+  to the repo) a PR-preview URL so `setup.html` can be shared with
+  students without merging the whole diff into `main` first. **Superseded
+  2026-08-12** — user merged anyway; see the entry above for what
+  happened next.
 - 2026-08-06 — Implemented most of Batches 1–4 from the full-scale site
   review (Topic 1 "State of AI" content edits, plus two template-level
   fixes applied across all 8 existing slide decks: removing the
