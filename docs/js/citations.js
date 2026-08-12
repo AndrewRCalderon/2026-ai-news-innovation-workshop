@@ -2,6 +2,14 @@
 // Turns <sup class="cite" data-url="..." data-note="...">...</sup> into a
 // numbered marker; the popover itself is shown on hover/focus via CSS.
 (function () {
+  function sourceLabel(url) {
+    try {
+      return new URL(url).hostname.replace(/^www\./, '');
+    } catch (e) {
+      return 'Source';
+    }
+  }
+
   function init() {
     document.querySelectorAll('.cite').forEach(function (cite, i) {
       var note = cite.getAttribute('data-note') || '';
@@ -21,7 +29,7 @@
         link.href = url;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
-        link.textContent = 'Source ↗';
+        link.textContent = sourceLabel(url) + ' ↗';
         pop.appendChild(document.createElement('br'));
         pop.appendChild(link);
       }

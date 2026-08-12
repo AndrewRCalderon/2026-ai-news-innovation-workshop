@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Claude Desktop — Day 1 — AI Journalism Workshop</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/briefing.css">
+</head>
+<body class="briefing briefing-overview" data-day="1" data-session-id="day-1/07-explore-claude-desktop">
+  <div id="nav"></div>
+
+  <main>
+    <div class="breadcrumb"><a href="/">Home</a> &gt; <a href="/day-1/">Day 1</a> &gt; Explore Claude Desktop</div>
+
+    <header class="masthead">
+      <h1 class="masthead-title">Explore Claude Desktop</h1>
+      <p class="masthead-dek">Hands-on, instructor-guided: get comfortable with the app you'll actually build with — especially its code environment — before you start building.</p>
+      <div class="masthead-meta"><span id="topic-time">--</span><span class="div">·</span><span id="topic-duration">--</span><span class="div">·</span><span id="topic-type">--</span></div>
+    </header>
+
+    <nav class="toc" aria-label="Sections in this briefing">
+      <ol>
+        <li><a href="#s1"><span class="n">01</span> Why This Session</a></li>
+        <li><a href="#s2"><span class="n">02</span> Session Roadmap</a></li>
+        <li><a href="#s3"><span class="n">03</span> Getting Oriented: Chat, Cowork, Code</a></li>
+        <li><a href="#s4"><span class="n">04</span> The Code Environment: Best Practices &amp; Mindset</a></li>
+        <li><a href="#s5"><span class="n">05</span> Connecting GitHub</a></li>
+        <li><a href="#s6"><span class="n">06</span> Building Is a Loop, Too</a></li>
+      </ol>
+    </nav>
+
+    <section class="slides-cta">
+      <p>Prefer to move through this section by section, presentation-style?</p>
+      <a class="slides-cta-link" href="slides/07-explore-claude-desktop-slides.html">Open the slides →</a>
+    </section>
+
+    <article>
+      <section class="block reveal" id="s1">
+        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">Why This Session</h2></div>
+        <p class="lede">AI Tools gave you the landscape. This session is different: it's hands-on and instructor-guided, working through the one app you'll actually use for the rest of the workshop — Claude Desktop — so nothing is unfamiliar when it's time to build.</p>
+        <p>If you haven't completed <a href="/setup.html">pre-workshop setup</a> yet, do that first — this session assumes Claude Desktop is already installed, signed in, and on a paid plan (Pro, Max, Team, or Enterprise). Its coding surface isn't available on a free account.</p>
+      </section>
+
+      <section class="block reveal" id="s2">
+        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">Session Roadmap</h2></div>
+        <p>55 minutes, one app, most of it in the Code tab — this is practice time, not install time, since setup happened before today:</p>
+        <ol class="history">
+          <li><span class="era">10 MIN</span><h3>Getting Oriented</h3><p>Chat, Cowork, and Code — what each tab is actually for.</p></li>
+          <li class="is-hinge"><span class="era">30 MIN</span><h3>The Code Environment</h3><p>The core of the session — describe a task, review the plan, watch it build, iterate.</p></li>
+          <li><span class="era">15 MIN</span><h3>Connecting GitHub</h3><p>Sign in to the GitHub connector — sets up the next session, Fork &amp; Submit.</p></li>
+        </ol>
+      </section>
+
+      <section class="block reveal" id="s3">
+        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">Getting Oriented: Chat, Cowork, Code</h2></div>
+        <p>Claude Desktop has three tabs, and they're not interchangeable — knowing which one you're in matters:</p>
+        <dl class="roster">
+          <div class="roster-row"><dt>Chat</dt><dd>A normal conversation with Claude. No special file access unless you add one.</dd></div>
+          <div class="roster-row"><dt>Cowork</dt><dd>An agentic workspace for document/research-style work — attach a "workspace folder," describe an outcome, step away, come back to a finished deliverable. Not a code editor: no file editor pane, no terminal, no diff view.</dd></div>
+          <div class="roster-row"><dt>Code</dt><dd>The actual coding surface, and it looks like a lightweight IDE — file editor, integrated terminal, a diff viewer with inline comments, and PR tooling. Same engine as the Claude Code CLI, in a GUI. <strong>This is where most of today's session happens.</strong></dd></div>
+        </dl>
+        <ul class="field-notes">
+          <li>Switch tabs from the tab bar near the message box.</li>
+          <li>In the Code tab, you pick a <strong>Project folder</strong> when you start a session — the same unscoped access model as opening a folder in VS Code.</li>
+          <li>In Cowork or Chat, you attach files or folders via <strong>Connectors</strong> instead — click the <strong>+</strong> next to the prompt box, or check <strong>Settings → Connectors</strong>.</li>
+          <li>The <strong>Customize</strong> panel in the sidebar is the one place to manage connectors, skills, and plugins — no technical setup required.</li>
+        </ul>
+      </section>
+
+      <section class="block reveal" id="s4">
+        <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">The Code Environment: Best Practices &amp; Mindset</h2></div>
+        <p class="lede">There isn't a fixed set of steps to memorize here — the real way to get good at the Code tab is to use it. What follows are guardrails, not a checklist: a few habits that make the difference between fighting the tool and working well with it. Once you've got these, the rest of today is practice.</p>
+        <ul class="field-notes">
+          <li><strong>Be specific.</strong> Vague asks get vague results. "Add filtering" is weaker than "add a dropdown that filters the article list by topic."</li>
+          <li><strong>Use Plan mode for anything non-trivial.</strong> The Code tab's permission modes (Manual, Accept Edits, Plan, Auto, Bypass) control how much it does before checking with you — Plan mode shows you what it's about to do before it does it, which is the moment to catch a misunderstanding cheaply.</li>
+          <li><strong>Give it context.</strong> Point it at relevant files or explain the project rather than assuming it can guess what you mean.</li>
+          <li><strong>Work in small steps.</strong> A series of small, specific asks beats one giant one — easier to review, easier to course-correct.</li>
+          <li><strong>Always read the diff.</strong> The Code tab's diff viewer is right there — use it. You're still responsible for what ships, not Claude.</li>
+          <li><strong>Clarify, don't fight.</strong> If the result is off, restate what you actually want rather than repeating the same prompt harder.</li>
+          <li><strong>Treat surprises as information.</strong> It won't be right every time — that's normal, not a sign you're doing something wrong.</li>
+        </ul>
+        <blockquote class="pull-question">The fastest way to get good at this is to use it. Treat today's project time as low-stakes practice.</blockquote>
+      </section>
+
+      <section class="block reveal" id="s5">
+        <div class="block-head"><span class="block-eyebrow">05</span><h2 class="block-title">Connecting GitHub</h2></div>
+        <p>Claude Desktop's GitHub connector signs in through your browser — no personal access tokens, no Git installed on your computer. Set it up now; the next session, Fork &amp; Submit, is where you'll actually use it.</p>
+        <ul class="field-notes">
+          <li>Click the <strong>+</strong> next to the prompt box (in Chat or Cowork) and choose <strong>Connectors</strong>, or go to <strong>Settings → Connectors</strong>.</li>
+          <li>Find <strong>GitHub</strong> and sign in — you'll get a short code and a browser prompt to approve it.</li>
+          <li>Once connected, Claude can read and write to repos you have access to: file changes, commits, and pull requests. Write actions ask for your approval before anything happens, and a few (like merging a PR) always require approval no matter what.</li>
+        </ul>
+        <p>This is a different path from the Code tab's own built-in git — that one is real, local git and works well, but requires Git (and the GitHub CLI, for PRs) installed on your machine. The connector skips that installation step entirely, which is why it's the one we're using this workshop.</p>
+      </section>
+
+      <section class="block reveal" id="s6">
+        <div class="block-head"><span class="block-eyebrow">06</span><h2 class="block-title">Building Is a Loop, Too</h2></div>
+        <p class="lede">Same lesson as this morning's design process: there's no straight line from "describe it" to "done." You'll go around this loop — building, trying it, adjusting — more than once before anything's ready to ship.</p>
+        <ol class="process-wheel">
+          <li><span class="era">1</span><h3>Ideation</h3><p>Describe the problem to Claude, in plain language.</p></li>
+          <li><span class="era">2</span><h3>Planning</h3><p>Claude shows you a plan before touching anything.</p></li>
+          <li><span class="era">3</span><h3>Building</h3><p>It writes the code; you see it in the editor pane.</p></li>
+          <li><span class="era">4</span><h3>Reviewing</h3><p>Check the diff, ask questions.</p></li>
+          <li><span class="era">5</span><h3>Testing</h3><p>Claude runs it locally, right in the terminal, so you can try it.</p></li>
+          <li class="is-hinge"><span class="era">6</span><h3>Iterating</h3><p>Tell Claude what to change based on what you saw.</p></li>
+          <li><span class="era">7</span><h3>Repeat</h3><p>Back to building — until it's actually right.</p></li>
+        </ol>
+        <p>Shipping — committing and opening a PR through the GitHub connector — happens whenever you're ready, not as a forced last step. That's what the next session, Fork &amp; Submit, walks through.</p>
+      </section>
+    </article>
+
+    <footer class="topic-nav">
+      <a id="prev-link" href="#">← Previous</a>
+      <a href="/day-1/">Day 1 Overview</a>
+      <a id="next-link" href="#">Next →</a>
+    </footer>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/js/partials.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/topic-metadata.js"></script>
+  <script src="/js/reveal.js"></script>
+</body>
+</html>

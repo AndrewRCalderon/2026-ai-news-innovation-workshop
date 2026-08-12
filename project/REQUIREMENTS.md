@@ -40,11 +40,11 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 
 ## Phase 3 — Content structure
 
-- [x] `docs/data/schedule.json` authored (single source of truth for session times/types/titles) — **placeholder times, confirm real schedule before workshop**
+- [x] `docs/data/schedule.json` authored (single source of truth for session times/types/titles) — **Day 1 times confirmed 2026-08-11** (10am–5pm, one AM break — see the Day 1 schedule section below); Day 2/3 still placeholder, confirm before the workshop
 - [x] `docs/css/timeline.css`, `docs/js/timeline.js`
 - [x] `docs/js/topic-metadata.js` — populates each topic page's time/duration/type badges and prev/next links from `schedule.json`
 - [x] Day 1/2/3 `index.html` (timeline view, driven by `schedule.json`) — pattern works for all three; Day 2/3 are stubs with a working timeline but no learning-outcomes copy yet
-- [~] Topic page template + 24 topic pages — **10/24 scaffolded (Day 1 now 10 topics — see below)**; of those, **8/10 have real content** (`01-state-of-ai`, `02-industry-conversation`, `03-use-cases`, `04-people-to-follow`, `05-project-ideation`, `07-ai-tools`, `08-explore-tech-stack`, `09-fork-and-submit`, all using the briefing-overview template — see below); `06-problem-statement-discussion` and `10-project-assignments` still placeholder. Day 2 (8) and Day 3 (6) not yet built, so their timeline links currently 404
+- [~] Topic page template + topic pages — **Day 1 renumbered/renamed 2026-08-11** (Claude Desktop pivot — see below): `01-state-of-ai`, `02-industry-conversation`, `03-use-cases`, `04-product-discussion`, `05-problem-statement-discussion`, `06-ai-tools`, `07-explore-claude-desktop`, `08-fork-and-submit` all have real content; `09-project-assignments` is still a placeholder. `people-to-follow.html` also has real content but is unlisted/unscheduled (a resource page, not a numbered session — see below). Day 2 (8 topics) and Day 3 (6 topics) not yet built, so their timeline links currently 404
 - [x] Briefing template, Overview page (`docs/css/briefing.css` Overview rules, `docs/js/reveal.js`) — normal scrolling page, shared nav/footer restored, reuses `topic-metadata.js`. See [ADR 0011](adr/0011-split-overview-and-slides.md) (supersedes [0010](adr/0010-briefing-template.md)'s toggle).
 - [x] Briefing template, Slides page (`docs/css/briefing.css` deck rules, `docs/js/deck.js`) — paginated-only, self-contained chrome linking back to its Overview page, no schedule.json fetch. **8/8 content-complete topics now have a Slides companion** (Topics 1–5, 7, 8, 9).
 - [ ] Slides system for the *generic* template (`docs/css/slides.css`, `docs/js/slides.js`) — the original Part 6b plan; **not needed for briefing-template pages**, which get their slides via the deck pattern above instead. Only relevant if a generic-template page ever wants slides.
@@ -60,11 +60,16 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 
 ## Phase 5 — Content fill
 
-- [~] Real content written for each of the 24 topic pages — **8/24 done** (Day 1 topics 1–5, 7, 8, 9; missing 6 and 10)
-- [ ] Slides populated per topic
-- [x] `docs/setup.html` — real self-serve pre-workshop setup instructions
-      (VS Code, Claude Code, GitHub, opening them together, a verify-you're-ready
-      step), not the original 5-bullet checklist stub
+- [~] Real content written for each of the 24 topic pages — **Day 1: 8/9
+      scheduled sessions done** (only `09-project-assignments` still a
+      placeholder), plus `people-to-follow.html` as a bonus resource page.
+      Day 2/3 not started.
+- [x] Slides populated per topic — **true for every Day 1 topic that has
+      real content** (all 8 scheduled + `people-to-follow`); Day 2/3 have
+      none yet.
+- [x] `docs/setup.html` — **rebuilt 2026-08-11 as Day 1 only**, with a real
+      interactive checklist, ready to send to students. Day 2's setup
+      content moved to a new, currently-unlinked `docs/setup-day-2.html`.
 - [ ] `STUDENT_CLAUDE_GUIDE.md` written (day-specific guidance students paste into their own Claude sessions — see ADR 0009 for why this isn't named `CLAUDE.md`)
 - [~] `resources.html` populated with real links — established pattern:
       when a topic's review turns up a genuinely useful external
@@ -706,6 +711,362 @@ Applies to `docs/day-1/05-project-ideation.html` and
       `REPLACE_WITH_PUBLISHED_CSV_URL` in the JS) that fail visibly with
       a clear message rather than silently, verified via Playwright.
 
+### Batch 11 — Topic 7 (AI Tools)
+
+Applies to `docs/day-1/07-ai-tools.html` and
+`docs/day-1/slides/07-ai-tools-slides.html` unless noted. Not implemented —
+logged only.
+
+- [ ] Remove **s3 "Quick Reference"** entirely (both files).
+- [ ] Remove **s5 "For This Workshop"** entirely (both files) —
+      supersedes the earlier plan (logged in "Day 1 schedule & Claude
+      Desktop pivot" below) to update this section's required-tools list
+      for the Claude Desktop pivot; it's being deleted, not reworked, so
+      that item is marked resolved/superseded there.
+- [ ] **s2 "The Broader Landscape"** tool listings (7 categories, ~25
+      tools) move out of this page into `resources.html`. Keep **s4
+      "Evaluating a New Tool"** as-is — user says it's useful.
+- [ ] Page reframes around two things going forward: evaluating new tools
+      (existing s4 content) and **familiarizing yourself with a new
+      tool** — this second angle isn't written yet; scope/content TBD
+      before implementation.
+- [ ] **Open implementation questions, not yet resolved:**
+  - Where exactly "The Broader Landscape" lands in `resources.html` needs
+    a format decision. Note this is a different case than
+    `resources.html`'s established pattern so far (Phase 5: link out to
+    genuinely useful *external* compilations we wouldn't host ourselves)
+    — this is ~25 tools across 7 categories the site itself authored, not
+    an outside link. Options: embed inline, build it as a filterable
+    table like People to Follow's, or keep it a dedicated page linked
+    from Resources. Not decided.
+  - TOC/section numbering for `07-ai-tools.html` shrinks from 5 sections
+    to 2 — renumbering question, same open item already flagged for
+    People to Follow's removal above.
+  - `schedule.json`'s AI Tools duration (currently 30 min) will very
+    likely shrink given the content cut — folds into the Day 1 retiming
+    already blocked on other content-boundary decisions.
+- [ ] **Resolves Adiel's PR #1 note #21** ("tool comparison table risks
+      feeling like a wall of information that goes stale fast... consider
+      simplifying toward general advice") — moving the volatile tool
+      roster to Resources (easier to keep current independently) while
+      keeping the in-session lesson durable (an evaluation skill, not a
+      point-in-time list) is exactly the fix she was pointing at.
+
+---
+
+## Collaborator feedback — Adiel, PR #1 (2026-08-07)
+
+Adiel (co-instructor) opened
+[PR #1](https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/pull/1)
+"Day 1 feedback" from a private fork, adding
+`project/feedback/adiel-2026-08-07.md` — notes from clicking through the
+live Day 1 pages. **Not merged**; digested into requirement items below.
+**Not implemented, logged only**, same workflow as the review batches
+above.
+
+The PR also included a `Logistics` section on Claude account
+billing/provisioning (credit-card reimbursement via a card-masking
+service, CUNY's Microsoft AI subscription decision) —
+**intentionally excluded from this log**, per instruction not to bring
+subscription/billing specifics into `main`. That topic (student Claude
+accounts need to be provisioned somehow before Day 1) still exists, but
+its resolution lives in conversation with Adiel, not in this repo.
+
+### Big-picture items (Adiel's top 4)
+
+- [x] **Day 1 timing** — independently confirms the schedule decision
+      already logged above (10am–5pm with breaks; the current
+      9am–5:45pm build needs condensing). No new information, just
+      corroboration from a second source.
+- [ ] **VS Code vs. Claude Desktop** — already being tracked above, but
+      Adiel's note adds a real wrinkle: she describes a Claude Desktop
+      interface where you switch between "cowork" and "claude code" via a
+      tab, with panels for MCPs/skills/scheduled tasks, and says it's now
+      comparable to Codex's interface and "feels like Notion" — closer to
+      what students should be comfortable with than raw VS Code.
+      **"Cowork" isn't a term I can independently confirm as an official
+      Claude Desktop feature name** — her notes were dictated, so it may
+      be shorthand or a transcription artifact. Verify the actual current
+      UI/feature names before writing session content around it.
+- [ ] **How much GitHub to teach — conflicts with the "GitHub Desktop
+      only" decision logged above.** Adiel suggests going further: use
+      Claude Desktop's GitHub connector (MCP) to handle fork/PR directly
+      from inside Claude Desktop, possibly bypassing GitHub Desktop and
+      the terminal entirely, so the only concepts students need are
+      "fork" and "PR." Needs a decision before Fork & Submit gets
+      rewritten — GitHub Desktop (already logged) or the Claude Desktop
+      connector (Adiel's newer suggestion). Cross-referenced in the
+      Fork & Submit bullet above.
+- [ ] **Pre-class email content** — to be finalized between you and Adiel;
+      she wants to send it by end of week. Related existing items: the
+      setup-page checklist-with-submit-button idea (#1 below) and the
+      "who are you building for" pre-workshop framing question (#18
+      below).
+
+### Cross-cutting patterns Adiel flagged
+
+Named across multiple notes; specifics logged per-page below with note
+numbers for traceability back to the PR:
+
+- Jargon students may not have yet (e.g. "your OS," "no ML background
+  needed," "AGI," "weights anyone can run locally").
+- Sources/examples that have aged out (some 3–5 years old) — a general
+  concern beyond the specific items flagged below.
+- A few sections zoom to industry-level abstraction before students have
+  footing, or present a dichotomy before students form their own view
+  first.
+- Several "AI can't do X" claims read more absolute than current
+  capability actually supports.
+
+### Setup guide (`/setup.html`)
+
+- [x] **Implemented 2026-08-11**: `/setup.html` is now Day 1 only, split
+      into its own standalone page — see "Setup pages split for shipping"
+      below for the full change. Its install steps are real interactive
+      checkboxes (`.field-notes.is-interactive-checklist`, `checklist.js`)
+      with a live "N of 7 steps checked off" counter. **No submission
+      step** — consistent with the "no Google Form right now" decision
+      from the revision-pass above; if a completion-tracking mechanism is
+      wanted later, it should use whatever lightweight approach gets
+      chosen for problem-statement submissions, not a one-off Google Form
+      here.
+- [ ] (#2) Add screenshots for install steps. **Not implemented — needs a
+      human.** I can't produce real UI screenshots of Claude Desktop,
+      VS Code, or GitHub; this needs someone to actually take them and
+      drop them in. Applies to both `/setup.html` (Day 1) and
+      `/setup-day-2.html` (Day 2).
+- [x] **Implemented**: terminal/Git is already fully out of Day 1 (the
+      Claude Desktop pivot removed it entirely, not just de-emphasized
+      it). On Day 2, where Git still appears, softened the framing —
+      added an explicit "if you're not comfortable with a command line,
+      that's fine" line before the terminal step rather than presenting
+      it as a bare requirement.
+
+### Day 1 — State of AI
+
+- [x] **Implemented 2026-08-11.** (#4) 2022 added as a fourth chip in the
+      timeline strip, matching 1995/2007/2010; "1,000,000" became "1M" in
+      the big stat display rather than literally "1 million" — spelling
+      it out clashed with that component's numeral-styled design
+      (`tabular-nums`, huge mono font), so "1M" was the readability fix
+      that didn't break the component. Flagging this as a judgment call,
+      not a literal application of the suggestion.
+- [x] **Implemented.** (#5) Two-part fix: (1) `citations.js` now derives
+      the source-site name from the citation URL's hostname for every
+      citation link sitewide (`sourceLabel()` — e.g. "mckinsey.com ↗"
+      instead of "Source ↗"), a systemic fix, not a per-page one. (2)
+      Added month/year to State of AI's citation hover notes, derived
+      confidently from each URL itself (arXiv ID month-year encoding,
+      URL date-slugs) rather than guessed — e.g. arXiv `2509.04664` →
+      Sept 2025. Skipped one citation (Dario Amodei's essay) where no
+      date could be derived this way.
+- [x] **Implemented.** (#6) AlexNet's 2012 entry reworded for a general
+      audience (exact 15.3%/26.2% figures moved into the citation hover,
+      not the visible prose); GPT-3's few-shot learning explanation moved
+      from a citation tooltip into visible text (this also resolves an
+      old pending item from Batch 3 — "GPT-3 introduces few-shot
+      learning" was flagged there as unexplained). Timeline extended past
+      2022 with two new entries covering the agentic escalation
+      (computer use + Operator, 2024–2025; Skills + Cowork, 2025–2026),
+      using dates verified by a research agent against primary sources —
+      see the research summary below. **Images not added — needs a
+      human**; I can't source/produce real images to embed responsibly.
+- [x] **Implemented.** (#7) Split into two clearly separated groups: "Who's
+      Building It" (tech giants/specialized/open-source — the model
+      layer) and "Who's Using It in Journalism" (large + small newsrooms
+      — the application layer), so newsrooms no longer read as parallel
+      to OpenAI/Google/Meta.
+
+### Day 1 — Industry Conversation
+
+- [x] **Implemented.** (#8) Added a "Before You Look" prompt box asking
+      students to generate their own list of disagreements before the
+      prepared dichotomies list is shown, reframing it from a presented
+      board of tensions into an activity.
+- [x] **Implemented.** (#9) Pulled the labor-disruption line out of a
+      trailing sentence into its own pull-quote, sharpened to name coding
+      as the clearest current example of "work changes, doesn't
+      disappear." Written as directional framing, not backed by a
+      specific stat — didn't want to fabricate a number under time
+      pressure.
+- [x] **Implemented.** (#10) Retitled rather than reordered — "The Tech
+      Industry Conversation" → "The Scaling Debate" (its actual, narrower
+      scope) and "Skeptics vs. Optimists" → "The Bigger Picture: Skeptics
+      vs. Optimists," with a line explicitly noting it's a wider, separate
+      split from the scaling one right before it. Resolves the "which
+      optimists/skeptics is this" confusion without needing to move
+      content around.
+- [x] **Implemented.** (#11) Reuters entry enriched with the angle Adiel
+      was actually pointing at (Fact Genie was already on the page) — AI
+      built into "Leon," Reuters' daily CMS (headline suggestions,
+      summaries, error detection), plus the 6–8 second alert-speed stat.
+      The Zapier/no-code example went into Use Cases (#12/#13 below)
+      instead of here, since it's a concrete deployed example matching
+      that section's pattern more than this page's policy/culture focus.
+
+### Day 1 — Use Cases
+
+- [x] **Implemented.** (#12) Legal example replaced: Harvey AI (142,000+
+      legal professionals, ~half the Am Law 100, used for discovery —
+      the direct parallel to document-heavy reporting Adiel wanted).
+      Added a new **Finance** row (Mastercard's fraud-detection model,
+      ~1 trillion data points, <50ms per transaction) rather than folding
+      it into Legal, since Adiel raised it as a distinct example. UPS
+      ORION/Logistics **dropped rather than replaced** — the research
+      agent couldn't find a comparably well-sourced current alternative
+      (candidates traced only to secondary SEO/consultant blogs, not
+      primary sources), so this followed the site's existing pattern of
+      dropping weak citations rather than forcing one in (see Batch 9).
+- [x] **Implemented.** (#13) Customer service and Content moderation rows
+      now explicitly note they're also business-side newsroom tools, not
+      purely "outside" journalism, with an intro line on the section
+      making the same point generally.
+- [x] **Implemented.** (#14) Both flagged claims softened: investigative
+      reporting now says AI can help with *pieces* of the process (cross-
+      referencing the Data Journalism/Records & FOIA rows above it) even
+      though it can't do the whole thing; the real-time item reframed
+      from "can't do real-time" to "the cutoff is a workflow problem, not
+      a hard wall," while keeping the real, narrower limitation (it can't
+      verify a live source itself).
+- [x] **Implemented.** (#15) Added "finding needles in haystacks — pattern
+      recognition, lead generation" as its own line in the Works When
+      column, and reframed "speed matters more than perfection" into
+      "you need an 'at least this many' count, not an exhaustive one" —
+      Adiel's exact framing.
+- [x] **Implemented.** (#16) Reframed exactly as suggested: "does this need
+      original judgment *every single time* — or can I design the
+      process so judgment only happens on a smaller, surfaced set?"
+- [x] **Added, not in Adiel's original list**: a new "No-code automation"
+      row using Simon Galperin's Zapier-based Bloomfield Information
+      Project (research-verified) — this is where the Zapier use case
+      from #11 landed. **Flagging a real overlap**: Simon Galperin is
+      already cited on People to Follow for the same underlying
+      small-newsroom-automation story (The Jersey Bee). Cross-referenced
+      the two entries explicitly rather than hiding the duplication —
+      worth a look to confirm that's the right call rather than swapping
+      in a different example.
+
+### Day 1 — People to Follow
+
+- [x] **Implemented.** (#17) Added an "Employer" column across all 27 rows
+      (derived from each entry's existing, already-verified "what to
+      know" text — not new research; org/publication rows get "—" since
+      Employer doesn't apply). Karen Hao recategorized from "Critic" to
+      "Journalist." Added the Tow-Knight Center's Substack, "(Re)Structured
+      News" by Gina Chua — URL and current focus (AI's impact on
+      journalism) confirmed by the research agent.
+
+### Day 1 — Project Ideation
+
+- [ ] (#18) Still open — clarify who students are building for before the
+      "what frustrates you" prompts. Now applies to Problem Statement's
+      "Finding a Problem Worth Solving" section post-restructure, not the
+      original Project Ideation page (which no longer exists under that
+      name — see Product Discussion above).
+- [x] (#19) No action needed — hypothesis section well-received as-is.
+- [ ] (#20) Still open — solo vs. pairs. **Partially resolved by the
+      revision pass above**: Product Discussion (the idea-sharing part)
+      is confirmed group; Problem Statement (the hypothesis/goal part) is
+      confirmed individual-then-share-out. Adiel's underlying "should
+      this be solo" question is answered for Problem Statement; Product
+      Discussion being a group activity was a separate, explicit user
+      decision, not derived from Adiel's guess.
+
+### Day 1 — AI Tools
+
+- [x] Already resolved earlier (Batch 11) — tool list moved to
+      `resources.html`, session content simplified to evaluating +
+      familiarizing. See above.
+
+### Research agent findings applied above (2026-08-11)
+
+A second background research agent verified: Cowork's research-preview
+date (Jan 12, 2026, TechCrunch) and GA date (April 9, 2026); Skills'
+launch date (Oct 16, 2025, official Anthropic post); Harvey AI's
+adoption/valuation figures; Mastercard's fraud-detection stats; the
+Bloomfield Information Project/Zapier case study; the Leon CMS/Fact Genie
+speed stat; and the Tow-Knight Substack URL. Full findings with every
+source URL and confidence level aren't persisted elsewhere — if a
+citation needs re-verification later, the research would need to be
+re-run rather than pulled from a saved report.
+
+### Use-case currency rule clarified, and applied — 2026-08-11
+
+User clarified the actual rule after reviewing the earlier "old sources"
+list: sources cited as **historical facts or terminology** (AlexNet's
+2012 win, "filter bubble" coined in 2011, IDx-DR's 2018 "first
+FDA-authorized" milestone) are fine to stay old — the date *is* the
+point. Sources cited as **live use cases** (claiming a practice is
+ongoing/current) need to meet Adiel's "avoid 2023 or earlier" bar. A
+third research agent checked the two remaining flagged examples against
+this:
+
+- [x] **AP's automated earnings reports — dropped entirely** (Industry
+      Conversation's "Associated Press" row and Use Cases' "Routine news"
+      row, both Overview + Slides). No citable 2024–2026 source exists
+      confirming current scale, vendor, or even that AP still runs this
+      the way the 2015 source describes — the automation vendor
+      (Automated Insights/Wordsmith)'s current marketing has pivoted
+      entirely to sports/betting content, a real signal the original
+      arrangement may not reflect AP's current state. Followed the site's
+      existing house rule (drop rather than force in a weak citation —
+      see Batch 9, UPS ORION above) rather than keep it caveated as
+      historical, since Use Cases' own framing explicitly claims these
+      are "real, deployed use cases, not theoretical ones."
+- [x] **Chequeado's Chequeabot — updated, not dropped.** Strong current
+      sourcing exists (Chequeado's own May 2024 and Sept 2025 posts
+      confirm it's still active, in production, and expanded since 2016
+      to cover podcasts and dozens of channels). Also **corrected a
+      real understatement**: the "1 in 5" figure from the old 2019
+      source is stale on the *low* side — Chequeado's own reporting
+      suggests roughly half of certain fact-checks now originate there.
+      Rewrote to "roughly half... and growing" rather than asserting a
+      precise current percentage I don't have.
+
+### "Claude-speak" / tone pass — sample on State of AI, 2026-08-11
+
+User flagged that Adiel's original PR feedback included a note this
+project's own digest had dropped: some passages "read very claude-speak."
+Combined with new guidance from the user directly: descriptions
+shouldn't sound absolute; the voice should be **thoughtful and
+constructively skeptical**, grounded in concrete examples, with a sense
+of **curiosity and insight** rather than declarative hype. User asked for
+a sample pass on State of AI first, to approve the direction before it
+rolls out further — **approved, "sounds a bit better," asked to extend
+it across the whole page** (done, both rounds, Overview + Slides, 7
+spots total):
+
+- Opening lede rewritten — cut "one of the most consequential technology
+  shifts in decades" and "suddenly accessible to everyone" (unverifiable
+  superlatives), replaced with a grounded framing that names the
+  hype-vs-reality tension directly instead of only asserting the hype
+  side.
+- "Faster than any app in history" → "one of the fastest consumer
+  product launches ever" (defensible; the original was an unverified
+  superlative).
+- "Impossible three years ago" → "far beyond what these models could do
+  three years ago" (defensible; "impossible" overclaimed).
+- "Everyone's tool" / "anyone could pick up" → "most people have at
+  least tried" / "millions of people were actually trying" (removed
+  unsupported absolutes; the second rewrite deliberately ties to the
+  1M-in-5-days stat right below it instead of asserting an unsupported
+  "most people," which the site's own later Pew citations don't actually
+  support for year one).
+- AlexNet/2012 entry: "this is where the modern AI boom actually starts"
+  (flat causal claim) → reframed into an observation with more curiosity
+  — "the shifts that turn out to matter most rarely look big while
+  they're happening."
+- Landscape section closer: "expect the landscape to keep shifting"
+  (filler) → named the actual pattern (new capability arrives, then
+  months pass before anyone knows what to do with it) instead of a
+  generic closing line.
+- "Essential" (stakes-for-you) → "turning into a basic job skill" —
+  echoes s4's own "AI is a tool in your kit now, the way Google Docs or
+  Slack is" framing instead of introducing new absolute language.
+- **Not yet done**: same treatment on Industry Conversation, Use Cases,
+  and People to Follow — holding for explicit go-ahead per the
+  sample-first workflow the user asked for.
+
 ---
 
 ## Site-wide color palette alignment (new initiative — 2026-08-06)
@@ -747,6 +1108,296 @@ the orange toward coral without matching `#E8664A` exactly, and consider
 introducing the teal as a new tertiary accent the workshop site doesn't
 currently have. Needs a proposed derived palette (with actual hex swatches
 for approval) before touching any CSS variables — not done yet.
+
+---
+
+## Day 1 schedule & Claude Desktop pivot (new initiative — 2026-08-11)
+
+User is auditing Day 1 at the structural level — schedule shape and tool
+stack — separate from the per-page copy batches above. Not implemented —
+logged only, per the review workflow (organize first, implement once the
+user says go).
+
+### Schedule structure (applies to all three days going forward)
+
+- [ ] Standard day shape: **10:00 AM–1:00 PM, 1-hour lunch, 2:00–5:00 PM**.
+      `schedule.json`'s Day 1 times are already flagged "PLACEHOLDER"; this
+      replaces that placeholder. Day 2/3 haven't been reviewed against this
+      rule yet.
+- [ ] **One 15-minute break in the morning only.** No afternoon break — the
+      afternoon is hands-on.
+- [x] **Resolved 2026-08-11 — final Day 1 timing, approved after two rounds
+      of preview**:
+
+      ```
+      10:00  State of AI              15 min
+      10:15  Industry Conversation    30 min
+      10:45  Use Cases                30 min
+      11:15  Break                    15 min
+      11:30  Product Discussion       90 min   (was Project Ideation)
+      1:00   Lunch                    60 min
+      2:00   Problem Statement        40 min
+      2:40   AI Tools                 15 min
+      2:55   Explore Claude Desktop   55 min   (was Explore Tech Stack)
+      3:50   Fork & Submit            25 min
+      4:15   Project Assignments      45 min
+      5:00   END
+      ```
+
+      Afternoon math: original session lengths totaled 250 min against a
+      180-min budget. User chose to protect Project Assignments (hands-on
+      buddy build time) and trim Explore Claude Desktop instead, over the
+      reverse. "Nudge & Check-in" (previously a 15-min slot after 5:30pm)
+      is **dropped as a separate scheduled item** — no room under the hard
+      5pm end; fold a brief nudge into Project Assignments' close if
+      wanted.
+- [x] **Implemented 2026-08-11**: `docs/data/schedule.json` rewritten with
+      the table above. Verified valid JSON and matches the approved times
+      exactly.
+
+### Remove "People to Follow" as a scheduled session
+
+- [ ] Drop `day-1/04-people-to-follow` from `schedule.json`'s session list
+      (frees ~15 min + its slot).
+- [ ] Keep the page itself live at its current URL — it becomes
+      resource-only, not a numbered/timed session. `resources.html`
+      already links to it (`#s2`); that link keeps working since the file
+      doesn't move.
+- [ ] Day 1 index timeline, topic-metadata prev/next links, and the
+      numbered TOC sequence (05→10) all need renumbering once this session
+      drops out of the sequence — whether to renumber files 05–10 down to
+      04–09, or leave a numbering gap, not yet decided.
+
+### Project Ideation / Problem Statement split
+
+- [x] **Resolved 2026-08-11**: "Project Ideation" (`05-project-ideation.html`)
+      is **renamed "Product Discussion"** and becomes a pure discussion of
+      students' own project ideas — no problem-solving framework content
+      at all. It's a **group activity**.
+- [x] **Resolved**: all of the problem-solving framework content moves to
+      the post-lunch "Problem Statement" session
+      (`06-problem-statement-discussion.html`, currently a placeholder):
+      Finding a Problem Worth Solving (s2), Get Specific (s3), Form a
+      Hypothesis (s4), Articulate Your Goal (s5), and the Workshop
+      Activity exercise + Google Form submission (s6). Problem Statement
+      is **individual work, then share out** as a group.
+- [ ] "The Design Process Is Circular" (s1, the process-wheel) — which
+      session it frames still isn't decided. Given Problem Statement now
+      owns the whole framework arc (questions → hypothesis → goal →
+      exercise), it likely belongs there as the opening frame rather than
+      in Product Discussion — not yet confirmed.
+- [ ] File rename still open: does `05-project-ideation.html` get renamed
+      to match "Product Discussion" (e.g. `05-product-discussion.html`),
+      or keep its filename with just the on-page title/nav label changed?
+      Ties into the broader Day 1 renumbering question above.
+
+### Day 1 tech stack: Claude Desktop instead of Claude Code/VS Code
+
+- [ ] Day 1's hands-on tool session (currently `08-explore-tech-stack.html`)
+      reworks around **Claude Desktop**: the app itself (not the Claude
+      Code CLI/VS Code extension), giving Claude access to local files, and
+      Claude Desktop's **GitHub integration/connector** (not VS Code's
+      Source Control panel).
+- [ ] **Confirmed 2026-08-11**: page renamed/refocused from "Explore Tech
+      Stack" to an "Explore Claude Desktop" framing — a live,
+      instructor-guided walkthrough of the Claude Desktop environment in
+      the classroom, with **special emphasis on the code environment**.
+      Exact title text and section-by-section roadmap not drafted yet —
+      s1 (Why This Session), s2 (Session Roadmap), and s6 (How They Work
+      Together) all need to be rewritten from scratch for Claude Desktop
+      rather than moved, since they currently describe the VS Code/Claude
+      Code/GitHub workflow directly (distinct from s3–s5 below, which
+      relocate to Day 2 largely as-is).
+- [x] **Research complete (background agent, 2026-08-11) — verifies and
+      corrects Adiel's "cowork" description.** Sourced against official
+      Anthropic docs (`code.claude.com/docs/en/desktop`,
+      `claude.com/docs/cowork/overview`, `support.claude.com`), high
+      confidence:
+      - **"Cowork" is real**, not a mishearing. Claude Desktop has three
+        tabs: **Chat**, **Cowork**, and **Code**. Cowork is an agentic
+        workspace for document/research/spreadsheet-style work (attach
+        "workspace folders," step away, come back to a deliverable) — it
+        is **not** IDE-like (no file editor, no terminal, no diff view).
+        **Code** is the actual coding surface and genuinely is
+        VS-Code-like: file editor, integrated terminal, diff viewer with
+        inline comments, multi-session sidebar, PR creation/monitoring —
+        same engine as the Claude Code CLI. **This session's "special
+        emphasis on the code environment" should center on the Code
+        tab**, using Cowork/Chat only as needed for file access and
+        connectors.
+      - **Filesystem access**: Cowork uses "workspace folders" (folder
+        picker, scoped access); the Code tab uses a "Project folder"
+        (same unscoped model as opening a folder in VS Code); Chat/either
+        tab can also add a filesystem **Connector**.
+      - **"Customize" panel confirmed real** — single place for
+        connectors/skills/plugins; **`/schedule`** or the Cowork sidebar
+        for scheduled tasks (runs remotely, even laptop closed). Adiel's
+        description of this was accurate.
+      - **Hard constraint for setup/logistics**: both Cowork and Code
+        **require a paid plan** (Pro/Max/Team/Enterprise) — not available
+        on a free account. Doesn't change any plan (Adiel is already
+        arranging paid seats — see the excluded Logistics note above),
+        but must land explicitly in `setup.html`'s Day 1 prep.
+      - **Windows-specific**: opening the Code tab at all requires **Git
+        for Windows** to be installed (Desktop prompts for it). Relevant
+        to Day 1 setup regardless of which Fork & Submit path gets
+        chosen, since the Code tab itself needs it just to open.
+      - Full agent report (with every source URL) isn't persisted
+        elsewhere — re-run the research if a citation is needed later
+        and isn't summarized here.
+- [ ] VS Code walkthrough (s3), Claude Code best-practices/mindset (s4),
+      and the VS Code-based GitHub walkthrough (s5) are **not deleted** —
+      they move to Day 2, which already plans to introduce VS Code, Claude
+      Code, and Git from the code editor. Exact Day 2 slot/page not decided
+      yet (Day 2 hasn't been reviewed).
+- [x] **Resolved 2026-08-11**: "Fork & Submit" (`09-fork-and-submit.html`)
+      **stays on Day 1**, rebuilt entirely around **Claude Desktop's
+      GitHub connector (option 2 above)** — OAuth device-flow sign-in via
+      Chat/Cowork, no local Git, no `gh`, and explicitly **no GitHub
+      Desktop app**. The whole fork → edit → commit → PR flow happens
+      conversationally inside Claude Desktop. GitHub Desktop is dropped
+      from the plan entirely, not kept as a fallback.
+- [x] Superseded — see Batch 11 in the "Full-scale site review" section
+      above: user decided to delete `07-ai-tools.html`'s "For This
+      Workshop" section entirely rather than update its required-tools
+      list.
+- [x] **Implemented 2026-08-11**: `setup.html` splits into two labeled
+      parts on one page (decided against a separate page, to keep one
+      canonical setup URL): **Day 1 Setup** = Claude Desktop app (install,
+      sign in, paid-plan note) + a GitHub account (connecting it to Claude
+      Desktop is left for the live Explore Claude Desktop session, not
+      pre-work). GitHub Desktop dropped entirely. **Day 2 Setup** = VS
+      Code, Claude Code extension, Git — carried over close to the
+      original pre-pivot content, relabeled as post-Day-1 prep.
+
+## Implementation pass, 2026-08-11 — what actually got built
+
+Everything above in this section is now implemented, not just logged.
+Summary of the concrete changes:
+
+- **Renumbered/renamed** all Day 1 Overview + Slides files via `git mv`
+  (history preserved): `04-people-to-follow` → `people-to-follow` (dropped
+  from the numbered sequence, kept as a resource, removed from the nav
+  dropdown); `05-project-ideation` → `04-product-discussion`;
+  `06-problem-statement-discussion` → `05-problem-statement-discussion`;
+  `07-ai-tools` → `06-ai-tools`; `08-explore-tech-stack` →
+  `07-explore-claude-desktop`; `09-fork-and-submit` → `08-fork-and-submit`;
+  `10-project-assignments` → `09-project-assignments`.
+- **`schedule.json`** rewritten with the approved Day 1 table; Day 2/3
+  still placeholder.
+- **`nav.html`, `resources.html`, `setup.html`, `project-ideas.html`**
+  updated for the new paths/names.
+- **Content rewritten**: Product Discussion (pure group discussion, no
+  framework), Problem Statement (absorbed the full framework arc,
+  upgraded from a placeholder to the briefing template, got a new Slides
+  deck), AI Tools (trimmed to Evaluating + a new Familiarizing section),
+  Explore Claude Desktop (fully rebuilt around Chat/Cowork/Code per the
+  research findings), Fork & Submit (rebuilt around the GitHub connector,
+  no GitHub Desktop). All six got matching Slides decks, kept in parity —
+  verified with `project/scripts/check-slide-parity.js` (clean run).
+- **`resources.html`** gained a new "AI Tools Landscape" section (the
+  migrated tool categories) — implemented as a plain categorized list,
+  not a filterable table, to match the page's existing simple style.
+- Verified: valid JSON, every internal Day 1 link resolves to a real
+  file, every `data-session-id` matches its `schedule.json` id, slide
+  parity checker clean, HTML tag balance spot-checked.
+
+**One honest caveat, not verified**: Fork & Submit's copy describes
+asking Claude to bridge a local Code-tab project folder into a fork via
+the GitHub connector, and Explore Claude Desktop describes Cowork
+"handing off" to a Code session. The research confirmed the GitHub
+connector's read/write capabilities and that Cowork *can* orchestrate
+both local files and connectors, but didn't verify the exact click-by-
+click mechanics of that hand-off. **Recommend walking through this flow
+firsthand in Claude Desktop before teaching it live** — the concepts
+should hold, but the precise UI steps might not match exactly.
+
+### Revision pass, 2026-08-11 (round 2) — user reviewed the implementation
+
+User reviewed the pages above and came back with corrections, applied
+directly (not just logged):
+
+- [x] **Product Discussion**: "The Design Process Is Circular" moved out
+      entirely, into Problem Statement (see below) — Product Discussion
+      is now just 2 sections (Why We Start Out Loud, Workshop Activity).
+      Cut the "Good ideas rarely survive first contact with an empty
+      room" line as a platitude; user's broader note: **avoid platitudes
+      in the copy generally**, not just here. s1 reframed to plainly
+      remind students they brought an idea in and we want to hear it, no
+      flourish. Workshop Activity rewritten as literal instructions
+      instead of vague description: students go around the room; since
+      most will have brought more than one idea, they pick the one
+      they're most excited about and talk about just that one; the group
+      asks questions and reacts afterward.
+- [x] **Problem Statement**: gained "The Design Process Is Circular" as
+      its new opening section (s1), reframed to say the group did the
+      first two steps this morning in Product Discussion and now it's
+      individual work through the rest — same wheel, same citation, just
+      relocated and reworded for the new context.
+- [x] **No submission mechanism for now.** The Google Form
+      embed/iframe and the "Submit Your Problem Statement" exercise-box
+      are removed from Problem Statement entirely — **tabled, not
+      cancelled**. User floated a possible lighter-weight future version
+      (drop into a CSV held in the repo, surfaced somehow) instead of
+      wiring up an actual Google Form, but explicitly does not want that
+      built now either. `docs/day-1/project-ideas.html` and
+      `docs/js/project-ideas.js` (the cards-gallery infrastructure from
+      [ADR 0017](adr/0017-project-ideas-google-form.md)) are **left in
+      place but now fully unlinked** — no page links to them anymore.
+      Revisit ADR 0017 if/when a submission mechanism actually gets
+      built, since the CSV-in-repo idea is a different architecture than
+      what's there now.
+- [x] **Explore Claude Desktop**: "How It All Works Together" kept (not
+      deleted) but reworked into **"Building Is a Loop, Too"** — no
+      longer a straight line ending at "Shipping." Now a 7-step
+      `.process-wheel` (same circular component as the Design Process
+      wheel, deliberately — visual callback to the same idea): Ideation →
+      Planning → Building → Reviewing → Testing → Iterating (hinge) →
+      Repeat. Shipping (commit + PR via the GitHub connector) is now a
+      separate line noting it happens "whenever you're ready," not a
+      forced final step in the loop — that's what Fork & Submit actually
+      covers.
+- All changes mirrored in both Overview and Slides for the three
+  affected pages; re-ran `check-slide-parity.js` (clean) and re-verified
+  JSON/link/tag-balance/`data-session-id` integrity after this round —
+  all clean.
+
+### Setup pages split for shipping, 2026-08-11
+
+User needs to send students a link to Day 1 setup imminently, so
+`/setup.html` had to stop being a two-day combined page and become a
+single-purpose, shippable URL.
+
+- [x] **`/setup.html` is now Day 1 setup only** — the page that's
+      actually going out. Title/H1 changed to "Day 1 Setup" so a
+      standalone shared link is unambiguous about scope. Confirmed no
+      other page expected Day 2 content to live at this URL (`index.html`,
+      `nav.html`, `footer.html`, and Explore Claude Desktop's two "do
+      setup first" links all just say "(pre-workshop) setup," which
+      still holds true).
+- [x] **New page `/setup-day-2.html`** — the former "Day 2 Setup" half,
+      moved wholesale, same content. **Not linked from nav or footer, and
+      not hyperlinked from `/setup.html` either** — `/setup.html` mentions
+      it exists in plain (non-clickable) text ("you'll get that link
+      closer to Day 2") so students don't go looking for it early. It's
+      fully built and live at its URL now, ready for whenever it needs to
+      go out.
+- [x] Both pages verified: tag balance, checkbox count matches the static
+      "N of 7" / "N of 10" fallback text, all sitewide links still resolve
+      to `/setup.html` correctly (grep-verified, none pointed at Day 2
+      content).
+
+### Downstream, not yet touched
+
+- [ ] `STUDENT_CLAUDE_GUIDE.md` (still unwritten, Phase 5) will need to
+      reflect Claude Desktop for Day 1 vs. Claude Code for Day 2 once
+      drafted.
+- [ ] Adiel's 21 per-page content notes (logged in the "Collaborator
+      feedback" section above) — in progress, see next section.
+- [ ] Day 2 hasn't been otherwise touched — it still needs the VS Code /
+      Claude Code / Git content that moved out of the old Explore Tech
+      Stack, plus its own schedule retiming against the 10–1/lunch/2–5
+      rule.
 
 ---
 
