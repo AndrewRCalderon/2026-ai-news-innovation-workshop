@@ -1403,6 +1403,19 @@ single-purpose, shippable URL.
 
 ## Change log
 
+- 2026-08-12 (latest) — Two small requests on `live`'s setup pages: (1)
+  added a real GitHub-connector walkthrough to `setup.html`'s GitHub
+  section (find the `+` next to the message box → Connectors → GitHub →
+  OAuth device-code sign-in → confirm connected), previously deferred to
+  the live Explore Claude Desktop session, now self-serve since it's
+  just an OAuth sign-in with no install step; checklist count 6 → 10.
+  (2) Removed every em-dash from `setup.html` and `setup-day-2.html`
+  (replaced with periods/colons/commas as fit each sentence). User set
+  this as a **standing rule going forward, not a one-off edit** — saved
+  to Claude's cross-session memory (`feedback_no-em-dashes`, outside
+  this repo) so it applies to future copy work automatically. Both
+  changes verified live via curl. Widens the divergence from `review`'s
+  copies, already flagged above as a known follow-up.
 - 2026-08-12 (later still) — Copy/design pass on `setup.html`, done
   directly on the `live` branch since that's what's actually deployed
   (not `review/full-site-audit-2`'s copy, which still has the original
