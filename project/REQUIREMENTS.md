@@ -1403,6 +1403,31 @@ single-purpose, shippable URL.
 
 ## Change log
 
+- 2026-08-12 (later still) — Copy/design pass on `setup.html`, done
+  directly on the `live` branch since that's what's actually deployed
+  (not `review/full-site-audit-2`'s copy, which still has the original
+  content and is now out of sync — see below). Found and fixed a real
+  CSS bug in the process: `.field-notes.is-interactive-checklist label`
+  has `display: flex`, and any inline element (`<strong>`, `<a>`) that's
+  a *direct child* of a flex container becomes its own separate flex
+  item instead of flowing as normal text — this is why "Chat," "Cowork,"
+  "Code" and the `github.com` link were each rendering on their own
+  line. Fixed by wrapping each label's text in a `<span>` (one flex
+  item instead of many), applied to every checklist item in both
+  `setup.html` and `setup-day-2.html` on `live`, not just the two the
+  user flagged, since it's the same underlying bug everywhere the
+  pattern appears. Content edits: dropped the Claude-account/paid-plan
+  checklist item, split the "if something doesn't work" contact info
+  into its own paragraph, "workshop account" → "email account" for the
+  sign-in step, removed the Git/GitHub-Desktop blockquote. Checklist
+  count 7 → 6. Verified live via curl.
+
+  **Known follow-up, not yet done**: `review/full-site-audit-2`'s copies
+  of `setup.html` and `setup-day-2.html` have the identical flex bug
+  (same CSS, same HTML pattern) and none of today's content edits.
+  Needs the same treatment whenever that branch's Day 1 rework actually
+  ships — the two branches' setup pages are now genuinely divergent, not
+  just differently-scoped.
 - 2026-08-12 (later same day) — Even with production correctly tracking
   `live`, user found that clicking through the shared `nav.html`/
   `footer.html` from `setup.html` still reached the rest of the (old,
