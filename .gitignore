@@ -4,3 +4,25 @@ node_modules/
 .env.local
 .DS_Store
 .claude/settings.local.json
+
+# live branch only: this branch is a deliberately minimal production
+# deploy (see ADR 0018) — only setup.html/setup-day-2.html and the
+# assets that support them should ever live here. These paths exist on
+# main/review branches; block them from being reintroduced here by
+# accident (e.g. a careless merge or cherry-pick).
+/docs/day-1/
+/docs/day-2/
+/docs/day-3/
+/docs/index.html
+/docs/resources.html
+/docs/resources/
+/docs/students/
+/docs/data/
+/docs/css/timeline.css
+/docs/js/citations.js
+/docs/js/deck.js
+/docs/js/project-ideas.js
+/docs/js/reveal.js
+/docs/js/timeline.js
+/docs/js/topic-metadata.js
+/docs/js/type-filter.js
