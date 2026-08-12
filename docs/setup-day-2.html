@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 2 Setup — AI Journalism Workshop</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/briefing.css">
+</head>
+<body class="briefing">
+  <div id="nav"></div>
+
+  <main>
+    <div class="breadcrumb"><a href="/">Home</a> &gt; <a href="/setup.html">Setup</a> &gt; Day 2</div>
+    <h1>Day 2 Setup</h1>
+    <p class="lede">Not needed until after Day 1 — you'll get this link separately closer to Day 2. Day 2 introduces a traditional code editor, VS Code, with Claude Code running inside it, so you can see how the same work looks from that side too. Should take about 15 minutes.</p>
+
+    <p class="setup-progress" id="setup-progress-count">0 of 10 steps checked off</p>
+
+    <h2>1. VS Code</h2>
+    <p>Your code editor — this is where you'll write and see code.</p>
+    <ul class="field-notes is-interactive-checklist">
+      <li><label><input type="checkbox" class="setup-check"> Download and install VS Code from <a href="https://code.visualstudio.com" target="_blank" rel="noopener">code.visualstudio.com</a> (it auto-detects your OS).</label></li>
+      <li><label><input type="checkbox" class="setup-check"> Open it once after installing, just to confirm it launches.</label></li>
+    </ul>
+
+    <h2>2. Claude Code</h2>
+    <p>The same AI you used in Claude Desktop's Code tab on Day 1 — this time running as an extension inside VS Code.</p>
+    <ul class="field-notes is-interactive-checklist">
+      <li><label><input type="checkbox" class="setup-check"> In VS Code, open the Extensions panel (the icon that looks like four squares in the left sidebar) and search for "Claude Code." Install it.</label></li>
+      <li><label><input type="checkbox" class="setup-check"> Sign in with your workshop account when prompted.</label></li>
+    </ul>
+
+    <h2>3. Git</h2>
+    <p>The tool on your computer that tracks changes and sends them to GitHub. Day 1 used Claude Desktop's GitHub connector instead of this — Day 2 shows you the traditional path. If you're not comfortable with a command line, that's fine — the step below is short, and you won't need to memorize any commands (see below).</p>
+    <ul class="field-notes is-interactive-checklist">
+      <li><label><input type="checkbox" class="setup-check"> On Mac, open <strong>Terminal</strong> (search for it with Spotlight) and type <code>git --version</code> — the first time you do this, it'll prompt you to install Xcode Command Line Tools, which includes Git. On Windows, download it from <a href="https://git-scm.com" target="_blank" rel="noopener">git-scm.com</a>. GitHub's own step-by-step guide is at <a href="https://docs.github.com/en/get-started/getting-started-with-git/set-up-git" target="_blank" rel="noopener">docs.github.com</a> if you want more detail than this page gives.</label></li>
+    </ul>
+    <blockquote class="pull-question">You don't need to memorize Git commands. Once Claude Code is set up, you can ask it in plain English to save and submit your work, and it runs the underlying commands for you. This step is just about getting Git installed.</blockquote>
+
+    <h2>4. Opening Claude Code and GitHub Inside VS Code</h2>
+    <ul class="field-notes is-interactive-checklist">
+      <li><label><input type="checkbox" class="setup-check"> Open a project folder in VS Code: <strong>File → Open Folder</strong>.</label></li>
+      <li><label><input type="checkbox" class="setup-check"> Claude Code lives in the sidebar — look for its icon, or open the Command Palette (<code>Cmd/Ctrl+Shift+P</code>) and type "Claude Code."</label></li>
+      <li><label><input type="checkbox" class="setup-check"> Git and GitHub show up in the <strong>Source Control</strong> panel (the branching-icon in the left sidebar). The first time you interact with a GitHub-hosted repo here, VS Code will prompt you to sign in to GitHub — follow that prompt.</label></li>
+    </ul>
+
+    <h2>5. Verify You're Ready</h2>
+    <ul class="field-notes is-interactive-checklist">
+      <li><label><input type="checkbox" class="setup-check"> Open Terminal and run <code>git --version</code> — it should print a version number, not an error.</label></li>
+      <li><label><input type="checkbox" class="setup-check"> Open Claude Code once and confirm it opens without an error and shows you're signed in.</label></li>
+    </ul>
+    <blockquote class="pull-question">If that works, you're set for Day 2.</blockquote>
+
+    <p>See the <a href="/resources.html">resources page</a> for links, and
+    <a href="https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/blob/main/STUDENT_CLAUDE_GUIDE.md" target="_blank" rel="noopener"><code>STUDENT_CLAUDE_GUIDE.md</code></a>
+    for day-specific guidance to paste into your own Claude session.</p>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/js/partials.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/checklist.js"></script>
+</body>
+</html>
