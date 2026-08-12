@@ -63,6 +63,18 @@ main {
   justify-content: space-between;
 }
 
+.site-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.site-nav-brand-logo {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
 .site-nav-logo {
   font-weight: bold;
   color: var(--purple-dark);
