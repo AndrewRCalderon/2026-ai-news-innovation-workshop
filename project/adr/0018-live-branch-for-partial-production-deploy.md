@@ -59,3 +59,16 @@ environment tracks does **not** retroactively rebuild/promote anything.
 The previous deployment keeps serving the stable production URL until a
 new build actually happens — a push (including an empty one) to the
 newly-assigned branch is what triggers that.
+
+## Update 2, 2026-08-12 — nav/footer also needed stripping
+
+Getting Production to track `live` wasn't sufficient on its own: `live`
+still contained every other page from the pre-rework site (all of old
+Day 1, Day 2, Day 3, resources, students), and the shared
+`nav.html`/`footer.html` link to all of it regardless of which page
+loaded them. A visitor on `setup.html` could click straight into
+everything else. Fixed by removing every page and unused asset from
+`live` that `setup.html`/`setup-day-2.html` don't actually depend on,
+and reducing `nav.html`/`footer.html` to a bare, linkless logo. `live`
+is now genuinely minimal — 9 files total — not just "the old site plus
+a new page."

@@ -1403,6 +1403,28 @@ single-purpose, shippable URL.
 
 ## Change log
 
+- 2026-08-12 (later same day) — Even with production correctly tracking
+  `live`, user found that clicking through the shared `nav.html`/
+  `footer.html` from `setup.html` still reached the rest of the (old,
+  pre-rework) site — every page, day, and the resources/students
+  sections were all still one click away. Not acceptable. Stripped the
+  `live` branch down to **only** `setup.html`, `setup-day-2.html`, and
+  the assets they actually depend on (`style.css`, `briefing.css`,
+  `partials.js`, `nav.js`, `checklist.js`, plus bare-logo versions of
+  `nav.html`/`footer.html` with no links elsewhere) — every other page
+  and unused script/stylesheet removed from the branch entirely (40
+  files changed, ~3,400 lines removed). Fixed the dead links this left
+  in both setup pages (breadcrumb, the old "resources page" and "Fork &
+  Submit" mentions). Added a branch-local `.gitignore` blocking those
+  removed paths from being reintroduced by a future merge/cherry-pick —
+  note per the user's own question: `.gitignore` alone doesn't remove
+  already-committed files or affect what Vercel builds; the actual fix
+  was `git rm`, the gitignore is just a safety net against re-adding
+  them later. Verified via curl against the live production URL:
+  `/setup.html` and `/setup-day-2.html` load; `/`, `/resources.html`,
+  `/students/`, every `/day-1/*`, `/day-2/`, `/day-3/`, and
+  `/data/schedule.json` all 404. [ADR 0018](adr/0018-live-branch-for-partial-production-deploy.md)
+  updated with this as a follow-on decision.
 - 2026-08-12 — User merged PR #2 into `main` directly (deviating from the
   "don't merge yet" plan logged the day before). Vercel's production
   deploy off `main` then hit a **team-membership** block (git commit
