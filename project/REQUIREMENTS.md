@@ -132,6 +132,50 @@ map cleanly to one.
       (Overview 22 `.roster-row`s vs. Slides 12). Address when the review
       reaches those topics.
 
+### `live` vs `review/full-site-audit-2` divergence — consolidated follow-ups
+
+Everything below happened directly on `live` (see [ADR 0018](adr/0018-live-branch-for-partial-production-deploy.md)
+and the 2026-08-12 Change log entries for the full story on each) since
+that's what's actually deployed. None of it exists yet on `review`'s
+copies of the same files. Pulling these into one list so they're not
+scattered across several change-log paragraphs when it's time to
+reconcile the two branches:
+
+- [ ] **Workshop name.** "AI Journalism Workshop" is wrong everywhere on
+      `review` — the correct name is **AI News Innovation Workshop**.
+      Needs a full site-wide find/replace: every page's `<title>`,
+      `nav.html`'s logo, `footer.html`, and any body-copy mentions.
+      Already fixed on `live`'s 4 occurrences (`setup.html`,
+      `setup-day-2.html`, `nav.html`, `footer.html`).
+- [ ] **Checklist label flex bug.** `.field-notes.is-interactive-checklist
+      label` has `display: flex`, so any inline element (`<strong>`,
+      `<a>`) as a *direct child* becomes its own flex item instead of
+      flowing as text (e.g. "Chat"/"Cowork"/"Code" each landing on their
+      own line). Fixed on `live` by wrapping each label's text in a
+      `<span>`. `review`'s `setup.html`/`setup-day-2.html` still have the
+      unfixed version.
+- [ ] **`setup.html` content edits, not yet on `review`**: GitHub
+      connector walkthrough (5 steps replacing the old 1-line "we'll do
+      this live" deferral), removed Claude-account/paid-plan checklist
+      item, contact-info split into its own paragraph, "workshop
+      account" → "email account," removed the Git/GitHub-Desktop
+      blockquote, removed the redundant "Setup" breadcrumb above the
+      `<h1>`.
+- [ ] **Em-dashes.** Standing rule now (saved to memory, not in this
+      repo: `feedback_no-em-dashes`) — no em-dashes in site copy, ever,
+      going forward. Only `live`'s `setup.html`/`setup-day-2.html` have
+      been swept so far. Every other page on `review` (all of Day 1,
+      the stubs, home, resources, students) still has them throughout
+      and hasn't been touched under this rule yet.
+- [ ] **Tow-Knight Center logo.** Added to `live`'s `nav.html` (new
+      `.site-nav-brand` wrapper, `docs/assets/images/tow-knight-logo.png`)
+      next to the workshop name. Not on `review`'s `nav.html`, and
+      `docs/assets/images/` doesn't exist there yet either (`live`'s
+      version of that directory was created fresh after the branch got
+      stripped down — see ADR 0018 — so it isn't a matter of copying a
+      folder that already exists on `review`, the asset itself needs to
+      be added there too).
+
 ---
 
 ## Full-scale site review (in progress — 2026-08-06)
