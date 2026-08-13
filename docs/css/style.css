@@ -1,13 +1,13 @@
 :root {
-  --purple: #9b7ebd;
-  --orange: #f4a460;
-  --cream: #f5f1e8;
-  --purple-light: rgba(155, 126, 189, 0.15);
-  --orange-light: rgba(244, 164, 96, 0.15);
-  --purple-dark: #6b4a7f;
-  --orange-dark: #d97e2a;
-  --text-primary: #2c2c2c;
-  --text-secondary: #666;
+  --purple: #955af5;
+  --orange: #e8664a;
+  --cream: #fdfbf7;
+  --purple-light: rgba(149, 90, 245, 0.15);
+  --orange-light: rgba(232, 102, 74, 0.15);
+  --purple-dark: #7c3aed;
+  --orange-dark: #c1442a;
+  --text-primary: #302f2f;
+  --text-secondary: #646464;
   --serif: Charter, "Iowan Old Style", "Georgia", "Times New Roman", serif;
 }
 
