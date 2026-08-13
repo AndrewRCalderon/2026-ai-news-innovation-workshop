@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLAUDE.md - Day 2 - AI News Innovation Workshop</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/briefing.css">
+</head>
+<body class="briefing briefing-overview" data-day="2" data-session-id="day-2/03-claude-md">
+  <div id="nav"></div>
+
+  <main>
+    <div class="breadcrumb"><a href="/">Home</a> &gt; <a href="/day-2/">Day 2</a> &gt; CLAUDE.md</div>
+
+    <header class="masthead">
+      <h1 class="masthead-title">CLAUDE.md</h1>
+      <p class="masthead-dek">One file, read at the start of every session. It's the difference between explaining your project to Claude once and explaining it every single time.</p>
+      <div class="masthead-meta"><span id="topic-time">--</span><span class="div">·</span><span id="topic-duration">--</span><span class="div">·</span><span id="topic-type">--</span></div>
+    </header>
+
+    <nav class="toc" aria-label="Sections in this briefing">
+      <ol>
+        <li><a href="#s1"><span class="n">01</span> What It Is</a></li>
+        <li><a href="#s2"><span class="n">02</span> A Real Example</a></li>
+        <li><a href="#s3"><span class="n">03</span> What Belongs In One</a></li>
+        <li><a href="#s4"><span class="n">04</span> Write Your Own</a></li>
+      </ol>
+    </nav>
+
+    <section class="slides-cta">
+      <p>Prefer to move through this section by section, presentation-style?</p>
+      <a class="slides-cta-link" href="slides/03-claude-md-slides.html">Open the slides →</a>
+    </section>
+
+    <article>
+      <section class="block reveal" id="s1">
+        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">What It Is</h2></div>
+        <p class="lede">CLAUDE.md is a plain-text file Claude reads automatically at the start of every session.<sup class="cite" data-url="https://code.claude.com/docs/en/memory" data-note="Claude Code Docs, &quot;How Claude remembers your project&quot;: CLAUDE.md files are markdown files that give Claude persistent instructions for a project, your personal workflow, or your entire organization. Claude reads them at the start of every session.">*</sup> Every Claude Code session starts with an empty context window. Without this file, you're re-explaining your project's conventions, commands, and quirks from scratch, every time.<sup class="cite" data-url="https://claude.com/blog/using-claude-md-files" data-note="Anthropic blog, Nov 25 2025, &quot;Using CLAUDE.md files&quot;: think of it as a configuration file that Claude automatically incorporates into every conversation, ensuring it always knows your project structure, coding standards, and preferred workflows.">*</sup></p>
+        <p>A simple test for whether something belongs in yours: has Claude made the same mistake twice, or have you typed the same correction into chat more than once? That's the signal.<sup class="cite" data-url="https://code.claude.com/docs/en/memory" data-note="Claude Code Docs: add to CLAUDE.md when Claude makes the same mistake a second time, a code review catches something Claude should have known, or you type the same correction into chat that you typed last session.">*</sup></p>
+      </section>
+
+      <section class="block reveal" id="s2">
+        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">A Real Example</h2></div>
+        <p>This workshop's own repository has a CLAUDE.md file. It's not a hypothetical, it's the actual file governing how this website gets built. Three things worth noticing about it:</p>
+        <dl class="roster">
+          <div class="roster-row"><dt>It points, it doesn't duplicate</dt><dd>Instead of listing every task, it says: read <code>project/REQUIREMENTS.md</code> for current status. The file stays short because it delegates to other files rather than repeating their contents.</dd></div>
+          <div class="roster-row"><dt>It states what can't be inferred from code</dt><dd>A rule like "any non-trivial technical decision gets a new numbered file in <code>project/adr/</code>" isn't something Claude could guess by reading the codebase. That's exactly the kind of thing that belongs here.</dd></div>
+          <div class="roster-row"><dt>It's organized by when you'd need it</dt><dd>Sections for "before starting work," "while working," and "repo layout" map to the actual moments in a session, not an abstract table of contents.</dd></div>
+        </dl>
+      </section>
+
+      <section class="block reveal" id="s3">
+        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">What Belongs In One</h2></div>
+        <p class="lede">The most common mistake isn't leaving something out. It's putting too much in.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs, &quot;Best practices for Claude Code&quot;: bloated CLAUDE.md files cause Claude to ignore your actual instructions. Target under 200 lines per file, longer files consume more context and reduce adherence.">*</sup></p>
+        <div class="compare-grid">
+          <div class="compare-col is-primary">
+            <h3>Include</h3>
+            <ul>
+              <li>Commands Claude can't guess</li>
+              <li>Code style rules that differ from defaults</li>
+              <li>Testing instructions and preferred test runners</li>
+              <li>Repo etiquette (branch naming, PR conventions)</li>
+              <li>Architectural decisions specific to your project</li>
+              <li>Non-obvious gotchas</li>
+            </ul>
+          </div>
+          <div class="compare-col is-secondary">
+            <h3>Leave out</h3>
+            <ul>
+              <li>Anything Claude can figure out by reading the code</li>
+              <li>Standard language conventions it already knows</li>
+              <li>Detailed API docs (link to them instead)</li>
+              <li>Information that changes frequently</li>
+              <li>Credentials, API keys, or connection strings, especially if this file is committed to version control</li>
+            </ul>
+          </div>
+        </div>
+        <p class="stat-pull"><sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs: for each line, ask &quot;would removing this cause Claude to make mistakes?&quot; If not, cut it.">Ask, for every line: would removing this actually cause Claude to make a mistake? If not, cut it.*</sup></p>
+        <p>One specific piece of guidance worth remembering: vague instructions don't hold up. "Format code properly" gives Claude nothing to check itself against. "Use 2-space indentation" does.<sup class="cite" data-url="https://code.claude.com/docs/en/memory" data-note="Claude Code Docs: write instructions concrete enough to verify. 'Use 2-space indentation' instead of 'Format code properly'; 'Run npm test before committing' instead of 'Test your changes.'">*</sup></p>
+      </section>
+
+      <section class="block reveal" id="s4">
+        <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Write Your Own</h2></div>
+        <p>Claude Code can generate a starting CLAUDE.md by analyzing your project directly, with the <code>/init</code> command.<sup class="cite" data-url="https://code.claude.com/docs/en/memory" data-note="Claude Code Docs: the /init command generates a starting CLAUDE.md by analyzing the codebase; re-run it to get improvement suggestions rather than overwrite.">*</sup> That's a starting point, not a finished product. It should grow from the actual friction points in your workflow, not a theoretical checklist.<sup class="cite" data-url="https://claude.com/blog/using-claude-md-files" data-note="Anthropic blog: start simple with basic project structure, then expand based on actual friction points in your workflow. Your file should reflect how your team actually develops software, not theoretical best practices that sound good but don't match reality.">*</sup></p>
+        <div class="exercise-box">
+          <h3>🎯 Exercise: Draft Your CLAUDE.md</h3>
+          <p><strong>Time:</strong> ~15 minutes.</p>
+          <p><strong>Description:</strong> Run <code>/init</code> on your Day 1 project, or start from scratch if you'd rather. Add at least one thing Claude couldn't have guessed on its own, a command, a convention, a decision you made yesterday and don't want to re-explain.</p>
+          <p><strong>Deliverable:</strong> A CLAUDE.md file under 200 lines, committed to your project.</p>
+        </div>
+      </section>
+    </article>
+
+    <footer class="topic-nav">
+      <a id="prev-link" href="#">← Previous</a>
+      <a href="/day-2/">Day 2 Overview</a>
+      <a id="next-link" href="#">Next →</a>
+    </footer>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/js/partials.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/topic-metadata.js"></script>
+  <script src="/js/reveal.js"></script>
+  <script src="/js/citations.js"></script>
+</body>
+</html>

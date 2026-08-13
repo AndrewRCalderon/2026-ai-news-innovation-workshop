@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Goal & Plan Mode - Day 2 - AI News Innovation Workshop</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/briefing.css">
+</head>
+<body class="briefing briefing-overview" data-day="2" data-session-id="day-2/05-goal-plan-mode">
+  <div id="nav"></div>
+
+  <main>
+    <div class="breadcrumb"><a href="/">Home</a> &gt; <a href="/day-2/">Day 2</a> &gt; Your Goal &amp; Plan Mode</div>
+
+    <header class="masthead">
+      <h1 class="masthead-title">Your Goal &amp; Plan Mode</h1>
+      <p class="masthead-dek">Before Claude touches any code, it can research and propose an approach first. You approve the plan, or you don't.</p>
+      <div class="masthead-meta"><span id="topic-time">--</span><span class="div">·</span><span id="topic-duration">--</span><span class="div">·</span><span id="topic-type">--</span></div>
+    </header>
+
+    <nav class="toc" aria-label="Sections in this briefing">
+      <ol>
+        <li><a href="#s1"><span class="n">01</span> What Plan Mode Is</a></li>
+        <li><a href="#s2"><span class="n">02</span> When to Use It</a></li>
+        <li><a href="#s3"><span class="n">03</span> State Your Goal</a></li>
+      </ol>
+    </nav>
+
+    <section class="slides-cta">
+      <p>Prefer to move through this section by section, presentation-style?</p>
+      <a class="slides-cta-link" href="slides/05-goal-plan-mode-slides.html">Open the slides →</a>
+    </section>
+
+    <article>
+      <section class="block reveal" id="s1">
+        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">What Plan Mode Is</h2></div>
+        <p class="lede">Plan mode tells Claude to research and propose changes without making them. It reads files, runs commands to explore, and writes a plan, but edits stay blocked until you approve it.<sup class="cite" data-url="https://code.claude.com/docs/en/permission-modes#analyze-before-you-edit-with-plan-mode" data-note="Claude Code Docs, &quot;Choose a permission mode&quot;: plan mode tells Claude to research and propose changes without making them. Claude reads files, runs shell commands to explore, and writes a plan, but does not edit your source. Edits stay blocked until you approve the plan.">*</sup></p>
+        <p>Enter it with <code>Shift+Tab</code>, or by prefixing a prompt with <code>/plan</code>.<sup class="cite" data-url="https://code.claude.com/docs/en/permission-modes#analyze-before-you-edit-with-plan-mode" data-note="Claude Code Docs: enter plan mode by pressing Shift+Tab or prefixing a single prompt with /plan.">*</sup> Once the plan is ready, you choose: approve and let Claude build, approve but review edits one at a time, or send it back to keep planning.</p>
+      </section>
+
+      <section class="block reveal" id="s2">
+        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">When to Use It</h2></div>
+        <p class="lede">Letting Claude jump straight to coding can produce code that solves the wrong problem.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices#explore-first-then-plan-then-code" data-note="Claude Code Docs, &quot;Best practices for Claude Code&quot;: letting Claude jump straight to coding can produce code that solves the wrong problem. Use plan mode to separate exploration from execution.">*</sup> That's the whole case for it. But planning has real overhead, and not every task needs it.</p>
+        <blockquote class="pull-question">If you could describe the diff in one sentence, skip the plan.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices#explore-first-then-plan-then-code" data-note="Claude Code Docs: planning is most useful when you're uncertain about the approach, when the change modifies multiple files, or when you're unfamiliar with the code being modified. If you could describe the diff in one sentence, skip the plan.">*</sup></blockquote>
+        <p>Fixing a typo or renaming a variable doesn't need a plan. A project goal you're still figuring out, on the other hand, is exactly the kind of uncertainty plan mode is for.</p>
+      </section>
+
+      <section class="block reveal" id="s3">
+        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">State Your Goal</h2></div>
+        <p>This isn't about building yet, that happens after lunch. It's about getting a clear-eyed look at your project from Claude before you commit to an approach.</p>
+        <div class="exercise-box">
+          <h3>🎯 Exercise: Plan Before You Build</h3>
+          <p><strong>Time:</strong> ~15 minutes.</p>
+          <p><strong>Description:</strong> Open plan mode on your Day 1 project. State your goal for the rest of the workshop in plain language, then let Claude research and propose an approach. Don't approve it yet, just read it.</p>
+          <p><strong>Deliverable:</strong> A plan you can bring back after lunch, whether or not you end up using it as-is.</p>
+        </div>
+      </section>
+    </article>
+
+    <footer class="topic-nav">
+      <a id="prev-link" href="#">← Previous</a>
+      <a href="/day-2/">Day 2 Overview</a>
+      <a id="next-link" href="#">Next →</a>
+    </footer>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/js/partials.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/topic-metadata.js"></script>
+  <script src="/js/reveal.js"></script>
+  <script src="/js/citations.js"></script>
+</body>
+</html>

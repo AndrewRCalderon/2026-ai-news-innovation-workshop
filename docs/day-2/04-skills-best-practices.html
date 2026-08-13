@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills & Best Practices - Day 2 - AI News Innovation Workshop</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/briefing.css">
+</head>
+<body class="briefing briefing-overview" data-day="2" data-session-id="day-2/04-skills-best-practices">
+  <div id="nav"></div>
+
+  <main>
+    <div class="breadcrumb"><a href="/">Home</a> &gt; <a href="/day-2/">Day 2</a> &gt; Skills &amp; Best Practices</div>
+
+    <header class="masthead">
+      <h1 class="masthead-title">Skills &amp; Best Practices</h1>
+      <p class="masthead-dek">Two ways to get more consistent results from Claude: package your expertise so it doesn't need re-explaining, and follow a few habits Anthropic's own engineers recommend.</p>
+      <div class="masthead-meta"><span id="topic-time">--</span><span class="div">·</span><span id="topic-duration">--</span><span class="div">·</span><span id="topic-type">--</span></div>
+    </header>
+
+    <nav class="toc" aria-label="Sections in this briefing">
+      <ol>
+        <li><a href="#s1"><span class="n">01</span> What a Skill Is</a></li>
+        <li><a href="#s2"><span class="n">02</span> What Actually Makes This Work</a></li>
+        <li><a href="#s3"><span class="n">03</span> Vague vs. Specific</a></li>
+        <li><a href="#s4"><span class="n">04</span> Common Failure Patterns</a></li>
+      </ol>
+    </nav>
+
+    <section class="slides-cta">
+      <p>Prefer to move through this section by section, presentation-style?</p>
+      <a class="slides-cta-link" href="slides/04-skills-best-practices-slides.html">Open the slides →</a>
+    </section>
+
+    <article>
+      <section class="block reveal" id="s1">
+        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">What a Skill Is</h2></div>
+        <p class="lede">A Skill is a reusable, filesystem-based resource: a folder of instructions, scripts, and reference material that gives Claude domain-specific expertise, organized roughly like an onboarding guide you'd hand a new hire.<sup class="cite" data-url="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview" data-note="Claude Platform Docs, Agent Skills Overview: Skills are reusable, filesystem-based resources that give Claude domain-specific expertise. They exist as directories containing instructions, executable code, and reference materials, organized like an onboarding guide you'd create for a new team member.">*</sup></p>
+        <p>The difference from just writing a good prompt: a prompt is conversation-level, for one task. A Skill loads on demand, so the same guidance doesn't need repeating across every new conversation.<sup class="cite" data-url="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview" data-note="Claude Platform Docs: unlike prompts (conversation-level instructions for one-off tasks), Skills load on demand, so you don't have to repeat the same guidance across conversations.">*</sup> Anthropic introduced Skills in October 2025, framing them around a simple idea: real work needs procedural knowledge and organizational context, not just a capable model.<sup class="cite" data-url="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" data-note="Anthropic Engineering blog, Oct 16 2025, &quot;Equipping agents for the real world with Agent Skills&quot;: Claude is powerful, but real work requires procedural knowledge and organizational context.">*</sup></p>
+      </section>
+
+      <section class="block reveal" id="s2">
+        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">What Actually Makes This Work</h2></div>
+        <p class="lede">Anthropic publishes its own best-practices guide for Claude Code, and most of it comes down to giving Claude something concrete to check itself against.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs, &quot;Best practices for Claude Code&quot;.">*</sup></p>
+        <ul class="field-notes">
+          <li>Give Claude a way to verify its own work: tests, a build, a screenshot to compare. It's the difference between a session you have to watch and one you can walk away from.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs: give Claude a check it can run: tests, a build, a screenshot to compare. It's the difference between a session you watch and one you walk away from.">*</sup></li>
+          <li>If you've corrected the same issue twice in one session, the context is cluttered with failed approaches. Clear it and start over with a more specific prompt.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs: if you've corrected Claude more than twice on the same issue in one session, the context is cluttered with failed approaches. Run /clear and start fresh with a more specific prompt that incorporates what you learned.">*</sup></li>
+          <li>Delegate research separately from implementation, so exploring a codebase doesn't clutter the conversation you're actually building in.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs: delegate research with 'use subagents to investigate X.' They explore in a separate context, keeping your main conversation clean for implementation.">*</sup></li>
+        </ul>
+      </section>
+
+      <section class="block reveal" id="s3">
+        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">Vague vs. Specific</h2></div>
+        <p>Claude can infer intent, but it can't read your mind.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs: Claude can infer intent, but it can't read your mind.">*</sup> The same request, made specific, gets a very different result:</p>
+        <div class="compare-grid">
+          <div class="compare-col is-primary">
+            <h3>Vague</h3>
+            <ul>
+              <li>"add tests for foo.py"</li>
+              <li>"implement a function that validates email addresses"</li>
+            </ul>
+          </div>
+          <div class="compare-col is-secondary">
+            <h3>Specific</h3>
+            <ul>
+              <li>"write a test for foo.py covering the edge case where the user is logged out. avoid mocks."</li>
+              <li>"write a validateEmail function. example test cases: user@example.com is true, invalid is false. run the tests after implementing."</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="block reveal" id="s4">
+        <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Common Failure Patterns</h2></div>
+        <p>Anthropic's own guide names a handful of recurring failure modes. Two worth watching for in your own sessions today:</p>
+        <dl class="roster">
+          <div class="roster-row"><dt>The kitchen sink session</dt><dd>Piling unrelated tasks into one long conversation until Claude loses the thread. Fix: one goal per session.</dd></div>
+          <div class="roster-row"><dt>The trust-then-verify gap</dt><dd>Assuming code that runs is code that's correct. Fix: the verification step from above isn't optional.</dd></div>
+        </dl>
+        <p class="pull-question">A Skill is stored expertise. The point, same as CLAUDE.md, is not re-explaining what you already know.</p>
+      </section>
+    </article>
+
+    <footer class="topic-nav">
+      <a id="prev-link" href="#">← Previous</a>
+      <a href="/day-2/">Day 2 Overview</a>
+      <a id="next-link" href="#">Next →</a>
+    </footer>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/js/partials.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/topic-metadata.js"></script>
+  <script src="/js/reveal.js"></script>
+  <script src="/js/citations.js"></script>
+</body>
+</html>

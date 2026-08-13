@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" class="briefing-deck">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLAUDE.md - Slides - Day 2 - AI News Innovation Workshop</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/briefing.css">
+</head>
+<body class="briefing briefing-deck">
+
+  <div class="chrome-top">
+    <span class="chrome-eyebrow">
+      <a href="/">AI News Innovation Workshop</a><span class="sep">·</span><a href="/day-2/">Day 2</a><span class="sep">·</span><a href="../03-claude-md.html">CLAUDE.md</a><span class="sep">·</span>Slides
+    </span>
+    <div class="chrome-right">
+      <span class="chrome-counter" id="counter">01 / 04</span>
+      <button type="button" class="chrome-fs" id="fs-toggle" aria-label="Toggle fullscreen">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3"></path>
+          <path d="M21 8V5a2 2 0 0 0-2-2h-3"></path>
+          <path d="M3 16v3a2 2 0 0 0 2 2h3"></path>
+          <path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="deck">
+      <div class="track" id="track">
+
+        <section class="slide slide-cover" data-slide="cover">
+          <div class="slide-inner">
+            <h1 class="cover-title">CLAUDE.md</h1>
+            <p class="cover-dek">One file, read at the start of every session.</p>
+            <div class="cover-meta"><span>11:00 AM</span><span class="div">·</span><span>35 MIN</span><span class="div">·</span><span>Hands-on</span></div>
+            <ul class="cover-contents">
+              <li><button type="button" data-jump="s1"><span class="n">01</span> What It Is</button></li>
+              <li><button type="button" data-jump="s2"><span class="n">02</span> A Real Example</button></li>
+              <li><button type="button" data-jump="s3"><span class="n">03</span> What Belongs In One</button></li>
+              <li><button type="button" data-jump="s4"><span class="n">04</span> Write Your Own</button></li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s1">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">What It Is</h2></div>
+            <p class="lede">CLAUDE.md is a plain-text file Claude reads automatically at the start of every session. Without it, you're re-explaining your project from scratch, every time.</p>
+            <p>A simple test for whether something belongs in yours: has Claude made the same mistake twice, or have you typed the same correction more than once? That's the signal.</p>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s2">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">A Real Example</h2></div>
+            <p>This workshop's own repo has a CLAUDE.md file. It's not hypothetical, it's the actual file governing this website's build.</p>
+            <dl class="roster">
+              <div class="roster-row"><dt>It points, it doesn't duplicate</dt><dd>Delegates to other files instead of repeating them.</dd></div>
+              <div class="roster-row"><dt>States what can't be inferred</dt><dd>Rules Claude couldn't guess from reading code.</dd></div>
+              <div class="roster-row"><dt>Organized by when you'd need it</dt><dd>Maps to actual moments in a session.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s3">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">What Belongs In One</h2></div>
+            <p class="lede">The most common mistake isn't leaving something out. It's putting too much in.</p>
+            <div class="compare-grid">
+              <div class="compare-col is-primary">
+                <h3>Include</h3>
+                <ul>
+                  <li>Commands Claude can't guess</li>
+                  <li>Non-default code style rules</li>
+                  <li>Testing instructions</li>
+                  <li>Repo etiquette</li>
+                  <li>Project-specific architecture decisions</li>
+                  <li>Non-obvious gotchas</li>
+                </ul>
+              </div>
+              <div class="compare-col is-secondary">
+                <h3>Leave out</h3>
+                <ul>
+                  <li>Anything inferable from code</li>
+                  <li>Standard conventions</li>
+                  <li>Detailed API docs (link instead)</li>
+                  <li>Frequently-changing info</li>
+                  <li>Credentials, ever</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s4">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Write Your Own</h2></div>
+            <p>Run <code>/init</code> to generate a starting point. That's a start, not a finished product, it should grow from actual friction points.</p>
+            <div class="exercise-box">
+              <h3>🎯 Exercise: Draft Your CLAUDE.md</h3>
+              <p><strong>Description:</strong> Run <code>/init</code> on your project, or start from scratch. Add one thing Claude couldn't have guessed.</p>
+              <p><strong>Deliverable:</strong> A CLAUDE.md under 200 lines, committed to your project.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-end" data-slide="end">
+          <div class="slide-inner">
+            <div class="end-links">
+              <a href="#" data-jump="cover">↺ Restart</a>
+              <a href="/day-2/">← Back to schedule</a>
+              <a href="../04-skills-best-practices.html">Next section →</a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <button type="button" class="edge-arrow edge-prev" id="prev-btn" aria-label="Previous section">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 4 7 12 15 20"></polyline></svg>
+    </button>
+    <button type="button" class="edge-arrow edge-next" id="next-btn" aria-label="Next section">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 4 17 12 9 20"></polyline></svg>
+    </button>
+    <div class="dot-nav" id="dots"></div>
+  </div>
+
+  <script src="/js/deck.js"></script>
+  <script src="/js/citations.js"></script>
+</body>
+</html>

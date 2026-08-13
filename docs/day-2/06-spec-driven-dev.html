@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spec-Driven Development - Day 2 - AI News Innovation Workshop</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/briefing.css">
+</head>
+<body class="briefing briefing-overview" data-day="2" data-session-id="day-2/06-spec-driven-dev">
+  <div id="nav"></div>
+
+  <main>
+    <div class="breadcrumb"><a href="/">Home</a> &gt; <a href="/day-2/">Day 2</a> &gt; Spec-Driven Development</div>
+
+    <header class="masthead">
+      <h1 class="masthead-title">Spec-Driven Development</h1>
+      <p class="masthead-dek">AI models are excellent at pattern completion and poor at mind reading. A spec is how you close that gap before you start building.</p>
+      <div class="masthead-meta"><span id="topic-time">--</span><span class="div">·</span><span id="topic-duration">--</span><span class="div">·</span><span id="topic-type">--</span></div>
+    </header>
+
+    <nav class="toc" aria-label="Sections in this briefing">
+      <ol>
+        <li><a href="#s1"><span class="n">01</span> The Core Idea</a></li>
+        <li><a href="#s2"><span class="n">02</span> The Checklist</a></li>
+        <li><a href="#s3"><span class="n">03</span> Why This Connects to Skills</a></li>
+      </ol>
+    </nav>
+
+    <section class="slides-cta">
+      <p>Prefer to move through this section by section, presentation-style?</p>
+      <a class="slides-cta-link" href="slides/06-spec-driven-dev-slides.html">Open the slides →</a>
+    </section>
+
+    <article>
+      <section class="block reveal" id="s1">
+        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">The Core Idea</h2></div>
+        <p class="lede">Spec-driven development inverts the usual workflow: the specification becomes the source of truth, and code becomes a generated or verified secondary artifact.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Piskala, 'Spec-Driven Development: From Code to Contract in the Age of AI Coding Assistants,' arXiv:2602.00180 (Jan 2026). Abstract: SDD inverts the traditional workflow by treating specifications as the source of truth and code as a generated or verified secondary artifact.">*</sup> Put another way: the spec declares intent, the code realizes it.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Same paper: 'In spec-driven development, code is the implementation detail of the specification, not the other way around. The spec declares intent; the code realizes it.'">*</sup></p>
+        <p>Why this matters more with AI assistants than it used to: AI models are excellent at pattern completion, and poor at mind reading.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Same paper: 'The problem is simple: AI models are excellent at pattern completion but poor at mind reading.'">*</sup> A vague prompt like "add photo sharing to my app" leaves Claude guessing at what you actually meant. A spec gives it enough to match your intent instead of inventing one.</p>
+      </section>
+
+      <section class="block reveal" id="s2">
+        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">The Checklist</h2></div>
+        <p class="lede">A repeatable four-step framework, worth applying to your own project this afternoon.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Same paper, Section III, describes this as a four-phase SDD workflow: Specify, Plan, Implement, Validate.">*</sup></p>
+        <ol class="process-wheel">
+          <li><span class="era">1</span><h3>Specify</h3><p>What should it do? Behavior, requirements, acceptance criteria, no implementation details yet.</p></li>
+          <li><span class="era">2</span><h3>Plan</h3><p>How should you build it? Architecture, data models, interfaces. The spec declares intent; the plan declares constraints.</p></li>
+          <li><span class="era">3</span><h3>Implement</h3><p>Small, validated increments, each one a testable piece of functionality, not one giant leap.</p></li>
+          <li class="is-hinge"><span class="era">4</span><h3>Validate</h3><p>Does the code actually meet the spec? If not: was the spec wrong, or the code? Either way, the spec stays the authority.</p></li>
+        </ol>
+        <p>What makes step 1 actually work: a good spec is behavior-focused (what happens, not how), testable, unambiguous, and complete enough without over-specifying.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Same paper, Section II: good specs share several characteristics: they are behavior-focused, describing what happens rather than how; they are testable; they are unambiguous; they are complete enough to cover essential cases without over-specifying.">*</sup> One practical rule of thumb: if there's only one reasonable way to read a requirement, don't add more detail. If there's more than one, that's exactly where to add clarification.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Same paper: write specs at the level of detail needed to remove ambiguity. If an AI or developer could interpret a requirement in multiple ways, add clarification. If there's only one reasonable interpretation, don't over-specify.">*</sup></p>
+        <p>A passing test only proves the code matches the spec, not that the spec was right in the first place. If the spec was wrong, the code will faithfully implement the wrong thing.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Same paper, Section IX, on the 'false confidence' pitfall: a passing spec test doesn't guarantee correct software, it only guarantees the software matches the spec. If the spec is wrong, the code will faithfully implement the wrong thing.">*</sup></p>
+      </section>
+
+      <section class="block reveal" id="s3">
+        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">Why This Connects to Skills</h2></div>
+        <p>Specs, done well, act as modular building blocks Claude can work from directly, close to what a Skill is doing when it packages expertise for reuse.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Same paper, Section IV: specifications act as 'super-prompts' that break down complex problems into modular components aligned with agents' context windows.">*</sup> A Skill is essentially a pre-written spec for a kind of task you'll do again. Once you've written a spec once, the checklist above is what makes it repeatable the next time.</p>
+      </section>
+    </article>
+
+    <footer class="topic-nav">
+      <a id="prev-link" href="#">← Previous</a>
+      <a href="/day-2/">Day 2 Overview</a>
+      <a id="next-link" href="#">Next →</a>
+    </footer>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/js/partials.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/topic-metadata.js"></script>
+  <script src="/js/reveal.js"></script>
+  <script src="/js/citations.js"></script>
+</body>
+</html>
