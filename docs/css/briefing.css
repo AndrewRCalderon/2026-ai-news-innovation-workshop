@@ -21,8 +21,8 @@
   --border: rgba(107, 74, 127, 0.18);
   --border-strong: rgba(107, 74, 127, 0.32);
 
-  --serif: Charter, "Iowan Old Style", "Georgia", "Times New Roman", serif;
-  --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  --serif: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "Space Grotesk", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   --sp-1: 0.25rem;
   --sp-2: 0.5rem;
@@ -58,7 +58,7 @@
 
 .briefing { font-family: var(--serif); }
 .briefing a { color: var(--accent-primary-strong); }
-.briefing h1, .briefing h2, .briefing h3 { text-wrap: balance; margin: 0; }
+.briefing h1, .briefing h2, .briefing h3 { text-wrap: balance; margin: 0; font-family: var(--mono); font-weight: 700; }
 .briefing button { font-family: inherit; }
 .briefing p { margin: 0 0 var(--sp-3); max-width: 62ch; }
 .briefing p:last-child { margin-bottom: 0; }
