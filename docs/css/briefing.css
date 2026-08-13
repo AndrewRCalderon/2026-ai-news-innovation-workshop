@@ -126,7 +126,7 @@ html.briefing-deck, body.briefing-deck { height: 100%; overflow: hidden; margin:
 /* Setup page: screenshots, per-step detail, and the Day 1 / Day 2 group headings.
    Screenshots and detail paragraphs sit outside the label on purpose. The label is
    a flex container, so any element inside it becomes a flex item on its own row. */
-.setup-shot { display: block; max-width: min(100%, 34rem); height: auto; margin: var(--sp-2) 0 var(--sp-2) 1.7em; border: 1px solid var(--border); border-radius: 3px; }
+.setup-shot { display: block; max-width: min(100%, 34rem); height: auto; margin: var(--sp-2) auto; border: 1px solid var(--border); border-radius: 3px; }
 .setup-shot.is-tall { max-height: 22rem; width: auto; }
 .setup-detail { margin: var(--sp-2) 0 var(--sp-2) 1.7em; padding-left: var(--sp-3); max-width: 56ch; border-left: 2px solid var(--border); }
 .briefing code { font-family: var(--mono); font-size: 0.88em; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; padding: 0.08em 0.35em; white-space: nowrap; }
