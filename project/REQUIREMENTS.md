@@ -40,13 +40,13 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 
 ## Phase 3 — Content structure
 
-- [x] `docs/data/schedule.json` authored (single source of truth for session times/types/titles) — **Day 1 times confirmed 2026-08-11**, **Day 2 times confirmed 2026-08-13** (10am–5pm, one AM break, matching Day 1's shape exactly — see the Day 2 schedule section below); Day 3 still placeholder, confirm before the workshop
+- [x] `docs/data/schedule.json` authored (single source of truth for session times/types/titles) — **Day 1 times confirmed 2026-08-11**, **Day 2 times confirmed 2026-08-13**, **Day 3 times confirmed 2026-08-13** (10am–5pm, one AM break, matching Day 1's shape exactly on all three days — see the Day 3 change log entry below)
 - [x] `docs/css/timeline.css`, `docs/js/timeline.js`
 - [x] `docs/js/topic-metadata.js` — populates each topic page's time/duration/type badges and prev/next links from `schedule.json`
-- [x] Day 1/2/3 `index.html` (timeline view, driven by `schedule.json`) — pattern works for all three; Day 2 now has real learning-outcomes copy (2026-08-13); Day 3 is still a stub with a working timeline but no learning-outcomes copy
-- [~] Topic page template + topic pages — **Day 1 renumbered/renamed 2026-08-11** (Claude Desktop pivot — see below): `01-state-of-ai`, `02-industry-conversation`, `03-use-cases`, `04-product-discussion`, `05-problem-statement-discussion`, `06-ai-tools`, `07-explore-claude-desktop`, `08-fork-and-submit` all have real content; `09-project-assignments` is still a placeholder. `people-to-follow.html` also has real content but is unlisted/unscheduled (a resource page, not a numbered session — see below). **Day 2, all 8 topics built 2026-08-13** (see below). Day 3 (6 topics) not yet built, so its timeline links currently 404
+- [x] Day 1/2/3 `index.html` (timeline view, driven by `schedule.json`) — pattern works for all three; Day 2 and Day 3 both now have real learning-outcomes copy (2026-08-13)
+- [~] Topic page template + topic pages — **Day 1 renumbered/renamed 2026-08-11** (Claude Desktop pivot — see below): `01-state-of-ai`, `02-industry-conversation`, `03-use-cases`, `04-product-discussion`, `05-problem-statement-discussion`, `06-ai-tools`, `07-explore-claude-desktop`, `08-fork-and-submit` all have real content; `09-project-assignments` is still a placeholder. `people-to-follow.html` also has real content but is unlisted/unscheduled (a resource page, not a numbered session — see below). **Day 2, all 8 topics built 2026-08-13. Day 3, all 7 topics built 2026-08-13** (see below). Every day now has real, scheduled content, except Day 1's `09-project-assignments` placeholder.
 - [x] Briefing template, Overview page (`docs/css/briefing.css` Overview rules, `docs/js/reveal.js`) — normal scrolling page, shared nav/footer restored, reuses `topic-metadata.js`. See [ADR 0011](adr/0011-split-overview-and-slides.md) (supersedes [0010](adr/0010-briefing-template.md)'s toggle).
-- [x] Briefing template, Slides page (`docs/css/briefing.css` deck rules, `docs/js/deck.js`) — paginated-only, self-contained chrome linking back to its Overview page, no schedule.json fetch. **8/8 Day 1 content-complete topics have a Slides companion** (Topics 1–5, 7, 8, 9); **all 8 Day 2 topics also have one, built 2026-08-13**, parity-checked against `project/scripts/check-slide-parity.js` (clean).
+- [x] Briefing template, Slides page (`docs/css/briefing.css` deck rules, `docs/js/deck.js`) — paginated-only, self-contained chrome linking back to its Overview page, no schedule.json fetch. **8/8 Day 1 content-complete topics have a Slides companion** (Topics 1–5, 7, 8, 9); **all 8 Day 2 topics and all 7 Day 3 topics also have one**, built 2026-08-13, parity-checked against `project/scripts/check-slide-parity.js` (clean).
 - [ ] Slides system for the *generic* template (`docs/css/slides.css`, `docs/js/slides.js`) — the original Part 6b plan; **not needed for briefing-template pages**, which get their slides via the deck pattern above instead. Only relevant if a generic-template page ever wants slides.
 - [~] Responsive layout — handled via media queries inside `style.css`/`timeline.css`/`briefing.css` rather than a separate `responsive.css` file (simpler given how little CSS exists so far); revisit splitting it out if it gets unwieldy
 
@@ -60,15 +60,18 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 
 ## Phase 5 — Content fill
 
-- [~] Real content written for each of the 24 topic pages — **Day 1: 8/9
-      scheduled sessions done** (only `09-project-assignments` still a
+- [~] Real content written for each of the 24 topic pages (originally scoped
+      as 24, actual final count differs per day since each day's session
+      count was recomposed during planning, not a fixed 8/day) — **Day 1:
+      8/9 scheduled sessions done** (only `09-project-assignments` still a
       placeholder), plus `people-to-follow.html` as a bonus resource page.
-      **Day 2: all 8/8 scheduled sessions done (2026-08-13)** — see the Day 2
-      change log entry below for the full session list and sourcing.
-      Day 3 not started.
+      **Day 2: all 8/8 scheduled sessions done (2026-08-13). Day 3: all 7/7
+      scheduled sessions done (2026-08-13)** — see the Day 2 and Day 3
+      change log entries below for the full session lists and sourcing.
 - [x] Slides populated per topic — **true for every Day 1 topic that has
-      real content** (all 8 scheduled + `people-to-follow`) **and every Day 2
-      topic** (all 8, built 2026-08-13); Day 3 has none yet.
+      real content** (all 8 scheduled + `people-to-follow`), **every Day 2
+      topic** (all 8), **and every Day 3 topic** (all 7), all built
+      2026-08-13.
 - [x] `docs/setup.html` — **rebuilt 2026-08-11 as Day 1 only**, with a real
       interactive checklist, ready to send to students. Day 2's setup
       content moved to a new, currently-unlinked `docs/setup-day-2.html`.
@@ -1456,13 +1459,89 @@ single-purpose, shippable URL.
       line originally assumed: VS Code/Claude Code/Git didn't move into Day
       2, Day 2 stayed inside Claude Desktop/Claude Code conceptually
       (prompting, CLAUDE.md, Skills, plan mode, spec-driven development).
-      Whether VS Code/Git content belongs in Day 3 instead is now an open
-      question, not resolved here.
+- [x] Resolved 2026-08-13: **Day 3 is also built** (same day as Day 2, see
+      the Day 3 change log entry below), and it didn't pick up the VS
+      Code/Git content either — Day 3 turned out to be product design,
+      responsible/auditable AI, human-AI collaboration, industry
+      application, then final build time and show & tell. **The VS
+      Code/Claude Code/Git question from the line above is still genuinely
+      unresolved** — that content doesn't have a home in any of the three
+      days as currently built. `docs/setup-day-2.html` still carries this
+      material as pre-workshop setup only; whether it needs an in-class
+      home too is an open decision for whoever reviews the finished
+      3-day arc next.
 
 ---
 
 ## Change log
 
+- 2026-08-13 (later) — **Day 3 built from scratch**, on
+  `review/full-site-audit-2`, same day as Day 2. Planned in plan mode from
+  the user's 8-item draft agenda. This build has a different process than
+  Day 2's: the user's explicit feedback on Day 2 was that it read as
+  "surface level... correct-but-generic," not enough depth, and gave a
+  standing instruction (saved to memory:
+  `feedback_content-depth-over-surface-level`) to research multiple
+  sources per judgment-based topic and extract genuinely actionable
+  guidance, not just cite one canonical doc per topic. Two rounds of plan
+  feedback also reshaped the schedule before any content was written:
+  Recap cut from 60 to 30 minutes, the freed time moved to the three
+  design lecture topics (35 → 45 min each); "Where Can You Take This?"
+  reframed from a generic "keep learning" resource list into a session
+  specifically about which newsroom roles/functions are adopting the
+  *build* skills this workshop taught, explicitly required to not repeat
+  Day 1's already-extensive Industry Conversation/Use Cases content (I
+  read both pages first to confirm the new angle didn't overlap).
+  - **Schedule**: 10:00 AM–5:00 PM, one 15-min break (11:15 AM, matching
+    Day 1's break time exactly), lunch 1:00–2:00 PM. 7 sessions + a
+    `url: null` closing marker: Recap & Open Questions (30m, discussion) →
+    Product Design (45m, lecture) → break → Safe & Auditable Design (45m,
+    lecture) → AI-Human Design (45m, lecture) → lunch → Where Can You Take
+    This? (45m, lecture) → Final Coding Time (60m, hands-on) → Final Show
+    & Tell (60m, discussion, includes the closing/celebration content
+    inline rather than as a separate page) → Closing & Celebration (15m,
+    schedule marker only, no page).
+  - **Research**: 4 parallel background agents, each briefed to find
+    multiple sources (not one canonical doc), fetch everything live, and
+    extract checklists/named examples/concrete numbers rather than
+    position statements. Genuinely deep results: Product Design found a
+    consistent pattern across 5+ named newsroom AI products (Chowbot, Ask
+    FT, Forbes' Adelaide, Rappler's Rai, a 4-bot UNC CISLM study) that all
+    independently converged on "scope to what you own, say so when you
+    can't." Safe & Auditable Design found real incidents (NYC's MyCity
+    chatbot giving false legal guidance for over a year uncaught, Air
+    Canada's tribunal loss, CNET's 53%-error self-audit) plus concrete
+    newsroom mechanisms (WBEZ's per-instance approval, LAist's
+    accountability language, CBC's one-question disclosure test) and NIST's
+    actual AI Risk Management Framework simplified to a 4-question
+    checklist. AI-Human Design surfaced a genuinely counterintuitive
+    finding worth the session's centerpiece: a controlled study found
+    giving people an algorithm's prediction to adjust produced a *worse*
+    false-positive rate and introduced racial bias not present in the
+    algorithm alone, directly complicating the naive "just add a human
+    checkpoint" assumption; paired with Zillow's Project Ketchup (removing
+    a working checkpoint under growth pressure, $421M quarterly loss) for
+    the opposite failure mode. Where Can You Take This surfaced named,
+    current (2026) roles (Politico's Newsroom Architect, ProPublica's
+    Computational Journalist), a real repo-level statistic (37% of new
+    newsroom repos show AI-coding signals by early 2026, up from a repo
+    culture that had collapsed 80% since 2016), and solo-builder examples
+    (a Reuters correspondent with no coding background who's built 14
+    tools; a journalist's 50+ Skill open-source library), plus an honest
+    counterweight (a controlled trial found experienced developers using
+    AI tools were 19% slower while believing they were faster).
+  - **Bug caught during build, not before**: repeatedly wrote `<sup
+    class="cite">...*</dd>` in `.roster` rows across multiple pages,
+    omitting the closing `</sup>` before `</dd>`. Not caught by
+    `check-slide-parity.js` (which only checks item counts, not tag
+    balance) — caught by explicitly grep-counting `<sup>`/`</sup>` opens
+    vs. closes per file during verification. Fixed across all 3 affected
+    files (`02-product-design.html`, `04-ai-human-design.html`,
+    `05-where-you-can-take-this.html`). Worth remembering for future
+    `.roster` sections with trailing citations.
+  - **Not done**: no day of the workshop currently has a home for VS
+    Code/Claude Code/Git content, see the "Downstream, not yet touched"
+    section above for the full note.
 - 2026-08-13 — **Day 2 built from scratch**, on `review/full-site-audit-2`.
   Planned in plan mode from the user's 14-item draft agenda, consolidated
   into 8 sessions after two rounds of user pushback (grouping confirmed via
