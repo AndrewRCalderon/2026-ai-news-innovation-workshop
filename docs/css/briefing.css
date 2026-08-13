@@ -58,7 +58,9 @@
 
 .briefing { font-family: var(--serif); }
 .briefing a { color: var(--accent-primary-strong); }
-.briefing h1, .briefing h2, .briefing h3 { text-wrap: balance; margin: 0; font-family: var(--mono); font-weight: 700; }
+.briefing h1 { text-wrap: balance; margin: 0 0 var(--sp-3); font-family: var(--mono); font-weight: 700; }
+.briefing h2, .briefing h3 { text-wrap: balance; margin: var(--sp-5) 0 var(--sp-2); font-family: var(--mono); font-weight: 700; }
+.briefing h2:first-of-type, .briefing h3:first-of-type { margin-top: 0; }
 .briefing button { font-family: inherit; }
 .briefing p { margin: 0 0 var(--sp-3); max-width: 62ch; }
 .briefing p:last-child { margin-bottom: 0; }
