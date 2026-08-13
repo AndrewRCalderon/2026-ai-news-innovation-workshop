@@ -134,47 +134,57 @@ map cleanly to one.
 
 ### `live` vs `review/full-site-audit-2` divergence — consolidated follow-ups
 
-Everything below happened directly on `live` (see [ADR 0018](adr/0018-live-branch-for-partial-production-deploy.md)
-and the 2026-08-12 Change log entries for the full story on each) since
-that's what's actually deployed. None of it exists yet on `review`'s
-copies of the same files. Pulling these into one list so they're not
-scattered across several change-log paragraphs when it's time to
-reconcile the two branches:
+`live` (see [ADR 0018](adr/0018-live-branch-for-partial-production-deploy.md))
+was the active surface for iterating on `setup.html` and a visual-design
+exploration (fonts, colors, spacing) with Adiel and the user. On
+2026-08-13 everything below was ported into `review` so it isn't lost
+when `review` eventually merges to `main`. `live` stays live/deployed
+independently; this is a one-way port (`live` → `review`), not a merge,
+so the two branches still diverge — `live` has no Day 1 content, `review`
+has no production URL.
 
-- [ ] **Workshop name.** "AI Journalism Workshop" is wrong everywhere on
-      `review` — the correct name is **AI News Innovation Workshop**.
-      Needs a full site-wide find/replace: every page's `<title>`,
-      `nav.html`'s logo, `footer.html`, and any body-copy mentions.
-      Already fixed on `live`'s 4 occurrences (`setup.html`,
-      `setup-day-2.html`, `nav.html`, `footer.html`).
-- [ ] **Checklist label flex bug.** `.field-notes.is-interactive-checklist
-      label` has `display: flex`, so any inline element (`<strong>`,
-      `<a>`) as a *direct child* becomes its own flex item instead of
-      flowing as text (e.g. "Chat"/"Cowork"/"Code" each landing on their
-      own line). Fixed on `live` by wrapping each label's text in a
-      `<span>`. `review`'s `setup.html`/`setup-day-2.html` still have the
-      unfixed version.
-- [ ] **`setup.html` content edits, not yet on `review`**: GitHub
-      connector walkthrough (5 steps replacing the old 1-line "we'll do
-      this live" deferral), removed Claude-account/paid-plan checklist
-      item, contact-info split into its own paragraph, "workshop
-      account" → "email account," removed the Git/GitHub-Desktop
-      blockquote, removed the redundant "Setup" breadcrumb above the
-      `<h1>`.
-- [ ] **Em-dashes.** Standing rule now (saved to memory, not in this
-      repo: `feedback_no-em-dashes`) — no em-dashes in site copy, ever,
-      going forward. Only `live`'s `setup.html`/`setup-day-2.html` have
-      been swept so far. Every other page on `review` (all of Day 1,
-      the stubs, home, resources, students) still has them throughout
-      and hasn't been touched under this rule yet.
-- [ ] **Tow-Knight Center logo.** Added to `live`'s `nav.html` (new
-      `.site-nav-brand` wrapper, `docs/assets/images/tow-knight-logo.png`)
-      next to the workshop name. Not on `review`'s `nav.html`, and
-      `docs/assets/images/` doesn't exist there yet either (`live`'s
-      version of that directory was created fresh after the branch got
-      stripped down — see ADR 0018 — so it isn't a matter of copying a
-      folder that already exists on `review`, the asset itself needs to
-      be added there too).
+- [x] **`setup.html`/`setup-day-2.html` content, final version.** Ported
+      wholesale from `live`, including Adiel's PR #3 (retitled
+      "Pre-Workshop Setup," checklist 7 → 18 items, Day 2/3 tooling
+      folded into the single page, new "Git" section — the Code tab
+      won't open without Git installed locally and GitHub Desktop's
+      bundled copy doesn't count — corrected connector path, corrected
+      tab count confirmed via live install, 7 new screenshots) and all
+      of the prior `live`-only copy edits (GitHub connector walkthrough,
+      contact info split out, "workshop account" → "email account," Git/
+      GitHub-Desktop blockquote removed, redundant "Setup" breadcrumb
+      removed). **`docs/setup-day-2.html` is orphaned on both branches**
+      now — nothing links to it since setup.html absorbed its content.
+      Left in place rather than deleted; still needs a decision.
+- [x] **Checklist label flex bug.** Fixed as a side effect of the
+      `setup.html` port (the fix was in the markup — text wrapped in a
+      `<span>` inside each label — not a standalone CSS change).
+- [x] **Tow-Knight Center logo.** Added to `review`'s `nav.html` (new
+      `.site-nav-brand` wrapper) and `docs/assets/images/` (created
+      fresh, didn't exist on `review` before). `review`'s nav keeps its
+      full dropdown menu, unlike `live`'s stripped single-link version,
+      so the markup differs slightly from `live`'s copy even though the
+      CSS is identical.
+- [x] **Design exploration (fonts, colors, spacing), applied site-wide.**
+      This went further than "port `live`'s files" — the token changes
+      live in shared `style.css`/`briefing.css`, so they now affect
+      every page on `review` (Day 1 topics, home, resources, students),
+      not just setup. Space Grotesk headings / Plus Jakarta Sans body
+      (loaded via one `@import` in `style.css` instead of per-page
+      `<link>` tags, since `review` has far more pages than `live`);
+      purple `#955af5` / coral `#e8664a` / off-white `#fdfbf7` palette
+      replacing the old pastel watercolor tones; heading margin added
+      (was `margin: 0`, headings sat flush against surrounding text).
+      Worth a look across a few Day 1 pages, not just setup, since this
+      is the first time the new look has touched them.
+- [ ] **Workshop name.** Fixed in `setup.html`, `setup-day-2.html`, and
+      `nav.html`'s brand link (all touched during this port anyway).
+      Still wrong in `footer.html` and every other page's `<title>`/body
+      copy — needs a full site-wide find/replace, not yet done.
+- [ ] **Em-dashes.** Standing rule (saved to memory, not in this repo:
+      `feedback_no-em-dashes`). Clean on `setup.html`/`setup-day-2.html`
+      (ported from `live`, already swept there). Every other page on
+      `review` still has them throughout, untouched by this pass.
 
 ---
 
