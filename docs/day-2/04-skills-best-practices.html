@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills & Best Practices - Day 2 - AI News Innovation Workshop</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/briefing.css">
+</head>
+<body class="briefing briefing-overview" data-day="2" data-session-id="day-2/04-skills-best-practices">
+  <div id="nav"></div>
+
+  <main>
+    <div class="breadcrumb"><a href="/">Home</a> &gt; <a href="/day-2/">Day 2</a> &gt; Skills &amp; Best Practices</div>
+
+    <header class="masthead">
+      <h1 class="masthead-title">Skills &amp; Best Practices</h1>
+      <p class="masthead-dek">Package your expertise so it doesn't need re-explaining, then look at what happens when real builders, including a journalist replicating a real investigation, actually put Skills to work.</p>
+      <div class="masthead-meta"><span id="topic-time">--</span><span class="div">·</span><span id="topic-duration">--</span><span class="div">·</span><span id="topic-type">--</span></div>
+    </header>
+
+    <nav class="toc" aria-label="Sections in this briefing">
+      <ol>
+        <li><a href="#s1"><span class="n">01</span> What a Skill Is</a></li>
+        <li><a href="#s2"><span class="n">02</span> What Actually Makes This Work</a></li>
+        <li><a href="#s3"><span class="n">03</span> A Real Investigation</a></li>
+        <li><a href="#s4"><span class="n">04</span> Common Failure Patterns</a></li>
+      </ol>
+    </nav>
+
+    <section class="slides-cta">
+      <p>Prefer to move through this section by section, presentation-style?</p>
+      <a class="slides-cta-link" href="slides/04-skills-best-practices-slides.html">Open the slides →</a>
+    </section>
+
+    <article>
+      <section class="block reveal" id="s1">
+        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">What a Skill Is</h2></div>
+        <p class="lede">A Skill is a reusable, filesystem-based resource: a folder of instructions, scripts, and reference material that gives Claude domain-specific expertise, organized roughly like an onboarding guide you'd hand a new hire.<sup class="cite" data-url="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview" data-note="Claude Platform Docs, Agent Skills Overview: Skills are reusable, filesystem-based resources that give Claude domain-specific expertise. They exist as directories containing instructions, executable code, and reference materials, organized like an onboarding guide you'd create for a new team member.">*</sup></p>
+        <p>The difference from just writing a good prompt: a prompt is conversation-level, for one task. A Skill loads on demand, so the same guidance doesn't need repeating across every new conversation.<sup class="cite" data-url="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview" data-note="Claude Platform Docs: unlike prompts (conversation-level instructions for one-off tasks), Skills load on demand, so you don't have to repeat the same guidance across conversations.">*</sup> Anthropic introduced Skills in October 2025, framing them around a simple idea: real work needs procedural knowledge and organizational context, not just a capable model.<sup class="cite" data-url="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" data-note="Anthropic Engineering blog, Oct 16 2025, &quot;Equipping agents for the real world with Agent Skills&quot;: Claude is powerful, but real work requires procedural knowledge and organizational context.">*</sup></p>
+        <p>People have already built skills for this exact job: a 14-skill collection for journalists covers AP style, source and deepfake verification, and FOIA request templates, free to install.<sup class="cite" data-url="https://github.com/jamditis/claude-skills-journalism" data-note="Joe Amditis, claude-skills-journalism (GitHub, MIT license): 14 core journalism skills built for journalists, researchers, and media professionals, covering AP style, source/deepfake verification via C2PA, and FOIA/OPRA request templates.">*</sup> Worth a look after this session.</p>
+      </section>
+
+      <section class="block reveal" id="s2">
+        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">What Actually Makes This Work</h2></div>
+        <p class="lede">The team that built Claude Code uses Skills internally for its own production work, and their account of what makes one hold up is sharper than the general best-practices advice.<sup class="cite" data-url="https://claude.com/blog/lessons-from-building-claude-code-how-we-use-skills" data-note="Anthropic, &quot;Lessons from building Claude Code: how we use skills.&quot; Describes their own internal production skill library, including billing-lib, signup-flow-driver, standup-post, and adversarial-review.">*</sup></p>
+        <ul class="field-notes">
+          <li>The highest-signal content in any skill is its Gotchas section, and it should be built from failures you actually watched happen, not ones you imagined in advance.<sup class="cite" data-url="https://claude.com/blog/lessons-from-building-claude-code-how-we-use-skills" data-note="Anthropic: 'The highest-signal content in any skill is the Gotchas section,' built from real observed failures rather than hypothetical ones.">*</sup></li>
+          <li>Run the task once without the skill loaded before you trust it. Without that baseline, you can't actually tell what the skill changed, only that something ran.<sup class="cite" data-url="https://alexmcfarland.substack.com/p/5-reasons-your-claude-skills-keep" data-note="Alex McFarland, &quot;5 reasons your Claude skills keep breaking (and you don't even notice),&quot; Mar 30 2026: if you never test without the skill loaded, 'you have no idea what your instructions actually changed.'">*</sup></li>
+          <li>A skill fails to activate before it fails to execute. A vague description like "helps with content creation" won't reliably trigger, a specific one describing exactly when to use it will.<sup class="cite" data-url="https://alexmcfarland.substack.com/p/5-reasons-your-claude-skills-keep" data-note="Alex McFarland: vague descriptions kill routing. Contrasts 'helps with content creation' against a specific trigger description naming exactly when the skill applies.">*</sup></li>
+        </ul>
+      </section>
+
+      <section class="block reveal" id="s3">
+        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">A Real Investigation</h2></div>
+        <p>A journalism researcher used Claude Code to replicate a real MuckRock/WHRO investigation into Virginia police decertifications, in under an hour.<sup class="cite" data-url="https://generative-ai-newsroom.com/coding-agents-for-investigative-journalism-8b65bc30f9ea" data-note="Nick Hagar, Generative AI in the Newsroom, Jan 27 2026, 'Coding Agents for Investigative Journalism': replicated a MuckRock/WHRO investigation into Virginia police decertifications using Claude Code, in under an hour with about 20 minutes of manual spot-checking.">*</sup> Without a data skill enforcing provenance and a documented methodology, Claude silently reformatted non-standard dates and undercounted the result. With one, it matched the published investigation exactly:</p>
+        <div class="compare-grid">
+          <div class="compare-col is-primary">
+            <h3>Without the skill</h3>
+            <ul>
+              <li>Silently handled date-formatting anomalies</li>
+              <li>Reported 80 decertifications, undercounted</li>
+            </ul>
+          </div>
+          <div class="compare-col is-secondary">
+            <h3>With the skill</h3>
+            <ul>
+              <li>Required provenance columns and a data-quality report before any transform</li>
+              <li>Reported 81, matching the published investigation</li>
+            </ul>
+          </div>
+        </div>
+        <p>Even with skills enforcing the process, a human still had to catch what the model couldn't: Unicode apostrophe variants in agency names, and whether "Hampton Police Department" and "Hampton Police Division" were the same entity.<sup class="cite" data-url="https://generative-ai-newsroom.com/coding-agents-for-investigative-journalism-8b65bc30f9ea" data-note="Nick Hagar: even with skills in place, Unicode apostrophe variants and entity-matching questions like whether two differently-named agencies were the same required manual judgment. 'The human remained essential throughout.'">*</sup> "Configuration matters as much as capability," Hagar writes. "A powerful model without the right constraints will move fast and make mistakes."<sup class="cite" data-url="https://generative-ai-newsroom.com/coding-agents-for-investigative-journalism-8b65bc30f9ea" data-note="Nick Hagar: 'Configuration matters as much as capability. A powerful model without the right constraints will move fast and make mistakes.'">*</sup></p>
+      </section>
+
+      <section class="block reveal" id="s4">
+        <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Common Failure Patterns</h2></div>
+        <p>Independent builders who've shipped dozens of skills describe the same failures in their own words, worth watching for in your own sessions today:</p>
+        <dl class="roster">
+          <div class="roster-row"><dt>The confident-looking failure</dt><dd>A skill that passes the test cases you wrote for it can still fail on real input, reordering sections, dropping fields, inventing ones that were never there. Fix: test it against messy, real input, not just the cases it was built to pass.<sup class="cite" data-url="https://medium.com/@mohit15856/i-built-106-claude-skills-here-are-the-12-dos-and-donts-i-wish-i-d-known-earlier-8f4f13903f28" data-note="Mohit Aggarwal, 'I Built 106 Claude Skills,' May 8 2026: a PRD Template skill passed his own test cases but varied section order, dropped required fields, and invented sections not in the template in real use. Rewritten four times before isolating the problem.">*</sup></dd></div>
+          <div class="roster-row"><dt>The patch spiral</dt><dd>Treating every new failure as a one-line edit until the skill accumulates contradictory rules nobody remembers the reason for. Fix: after a couple of patches, rebuild from what actually failed instead of layering on another exception.<sup class="cite" data-url="https://alexmcfarland.substack.com/p/5-reasons-your-claude-skills-keep" data-note="Alex McFarland: describes a 'patch spiral,' where every failure gets a quick fix until the skill accumulates contradictory rules, instead of being rebuilt from what was actually observed to fail.">*</sup></dd></div>
+          <div class="roster-row"><dt>Installing skills from strangers</dt><dd>One public skills marketplace passed 40,000 listings within months of launch, and shared skill repos have already been found shipping malware that exfiltrates tokens and cloud credentials. Fix: read a skill's actual instructions before installing it, the same way you'd check a browser extension's permissions.<sup class="cite" data-url="https://news.ycombinator.com/item?id=49169640" data-note="Hacker News thread, 'Agent skills that bring team coding standards to Claude Code and Codex': commenters warned that a linked skill repo contained malware exfiltrating GitHub tokens, AWS keys, and Kubernetes secrets. Separately reported: a skills marketplace exceeded 40,000 listings within months of the feature's October 2025 launch.">*</sup></dd></div>
+        </dl>
+        <p class="pull-question">A Skill is stored expertise. The point, same as CLAUDE.md, is not re-explaining what you already know, but a skill you've never tested without is a skill you don't actually understand.</p>
+      </section>
+    </article>
+
+    <footer class="topic-nav">
+      <a id="prev-link" href="#">← Previous</a>
+      <a href="/day-2/">Day 2 Overview</a>
+      <a id="next-link" href="#">Next →</a>
+    </footer>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/js/partials.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/topic-metadata.js"></script>
+  <script src="/js/reveal.js"></script>
+  <script src="/js/citations.js"></script>
+</body>
+</html>

@@ -1,12 +1,26 @@
 # Requirements & Task Log
 
-**Current focus (2026-08-04):** paused backend work (Phase 2, and the
-remaining Vercel-connection item in Phase 1) to prioritize frontend/content —
-need the site visibly clickable and ready for content to be added. Backend
-items below are fully scoped and not forgotten; resume after the content
-pass. Do not build anything that calls the Claude API from a page until
-Phase 2 (the proxy) is actually done — see
+**Current focus (2026-08-04, status updated 2026-08-15):** paused backend
+work (Phase 2, and the remaining Vercel-connection item in Phase 1) to
+prioritize frontend/content — need the site visibly clickable and ready for
+content to be added. Backend items below are fully scoped and not forgotten;
+resume after the content pass. Do not build anything that calls the Claude
+API from a page until Phase 2 (the proxy) is actually done — see
 [ADR 0007](adr/0007-serverless-claude-proxy.md).
+
+**Where things stand (2026-08-15):** all three days now have real,
+scheduled content on `review/full-site-audit-2` — Day 1 (8/9 sessions, only
+`09-project-assignments` still a placeholder), Day 2 (8/8), Day 3 (7/7).
+`live` (production, minimal) is untouched by the Day 2/3 work and still
+only serves `setup.html`/`setup-day-2.html`, by design — see
+[ADR 0018](adr/0018-live-branch-for-partial-production-deploy.md). Day 2's
+content-depth audit is done (see the 2026-08-15 change log entry) — 5 of
+its 8 sessions were rewritten against a new formal content standard, the
+other 3 already met it. Known open threads, not yet scheduled: the
+workshop-name and em-dash sweeps are still only done on pages that got
+touched directly, not site-wide; VS Code/Claude Code/Git content has no
+scheduled home on any of the 3 days (see the Day 3 change log entry);
+`STUDENT_CLAUDE_GUIDE.md` is still unwritten.
 
 Source of truth for build progress on this repo. Check here before starting
 work; update here when a task starts/completes, or when new work is
@@ -40,13 +54,13 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 
 ## Phase 3 — Content structure
 
-- [x] `docs/data/schedule.json` authored (single source of truth for session times/types/titles) — **Day 1 times confirmed 2026-08-11** (10am–5pm, one AM break — see the Day 1 schedule section below); Day 2/3 still placeholder, confirm before the workshop
+- [x] `docs/data/schedule.json` authored (single source of truth for session times/types/titles) — **Day 1 times confirmed 2026-08-11**, **Day 2 times confirmed 2026-08-13**, **Day 3 times confirmed 2026-08-13** (10am–5pm, one AM break, matching Day 1's shape exactly on all three days — see the Day 3 change log entry below)
 - [x] `docs/css/timeline.css`, `docs/js/timeline.js`
 - [x] `docs/js/topic-metadata.js` — populates each topic page's time/duration/type badges and prev/next links from `schedule.json`
-- [x] Day 1/2/3 `index.html` (timeline view, driven by `schedule.json`) — pattern works for all three; Day 2/3 are stubs with a working timeline but no learning-outcomes copy yet
-- [~] Topic page template + topic pages — **Day 1 renumbered/renamed 2026-08-11** (Claude Desktop pivot — see below): `01-state-of-ai`, `02-industry-conversation`, `03-use-cases`, `04-product-discussion`, `05-problem-statement-discussion`, `06-ai-tools`, `07-explore-claude-desktop`, `08-fork-and-submit` all have real content; `09-project-assignments` is still a placeholder. `people-to-follow.html` also has real content but is unlisted/unscheduled (a resource page, not a numbered session — see below). Day 2 (8 topics) and Day 3 (6 topics) not yet built, so their timeline links currently 404
+- [x] Day 1/2/3 `index.html` (timeline view, driven by `schedule.json`) — pattern works for all three; Day 2 and Day 3 both now have real learning-outcomes copy (2026-08-13)
+- [~] Topic page template + topic pages — **Day 1 renumbered/renamed 2026-08-11** (Claude Desktop pivot — see below): `01-state-of-ai`, `02-industry-conversation`, `03-use-cases`, `04-product-discussion`, `05-problem-statement-discussion`, `06-ai-tools`, `07-explore-claude-desktop`, `08-fork-and-submit` all have real content; `09-project-assignments` is still a placeholder. `people-to-follow.html` also has real content but is unlisted/unscheduled (a resource page, not a numbered session — see below). **Day 2, all 8 topics built 2026-08-13. Day 3, all 7 topics built 2026-08-13** (see below). Every day now has real, scheduled content, except Day 1's `09-project-assignments` placeholder.
 - [x] Briefing template, Overview page (`docs/css/briefing.css` Overview rules, `docs/js/reveal.js`) — normal scrolling page, shared nav/footer restored, reuses `topic-metadata.js`. See [ADR 0011](adr/0011-split-overview-and-slides.md) (supersedes [0010](adr/0010-briefing-template.md)'s toggle).
-- [x] Briefing template, Slides page (`docs/css/briefing.css` deck rules, `docs/js/deck.js`) — paginated-only, self-contained chrome linking back to its Overview page, no schedule.json fetch. **8/8 content-complete topics now have a Slides companion** (Topics 1–5, 7, 8, 9).
+- [x] Briefing template, Slides page (`docs/css/briefing.css` deck rules, `docs/js/deck.js`) — paginated-only, self-contained chrome linking back to its Overview page, no schedule.json fetch. **8/8 Day 1 content-complete topics have a Slides companion** (Topics 1–5, 7, 8, 9); **all 8 Day 2 topics and all 7 Day 3 topics also have one**, built 2026-08-13, parity-checked against `project/scripts/check-slide-parity.js` (clean).
 - [ ] Slides system for the *generic* template (`docs/css/slides.css`, `docs/js/slides.js`) — the original Part 6b plan; **not needed for briefing-template pages**, which get their slides via the deck pattern above instead. Only relevant if a generic-template page ever wants slides.
 - [~] Responsive layout — handled via media queries inside `style.css`/`timeline.css`/`briefing.css` rather than a separate `responsive.css` file (simpler given how little CSS exists so far); revisit splitting it out if it gets unwieldy
 
@@ -60,13 +74,18 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 
 ## Phase 5 — Content fill
 
-- [~] Real content written for each of the 24 topic pages — **Day 1: 8/9
-      scheduled sessions done** (only `09-project-assignments` still a
+- [~] Real content written for each of the 24 topic pages (originally scoped
+      as 24, actual final count differs per day since each day's session
+      count was recomposed during planning, not a fixed 8/day) — **Day 1:
+      8/9 scheduled sessions done** (only `09-project-assignments` still a
       placeholder), plus `people-to-follow.html` as a bonus resource page.
-      Day 2/3 not started.
+      **Day 2: all 8/8 scheduled sessions done (2026-08-13). Day 3: all 7/7
+      scheduled sessions done (2026-08-13)** — see the Day 2 and Day 3
+      change log entries below for the full session lists and sourcing.
 - [x] Slides populated per topic — **true for every Day 1 topic that has
-      real content** (all 8 scheduled + `people-to-follow`); Day 2/3 have
-      none yet.
+      real content** (all 8 scheduled + `people-to-follow`), **every Day 2
+      topic** (all 8), **and every Day 3 topic** (all 7), all built
+      2026-08-13.
 - [x] `docs/setup.html` — **rebuilt 2026-08-11 as Day 1 only**, with a real
       interactive checklist, ready to send to students. Day 2's setup
       content moved to a new, currently-unlinked `docs/setup-day-2.html`.
@@ -131,6 +150,60 @@ map cleanly to one.
       s2 (Overview 12 `<li>`s vs. Slides 7) and `07-ai-tools.html` s2
       (Overview 22 `.roster-row`s vs. Slides 12). Address when the review
       reaches those topics.
+
+### `live` vs `review/full-site-audit-2` divergence — consolidated follow-ups
+
+`live` (see [ADR 0018](adr/0018-live-branch-for-partial-production-deploy.md))
+was the active surface for iterating on `setup.html` and a visual-design
+exploration (fonts, colors, spacing) with Adiel and the user. On
+2026-08-13 everything below was ported into `review` so it isn't lost
+when `review` eventually merges to `main`. `live` stays live/deployed
+independently; this is a one-way port (`live` → `review`), not a merge,
+so the two branches still diverge — `live` has no Day 1 content, `review`
+has no production URL.
+
+- [x] **`setup.html`/`setup-day-2.html` content, final version.** Ported
+      wholesale from `live`, including Adiel's PR #3 (retitled
+      "Pre-Workshop Setup," checklist 7 → 18 items, Day 2/3 tooling
+      folded into the single page, new "Git" section — the Code tab
+      won't open without Git installed locally and GitHub Desktop's
+      bundled copy doesn't count — corrected connector path, corrected
+      tab count confirmed via live install, 7 new screenshots) and all
+      of the prior `live`-only copy edits (GitHub connector walkthrough,
+      contact info split out, "workshop account" → "email account," Git/
+      GitHub-Desktop blockquote removed, redundant "Setup" breadcrumb
+      removed). **`docs/setup-day-2.html` is orphaned on both branches**
+      now — nothing links to it since setup.html absorbed its content.
+      Left in place rather than deleted; still needs a decision.
+- [x] **Checklist label flex bug.** Fixed as a side effect of the
+      `setup.html` port (the fix was in the markup — text wrapped in a
+      `<span>` inside each label — not a standalone CSS change).
+- [x] **Tow-Knight Center logo.** Added to `review`'s `nav.html` (new
+      `.site-nav-brand` wrapper) and `docs/assets/images/` (created
+      fresh, didn't exist on `review` before). `review`'s nav keeps its
+      full dropdown menu, unlike `live`'s stripped single-link version,
+      so the markup differs slightly from `live`'s copy even though the
+      CSS is identical.
+- [x] **Design exploration (fonts, colors, spacing), applied site-wide.**
+      This went further than "port `live`'s files" — the token changes
+      live in shared `style.css`/`briefing.css`, so they now affect
+      every page on `review` (Day 1 topics, home, resources, students),
+      not just setup. Space Grotesk headings / Plus Jakarta Sans body
+      (loaded via one `@import` in `style.css` instead of per-page
+      `<link>` tags, since `review` has far more pages than `live`);
+      purple `#955af5` / coral `#e8664a` / off-white `#fdfbf7` palette
+      replacing the old pastel watercolor tones; heading margin added
+      (was `margin: 0`, headings sat flush against surrounding text).
+      Worth a look across a few Day 1 pages, not just setup, since this
+      is the first time the new look has touched them.
+- [ ] **Workshop name.** Fixed in `setup.html`, `setup-day-2.html`, and
+      `nav.html`'s brand link (all touched during this port anyway).
+      Still wrong in `footer.html` and every other page's `<title>`/body
+      copy — needs a full site-wide find/replace, not yet done.
+- [ ] **Em-dashes.** Standing rule (saved to memory, not in this repo:
+      `feedback_no-em-dashes`). Clean on `setup.html`/`setup-day-2.html`
+      (ported from `live`, already swept there). Every other page on
+      `review` still has them throughout, untouched by this pass.
 
 ---
 
@@ -1394,15 +1467,334 @@ single-purpose, shippable URL.
       drafted.
 - [ ] Adiel's 21 per-page content notes (logged in the "Collaborator
       feedback" section above) — in progress, see next section.
-- [ ] Day 2 hasn't been otherwise touched — it still needs the VS Code /
-      Claude Code / Git content that moved out of the old Explore Tech
-      Stack, plus its own schedule retiming against the 10–1/lunch/2–5
-      rule.
+- [x] Resolved 2026-08-13: **Day 2 is built.** Retimed to the same
+      10–1/lunch/2–5 shape as Day 1 (see the Day 2 schedule change log entry
+      below). Note this landed with a different content shape than this
+      line originally assumed: VS Code/Claude Code/Git didn't move into Day
+      2, Day 2 stayed inside Claude Desktop/Claude Code conceptually
+      (prompting, CLAUDE.md, Skills, plan mode, spec-driven development).
+- [x] Resolved 2026-08-13: **Day 3 is also built** (same day as Day 2, see
+      the Day 3 change log entry below), and it didn't pick up the VS
+      Code/Git content either — Day 3 turned out to be product design,
+      responsible/auditable AI, human-AI collaboration, industry
+      application, then final build time and show & tell. **The VS
+      Code/Claude Code/Git question from the line above is still genuinely
+      unresolved** — that content doesn't have a home in any of the three
+      days as currently built. `docs/setup-day-2.html` still carries this
+      material as pre-workshop setup only; whether it needs an in-class
+      home too is an open decision for whoever reviews the finished
+      3-day arc next.
 
 ---
 
 ## Change log
 
+- 2026-08-15 — **Day 2 content-depth revision**, on `review/full-site-audit-2`,
+  addressing the "surface level... correct-but-generic" feedback logged in
+  the 2026-08-13 Day 3 entry below. The user supplied a formal content
+  standard for curriculum pages (three separate steps, plan structure then
+  research then write, never collapsed; multiple live-verified sources for
+  judgment topics; synthesis over data-dump; duration follows content
+  richness, not time-math) and this pass applied it specifically to Day 2,
+  the day it was written about.
+  - **Scope**: 5 of 8 sessions revised, `02-prompting`, `03-claude-md`,
+    `04-skills-best-practices`, `05-goal-plan-mode`, `06-spec-driven-dev`,
+    all judgment/practice topics that were single-sourced or generic.
+    `01-debrief`, `07-revisit-build`, `08-show-tell` left untouched,
+    confirmed with the user first: discussion/build scaffolding with no
+    factual claims to source, already at the right depth for their type.
+  - **Schedule**: AM block (`02`–`05`) reallocated within its existing
+    145-minute pool after sketching each session's actual content need,
+    confirmed with the user before research started: `02` 40→35 min, `03`
+    35→30 min, `04` unchanged at 40 min, `05` 30→40 min (was the thinnest
+    session, ~15 min of real content behind its exercise). `06` stays fixed
+    at 30 min, the PM block has no slack since `07`/`08` weren't in scope.
+    Total day span unchanged, still 10:00 AM–1:00 PM / lunch / 2:00–5:00 PM.
+  - **Research**: 5 dedicated background research passes, one per session,
+    run after the schedule was locked and before any page content was
+    rewritten, each fetching and verifying sources live. Replaced Day 2's
+    original single-source-per-topic pattern (see the 2026-08-13 entry
+    below) with genuinely convergent, independent evidence: `06`'s entire
+    page had been sourced to one non-peer-reviewed arXiv paper
+    (Piskala, arXiv:2602.00180) — now corroborated by GitHub's spec-kit,
+    AWS Kiro, Anthropic's own Claude Code docs, a named practitioner case
+    study (Joshua McDonald, ~2-3x throughput over a year), and two
+    independent critiques (Wattenberger on spec staleness, Zaninotto on
+    SDD-as-Waterfall for large codebases). `04` gained a real journalism
+    case study (Nick Hagar replicating a MuckRock/WHRO Virginia
+    police-decertification investigation with Claude Code, a documented
+    80-vs-81 undercount without a data skill) plus independent builder
+    accounts of Skills failing in practice, replacing a page that had been
+    sourced entirely to Anthropic's own docs and one launch post. `03`
+    gained a real cross-org convergence (Cloudflare, Block/goose, Next.js,
+    Red Hat all using CLAUDE.md as a thin `@AGENTS.md` pointer) and a real
+    51-line vs. 868-line before/after (`securego/gosec` vs.
+    `RedHatInsights/insights-chrome`). `05` gained a 3-axis decision
+    framework (uncertainty, blast radius, familiarity) that four
+    independent practitioners converged on without citing each other or
+    Anthropic, plus a documented reverse failure mode (over-planning as its
+    own tax, giant unreviewable plans, plan drift). `02` gained a real
+    before/after from the Claude Code team's own July 2026 system-prompt
+    rewrite, plus a "verify your own work" finding convergent across
+    official docs, the tool's creator, and independent practitioners.
+  - **Verification**: `project/scripts/check-slide-parity.js` passes clean.
+    All 37 citation URLs across the 5 rewritten pages spot-checked live;
+    2 initially returned non-200s from bot-blocking (Medium, Time.com,
+    generative-ai-newsroom.com) or GitHub rate-limiting, re-verified via a
+    second fetch method rather than dropped, all confirmed real and saying
+    what they're cited for. `<sup class="cite">` open/close tags balanced
+    across all 5 files (the unclosed-tag bug class found on Day 3). No
+    em-dashes, workshop name correct throughout.
+- 2026-08-13 (later) — **Day 3 built from scratch**, on
+  `review/full-site-audit-2`, same day as Day 2. Planned in plan mode from
+  the user's 8-item draft agenda. This build has a different process than
+  Day 2's: the user's explicit feedback on Day 2 was that it read as
+  "surface level... correct-but-generic," not enough depth, and gave a
+  standing instruction (saved to memory:
+  `feedback_content-depth-over-surface-level`) to research multiple
+  sources per judgment-based topic and extract genuinely actionable
+  guidance, not just cite one canonical doc per topic. Two rounds of plan
+  feedback also reshaped the schedule before any content was written:
+  Recap cut from 60 to 30 minutes, the freed time moved to the three
+  design lecture topics (35 → 45 min each); "Where Can You Take This?"
+  reframed from a generic "keep learning" resource list into a session
+  specifically about which newsroom roles/functions are adopting the
+  *build* skills this workshop taught, explicitly required to not repeat
+  Day 1's already-extensive Industry Conversation/Use Cases content (I
+  read both pages first to confirm the new angle didn't overlap).
+  - **Schedule**: 10:00 AM–5:00 PM, one 15-min break (11:15 AM, matching
+    Day 1's break time exactly), lunch 1:00–2:00 PM. 7 sessions + a
+    `url: null` closing marker: Recap & Open Questions (30m, discussion) →
+    Product Design (45m, lecture) → break → Safe & Auditable Design (45m,
+    lecture) → AI-Human Design (45m, lecture) → lunch → Where Can You Take
+    This? (45m, lecture) → Final Coding Time (60m, hands-on) → Final Show
+    & Tell (60m, discussion, includes the closing/celebration content
+    inline rather than as a separate page) → Closing & Celebration (15m,
+    schedule marker only, no page).
+  - **Research**: 4 parallel background agents, each briefed to find
+    multiple sources (not one canonical doc), fetch everything live, and
+    extract checklists/named examples/concrete numbers rather than
+    position statements. Genuinely deep results: Product Design found a
+    consistent pattern across 5+ named newsroom AI products (Chowbot, Ask
+    FT, Forbes' Adelaide, Rappler's Rai, a 4-bot UNC CISLM study) that all
+    independently converged on "scope to what you own, say so when you
+    can't." Safe & Auditable Design found real incidents (NYC's MyCity
+    chatbot giving false legal guidance for over a year uncaught, Air
+    Canada's tribunal loss, CNET's 53%-error self-audit) plus concrete
+    newsroom mechanisms (WBEZ's per-instance approval, LAist's
+    accountability language, CBC's one-question disclosure test) and NIST's
+    actual AI Risk Management Framework simplified to a 4-question
+    checklist. AI-Human Design surfaced a genuinely counterintuitive
+    finding worth the session's centerpiece: a controlled study found
+    giving people an algorithm's prediction to adjust produced a *worse*
+    false-positive rate and introduced racial bias not present in the
+    algorithm alone, directly complicating the naive "just add a human
+    checkpoint" assumption; paired with Zillow's Project Ketchup (removing
+    a working checkpoint under growth pressure, $421M quarterly loss) for
+    the opposite failure mode. Where Can You Take This surfaced named,
+    current (2026) roles (Politico's Newsroom Architect, ProPublica's
+    Computational Journalist), a real repo-level statistic (37% of new
+    newsroom repos show AI-coding signals by early 2026, up from a repo
+    culture that had collapsed 80% since 2016), and solo-builder examples
+    (a Reuters correspondent with no coding background who's built 14
+    tools; a journalist's 50+ Skill open-source library), plus an honest
+    counterweight (a controlled trial found experienced developers using
+    AI tools were 19% slower while believing they were faster).
+  - **Bug caught during build, not before**: repeatedly wrote `<sup
+    class="cite">...*</dd>` in `.roster` rows across multiple pages,
+    omitting the closing `</sup>` before `</dd>`. Not caught by
+    `check-slide-parity.js` (which only checks item counts, not tag
+    balance) — caught by explicitly grep-counting `<sup>`/`</sup>` opens
+    vs. closes per file during verification. Fixed across all 3 affected
+    files (`02-product-design.html`, `04-ai-human-design.html`,
+    `05-where-you-can-take-this.html`). Worth remembering for future
+    `.roster` sections with trailing citations.
+  - **Not done**: no day of the workshop currently has a home for VS
+    Code/Claude Code/Git content, see the "Downstream, not yet touched"
+    section above for the full note.
+- 2026-08-13 — **Day 2 built from scratch**, on `review/full-site-audit-2`.
+  Planned in plan mode from the user's 14-item draft agenda, consolidated
+  into 8 sessions after two rounds of user pushback (grouping confirmed via
+  `AskUserQuestion`; time allocation reworked after the user challenged
+  whether "Your Goal & Plan Mode" at 50 min had enough real substance while
+  CLAUDE.md at 20 min was too thin for something "vital" — resolved by
+  sketching actual content per session rather than just doing time-math,
+  landing both at ~30-35 min; a second round added a prompting-history
+  timeline and reframed Spec-Driven Development around a concrete
+  checklist rather than a paper summary, per further user feedback). Full
+  plan preserved at the top of `project/adr/` is not applicable here, this
+  was tracked via the planning tool, not an ADR, since it's content
+  structure, not a technical decision.
+  - **Schedule** (`schedule.json`): 10:00 AM–5:00 PM, one 15-min break
+    (11:35 AM), lunch 1:00–2:00 PM, matching Day 1's shape exactly. 8
+    sessions: Yesterday's Debrief (20m, discussion) → Prompting (40m,
+    hands-on) → CLAUDE.md (35m, hands-on) → break → Skills & Best
+    Practices (40m, lecture) → Your Goal & Plan Mode (30m, hands-on) →
+    lunch → Spec-Driven Development (30m, lecture) → Revisit & Build (60m,
+    hands-on) → Show & Tell + Critique (90m, discussion).
+  - **All 8 topics built**, Overview + Slides each, using the briefing
+    template exactly as established on Day 1 (discussion sessions get
+    light citation density and `.field-notes` as discussion prompts;
+    lecture sessions are citation-backed; hands-on sessions get
+    `.exercise-box`). `project/scripts/check-slide-parity.js` passes clean.
+  - **Sourcing**: Day 2 leans on Anthropic's own documentation instead of
+    Day 1's industry/journalism sourcing, gathered via 5 parallel
+    background research agents (never inline, per standing preference),
+    each one fetching and verifying sources live rather than citing from
+    memory: `code.claude.com/docs/en/memory` and
+    `code.claude.com/docs/en/best-practices` (CLAUDE.md, general best
+    practices), `platform.claude.com/.../agent-skills/overview` and
+    Anthropic's Oct 2025 Skills launch post (Skills),
+    `code.claude.com/docs/en/permission-modes` (plan mode), and the user's
+    linked paper (`arxiv.org/pdf/2602.00180`, "Spec-Driven Development:
+    From Code to Contract," Piskala, Jan 2026) for the Spec-Driven
+    Development checklist — the paper turned out to be genuinely
+    prescriptive (a real four-phase Specify/Plan/Implement/Validate
+    framework), not just conceptual, confirmed by extracting the full PDF
+    text rather than trusting a summary. The prompting history timeline
+    (2022 role-play era → 2023 "prompt engineer" job boom → 2024 Anthropic
+    ships prompt generator/improver tools → 2025 Anthropic's own guidance
+    that early scaffolding tricks matter less now) is built entirely from
+    dated, fetched, live-verified sources, one Gartner claim was found and
+    dropped because the primary source 403'd and couldn't be verified.
+  - **Consequence**: this makes the site-wide divergence between `live`
+    and `review` wider in one sense (Day 2 exists only on `review`) but
+    narrower in the naming sense (Day 2's pages all use "AI News
+    Innovation Workshop" and have zero em-dashes from the start, unlike
+    the rest of `review`'s still-unswept pages).
+  - **Not done**: `docs/day-3/` is still fully untouched. Whether Day 2
+    should also carry VS Code/Claude Code/Git content (previously assumed
+    in an earlier "downstream, not yet touched" note) turned out not to
+    fit the day the user actually wanted, that note has been corrected
+    above rather than fulfilled as originally written.
+- 2026-08-12 (latest, round 2) — Three more small fixes on `live`,
+  same "edit there directly, it's what's deployed" pattern as above:
+  (1) removed the redundant "Setup" breadcrumb sitting right above the
+  `<h1>` on `setup.html`. (2) Corrected the workshop's actual name
+  site-wide on `live`: "AI Journalism Workshop" → "**AI News Innovation
+  Workshop**", across `setup.html`, `setup-day-2.html`, `nav.html`, and
+  `footer.html` (all 4 occurrences that branch has). **This name is
+  still wrong everywhere on `review/full-site-audit-2`** — every page
+  title, the nav logo, the footer — that's the correct name for the
+  whole site, not just `live`'s pages, so this needs a full find/replace
+  across `review` too, not yet done. (3) Added the Tow-Knight Center for
+  Journalism Futures logo (`docs/assets/images/tow-knight-logo.png`,
+  supplied by the user from `~/Downloads`) to the nav bar next to the
+  workshop name, via a new `.site-nav-brand` flex wrapper in
+  `nav.html`/`style.css` (28px tall, width auto). All three verified
+  live via curl; the logo specifically confirmed as byte-identical to
+  the source file (21,555 bytes) once served.
+- 2026-08-12 (latest) — Two small requests on `live`'s setup pages: (1)
+  added a real GitHub-connector walkthrough to `setup.html`'s GitHub
+  section (find the `+` next to the message box → Connectors → GitHub →
+  OAuth device-code sign-in → confirm connected), previously deferred to
+  the live Explore Claude Desktop session, now self-serve since it's
+  just an OAuth sign-in with no install step; checklist count 6 → 10.
+  (2) Removed every em-dash from `setup.html` and `setup-day-2.html`
+  (replaced with periods/colons/commas as fit each sentence). User set
+  this as a **standing rule going forward, not a one-off edit** — saved
+  to Claude's cross-session memory (`feedback_no-em-dashes`, outside
+  this repo) so it applies to future copy work automatically. Both
+  changes verified live via curl. Widens the divergence from `review`'s
+  copies, already flagged above as a known follow-up.
+- 2026-08-12 (later still) — Copy/design pass on `setup.html`, done
+  directly on the `live` branch since that's what's actually deployed
+  (not `review/full-site-audit-2`'s copy, which still has the original
+  content and is now out of sync — see below). Found and fixed a real
+  CSS bug in the process: `.field-notes.is-interactive-checklist label`
+  has `display: flex`, and any inline element (`<strong>`, `<a>`) that's
+  a *direct child* of a flex container becomes its own separate flex
+  item instead of flowing as normal text — this is why "Chat," "Cowork,"
+  "Code" and the `github.com` link were each rendering on their own
+  line. Fixed by wrapping each label's text in a `<span>` (one flex
+  item instead of many), applied to every checklist item in both
+  `setup.html` and `setup-day-2.html` on `live`, not just the two the
+  user flagged, since it's the same underlying bug everywhere the
+  pattern appears. Content edits: dropped the Claude-account/paid-plan
+  checklist item, split the "if something doesn't work" contact info
+  into its own paragraph, "workshop account" → "email account" for the
+  sign-in step, removed the Git/GitHub-Desktop blockquote. Checklist
+  count 7 → 6. Verified live via curl.
+
+  **Known follow-up, not yet done**: `review/full-site-audit-2`'s copies
+  of `setup.html` and `setup-day-2.html` have the identical flex bug
+  (same CSS, same HTML pattern) and none of today's content edits.
+  Needs the same treatment whenever that branch's Day 1 rework actually
+  ships — the two branches' setup pages are now genuinely divergent, not
+  just differently-scoped.
+
+  **Follow-up, same day**: added a real walkthrough for connecting
+  Claude Desktop's GitHub connector to `live`'s `setup.html` (find the
+  `+` next to the message box → Connectors → GitHub → OAuth device-code
+  sign-in → confirm connected) — previously this was deliberately
+  deferred to the live Explore Claude Desktop session; now self-serve,
+  since it's just an OAuth sign-in with no install step. Steps sourced
+  from the same research already used to write Explore Claude Desktop's
+  "Connecting GitHub" section, not re-verified fresh. Checklist count
+  6 → 10. This widens the divergence from `review`'s copy noted above.
+- 2026-08-12 (later same day) — Even with production correctly tracking
+  `live`, user found that clicking through the shared `nav.html`/
+  `footer.html` from `setup.html` still reached the rest of the (old,
+  pre-rework) site — every page, day, and the resources/students
+  sections were all still one click away. Not acceptable. Stripped the
+  `live` branch down to **only** `setup.html`, `setup-day-2.html`, and
+  the assets they actually depend on (`style.css`, `briefing.css`,
+  `partials.js`, `nav.js`, `checklist.js`, plus bare-logo versions of
+  `nav.html`/`footer.html` with no links elsewhere) — every other page
+  and unused script/stylesheet removed from the branch entirely (40
+  files changed, ~3,400 lines removed). Fixed the dead links this left
+  in both setup pages (breadcrumb, the old "resources page" and "Fork &
+  Submit" mentions). Added a branch-local `.gitignore` blocking those
+  removed paths from being reintroduced by a future merge/cherry-pick —
+  note per the user's own question: `.gitignore` alone doesn't remove
+  already-committed files or affect what Vercel builds; the actual fix
+  was `git rm`, the gitignore is just a safety net against re-adding
+  them later. Verified via curl against the live production URL:
+  `/setup.html` and `/setup-day-2.html` load; `/`, `/resources.html`,
+  `/students/`, every `/day-1/*`, `/day-2/`, `/day-3/`, and
+  `/data/schedule.json` all 404. [ADR 0018](adr/0018-live-branch-for-partial-production-deploy.md)
+  updated with this as a follow-on decision.
+- 2026-08-12 — User merged PR #2 into `main` directly (deviating from the
+  "don't merge yet" plan logged the day before). Vercel's production
+  deploy off `main` then hit a **team-membership** block (git commit
+  author wasn't recognized as a member of the connected Vercel team) —
+  resolved by making the GitHub repo public, per the already-decided
+  [ADR 0002](adr/0002-public-repo.md), which the repo had drifted from
+  (it was still private). That fixed the deploy, but exposed Vercel's
+  **Deployment Protection** login wall on top — and once that got sorted
+  (via a Vercel "Share Deployment" bypass link, initially), a bigger
+  problem surfaced: `main` now has the *entire* Day 1 restructure on it,
+  not just the reviewed-and-ready `setup.html`. Resolved by creating a
+  dedicated `live` branch instead — see
+  [ADR 0018](adr/0018-live-branch-for-partial-production-deploy.md) for
+  the full reasoning.
+
+  **Resolved, same day.** Vercel's dashboard has moved this setting under
+  "Environments" (not the classic "Settings → Git → Production Branch"
+  path); user set the Production environment to track `live`. That alone
+  didn't retroactively rebuild/promote anything — the stable production
+  URLs kept serving the old `main`-based deployment (confirmed live via
+  curl: today's new Product Discussion page was still reachable, and
+  Deployment Protection was off project-wide, so this was a real public
+  exposure of the in-review Day 1 content for a window, not just a
+  theoretical one — user opted to leave it exposed rather than re-protect
+  while sorting the setting out, judging it low-stakes). Pushed an empty
+  commit to `live` to force a fresh build once Production was actually
+  tracking it; that promoted correctly. **Verified via curl against both
+  candidate stable domains**: `setup.html` loads (200, correct title,
+  checklist present, checklist.js loads), today's `04-product-discussion`
+  404s as expected, and the old `05-project-ideation` (pre-rework) is
+  back, confirming production now serves the `live` branch, not `main`.
+  Link to send students: `https://2026-ai-news-innovation-workshop.vercel.app/setup.html`.
+- 2026-08-11 — Committed and pushed the full Day 1 restructure (Claude
+  Desktop pivot, schedule retiming, Adiel's PR #1 feedback, State of AI
+  tone pass) as one commit on `review/full-site-audit-2`, and opened
+  [PR #2](https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/pull/2)
+  against `main` — not to merge yet, but to give Vercel (just connected
+  to the repo) a PR-preview URL so `setup.html` can be shared with
+  students without merging the whole diff into `main` first. **Superseded
+  2026-08-12** — user merged anyway; see the entry above for what
+  happened next.
 - 2026-08-06 — Implemented most of Batches 1–4 from the full-scale site
   review (Topic 1 "State of AI" content edits, plus two template-level
   fixes applied across all 8 existing slide decks: removing the

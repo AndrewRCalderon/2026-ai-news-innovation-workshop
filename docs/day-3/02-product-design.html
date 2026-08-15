@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Design - Day 3 - AI News Innovation Workshop</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/briefing.css">
+</head>
+<body class="briefing briefing-overview" data-day="3" data-session-id="day-3/02-product-design">
+  <div id="nav"></div>
+
+  <main>
+    <div class="breadcrumb"><a href="/">Home</a> &gt; <a href="/day-3/">Day 3</a> &gt; Product Design</div>
+
+    <header class="masthead">
+      <h1 class="masthead-title">Product Design</h1>
+      <p class="masthead-dek">Not "is the AI good." Whether the experience around it earns trust, and whether it holds up once you're not the only one using it.</p>
+      <div class="masthead-meta"><span id="topic-time">--</span><span class="div">·</span><span id="topic-duration">--</span><span class="div">·</span><span id="topic-type">--</span></div>
+    </header>
+
+    <nav class="toc" aria-label="Sections in this briefing">
+      <ol>
+        <li><a href="#s1"><span class="n">01</span> The Confident-Wrongness Problem</a></li>
+        <li><a href="#s2"><span class="n">02</span> Framing Changes Everything</a></li>
+        <li><a href="#s3"><span class="n">03</span> The One Pattern Every Case Study Agrees On</a></li>
+        <li><a href="#s4"><span class="n">04</span> Design the Disclosure</a></li>
+      </ol>
+    </nav>
+
+    <section class="slides-cta">
+      <p>Prefer to move through this section by section, presentation-style?</p>
+      <a class="slides-cta-link" href="slides/02-product-design-slides.html">Open the slides →</a>
+    </section>
+
+    <article>
+      <section class="block reveal" id="s1">
+        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">The Confident-Wrongness Problem</h2></div>
+        <p class="lede">A study testing eight AI search tools on 1,600 news queries found more than 60% of answers were factually wrong.<sup class="cite" data-url="https://www.cjr.org/tow_center/we-compared-eight-ai-search-engines-theyre-all-bad-at-citing-news.php" data-note="Columbia Journalism Review / Tow Center, March 6 2025: tested 8 AI search tools on 1,600 queries, over 60% of responses factually wrong.">*</sup> That's not the dangerous part on its own. The dangerous part: ChatGPT misidentified 134 articles, but flagged low confidence only 15 times out of 200 answers.<sup class="cite" data-url="https://www.cjr.org/tow_center/we-compared-eight-ai-search-engines-theyre-all-bad-at-citing-news.php" data-note="Same study: ChatGPT misidentified 134 articles but flagged low confidence only 15 times out of 200 answers. Grok-3 and Gemini fabricated URLs in over 50% of responses.">*</sup> The failure mode isn't "the tool doesn't know." It's the tool sounding exactly as confident when it's wrong as when it's right.</p>
+        <p>Whatever you build today needs to design around that, not assume it away. And don't assume demand either: in one survey, nearly half of respondents said they had zero interest in AI chatbots for getting news.<sup class="cite" data-url="https://www.poynter.org/ethics-trust/2025/news-audience-feelings-artificial-intelligence-data/" data-note="Poynter / University of Minnesota, April 8 2025, n=1,128: 49% of respondents reported zero interest in AI chatbots for news. Researcher Benjamin Toff: 'The data suggests if you build it, do not expect overwhelming demand for it.'">*</sup> Build for the person who'll actually use it, not the assumption that they will.</p>
+      </section>
+
+      <section class="block reveal" id="s2">
+        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">Framing Changes Everything</h2></div>
+        <p class="lede">Here's the single most useful finding for anyone designing an AI feature: the same underlying process, described two different ways, gets wildly different trust.</p>
+        <div class="stat-pull">
+          <span class="num">43%</span>
+          <span class="cap">comfort: "human-led, AI-assisted"</span>
+        </div>
+        <p>Versus <strong>21% comfort</strong> for "AI-led, with human oversight," describing functionally the same workflow.<sup class="cite" data-url="https://reutersinstitute.politics.ox.ac.uk/generative-ai-and-news-report-2025-how-people-think-about-ais-role-journalism-and-society" data-note="Reuters Institute, Oxford, Oct 7 2025 Generative AI and News Report: human-led-with-AI-assist framing gets 43% comfort vs. 21% for AI-led-with-human-oversight framing, describing the same technical process. Fully AI-generated news gets 12% comfort vs. 62% for fully human.">*</sup> Same work, same amount of human review, different label, double the comfort. This isn't spin, it's a real design lever: how you describe what your tool does changes whether people trust it, independent of what it actually does.</p>
+        <p>One more number worth knowing: only 33% of people believe journalists actually check AI output before publishing, and that belief tracks closely with trust.<sup class="cite" data-url="https://reutersinstitute.politics.ox.ac.uk/generative-ai-and-news-report-2025-how-people-think-about-ais-role-journalism-and-society" data-note="Same report: only 33% believe journalists check AI output before publishing; belief in verification correlates strongly with trust (57% among high-trust consumers vs. 19% among distrusters). Also: 77% consume news daily but only 19% report seeing AI labels daily.">*</sup> Visible verification, not claimed verification, is what moves that number.</p>
+      </section>
+
+      <section class="block reveal" id="s3">
+        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">The One Pattern Every Case Study Agrees On</h2></div>
+        <p class="lede">Across every real newsroom AI product this research turned up, one design choice shows up again and again: answer only from what you actually own and trust, and say so when you can't.</p>
+        <dl class="roster">
+          <div class="roster-row"><dt>SF Chronicle's Chowbot</dt><dd>Answers draw only from ~1,000 vetted restaurant reviews, never general web knowledge. Outside that scope, it says so instead of guessing.<sup class="cite" data-url="https://www.niemanlab.org/2024/02/san-francisco-chronicle-tries-an-ai-chatbot-er-chowbot-for-food-recs/" data-note="Nieman Lab, Feb 27 2024: Chowbot answers only from ~1,000 vetted Chronicle reviews. Food editor Janelle Bitker: it 'accentuates' rather than replaces human expertise. Team documented the hallucination risk publicly rather than overselling accuracy.">*</sup></dd></div>
+          <div class="roster-row"><dt>Financial Times' Ask FT</dt><dd>Restricted to FT's own archive, footnoted citations, a stated time range for sources. It still misidentified an ex-candidate as active, a stale-knowledge gap worth planning for explicitly.<sup class="cite" data-url="https://www.niemanlab.org/2024/03/the-financial-times-is-ready-for-its-ai-to-answer-your-questions-well-some-of-them/" data-note="Nieman Lab, March 23 2024: Ask FT restricted to FT's own archive back to 2004, with footnoted citations. Initially misidentified Nikki Haley as an active candidate, a stale-knowledge-vs-live-reporting gap.">*</sup></dd></div>
+          <div class="roster-row"><dt>Forbes' Adelaide</dt><dd>Chief Digital Officer: "We only want to provide our users with our trusted journalism." Launched to 5% of readers first, expanded once the pattern held.<sup class="cite" data-url="https://pressgazette.co.uk/publishers/digital-journalism/news-chatbots-generative-ai-forbes-search/" data-note="Press Gazette, Dec 14 2023: Forbes' Adelaide launched in beta to 5% of audience, expanding later. CDO Vadim Supitskiy: 'We only want to provide our users with our trusted journalism, right?'">*</sup></dd></div>
+          <div class="roster-row"><dt>Rappler's Rai</dt><dd>Built with "hyper-strict guardrails to prevent outside information from seeping into results," designed to say "I don't know" rather than fabricate.<sup class="cite" data-url="https://gijn.org/stories/newsrooms-using-ai-chatbots-leverage-reporting/" data-note="Global Investigative Journalism Network, Aug 2025: Rappler's Rai draws from 400,000+ stories with hyper-strict guardrails against outside information. In July 2025 it stopped including new stories due to a broken pipeline, going stale without anyone noticing.">*</sup></dd></div>
+        </dl>
+        <p>The clearest evidence for why scope matters comes from a study of four small-newsroom bots. The two that stuck to a narrow, unchanging job (subscription FAQs, local election basics) answered reliably. The two that tried to search an entire, growing story archive couldn't keep the underlying data current with a 3-person newsroom, and one was pulled after readers asked for its removal.<sup class="cite" data-url="https://www.niemanlab.org/2025/08/local-newsrooms-are-building-ai-chatbots-fast-and-cheap/" data-note="Nieman Lab / UNC CISLM Local NewsBot Studio, Aug 2025: The News Reporter's FAQ bot answered 90%+ of static queries reliably. Chapelboro and Henrico Citizen's archive-search bots hit unsustainable maintenance burden with only 3 full-time journalists; 'Chappy' was pulled after accuracy complaints. Development was fast and cheap, initial demo in 1 week, full deployment in 1 month, about $40/month.">*</sup> Scoping tightly isn't a limitation you settle for, it's the actual reason the reliable ones work.</p>
+      </section>
+
+      <section class="block reveal" id="s4">
+        <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Design the Disclosure</h2></div>
+        <p class="lede">Telling people you used AI isn't a compliance checkbox, it's an interface decision, and the details of that decision measurably change trust.</p>
+        <p>Detailed disclosures actually made readers slightly less trusting than a simple one-line label, in one controlled study, even though most readers said they preferred the detailed version anyway.<sup class="cite" data-url="https://arxiv.org/abs/2601.09620" data-note="Prajod et al., 'Full Disclosure, Less Trust?', arXiv:2601.09620, submitted Jan 14 2026: trust declined specifically with detailed disclosures, not one-line ones, though about 67% of participants preferred detailed disclosure despite the trust cost.">*</sup> The fix isn't picking one over the other, it's giving people the choice:</p>
+        <ul class="field-notes">
+          <li><strong>Detail-on-demand:</strong> a small info icon that reveals full disclosure on click, instead of forcing a block of text on every reader.</li>
+          <li><strong>Highlight-for-glancing:</strong> a visual marker on the specific passages AI touched, scannable without breaking reading flow.</li>
+          <li><strong>Outlet-level transparency:</strong> publish your AI policy once, don't repeat a full disclosure on every single piece.</li>
+        </ul>
+        <p class="stat-pull"><sup class="cite" data-url="https://arxiv.org/html/2606.11116" data-note="Prajod, 'Designed by Journalists, but Is It for Readers?', arXiv:2606.11116, June 2026 CHIWORK workshop paper. Six reader-sourced disclosure patterns: detail-on-demand, highlight-for-glancing, proportional visualization, outlet-level transparency, trust badges, and 'no AI used' labels. Core insight: readers want agency over when and how deeply they engage with AI-transparency information.">These three patterns come directly from reader research, not designer intuition.*</sup></p>
+        <div class="exercise-box">
+          <h3>🎯 Apply This</h3>
+          <p><strong>Time:</strong> A few minutes, individually.</p>
+          <p><strong>Description:</strong> For your own project: what's the one source of truth you'll scope your AI to, and what will it say when a question falls outside that? Then draft one sentence of disclosure using this template: "We used [tool] to help us [what it did]. We [verified/reviewed] it by [how]."<sup class="cite" data-url="https://trustingnews.org/trustkits/ai/" data-note="Trusting News AI Trust Kit: fill-in-the-blank disclosure template. 93.8% of audiences want AI use disclosed in some form.">*</sup></p>
+          <p><strong>Deliverable:</strong> One sentence you could actually put on your project today.</p>
+        </div>
+      </section>
+    </article>
+
+    <footer class="topic-nav">
+      <a id="prev-link" href="#">← Previous</a>
+      <a href="/day-3/">Day 3 Overview</a>
+      <a id="next-link" href="#">Next →</a>
+    </footer>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/js/partials.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/topic-metadata.js"></script>
+  <script src="/js/reveal.js"></script>
+  <script src="/js/citations.js"></script>
+</body>
+</html>

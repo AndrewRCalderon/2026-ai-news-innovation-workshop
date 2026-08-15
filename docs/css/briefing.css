@@ -16,13 +16,13 @@
   --accent-secondary-strong: var(--orange-dark);
   --bg: var(--cream);
   --ink: var(--text-primary);
-  --ink-soft: #6b6152;
-  --surface: #fffcf5;
-  --border: rgba(107, 74, 127, 0.18);
-  --border-strong: rgba(107, 74, 127, 0.32);
+  --ink-soft: #767676;
+  --surface: #fffdf9;
+  --border: rgba(124, 58, 237, 0.18);
+  --border-strong: rgba(124, 58, 237, 0.32);
 
-  --serif: Charter, "Iowan Old Style", "Georgia", "Times New Roman", serif;
-  --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  --serif: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "Space Grotesk", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   --sp-1: 0.25rem;
   --sp-2: 0.5rem;
@@ -50,15 +50,17 @@
   --border: rgba(226, 210, 242, 0.16); --border-strong: rgba(226, 210, 242, 0.3);
 }
 :root[data-theme="light"] {
-  --bg: var(--cream); --surface: #fffcf5; --ink: var(--text-primary); --ink-soft: #6b6152;
+  --bg: var(--cream); --surface: #fffdf9; --ink: var(--text-primary); --ink-soft: #767676;
   --accent-primary: var(--purple); --accent-primary-strong: var(--purple-dark);
   --accent-secondary: var(--orange); --accent-secondary-strong: var(--orange-dark);
-  --border: rgba(107, 74, 127, 0.18); --border-strong: rgba(107, 74, 127, 0.32);
+  --border: rgba(124, 58, 237, 0.18); --border-strong: rgba(124, 58, 237, 0.32);
 }
 
 .briefing { font-family: var(--serif); }
 .briefing a { color: var(--accent-primary-strong); }
-.briefing h1, .briefing h2, .briefing h3 { text-wrap: balance; margin: 0; }
+.briefing h1 { text-wrap: balance; margin: 0 0 var(--sp-3); font-family: var(--mono); font-weight: 700; }
+.briefing h2, .briefing h3 { text-wrap: balance; margin: var(--sp-5) 0 var(--sp-2); font-family: var(--mono); font-weight: 700; }
+.briefing h2:first-of-type, .briefing h3:first-of-type { margin-top: 0; }
 .briefing button { font-family: inherit; }
 .briefing p { margin: 0 0 var(--sp-3); max-width: 62ch; }
 .briefing p:last-child { margin-bottom: 0; }
@@ -122,6 +124,15 @@ html.briefing-deck, body.briefing-deck { height: 100%; overflow: hidden; margin:
 .field-notes.is-interactive-checklist label { display: flex; align-items: flex-start; gap: 0.6em; cursor: pointer; max-width: 58ch; }
 .field-notes.is-interactive-checklist input[type="checkbox"] { flex-shrink: 0; width: 1.1em; height: 1.1em; margin-top: 0.3em; accent-color: var(--accent-primary); }
 .setup-progress { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.04em; color: var(--ink-soft); margin: var(--sp-3) 0; }
+
+/* Setup page: screenshots, per-step detail, and the Day 1 / Day 2 group headings.
+   Screenshots and detail paragraphs sit outside the label on purpose. The label is
+   a flex container, so any element inside it becomes a flex item on its own row. */
+.setup-shot { display: block; max-width: min(100%, 34rem); height: auto; margin: var(--sp-2) auto; border: 1px solid var(--border); border-radius: 3px; }
+.setup-shot.is-tall { max-height: 22rem; width: auto; }
+.setup-detail { margin: var(--sp-2) 0 var(--sp-2) 1.7em; padding-left: var(--sp-3); max-width: 56ch; border-left: 2px solid var(--border); }
+.briefing code { font-family: var(--mono); font-size: 0.88em; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; padding: 0.08em 0.35em; white-space: nowrap; }
+.day-group { margin-top: var(--sp-5); padding-top: var(--sp-3); border-top: 2px solid var(--border-strong); font-family: var(--mono); font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
 
 .chip-strip { display: flex; flex-wrap: wrap; margin: var(--sp-3) 0; border-top: 1px solid var(--border); }
 .chip { flex: 1 1 140px; padding: var(--sp-3) var(--sp-3) 0 var(--sp-3); border-right: 1px solid var(--border); }

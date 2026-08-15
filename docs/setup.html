@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Day 1 Setup — AI Journalism Workshop</title>
+  <title>Pre-Workshop Setup - AI News Innovation Workshop</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/briefing.css">
 </head>
@@ -11,41 +11,86 @@
   <div id="nav"></div>
 
   <main>
-    <div class="breadcrumb"><a href="/">Home</a> &gt; Setup</div>
-    <h1>Day 1 Setup</h1>
-    <p class="lede">Please do this <strong>before Day 1</strong> — we won't have time to walk through installs live, and Day 1's hands-on session assumes you're already set up. It should take about 15 minutes. If something doesn't work, don't spend more than that fighting it — stop, note where you got stuck, and we'll sort it out first thing in class.</p>
-    <p class="aside">This page covers Day 1 only. Day 2 introduces a different set of tools (VS Code, Claude Code, Git) — that setup is separate and not needed yet; you'll get that link closer to Day 2.</p>
+    <h1>Pre-Workshop Setup</h1>
+    <p class="lede">Please do this <strong>before Day 1</strong>. We won't have time to walk through installs live, and Day 1's hands-on session assumes you're already set up.</p>
+    <p>This covers everything you'll need for the whole workshop. Sections 1 to 3 are what you need on Day 1. Sections 4 and 5 aren't used until Day 2, but please set them up before the workshop begins, so we can help you troubleshoot in advance, if needed. Total set up should take <strong>about 30 minutes</strong>.</p>
+    <p>If something doesn't work, please reach out to Andrew (andrew.calderon@journalism.cuny.edu) or Adiel (adiel.kaplan@journalism.cuny.edu).</p>
 
-    <p class="setup-progress" id="setup-progress-count">0 of 7 steps checked off</p>
+    <p class="setup-progress" id="setup-progress-count">0 of 18 steps checked off</p>
 
-    <h2>1. Claude Desktop</h2>
-    <p>The app you'll build with all day — chat, research, and an actual coding environment, all in one place.</p>
+    <h2 class="day-group">Day 1</h2>
+
+    <h3>1. Claude Desktop</h3>
+    <p>The app you'll use on Day 1. It's a chat, research, and coding environment, all in one place.</p>
     <ul class="field-notes is-interactive-checklist">
-      <li><label><input type="checkbox" class="setup-check"> Confirm you have access to the workshop's Claude account — check your email for an invite. If you don't see one, flag it before Day 1, not on the morning of. Claude Desktop's coding environment needs a paid plan (Pro, Max, Team, or Enterprise); it isn't available on a free account.</label></li>
-      <li><label><input type="checkbox" class="setup-check"> Download and install Claude Desktop from <a href="https://claude.ai/download" target="_blank" rel="noopener">claude.ai/download</a>.</label></li>
-      <li><label><input type="checkbox" class="setup-check"> Open it and sign in with your workshop account.</label></li>
-      <li><label><input type="checkbox" class="setup-check"> Confirm you can see three tabs near the top: <strong>Chat</strong>, <strong>Cowork</strong>, and <strong>Code</strong>. We'll cover what each one is for on Day 1.</label></li>
+      <li><label><input type="checkbox" class="setup-check"><span>Download and install Claude Desktop from <a href="https://claude.ai/download" target="_blank" rel="noopener">claude.ai/download</a>.</span></label></li>
+      <li><label><input type="checkbox" class="setup-check"><span>Open it and sign in. Adiel is emailing everyone their account details the week before class. If you don't have them yet, sign in when that email arrives.</span></label></li>
+      <li>
+        <label><input type="checkbox" class="setup-check"><span>Confirm you're signed in and that you can see two tabs in the top left corner: <strong>Home</strong> and <strong>Code</strong>. Home is where chat and longer research work happen. Code is for building things. We'll cover both on Day 1. If you're on a Windows computer, the Code tab may not open yet. That's expected, and section 2 below fixes it.</span></label>
+        <img class="setup-shot" src="/assets/images/setup-01-home-code-tabs.png" alt="The top left of Claude Desktop showing two tabs, Home and Code, with New, Artifacts, Routines and Customize listed below.">
+      </li>
     </ul>
 
-    <h2>2. GitHub Account</h2>
-    <p><strong>GitHub</strong> is the website where your work lives online and gets submitted. You just need an account for now — we'll connect it to Claude Desktop together, live, in the first hands-on session.</p>
+    <h3>2. Git</h3>
+    <p>A small background tool used by Claude and in coding to keep track of changes to your work. You won't interact with it directly, but the Code tab won't open without it.</p>
     <ul class="field-notes is-interactive-checklist">
-      <li><label><input type="checkbox" class="setup-check"> Sign up for a free account at <a href="https://github.com" target="_blank" rel="noopener">github.com</a> if you don't already have one.</label></li>
+      <li>
+        <label><input type="checkbox" class="setup-check"><span>Install Git, following the instructions for your computer.</span></label>
+        <p class="setup-detail"><strong>On a Mac:</strong> open the Terminal app. You can find it using the Spotlight search (Command + space bar) and typing <code>Terminal</code>, then hit Enter. In the window that opens, type <code>git --version</code> and press Enter. If it prints a version number, you're done. If it offers to install developer command line tools, accept and let it finish.</p>
+        <p class="setup-detail"><strong>On Windows:</strong> download and install <a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener">Git for Windows</a>, then reopen Claude Desktop.</p>
+      </li>
+      <li><label><input type="checkbox" class="setup-check"><span>Back in Claude Desktop, click the <strong>Code</strong> tab and confirm it opens without an error. If it says Git is required, redo step 1 for your computer.</span></label></li>
     </ul>
-    <blockquote class="pull-question">You don't need to install Git, GitHub Desktop, or anything else for Day 1. Claude Desktop connects to GitHub directly — no separate app, no typed commands.</blockquote>
 
-    <h2>3. Verify You're Ready</h2>
+    <h3>3. GitHub</h3>
+    <p><strong>GitHub</strong> is the website where your work lives online and gets submitted. You'll learn how to connect it to your computer in two ways. But first, make an account.</p>
     <ul class="field-notes is-interactive-checklist">
-      <li><label><input type="checkbox" class="setup-check"> Open Claude Desktop, confirm you're signed in, and confirm you see the Chat, Cowork, and Code tabs.</label></li>
-      <li><label><input type="checkbox" class="setup-check"> Confirm you can log in to <a href="https://github.com" target="_blank" rel="noopener">github.com</a> with your account.</label></li>
+      <li><label><input type="checkbox" class="setup-check"><span>Sign up for a free account at <a href="https://github.com" target="_blank" rel="noopener">github.com</a> if you don't already have one. Use a personal email address rather than your school one. This account will stay with you long term, you don't want to lose access to it.</span></label></li>
+      <li>
+        <label><input type="checkbox" class="setup-check"><span>In Claude Desktop, click <strong>Customize</strong> on the top left, then <strong>Connectors</strong> near the bottom of the list that pops up.</span></label>
+        <img class="setup-shot" src="/assets/images/setup-03a-customize.png" alt="Claude Desktop's left sidebar with Customize highlighted below New, Artifacts and Routines.">
+        <img class="setup-shot is-tall" src="/assets/images/setup-03b-connectors-in-settings.png" alt="The Claude Desktop settings list, with Connectors near the bottom under a Customize heading.">
+      </li>
+      <li>
+        <label><input type="checkbox" class="setup-check"><span>On the top right, click <strong>Add</strong> &gt; <strong>Browse Connectors</strong>. Then find <strong>GitHub Integration</strong> in the list and select it.</span></label>
+        <img class="setup-shot" src="/assets/images/setup-03c-add-connectors.png" alt="The Connectors panel in Claude Desktop with the Add button in the top right corner.">
+      </li>
+      <li><label><input type="checkbox" class="setup-check"><span>A browser tab should open up to log in to your GitHub account. Follow the steps there to approve the connection.</span></label></li>
+      <li><label><input type="checkbox" class="setup-check"><span>Back in Claude Desktop <strong>Connectors</strong> view, confirm GitHub now shows as connected.</span></label></li>
     </ul>
-    <blockquote class="pull-question">If that works, you're set for Day 1.</blockquote>
 
-    <p>See the <a href="/resources.html">resources page</a> for links, and
-    <a href="https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/blob/main/STUDENT_CLAUDE_GUIDE.md" target="_blank" rel="noopener"><code>STUDENT_CLAUDE_GUIDE.md</code></a>
-    for day-specific guidance to paste into your own Claude session. You'll fork
-    this same repo in the <a href="/day-1/08-fork-and-submit.html">Fork &amp; Submit</a>
-    session on Day 1.</p>
+    <blockquote class="pull-question"><strong>That's everything you need for Day 1.</strong> If anything above didn't work, stop here and email Andrew (andrew.calderon@journalism.cuny.edu) and Adiel (adiel.kaplan@journalism.cuny.edu). Tell us which step you got stuck on and what you saw.</blockquote>
+
+    <h2 class="day-group">Days 2 and 3</h2>
+
+    <h3>4. Visual Studio Code</h3>
+    <p>A traditional code editor, with Claude running inside it. It's the same Claude you'll use in Claude Desktop's Code tab, just in a traditional coding environment.</p>
+    <ul class="field-notes is-interactive-checklist">
+      <li><label><input type="checkbox" class="setup-check"><span>Download and install Visual Studio Code (commonly called VS Code) from <a href="https://code.visualstudio.com" target="_blank" rel="noopener">code.visualstudio.com</a>. It detects your operating system automatically.</span></label></li>
+      <li>
+        <label><input type="checkbox" class="setup-check"><span>Open it once after installing (no sign in needed for VS Code), then open the Extensions panel. It's the icon that looks like four squares in the left sidebar. Search for "Claude Code" and click Install.</span></label>
+        <img class="setup-shot is-tall" src="/assets/images/setup-04a-extensions-panel.png" alt="The VS Code left sidebar with the cursor on the four-squares Extensions icon, showing an Extensions tooltip.">
+      </li>
+      <li>
+        <label><input type="checkbox" class="setup-check"><span>Sign into Claude with your workshop account when prompted. If you aren't prompted, you should see a Claude icon in the lefthand vertical bar. Click that, and you'll be asked "How do you want to log in?" Select <strong>Claude.ai Subscription</strong> and sign in.</span></label>
+        <img class="setup-shot is-tall" src="/assets/images/setup-04b-claude-code-icon.png" alt="The VS Code left sidebar with the cursor on the starburst Claude Code icon, showing a Claude Code tooltip.">
+      </li>
+      <li>
+        <label><input type="checkbox" class="setup-check"><span>Once signed in, the Claude Code tab will just say <strong>+ New session</strong> at the top.</span></label>
+        <img class="setup-shot" src="/assets/images/setup-04c-new-session.png" alt="The Claude Code panel in VS Code showing a New session button, Local and Web tabs, and the message No sessions yet.">
+      </li>
+    </ul>
+
+    <h3>5. GitHub Desktop</h3>
+    <p>A free app for moving work between your computer and GitHub. Day 1 uses Claude Desktop's GitHub connector instead. This is the path you'd use on your own projects.</p>
+    <ul class="field-notes is-interactive-checklist">
+      <li><label><input type="checkbox" class="setup-check"><span>Download and install GitHub Desktop from <a href="https://desktop.github.com" target="_blank" rel="noopener">desktop.github.com</a>. If you're on a Mac, check whether you have a silicon or Intel chip by looking at <strong>About this Mac</strong>. If Chip says Apple M-something, select silicon.</span></label></li>
+      <li><label><input type="checkbox" class="setup-check"><span>Sign in with the GitHub account from section 3.</span></label></li>
+      <li><label><input type="checkbox" class="setup-check"><span>On the <strong>Configure Git</strong> screen, select <strong>Use my GitHub account name and email address</strong> and confirm they look correct.</span></label></li>
+      <li><label><input type="checkbox" class="setup-check"><span>You should see a screen that says "Let's get started!"</span></label></li>
+    </ul>
+
+    <blockquote class="pull-question">If that works, you're set.</blockquote>
   </main>
 
   <div id="footer"></div>
