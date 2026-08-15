@@ -1,12 +1,25 @@
 # Requirements & Task Log
 
-**Current focus (2026-08-04):** paused backend work (Phase 2, and the
-remaining Vercel-connection item in Phase 1) to prioritize frontend/content —
-need the site visibly clickable and ready for content to be added. Backend
-items below are fully scoped and not forgotten; resume after the content
-pass. Do not build anything that calls the Claude API from a page until
-Phase 2 (the proxy) is actually done — see
+**Current focus (2026-08-04, status updated 2026-08-15):** paused backend
+work (Phase 2, and the remaining Vercel-connection item in Phase 1) to
+prioritize frontend/content — need the site visibly clickable and ready for
+content to be added. Backend items below are fully scoped and not forgotten;
+resume after the content pass. Do not build anything that calls the Claude
+API from a page until Phase 2 (the proxy) is actually done — see
 [ADR 0007](adr/0007-serverless-claude-proxy.md).
+
+**Where things stand (2026-08-15):** all three days now have real,
+scheduled content on `review/full-site-audit-2` — Day 1 (8/9 sessions, only
+`09-project-assignments` still a placeholder), Day 2 (8/8), Day 3 (7/7).
+`live` (production, minimal) is untouched by the Day 2/3 work and still
+only serves `setup.html`/`setup-day-2.html`, by design — see
+[ADR 0018](adr/0018-live-branch-for-partial-production-deploy.md). Next
+planned step: user is auditing Day 2's content for quality/accuracy in a
+fresh session. Known open threads, not yet scheduled: the workshop-name and
+em-dash sweeps are still only done on pages that got touched directly, not
+site-wide; VS Code/Claude Code/Git content has no scheduled home on any of
+the 3 days (see the Day 3 change log entry); `STUDENT_CLAUDE_GUIDE.md` is
+still unwritten.
 
 Source of truth for build progress on this repo. Check here before starting
 work; update here when a task starts/completes, or when new work is
