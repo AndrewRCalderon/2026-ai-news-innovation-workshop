@@ -38,6 +38,7 @@
         <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">What It Is</h2></div>
         <p class="lede">CLAUDE.md is a plain-text file Claude reads automatically at the start of every session.<sup class="cite" data-url="https://code.claude.com/docs/en/memory" data-note="Claude Code Docs, &quot;How Claude remembers your project&quot;: CLAUDE.md files are markdown files that give Claude persistent instructions for a project, your personal workflow, or your entire organization. Claude reads them at the start of every session.">*</sup> Every Claude Code session starts with an empty context window. Without this file, you're re-explaining your project's conventions, commands, and quirks from scratch, every time.<sup class="cite" data-url="https://claude.com/blog/using-claude-md-files" data-note="Anthropic blog, Nov 25 2025, &quot;Using CLAUDE.md files&quot;: think of it as a configuration file that Claude automatically incorporates into every conversation, ensuring it always knows your project structure, coding standards, and preferred workflows.">*</sup></p>
         <p>A simple test for whether something belongs in yours: has Claude made the same mistake twice, or have you typed the same correction into chat more than once? That's the signal.<sup class="cite" data-url="https://code.claude.com/docs/en/memory" data-note="Claude Code Docs: add to CLAUDE.md when Claude makes the same mistake a second time, a code review catches something Claude should have known, or you type the same correction into chat that you typed last session.">*</sup></p>
+        <p>One distinction worth knowing before next session: CLAUDE.md is for what's true every time. If something's only relevant sometimes, a specific kind of task you do occasionally, that's what Skills, covered right after lunch, are for instead.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs, Best Practices: 'For domain knowledge or workflows that are only relevant sometimes, use skills instead' of CLAUDE.md.">*</sup></p>
       </section>
 
       <section class="block reveal" id="s2">
@@ -45,7 +46,7 @@
         <p>This workshop's own repository has a CLAUDE.md file. It's not a hypothetical, it's the actual file governing how this website gets built. Three things worth noticing about it:</p>
         <dl class="roster">
           <div class="roster-row"><dt>It points, it doesn't duplicate</dt><dd>Instead of listing every task, it says: read <code>project/REQUIREMENTS.md</code> for current status. The file stays short because it delegates to other files rather than repeating their contents.</dd></div>
-          <div class="roster-row"><dt>It states what can't be inferred from code</dt><dd>A rule like "any non-trivial technical decision gets a new numbered file in <code>project/adr/</code>" isn't something Claude could guess by reading the codebase. That's exactly the kind of thing that belongs here.</dd></div>
+          <div class="roster-row"><dt>It states what can't be inferred from code</dt><dd>A rule like "any non-trivial technical decision gets a new numbered file in <code>project/adr/</code>" isn't something Claude could guess by reading the codebase. That's exactly the kind of thing that belongs here. A robotics lab's CLAUDE.md makes the same kind of call for a different reason: it tells Claude explicitly that existing code has been human-verified to work, but isn't necessarily the best implementation, a fact no amount of code-reading would reveal.<sup class="cite" data-url="https://github.com/haddocking/haddock3/blob/main/CLAUDE.md" data-note="haddocking/haddock3 CLAUDE.md (Utrecht University): 'All code in this project is functional, meaning it has been verified by humans that it produces the expected results, but that does not mean that the code is in its best implementation. If you copy code from somewhere else, try to improve it, do not assume it is already optimal.'">*</sup></dd></div>
           <div class="roster-row"><dt>It's organized by when you'd need it</dt><dd>Sections for "before starting work," "while working," and "repo layout" map to the actual moments in a session, not an abstract table of contents.</dd></div>
         </dl>
       </section>
@@ -53,6 +54,7 @@
       <section class="block reveal" id="s3">
         <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">What Belongs In One</h2></div>
         <p class="lede">The most common mistake isn't leaving something out. It's putting too much in.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs, &quot;Best practices for Claude Code&quot;: bloated CLAUDE.md files cause Claude to ignore your actual instructions. Target under 200 lines per file, longer files consume more context and reduce adherence.">*</sup></p>
+        <p>This repo's "point, don't duplicate" habit isn't a one-off. Four unrelated, real projects, Cloudflare's Workers SDK, the 52,000-star Block/goose, Next.js, and Red Hat's Insights Chrome, all use CLAUDE.md as a one-line pointer to a canonical AGENTS.md file. Some are literally one line: <code>@AGENTS.md</code>. Claude Code supports this natively, with <code>@path/to/import</code> syntax pulling in another file's contents at read time.<sup class="cite" data-url="https://github.com/cloudflare/workers-sdk/blob/main/CLAUDE.md" data-note="cloudflare/workers-sdk CLAUDE.md, live on GitHub: full file contents are 'This file provides guidance to Claude Code... See @AGENTS.md.'">*</sup><sup class="cite" data-url="https://github.com/block/goose/blob/main/CLAUDE.md" data-note="block/goose CLAUDE.md (52,843 GitHub stars): the entire file is the single line @AGENTS.md.">*</sup></p>
         <div class="compare-grid">
           <div class="compare-col is-primary">
             <h3>Include</h3>
@@ -69,15 +71,15 @@
             <h3>Leave out</h3>
             <ul>
               <li>Anything Claude can figure out by reading the code</li>
-              <li>Standard language conventions it already knows</li>
-              <li>Detailed API docs (link to them instead)</li>
-              <li>Information that changes frequently</li>
+              <li>Long explanations or tutorials on tools Claude already knows how to use</li>
+              <li>File-by-file descriptions of the codebase</li>
+              <li>Self-evident practices, like "write clean code"</li>
               <li>Credentials, API keys, or connection strings, especially if this file is committed to version control</li>
             </ul>
           </div>
         </div>
+        <p>That "leave out" column isn't abstract. A security scanner's CLAUDE.md stays disciplined at 51 lines: build commands, a project-specific rule checklist, nothing else.<sup class="cite" data-url="https://github.com/securego/gosec/blob/master/CLAUDE.md" data-note="securego/gosec CLAUDE.md (8,922 stars): 51 lines total, covering build/test/lint commands and a project-specific rule-adding checklist, no restated language conventions or tutorials.">*</sup> A Red Hat product's CLAUDE.md runs 868 lines, roughly a sixth of it a step-by-step Playwright tutorial Claude already knows how to run, plus a closing "Key Takeaways" section that restates everything already said once.<sup class="cite" data-url="https://github.com/RedHatInsights/insights-chrome/blob/master/CLAUDE.md" data-note="RedHatInsights/insights-chrome CLAUDE.md, live on GitHub: 868 lines, including roughly 150 lines walking through Playwright MCP tool calls step by step, and a closing 'Summary: Key Takeaways for AI Assistants' section restating points already made earlier in the file.">*</sup> Same goal, radically different discipline.</p>
         <p class="stat-pull"><sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs: for each line, ask &quot;would removing this cause Claude to make mistakes?&quot; If not, cut it.">Ask, for every line: would removing this actually cause Claude to make a mistake? If not, cut it.*</sup></p>
-        <p>One specific piece of guidance worth remembering: vague instructions don't hold up. "Format code properly" gives Claude nothing to check itself against. "Use 2-space indentation" does.<sup class="cite" data-url="https://code.claude.com/docs/en/memory" data-note="Claude Code Docs: write instructions concrete enough to verify. 'Use 2-space indentation' instead of 'Format code properly'; 'Run npm test before committing' instead of 'Test your changes.'">*</sup></p>
       </section>
 
       <section class="block reveal" id="s4">

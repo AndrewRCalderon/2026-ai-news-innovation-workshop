@@ -48,8 +48,29 @@
 
       <section class="block reveal" id="s2">
         <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">What Works Now</h2></div>
-        <p class="lede">The best prompt isn't the longest or the most cleverly structured. It's the one that gets you what you actually want with the least unnecessary scaffolding.<sup class="cite" data-url="https://claude.com/blog/best-practices-for-prompt-engineering" data-note="Anthropic: the best prompt isn't the longest or most complex. It's the one that achieves your goals reliably with the minimum necessary structure.">*</sup></p>
-        <p>Concretely: say what you want, give the context Claude can't already see (a file, a constraint, an example of what "done" looks like), and skip elaborate persona framing unless it's actually doing something for the task. If a prompt from 2023 reads like it's trying to trick the model into behaving, that's a sign it's out of date, not that it's thorough.</p>
+        <p class="lede">The best prompt isn't the longest or the most cleverly structured. It's the one that gets you what you actually want with the least unnecessary scaffolding.<sup class="cite" data-url="https://claude.com/blog/best-practices-for-prompt-engineering" data-note="Anthropic: the best prompt isn't the longest or most complex. It's the one that achieves your goals reliably with the minimum necessary structure.">*</sup> The team that writes Claude Code's own system prompt has been cutting it down for exactly this reason: fewer "always" and "never" rules, because a long list of directives is a strong impulse for Claude to follow, especially once one starts conflicting with what you actually asked for later.<sup class="cite" data-url="https://simonwillison.net/2026/Jul/21/cat-and-thariq/" data-note="Simon Willison, 'A Fireside Chat with Cat and Thariq from the Claude Code team,' Jul 21 2026, quoting Cat Wu: 'fewer do not do this instructions, because that's a very strong impulse for Claude... especially if it conflicts with user instructions later on, that can be extremely confusing to Claude.'">*</sup> Here's what that shift looks like in two real prompts, before and after:</p>
+        <div class="compare-grid">
+          <div class="compare-col is-primary">
+            <h3>Before</h3>
+            <ul>
+              <li>"if you make a front-end change, always verify"</li>
+              <li>"implement a function that validates email addresses"</li>
+            </ul>
+          </div>
+          <div class="compare-col is-secondary">
+            <h3>After</h3>
+            <ul>
+              <li>"when you make larger changes to the user experience, please run the app locally"</li>
+              <li>"write a validateEmail function. example test cases: user@example.com is true, invalid is false, user@.com is false. run the tests after implementing"</li>
+            </ul>
+          </div>
+        </div>
+        <p>The second pair points at the single most repeated piece of advice across independent sources, official docs, the tool's own creator, and outside practitioners alike: give Claude a way to check its own work. It's the difference between a session you have to babysit and one you can walk away from.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs, Best Practices, section 'Give Claude a way to verify its work': Claude stops when the work looks done. Without a check it can run, looks done is the only signal available, and you become the verification loop.">*</sup> Claude Code's creator puts a number on it: pairing a prompt with something Claude can actually run to check its own output, tests, a linter, a browser it can look at, is worth roughly another two to three times the result.<sup class="cite" data-url="https://news.ycombinator.com/item?id=46256606" data-note="Boris Cherny (creator of Claude Code), Hacker News comment: 'Give the model a way to check its work... This is another 2-3x.'">*</sup></p>
+        <p>Two failure patterns worth recognizing when they happen, not just avoiding in theory:</p>
+        <ul class="field-notes">
+          <li>The kitchen sink session: piling unrelated tasks into one long conversation until Claude loses the thread of what actually matters. Fix: one goal per session, <code>/clear</code> before starting the next.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs, common failure patterns: the kitchen sink session mixes unrelated tasks into one context. Fix: /clear between tasks.">*</sup></li>
+          <li>Correcting the same thing twice: by the third try, the context is cluttered with failed approaches, not getting clearer. Fix: clear it and rewrite the prompt with what you learned, instead of correcting again.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs: if you've corrected Claude more than twice on the same issue in one session, the context is cluttered with failed approaches. Run /clear and start fresh with a more specific prompt that incorporates what you learned.">*</sup></li>
+        </ul>
       </section>
 
       <section class="block reveal" id="s3">

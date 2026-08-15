@@ -1,5 +1,5 @@
 {
-  "note": "Day 1 times/durations confirmed 2026-08-11, Day 2 confirmed 2026-08-13, Day 3 confirmed 2026-08-13 (see project/REQUIREMENTS.md).",
+  "note": "Day 1 times/durations confirmed 2026-08-11, Day 2 confirmed 2026-08-13, Day 3 confirmed 2026-08-13 (see project/REQUIREMENTS.md). Day 2 AM block (02-05) rebalanced 2026-08-15 during the content-depth revision pass; total day span unchanged (10am-1pm, lunch, 2pm-5pm).",
   "days": [
     {
       "day": 1,
@@ -23,11 +23,11 @@
       "title": "Day 2: Iteration & Depth",
       "sessions": [
         { "id": "day-2/01-debrief", "title": "Yesterday's Debrief", "time": "10:00 AM", "duration": "20 min", "type": "discussion", "url": "/day-2/01-debrief.html", "summary": "What did you build yesterday, what worked, what didn't." },
-        { "id": "day-2/02-prompting", "title": "Prompting", "time": "10:20 AM", "duration": "40 min", "type": "hands-on", "url": "/day-2/02-prompting.html", "summary": "How prompting has changed, what makes a prompt effective, using Claude to refine your own prompts." },
-        { "id": "day-2/03-claude-md", "title": "CLAUDE.md", "time": "11:00 AM", "duration": "35 min", "type": "hands-on", "url": "/day-2/03-claude-md.html", "summary": "The persistent instructions file behind an effective build." },
-        { "id": "day-2/break-1", "title": "Break", "time": "11:35 AM", "duration": "15 min", "type": "break", "url": null },
-        { "id": "day-2/04-skills-best-practices", "title": "Skills & Best Practices", "time": "11:50 AM", "duration": "40 min", "type": "lecture", "url": "/day-2/04-skills-best-practices.html", "summary": "What a Skill is, and Anthropic's official guidance for effective use." },
-        { "id": "day-2/05-goal-plan-mode", "title": "Your Goal & Plan Mode", "time": "12:30 PM", "duration": "30 min", "type": "hands-on", "url": "/day-2/05-goal-plan-mode.html", "summary": "Using plan mode to figure out a way forward on your own project." },
+        { "id": "day-2/02-prompting", "title": "Prompting", "time": "10:20 AM", "duration": "35 min", "type": "hands-on", "url": "/day-2/02-prompting.html", "summary": "How prompting has changed, what makes a prompt effective, using Claude to refine your own prompts." },
+        { "id": "day-2/03-claude-md", "title": "CLAUDE.md", "time": "10:55 AM", "duration": "30 min", "type": "hands-on", "url": "/day-2/03-claude-md.html", "summary": "The persistent instructions file behind an effective build." },
+        { "id": "day-2/break-1", "title": "Break", "time": "11:25 AM", "duration": "15 min", "type": "break", "url": null },
+        { "id": "day-2/04-skills-best-practices", "title": "Skills & Best Practices", "time": "11:40 AM", "duration": "40 min", "type": "lecture", "url": "/day-2/04-skills-best-practices.html", "summary": "What a Skill is, and Anthropic's official guidance for effective use." },
+        { "id": "day-2/05-goal-plan-mode", "title": "Your Goal & Plan Mode", "time": "12:20 PM", "duration": "40 min", "type": "hands-on", "url": "/day-2/05-goal-plan-mode.html", "summary": "Using plan mode to figure out a way forward on your own project." },
         { "id": "day-2/lunch", "title": "Lunch", "time": "1:00 PM", "duration": "60 min", "type": "lunch", "url": null },
         { "id": "day-2/06-spec-driven-dev", "title": "Spec-Driven Development", "time": "2:00 PM", "duration": "30 min", "type": "lecture", "url": "/day-2/06-spec-driven-dev.html", "summary": "A checklist for writing a spec before you build, and how skills are actually agentic pipelines." },
         { "id": "day-2/07-revisit-build", "title": "Revisit & Build", "time": "2:30 PM", "duration": "60 min", "type": "hands-on", "url": "/day-2/07-revisit-build.html", "summary": "Reframe your goal with today's tools, then build." },

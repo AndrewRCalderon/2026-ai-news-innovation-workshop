@@ -14,7 +14,7 @@
       <a href="/">AI News Innovation Workshop</a><span class="sep">·</span><a href="/day-2/">Day 2</a><span class="sep">·</span><a href="../05-goal-plan-mode.html">Your Goal &amp; Plan Mode</a><span class="sep">·</span>Slides
     </span>
     <div class="chrome-right">
-      <span class="chrome-counter" id="counter">01 / 03</span>
+      <span class="chrome-counter" id="counter">01 / 04</span>
       <button type="button" class="chrome-fs" id="fs-toggle" aria-label="Toggle fullscreen">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M8 3H5a2 2 0 0 0-2 2v3"></path>
@@ -33,12 +33,13 @@
         <section class="slide slide-cover" data-slide="cover">
           <div class="slide-inner">
             <h1 class="cover-title">Your Goal &amp; Plan Mode</h1>
-            <p class="cover-dek">Before Claude touches any code, it can research and propose an approach first.</p>
-            <div class="cover-meta"><span>12:30 PM</span><span class="div">·</span><span>30 MIN</span><span class="div">·</span><span>Hands-on</span></div>
+            <p class="cover-dek">Before Claude touches any code, it can research and propose an approach first. Knowing when that's worth it is the actual skill.</p>
+            <div class="cover-meta"><span>12:20 PM</span><span class="div">·</span><span>40 MIN</span><span class="div">·</span><span>Hands-on</span></div>
             <ul class="cover-contents">
               <li><button type="button" data-jump="s1"><span class="n">01</span> What Plan Mode Is</button></li>
               <li><button type="button" data-jump="s2"><span class="n">02</span> When to Use It</button></li>
-              <li><button type="button" data-jump="s3"><span class="n">03</span> State Your Goal</button></li>
+              <li><button type="button" data-jump="s3"><span class="n">03</span> The Other Failure Mode</button></li>
+              <li><button type="button" data-jump="s4"><span class="n">04</span> State Your Goal</button></li>
             </ul>
           </div>
         </section>
@@ -54,19 +55,36 @@
         <section class="slide" data-slide="s2">
           <div class="slide-inner">
             <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">When to Use It</h2></div>
-            <p class="lede">Letting Claude jump straight to coding can produce code that solves the wrong problem.</p>
-            <blockquote class="pull-question">If you could describe the diff in one sentence, skip the plan.</blockquote>
-            <p>A project goal you're still figuring out is exactly the kind of uncertainty plan mode is for.</p>
+            <p class="lede">"The first time I let Claude Code take a serious auth change straight from prompt to patch, it changed nine files. Three were subtly wrong." Compiled fine. Broke at runtime.</p>
+            <blockquote class="pull-question">A bad plan is a paragraph. A bad implementation is an afternoon.</blockquote>
+            <ul class="field-notes">
+              <li><strong>Uncertainty.</strong> Do you know the approach, or are you still figuring out "done"?</li>
+              <li><strong>Blast radius.</strong> One easy-to-undo file, or several touching something hard to reverse?</li>
+              <li><strong>Familiarity.</strong> Code you know well, or a part you haven't touched?</li>
+            </ul>
+            <p>Fast check: if you could describe the diff in one sentence, skip the plan, unless one of the axes above says otherwise.</p>
           </div>
         </section>
 
         <section class="slide" data-slide="s3">
           <div class="slide-inner">
-            <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">State Your Goal</h2></div>
+            <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">The Other Failure Mode</h2></div>
+            <p class="lede">Over-relying on planning becomes its own tax. One account: giant multi-page plans, hard to review, and feedback triggered a full regeneration instead of a targeted edit.</p>
+            <dl class="roster">
+              <div class="roster-row"><dt>Rubber-stamping</dt><dd>A long plan gets skimmed and approved, not actually read.</dd></div>
+              <div class="roster-row"><dt>Plan drift</dt><dd>Long sessions can quietly drop details the plan depended on.</dd></div>
+            </dl>
+            <p class="pull-question">Keep it short enough to read. Act on it soon after you approve it.</p>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s4">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">State Your Goal</h2></div>
             <p>Not building yet, that's after lunch. Just a clear-eyed look at your project before committing to an approach.</p>
             <div class="exercise-box">
               <h3>🎯 Exercise: Plan Before You Build</h3>
-              <p><strong>Description:</strong> Open plan mode on your Day 1 project. State your goal in plain language, let Claude propose an approach. Don't approve yet, just read it.</p>
+              <p><strong>Description:</strong> Open plan mode on your Day 1 project. State your goal in plain language, let Claude propose an approach. Don't approve yet, just read it, is it specific to your project or generic?</p>
               <p><strong>Deliverable:</strong> A plan to bring back after lunch.</p>
             </div>
           </div>

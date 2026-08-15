@@ -33,12 +33,12 @@
         <section class="slide slide-cover" data-slide="cover">
           <div class="slide-inner">
             <h1 class="cover-title">Skills &amp; Best Practices</h1>
-            <p class="cover-dek">Package your expertise so it doesn't need re-explaining, and follow a few habits Anthropic recommends.</p>
-            <div class="cover-meta"><span>11:50 AM</span><span class="div">·</span><span>40 MIN</span><span class="div">·</span><span>Lecture</span></div>
+            <p class="cover-dek">Package your expertise so it doesn't need re-explaining, then see what happens when real builders put Skills to work.</p>
+            <div class="cover-meta"><span>11:40 AM</span><span class="div">·</span><span>40 MIN</span><span class="div">·</span><span>Lecture</span></div>
             <ul class="cover-contents">
               <li><button type="button" data-jump="s1"><span class="n">01</span> What a Skill Is</button></li>
               <li><button type="button" data-jump="s2"><span class="n">02</span> What Actually Makes This Work</button></li>
-              <li><button type="button" data-jump="s3"><span class="n">03</span> Vague vs. Specific</button></li>
+              <li><button type="button" data-jump="s3"><span class="n">03</span> A Real Investigation</button></li>
               <li><button type="button" data-jump="s4"><span class="n">04</span> Common Failure Patterns</button></li>
             </ul>
           </div>
@@ -48,42 +48,43 @@
           <div class="slide-inner">
             <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">What a Skill Is</h2></div>
             <p class="lede">A reusable, filesystem-based resource: a folder of instructions, scripts, and reference material, organized roughly like an onboarding guide.</p>
-            <p>A prompt is conversation-level, for one task. A Skill loads on demand, so the same guidance doesn't need repeating across every conversation.</p>
+            <p>A prompt is conversation-level, for one task. A Skill loads on demand. A 14-skill journalism collection (AP style, source verification, FOIA templates) already exists, free to install.</p>
           </div>
         </section>
 
         <section class="slide" data-slide="s2">
           <div class="slide-inner">
             <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">What Actually Makes This Work</h2></div>
-            <p class="lede">Most of Anthropic's own best-practices guidance comes down to giving Claude something concrete to check itself against.</p>
+            <p class="lede">The Claude Code team's own account of building skills for production, sharper than the general advice.</p>
             <ul class="field-notes">
-              <li>Give Claude a way to verify its own work: tests, a build, a screenshot to compare.</li>
-              <li>Corrected the same issue twice? Clear the context and start over, more specifically.</li>
-              <li>Delegate research separately from implementation to keep your main conversation clean.</li>
+              <li>The Gotchas section is the highest-signal part, built from real failures, not imagined ones.</li>
+              <li>Run the task once without the skill first, or you can't tell what it actually changed.</li>
+              <li>A skill fails to activate before it fails to execute. Vague descriptions kill routing.</li>
             </ul>
           </div>
         </section>
 
         <section class="slide" data-slide="s3">
           <div class="slide-inner">
-            <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">Vague vs. Specific</h2></div>
-            <p class="lede">Claude can infer intent, but it can't read your mind.</p>
+            <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">A Real Investigation</h2></div>
+            <p class="lede">A researcher replicated a real Virginia police-decertification investigation with Claude Code, under an hour.</p>
             <div class="compare-grid">
               <div class="compare-col is-primary">
-                <h3>Vague</h3>
+                <h3>Without the skill</h3>
                 <ul>
-                  <li>"add tests for foo.py"</li>
-                  <li>"validate email addresses"</li>
+                  <li>Silently reformatted odd dates</li>
+                  <li>Reported 80, undercounted</li>
                 </ul>
               </div>
               <div class="compare-col is-secondary">
-                <h3>Specific</h3>
+                <h3>With the skill</h3>
                 <ul>
-                  <li>"test the logged-out edge case, avoid mocks"</li>
-                  <li>"validateEmail, with example cases, run tests after"</li>
+                  <li>Required provenance + a data-quality report</li>
+                  <li>Reported 81, matched the published count</li>
                 </ul>
               </div>
             </div>
+            <p class="pull-question">"Configuration matters as much as capability." The human remained essential throughout.</p>
           </div>
         </section>
 
@@ -91,10 +92,11 @@
           <div class="slide-inner">
             <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Common Failure Patterns</h2></div>
             <dl class="roster">
-              <div class="roster-row"><dt>The kitchen sink session</dt><dd>Piling unrelated tasks into one conversation. Fix: one goal per session.</dd></div>
-              <div class="roster-row"><dt>The trust-then-verify gap</dt><dd>Assuming code that runs is code that's correct. Fix: verify.</dd></div>
+              <div class="roster-row"><dt>The confident-looking failure</dt><dd>Passes your test cases, fails on real input. Fix: test with messy real input.</dd></div>
+              <div class="roster-row"><dt>The patch spiral</dt><dd>One-line fixes pile into contradictions. Fix: rebuild from what failed.</dd></div>
+              <div class="roster-row"><dt>Installing skills from strangers</dt><dd>Shared skill repos have shipped credential-stealing malware. Fix: read before installing.</dd></div>
             </dl>
-            <p class="pull-question">A Skill is stored expertise. The point is not re-explaining what you already know.</p>
+            <p class="pull-question">A skill you've never tested without is a skill you don't actually understand.</p>
           </div>
         </section>
 

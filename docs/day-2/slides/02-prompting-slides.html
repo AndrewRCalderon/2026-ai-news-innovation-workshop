@@ -34,7 +34,7 @@
           <div class="slide-inner">
             <h1 class="cover-title">Prompting</h1>
             <p class="cover-dek">"Prompt engineering" used to mean tricks. Increasingly, it just means being clear about what you want.</p>
-            <div class="cover-meta"><span>10:20 AM</span><span class="div">·</span><span>40 MIN</span><span class="div">·</span><span>Hands-on</span></div>
+            <div class="cover-meta"><span>10:20 AM</span><span class="div">·</span><span>35 MIN</span><span class="div">·</span><span>Hands-on</span></div>
             <ul class="cover-contents">
               <li><button type="button" data-jump="s1"><span class="n">01</span> How This Has Changed</button></li>
               <li><button type="button" data-jump="s2"><span class="n">02</span> What Works Now</button></li>
@@ -61,8 +61,28 @@
         <section class="slide" data-slide="s2">
           <div class="slide-inner">
             <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">What Works Now</h2></div>
-            <p class="lede">The best prompt isn't the longest or the most cleverly structured. It's the one that gets you what you want with the least unnecessary scaffolding.</p>
-            <p>Say what you want, give context Claude can't already see, and skip elaborate persona framing unless it's doing something for the task. A prompt that reads like it's trying to trick the model is a sign it's out of date, not thorough.</p>
+            <p class="lede">Fewer "always" and "never" rules. A long list of directives is a strong impulse for Claude, especially once one conflicts with what you actually asked for.</p>
+            <div class="compare-grid">
+              <div class="compare-col is-primary">
+                <h3>Before</h3>
+                <ul>
+                  <li>"if you make a front-end change, always verify"</li>
+                  <li>"implement a function that validates email addresses"</li>
+                </ul>
+              </div>
+              <div class="compare-col is-secondary">
+                <h3>After</h3>
+                <ul>
+                  <li>"when you make larger changes, please run the app locally"</li>
+                  <li>"write validateEmail. test cases: user@example.com true, invalid false. run tests after"</li>
+                </ul>
+              </div>
+            </div>
+            <p class="pull-question">Give Claude a way to check its own work. Claude Code's creator: "this is another 2-3x."</p>
+            <ul class="field-notes">
+              <li>The kitchen sink session: unrelated tasks piled into one conversation. Fix: one goal per session, /clear before the next.</li>
+              <li>Correcting the same thing twice: the context is cluttered, not clearer. Fix: clear it and rewrite the prompt.</li>
+            </ul>
           </div>
         </section>
 

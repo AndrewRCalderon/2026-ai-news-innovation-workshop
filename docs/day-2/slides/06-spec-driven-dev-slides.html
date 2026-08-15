@@ -46,8 +46,8 @@
         <section class="slide" data-slide="s1">
           <div class="slide-inner">
             <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">The Core Idea</h2></div>
-            <p class="lede">Spec-driven development inverts the usual workflow: the spec becomes the source of truth, code becomes a generated or verified secondary artifact.</p>
-            <p>The spec declares intent, the code realizes it. A vague prompt leaves Claude guessing. A spec gives it enough to match your intent instead of inventing one.</p>
+            <p class="lede">Spec-driven development inverts the usual workflow: the spec becomes the source of truth, code becomes a generated or verified secondary artifact. GitHub's spec-kit independently describes the same inversion.</p>
+            <p>The spec declares intent, the code realizes it. A vague prompt leaves Claude guessing. A spec gives it enough to match your intent instead of inventing one. Works best on new, well-scoped work, less so on a large existing codebase.</p>
           </div>
         </section>
 
@@ -55,11 +55,12 @@
           <div class="slide-inner">
             <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">The Checklist</h2></div>
             <ol class="process-wheel">
-              <li><span class="era">1</span><h3>Specify</h3><p>What should it do? No implementation details yet.</p></li>
-              <li><span class="era">2</span><h3>Plan</h3><p>How should you build it? The plan declares constraints.</p></li>
-              <li><span class="era">3</span><h3>Implement</h3><p>Small, validated increments.</p></li>
-              <li class="is-hinge"><span class="era">4</span><h3>Validate</h3><p>Does the code meet the spec? The spec stays the authority.</p></li>
+              <li><span class="era">1</span><h3>Specify</h3><p>What should it do? No implementation details yet. Spec-kit and Kiro both start here too.</p></li>
+              <li><span class="era">2</span><h3>Plan</h3><p>How should you build it? The step that resists automation most, one team found, it needs human judgment.</p></li>
+              <li><span class="era">3</span><h3>Implement</h3><p>Small, validated increments. That team saw ~2-3x throughput over a year running this loop.</p></li>
+              <li class="is-hinge"><span class="era">4</span><h3>Validate</h3><p>Does the code meet the spec? Real tools check continuously between phases, not just at the end.</p></li>
             </ol>
+            <p class="pull-question">A spec that isn't updated when the code changes doesn't just go unused, it actively misleads.</p>
           </div>
         </section>
 

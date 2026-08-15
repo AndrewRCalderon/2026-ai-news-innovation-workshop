@@ -13,13 +13,14 @@ scheduled content on `review/full-site-audit-2` — Day 1 (8/9 sessions, only
 `09-project-assignments` still a placeholder), Day 2 (8/8), Day 3 (7/7).
 `live` (production, minimal) is untouched by the Day 2/3 work and still
 only serves `setup.html`/`setup-day-2.html`, by design — see
-[ADR 0018](adr/0018-live-branch-for-partial-production-deploy.md). Next
-planned step: user is auditing Day 2's content for quality/accuracy in a
-fresh session. Known open threads, not yet scheduled: the workshop-name and
-em-dash sweeps are still only done on pages that got touched directly, not
-site-wide; VS Code/Claude Code/Git content has no scheduled home on any of
-the 3 days (see the Day 3 change log entry); `STUDENT_CLAUDE_GUIDE.md` is
-still unwritten.
+[ADR 0018](adr/0018-live-branch-for-partial-production-deploy.md). Day 2's
+content-depth audit is done (see the 2026-08-15 change log entry) — 5 of
+its 8 sessions were rewritten against a new formal content standard, the
+other 3 already met it. Known open threads, not yet scheduled: the
+workshop-name and em-dash sweeps are still only done on pages that got
+touched directly, not site-wide; VS Code/Claude Code/Git content has no
+scheduled home on any of the 3 days (see the Day 3 change log entry);
+`STUDENT_CLAUDE_GUIDE.md` is still unwritten.
 
 Source of truth for build progress on this repo. Check here before starting
 work; update here when a task starts/completes, or when new work is
@@ -1488,6 +1489,62 @@ single-purpose, shippable URL.
 
 ## Change log
 
+- 2026-08-15 — **Day 2 content-depth revision**, on `review/full-site-audit-2`,
+  addressing the "surface level... correct-but-generic" feedback logged in
+  the 2026-08-13 Day 3 entry below. The user supplied a formal content
+  standard for curriculum pages (three separate steps, plan structure then
+  research then write, never collapsed; multiple live-verified sources for
+  judgment topics; synthesis over data-dump; duration follows content
+  richness, not time-math) and this pass applied it specifically to Day 2,
+  the day it was written about.
+  - **Scope**: 5 of 8 sessions revised, `02-prompting`, `03-claude-md`,
+    `04-skills-best-practices`, `05-goal-plan-mode`, `06-spec-driven-dev`,
+    all judgment/practice topics that were single-sourced or generic.
+    `01-debrief`, `07-revisit-build`, `08-show-tell` left untouched,
+    confirmed with the user first: discussion/build scaffolding with no
+    factual claims to source, already at the right depth for their type.
+  - **Schedule**: AM block (`02`–`05`) reallocated within its existing
+    145-minute pool after sketching each session's actual content need,
+    confirmed with the user before research started: `02` 40→35 min, `03`
+    35→30 min, `04` unchanged at 40 min, `05` 30→40 min (was the thinnest
+    session, ~15 min of real content behind its exercise). `06` stays fixed
+    at 30 min, the PM block has no slack since `07`/`08` weren't in scope.
+    Total day span unchanged, still 10:00 AM–1:00 PM / lunch / 2:00–5:00 PM.
+  - **Research**: 5 dedicated background research passes, one per session,
+    run after the schedule was locked and before any page content was
+    rewritten, each fetching and verifying sources live. Replaced Day 2's
+    original single-source-per-topic pattern (see the 2026-08-13 entry
+    below) with genuinely convergent, independent evidence: `06`'s entire
+    page had been sourced to one non-peer-reviewed arXiv paper
+    (Piskala, arXiv:2602.00180) — now corroborated by GitHub's spec-kit,
+    AWS Kiro, Anthropic's own Claude Code docs, a named practitioner case
+    study (Joshua McDonald, ~2-3x throughput over a year), and two
+    independent critiques (Wattenberger on spec staleness, Zaninotto on
+    SDD-as-Waterfall for large codebases). `04` gained a real journalism
+    case study (Nick Hagar replicating a MuckRock/WHRO Virginia
+    police-decertification investigation with Claude Code, a documented
+    80-vs-81 undercount without a data skill) plus independent builder
+    accounts of Skills failing in practice, replacing a page that had been
+    sourced entirely to Anthropic's own docs and one launch post. `03`
+    gained a real cross-org convergence (Cloudflare, Block/goose, Next.js,
+    Red Hat all using CLAUDE.md as a thin `@AGENTS.md` pointer) and a real
+    51-line vs. 868-line before/after (`securego/gosec` vs.
+    `RedHatInsights/insights-chrome`). `05` gained a 3-axis decision
+    framework (uncertainty, blast radius, familiarity) that four
+    independent practitioners converged on without citing each other or
+    Anthropic, plus a documented reverse failure mode (over-planning as its
+    own tax, giant unreviewable plans, plan drift). `02` gained a real
+    before/after from the Claude Code team's own July 2026 system-prompt
+    rewrite, plus a "verify your own work" finding convergent across
+    official docs, the tool's creator, and independent practitioners.
+  - **Verification**: `project/scripts/check-slide-parity.js` passes clean.
+    All 37 citation URLs across the 5 rewritten pages spot-checked live;
+    2 initially returned non-200s from bot-blocking (Medium, Time.com,
+    generative-ai-newsroom.com) or GitHub rate-limiting, re-verified via a
+    second fetch method rather than dropped, all confirmed real and saying
+    what they're cited for. `<sup class="cite">` open/close tags balanced
+    across all 5 files (the unclosed-tag bug class found on Day 3). No
+    em-dashes, workshop name correct throughout.
 - 2026-08-13 (later) — **Day 3 built from scratch**, on
   `review/full-site-audit-2`, same day as Day 2. Planned in plan mode from
   the user's 8-item draft agenda. This build has a different process than

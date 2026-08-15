@@ -34,7 +34,7 @@
           <div class="slide-inner">
             <h1 class="cover-title">CLAUDE.md</h1>
             <p class="cover-dek">One file, read at the start of every session.</p>
-            <div class="cover-meta"><span>11:00 AM</span><span class="div">·</span><span>35 MIN</span><span class="div">·</span><span>Hands-on</span></div>
+            <div class="cover-meta"><span>10:55 AM</span><span class="div">·</span><span>30 MIN</span><span class="div">·</span><span>Hands-on</span></div>
             <ul class="cover-contents">
               <li><button type="button" data-jump="s1"><span class="n">01</span> What It Is</button></li>
               <li><button type="button" data-jump="s2"><span class="n">02</span> A Real Example</button></li>
@@ -48,7 +48,7 @@
           <div class="slide-inner">
             <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">What It Is</h2></div>
             <p class="lede">CLAUDE.md is a plain-text file Claude reads automatically at the start of every session. Without it, you're re-explaining your project from scratch, every time.</p>
-            <p>A simple test for whether something belongs in yours: has Claude made the same mistake twice, or have you typed the same correction more than once? That's the signal.</p>
+            <p>A simple test for whether something belongs in yours: has Claude made the same mistake twice, or have you typed the same correction more than once? That's the signal. If it's only sometimes relevant, that's a Skill instead, next session.</p>
           </div>
         </section>
 
@@ -58,7 +58,7 @@
             <p>This workshop's own repo has a CLAUDE.md file. It's not hypothetical, it's the actual file governing this website's build.</p>
             <dl class="roster">
               <div class="roster-row"><dt>It points, it doesn't duplicate</dt><dd>Delegates to other files instead of repeating them.</dd></div>
-              <div class="roster-row"><dt>States what can't be inferred</dt><dd>Rules Claude couldn't guess from reading code.</dd></div>
+              <div class="roster-row"><dt>States what can't be inferred</dt><dd>Rules Claude couldn't guess from reading code, like a robotics lab's note that existing code is human-verified but not necessarily optimal.</dd></div>
               <div class="roster-row"><dt>Organized by when you'd need it</dt><dd>Maps to actual moments in a session.</dd></div>
             </dl>
           </div>
@@ -68,6 +68,7 @@
           <div class="slide-inner">
             <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">What Belongs In One</h2></div>
             <p class="lede">The most common mistake isn't leaving something out. It's putting too much in.</p>
+            <p>Not just this repo's habit: Cloudflare, the 52k-star Block/goose, and Next.js all use CLAUDE.md as a one-line pointer to AGENTS.md, via Claude Code's own <code>@path/to/import</code> syntax.</p>
             <div class="compare-grid">
               <div class="compare-col is-primary">
                 <h3>Include</h3>
@@ -84,13 +85,14 @@
                 <h3>Leave out</h3>
                 <ul>
                   <li>Anything inferable from code</li>
-                  <li>Standard conventions</li>
-                  <li>Detailed API docs (link instead)</li>
-                  <li>Frequently-changing info</li>
+                  <li>Tutorials on tools Claude already knows</li>
+                  <li>File-by-file codebase descriptions</li>
+                  <li>Self-evident practices ("write clean code")</li>
                   <li>Credentials, ever</li>
                 </ul>
               </div>
             </div>
+            <p class="pull-question">A real 51-line security-scanner CLAUDE.md vs. a real 868-line one, a sixth of it a tutorial Claude didn't need. Same goal, radically different discipline.</p>
           </div>
         </section>
 
