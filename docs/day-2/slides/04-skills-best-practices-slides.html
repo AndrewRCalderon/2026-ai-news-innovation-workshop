@@ -33,12 +33,12 @@
         <section class="slide slide-cover" data-slide="cover">
           <div class="slide-inner">
             <h1 class="cover-title">Skills &amp; Best Practices</h1>
-            <p class="cover-dek">Package your expertise so it doesn't need re-explaining, then see what happens when real builders put Skills to work.</p>
+            <p class="cover-dek">Package your expertise so it doesn't need re-explaining.</p>
             <div class="cover-meta"><span>11:40 AM</span><span class="div">·</span><span>40 MIN</span><span class="div">·</span><span>Lecture</span></div>
             <ul class="cover-contents">
               <li><button type="button" data-jump="s1"><span class="n">01</span> What a Skill Is</button></li>
               <li><button type="button" data-jump="s2"><span class="n">02</span> What Actually Makes This Work</button></li>
-              <li><button type="button" data-jump="s3"><span class="n">03</span> A Real Investigation</button></li>
+              <li><button type="button" data-jump="s3"><span class="n">03</span> Build One</button></li>
               <li><button type="button" data-jump="s4"><span class="n">04</span> Common Failure Patterns</button></li>
             </ul>
           </div>
@@ -57,34 +57,24 @@
             <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">What Actually Makes This Work</h2></div>
             <p class="lede">The Claude Code team's own account of building skills for production, sharper than the general advice.</p>
             <ul class="field-notes">
-              <li>The Gotchas section is the highest-signal part, built from real failures, not imagined ones.</li>
-              <li>Run the task once without the skill first, or you can't tell what it actually changed.</li>
-              <li>A skill fails to activate before it fails to execute. Vague descriptions kill routing.</li>
+              <li>Build the Gotchas section from failures you actually watched happen. It's the highest-signal part, and an imagined failure guards against a problem that was never real.</li>
+              <li>Run the task once without the skill first. Skip that, and you have no baseline, so you can't tell what actually changed.</li>
+              <li>If Claude doesn't reach for a skill reliably, the problem is usually the description. Vague ones kill routing, write one specific enough to say exactly when to use it.</li>
             </ul>
           </div>
         </section>
 
         <section class="slide" data-slide="s3">
           <div class="slide-inner">
-            <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">A Real Investigation</h2></div>
-            <p class="lede">A researcher replicated a real Virginia police-decertification investigation with Claude Code, under an hour.</p>
-            <div class="compare-grid">
-              <div class="compare-col is-primary">
-                <h3>Without the skill</h3>
-                <ul>
-                  <li>Silently reformatted odd dates</li>
-                  <li>Reported 80, undercounted</li>
-                </ul>
-              </div>
-              <div class="compare-col is-secondary">
-                <h3>With the skill</h3>
-                <ul>
-                  <li>Required provenance + a data-quality report</li>
-                  <li>Reported 81, matched the published count</li>
-                </ul>
-              </div>
-            </div>
-            <p class="pull-question">"Configuration matters as much as capability." The human remained essential throughout.</p>
+            <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">Build One</h2></div>
+            <p class="lede">Five steps, from noticing you need one to actually trusting it.</p>
+            <ol class="history">
+              <li><span class="era">1</span><h3>Notice the pattern</h3><p>Same test as CLAUDE.md. Explained twice, or corrected twice.</p></li>
+              <li><span class="era">2</span><h3>Create the folder and file</h3><p>Its own folder, named after the skill, one required SKILL.md inside.</p></li>
+              <li><span class="era">3</span><h3>Fill it in like an onboarding doc</h3><p>A description of what and when, then instructions like briefing a new hire.</p></li>
+              <li><span class="era">4</span><h3>Test it two ways</h3><p>Ask a matching question, then invoke it directly by name.</p></li>
+              <li class="is-hinge"><span class="era">5</span><h3>Stress-test it honestly</h3><p>Real examples, not abstract rules. Then a fresh conversation, messy input.</p></li>
+            </ol>
           </div>
         </section>
 
@@ -92,11 +82,10 @@
           <div class="slide-inner">
             <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Common Failure Patterns</h2></div>
             <dl class="roster">
-              <div class="roster-row"><dt>The confident-looking failure</dt><dd>Passes your test cases, fails on real input. Fix: test with messy real input.</dd></div>
-              <div class="roster-row"><dt>The patch spiral</dt><dd>One-line fixes pile into contradictions. Fix: rebuild from what failed.</dd></div>
+              <div class="roster-row"><dt>The confident-looking failure</dt><dd>Passes your test cases, fails on real input, a missing field, an edge case you didn't write down. Fix: write real examples, test in a fresh conversation with messy input.</dd></div>
+              <div class="roster-row"><dt>The patch spiral</dt><dd>One-line fixes pile into contradictions. Fix: rebuild from what failed. Can't explain why each rule is there? Time to rebuild.</dd></div>
               <div class="roster-row"><dt>Installing skills from strangers</dt><dd>Shared skill repos have shipped credential-stealing malware. Fix: read before installing.</dd></div>
             </dl>
-            <p class="pull-question">A skill you've never tested without is a skill you don't actually understand.</p>
           </div>
         </section>
 

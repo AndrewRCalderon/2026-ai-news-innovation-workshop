@@ -56,43 +56,91 @@
           <div class="slide-inner">
             <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">A Real Example</h2></div>
             <p>This workshop's own repo has a CLAUDE.md file. It's not hypothetical, it's the actual file governing this website's build.</p>
+            <button type="button" class="file-viewer-trigger" data-file-viewer="claude-md-example">Open CLAUDE.md →</button>
             <dl class="roster">
               <div class="roster-row"><dt>It points, it doesn't duplicate</dt><dd>Delegates to other files instead of repeating them.</dd></div>
               <div class="roster-row"><dt>States what can't be inferred</dt><dd>Rules Claude couldn't guess from reading code, like a robotics lab's note that existing code is human-verified but not necessarily optimal.</dd></div>
               <div class="roster-row"><dt>Organized by when you'd need it</dt><dd>Maps to actual moments in a session.</dd></div>
             </dl>
+            <p>The habit worth copying: point instead of duplicate, write down what Claude can't guess, organize around when you'll need it.</p>
           </div>
         </section>
+
+        <dialog class="file-viewer" id="claude-md-example">
+          <div class="file-viewer-head">
+            <span class="file-viewer-name">CLAUDE.md</span>
+            <button type="button" class="file-viewer-close" data-file-viewer-close aria-label="Close">✕</button>
+          </div>
+          <pre class="file-viewer-body"><code># CLAUDE.md — Maintainer / Build Guide
+
+This file is for Claude Code sessions working **on** this repository —
+building the workshop website itself. It is not shown to workshop students.
+Their day-by-day guidance lives in `STUDENT_CLAUDE_GUIDE.md` (see
+[ADR 0009](project/adr/0009-separate-maintainer-claude-md.md) for why these
+are separate files).
+
+## Before starting work
+
+- Read [`project/REQUIREMENTS.md`](project/REQUIREMENTS.md) for current task
+  status and what's next in the active phase.
+- Read [`project/adr/`](project/adr/) for existing architecture decisions
+  before proposing a new approach to something already decided. If a past
+  decision needs to change, write a new ADR that supersedes it — don't edit
+  the old one.
+
+## While working
+
+- Check off tasks in `project/REQUIREMENTS.md` as they're completed. Add
+  newly discovered tasks to its "Newly identified tasks" section rather than
+  letting them go untracked.
+- Any non-trivial technical decision (new dependency, changed data flow,
+  hosting/infra change, a plan deviation) gets a new numbered file in
+  `project/adr/`, following the existing format (Context / Decision /
+  Consequences).
+
+## Repo layout
+
+- `docs/` — the deployed static site (Vercel). This is the only directory
+  that ends up live at the public URL.
+- `project/` — internal build tracking (this file's companions). Never
+  linked from the public site.
+- `api/` — the one serverless function (Claude proxy, see
+  [ADR 0007](project/adr/0007-serverless-claude-proxy.md)). Never put
+  secrets in this directory's source — they're Vercel environment variables.
+- `STUDENT_CLAUDE_GUIDE.md`, `SUBMISSION_GUIDE.md` — content students copy
+  into their own workflow. Treat as content-fill deliverables, not this
+  file's concern.</code></pre>
+        </dialog>
 
         <section class="slide" data-slide="s3">
           <div class="slide-inner">
             <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">What Belongs In One</h2></div>
             <p class="lede">The most common mistake isn't leaving something out. It's putting too much in.</p>
-            <p>Not just this repo's habit: Cloudflare, the 52k-star Block/goose, and Next.js all use CLAUDE.md as a one-line pointer to AGENTS.md, via Claude Code's own <code>@path/to/import</code> syntax.</p>
+            <p>A CLAUDE.md isn't only an engineering file. It's a record of decisions your whole team has already made.</p>
             <div class="compare-grid">
               <div class="compare-col is-primary">
                 <h3>Include</h3>
                 <ul>
-                  <li>Commands Claude can't guess</li>
-                  <li>Non-default code style rules</li>
-                  <li>Testing instructions</li>
-                  <li>Repo etiquette</li>
-                  <li>Project-specific architecture decisions</li>
-                  <li>Non-obvious gotchas</li>
+                  <li>Decisions Claude can't guess, a command, a required step, a deadline</li>
+                  <li>Your design system, fonts, colors, spacing</li>
+                  <li>What you know about your audience, personas, reading level</li>
+                  <li>Structural decisions specific to your project</li>
+                  <li>A gotcha you've already hit once</li>
                 </ul>
               </div>
               <div class="compare-col is-secondary">
                 <h3>Leave out</h3>
                 <ul>
-                  <li>Anything inferable from code</li>
+                  <li>Anything inferable from the project itself</li>
                   <li>Tutorials on tools Claude already knows</li>
-                  <li>File-by-file codebase descriptions</li>
+                  <li>Detailed documentation, link to it instead</li>
+                  <li>Information that changes often</li>
                   <li>Self-evident practices ("write clean code")</li>
                   <li>Credentials, ever</li>
                 </ul>
               </div>
             </div>
-            <p class="pull-question">A real 51-line security-scanner CLAUDE.md vs. a real 868-line one, a sixth of it a tutorial Claude didn't need. Same goal, radically different discipline.</p>
+            <p class="pull-question">Before you add a line, would removing it cause Claude to make a mistake? Could Claude figure it out just by looking at the project itself? If either, cut it.</p>
           </div>
         </section>
 
@@ -102,8 +150,8 @@
             <p>Run <code>/init</code> to generate a starting point. That's a start, not a finished product, it should grow from actual friction points.</p>
             <div class="exercise-box">
               <h3>🎯 Exercise: Draft Your CLAUDE.md</h3>
-              <p><strong>Description:</strong> Run <code>/init</code> on your project, or start from scratch. Add one thing Claude couldn't have guessed.</p>
-              <p><strong>Deliverable:</strong> A CLAUDE.md under 200 lines, committed to your project.</p>
+              <p><strong>Description:</strong> Run <code>/init</code> on your project and let Claude generate it, don't write it yourself first.</p>
+              <p><strong>Deliverable:</strong> Read what Claude produced. For a few things it summarized, ask: was this explicit, or did Claude infer it from a pattern you weren't even aware of?</p>
             </div>
           </div>
         </section>
@@ -132,5 +180,6 @@
 
   <script src="/js/deck.js"></script>
   <script src="/js/citations.js"></script>
+  <script src="/js/file-viewer.js"></script>
 </body>
 </html>

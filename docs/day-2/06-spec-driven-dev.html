@@ -21,9 +21,10 @@
 
     <nav class="toc" aria-label="Sections in this briefing">
       <ol>
-        <li><a href="#s1"><span class="n">01</span> The Core Idea</a></li>
-        <li><a href="#s2"><span class="n">02</span> The Checklist</a></li>
-        <li><a href="#s3"><span class="n">03</span> Why This Connects to Skills</a></li>
+        <li><a href="#s1"><span class="n">01</span> What a Spec Is</a></li>
+        <li><a href="#s2"><span class="n">02</span> The Core Idea</a></li>
+        <li><a href="#s3"><span class="n">03</span> The Checklist</a></li>
+        <li><a href="#s4"><span class="n">04</span> Why This Connects to Skills</a></li>
       </ol>
     </nav>
 
@@ -34,29 +35,86 @@
 
     <article>
       <section class="block reveal" id="s1">
-        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">The Core Idea</h2></div>
-        <p class="lede">Spec-driven development inverts the usual workflow: the specification becomes the source of truth, and code becomes a generated or verified secondary artifact.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Piskala, 'Spec-Driven Development: From Code to Contract in the Age of AI Coding Assistants,' arXiv:2602.00180 (Jan 2026). Abstract: SDD inverts the traditional workflow by treating specifications as the source of truth and code as a generated or verified secondary artifact.">*</sup> GitHub's own tooling for this, spec-kit, describes the same inversion independently: you give the agent a high-level description of what you're building and why, and it generates the spec first, the plan second, code last.<sup class="cite" data-url="https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-get-started-with-a-new-open-source-toolkit/" data-note="Den Delimarsky, GitHub Blog, Sept 2 2025: 'You provide a high-level description of what you're building and why, and the coding agent generates a detailed specification.'">*</sup></p>
-        <p>Why this matters more with AI assistants than it used to: AI models are excellent at pattern completion, and poor at mind reading.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Piskala paper: 'The problem is simple: AI models are excellent at pattern completion but poor at mind reading.'">*</sup> A vague prompt like "add photo sharing to my app" leaves Claude guessing at what you actually meant. A spec gives it enough to match your intent instead of inventing one.</p>
-        <p>Worth knowing before you reach for this on every project: it works best on new, well-scoped work. One independent critique argues that on a large, already-existing codebase it mostly breaks down, planning can't eliminate the non-determinism of real development the way it promises to.<sup class="cite" data-url="https://marmelab.com/blog/2025/11/12/spec-driven-development-waterfall-strikes-back.html" data-note="François Zaninotto, Marmelab, Nov 12 2025: 'Software development is fundamentally a non-deterministic process, so planning doesn't eliminate uncertainty.' Also: 'For large existing codebases, SDD is mostly unusable.'">*</sup> For an afternoon build in this workshop, that's rarely the constraint you'll hit.</p>
+        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">What a Spec Is</h2></div>
+        <p class="lede">A spec, short for specification, is a written description of what something should do, worked out before anyone builds it. Product and design teams have used them for decades, long before AI entered the picture.</p>
+        <p>An engineer writes what a feature needs to accomplish. A designer writes what a screen needs to show and how it should behave. An editor writes what a story needs to cover before a reporter starts writing it. Different fields, same habit. Agree on what "done" looks like before you start, so you're not discovering disagreements halfway through.</p>
+        <p>A useful spec usually has three parts. The requirements, what has to be true when this is finished. The constraints, what can't be true, budget, format, a deadline, a technical limit. And the acceptance criteria, how you'll actually know it's done, not just started.</p>
       </section>
 
       <section class="block reveal" id="s2">
-        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">The Checklist</h2></div>
-        <p class="lede">A repeatable four-step framework, worth applying to your own project this afternoon, and one that independent teams building real spec-driven tools converge on in roughly the same shape.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Piskala paper, Section III, describes this as a four-phase SDD workflow: Specify, Plan, Implement, Validate.">*</sup></p>
-        <ol class="process-wheel">
-          <li><span class="era">1</span><h3>Specify</h3><p>What should it do? Behavior, requirements, acceptance criteria, no implementation details yet. GitHub's spec-kit and AWS's Kiro both start in the same place, under names like requirements.md.<sup class="cite" data-url="https://kiro.dev/docs/specs/" data-note="AWS Kiro docs: the first spec artifact, requirements.md, is defined to 'Define what needs to be built or fixed.'">*</sup></p></li>
-          <li><span class="era">2</span><h3>Plan</h3><p>How should you build it? Architecture, data models, interfaces. The spec declares intent; the plan declares constraints. This is also the step that resists automation the most, per one four-engineer team's year of running this loop with Claude Code: decomposing a spec into a plan needs a human's judgment about the codebase and the team, not just the model's.<sup class="cite" data-url="https://joshmcdonald.medium.com/running-a-small-team-on-a-big-project-spec-driven-development-with-claude-code-9a1b97f58551" data-note="Joshua McDonald, Apr 28 2026, on running a small team on spec-driven development with Claude Code: the /spec-decompose planning step is explicitly called out as resisting reliable automation, requiring human judgment about team composition and codebase context.">*</sup></p></li>
-          <li><span class="era">3</span><h3>Implement</h3><p>Small, validated increments, each one a testable piece of functionality, not one giant leap. That same team reported roughly a two-to-three-times increase in throughput over a year running this workflow, with headcount unchanged.<sup class="cite" data-url="https://joshmcdonald.medium.com/running-a-small-team-on-a-big-project-spec-driven-development-with-claude-code-9a1b97f58551" data-note="Joshua McDonald, Apr 28 2026: 'Throughput increased by about a factor of two to three over the past year, while headcount remained unchanged.' Four-engineer team, fourteen-feature roadmap, using Claude Code specifically.">*</sup></p></li>
-          <li class="is-hinge"><span class="era">4</span><h3>Validate</h3><p>Does the code actually meet the spec? If not: was the spec wrong, or the code? Either way, the spec stays the authority.</p></li>
-        </ol>
-        <p>What makes step 1 actually work: a good spec is behavior-focused (what happens, not how), testable, unambiguous, and complete enough without over-specifying.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Piskala paper, Section II: good specs share several characteristics: they are behavior-focused, describing what happens rather than how; they are testable; they are unambiguous; they are complete enough to cover essential cases without over-specifying.">*</sup> One practical rule of thumb: if there's only one reasonable way to read a requirement, don't add more detail. If there's more than one, that's exactly where to add clarification.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Piskala paper: write specs at the level of detail needed to remove ambiguity. If an AI or developer could interpret a requirement in multiple ways, add clarification. If there's only one reasonable interpretation, don't over-specify.">*</sup></p>
-        <p>A passing test only proves the code matches the spec, not that the spec was right in the first place.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Piskala paper, Section IX, on the 'false confidence' pitfall: a passing spec test doesn't guarantee correct software, it only guarantees the software matches the spec. If the spec is wrong, the code will faithfully implement the wrong thing.">*</sup> Claude Code's own team makes a related point about validation generally: Claude stops when the work looks done, and without an explicit check to run, "looks done" is the only signal you get.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs, Best Practices: 'Claude stops when the work looks done. Without a check it can run, looks done is the only signal available, and you become the verification loop.'">*</sup> Neither of the real tools that implement this workflow treats validation as one closing step, either: GitHub's spec-kit and AWS's Kiro both check continuously between phases, through dedicated clarify/analyze commands or review gates, rather than saving it all for the end.<sup class="cite" data-url="https://github.com/github/spec-kit" data-note="GitHub spec-kit repo: alongside /speckit.specify, /speckit.plan, /speckit.tasks, and /speckit.implement, it ships /speckit.clarify and /speckit.analyze for ambiguity and consistency checks between phases, not one closing validation step.">*</sup></p>
-        <p>One pitfall the checklist above doesn't cover: a spec that isn't updated when the code changes doesn't just become unused, it becomes actively misleading. An agent will follow it confidently even after it's stopped matching reality.<sup class="cite" data-url="https://www.augmentcode.com/blog/what-spec-driven-development-gets-wrong" data-note="Amelia Wattenberger, Augment Code, Feb 20 2026 (updated Jun 18 2026): 'A stale spec misleads agents that don't know any better. They'll execute a plan that no longer matches reality, confidently.'">*</sup> If you revise your project later today, revise the spec too.</p>
+        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">The Core Idea</h2></div>
+        <p class="lede">Spec-driven development takes that same habit and applies it to how you work with an AI coding assistant. It inverts the usual coding workflow. The specification becomes the source of truth, and the code becomes something generated and checked against it, not the other way around.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Piskala, 'Spec-Driven Development: From Code to Contract in the Age of AI Coding Assistants,' arXiv:2602.00180 (Jan 2026). Abstract: SDD inverts the traditional workflow by treating specifications as the source of truth and code as a generated or verified secondary artifact.">*</sup> GitHub's own tooling for this, spec-kit, describes the same inversion independently: you give the agent a high-level description of what you're building and why, and it generates the spec first, the plan second, code last.<sup class="cite" data-url="https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-get-started-with-a-new-open-source-toolkit/" data-note="Den Delimarsky, GitHub Blog, Sept 2 2025: 'You provide a high-level description of what you're building and why, and the coding agent generates a detailed specification.'">*</sup></p>
+        <p>Why this matters more with AI assistants than it used to: AI models are excellent at pattern completion, matching what you ask against patterns they've already seen, and poor at mind reading.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Piskala paper: 'The problem is simple: AI models are excellent at pattern completion but poor at mind reading.'">*</sup> A vague prompt like "add photo sharing to my app" leaves Claude guessing at what you actually meant. A spec gives it enough to match your intent instead of inventing one.</p>
+        <p>Worth knowing before you reach for this on every project: it works best on new, well-scoped work. One independent critique argues that on a large project's existing code, its codebase, it mostly breaks down. Planning can't eliminate how unpredictable real development actually is, the way it promises to.<sup class="cite" data-url="https://marmelab.com/blog/2025/11/12/spec-driven-development-waterfall-strikes-back.html" data-note="François Zaninotto, Marmelab, Nov 12 2025: 'Software development is fundamentally a non-deterministic process, so planning doesn't eliminate uncertainty.' Also: 'For large existing codebases, SDD is mostly unusable.'">*</sup> For an afternoon build in this workshop, that's rarely the constraint you'll hit.</p>
       </section>
 
       <section class="block reveal" id="s3">
-        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">Why This Connects to Skills</h2></div>
-        <p>Specs, done well, act as modular building blocks Claude can work from directly, close to what a Skill is doing when it packages expertise for reuse.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Piskala paper, Section IV: specifications act as 'super-prompts' that break down complex problems into modular components aligned with agents' context windows.">*</sup> A Skill is essentially a pre-written spec for a kind of task you'll do again. Once you've written a spec once, the checklist above is what makes it repeatable the next time.</p>
+        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">The Checklist</h2></div>
+        <p class="lede">A repeatable four-step framework, worth applying to your own project this afternoon, and one that independent teams building real spec-driven tools converge on in roughly the same shape.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Piskala paper, Section III, describes this as a four-phase SDD workflow: Specify, Plan, Implement, Validate.">*</sup> At each step, a few questions to ask yourself and anyone you're building with.</p>
+        <ol class="history">
+          <li>
+            <span class="era">1</span><h3>Specify: what should it do?</h3>
+            <p>Behavior, requirements, acceptance criteria, not implementation details yet. GitHub's spec-kit and AWS's Kiro, two real tools built around this workflow, both start in the same place, under names like requirements.md.<sup class="cite" data-url="https://kiro.dev/docs/specs/" data-note="AWS Kiro docs: the first spec artifact, requirements.md, is defined to 'Define what needs to be built or fixed.'">*</sup></p>
+            <ul class="field-notes is-checklist">
+              <li>What should this actually do, described as behavior, not how it gets built?</li>
+              <li>What does "finished" look like, specifically enough that someone else could check it?<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Piskala paper, Section II: good specs share several characteristics: they are behavior-focused, describing what happens rather than how; they are testable; they are unambiguous; they are complete enough to cover essential cases without over-specifying.">*</sup></li>
+              <li>Is there more than one reasonable way to read what you just wrote? If so, that's exactly where to add detail. If there's only one reasonable reading, stop there.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Piskala paper: write specs at the level of detail needed to remove ambiguity. If an AI or developer could interpret a requirement in multiple ways, add clarification. If there's only one reasonable interpretation, don't over-specify.">*</sup></li>
+            </ul>
+          </li>
+          <li>
+            <span class="era">2</span><h3>Plan: how should you build it?</h3>
+            <p>Architecture, the pieces, how they fit together. The spec declares what you want, the plan declares how you'll get there. One four-engineer team, a year into running this loop with Claude Code, found this is also the step that resists automation the most.<sup class="cite" data-url="https://joshmcdonald.medium.com/running-a-small-team-on-a-big-project-spec-driven-development-with-claude-code-9a1b97f58551" data-note="Joshua McDonald, Apr 28 2026, on running a small team on spec-driven development with Claude Code: the /spec-decompose planning step is explicitly called out as resisting reliable automation, requiring human judgment about team composition and codebase context.">*</sup></p>
+            <ul class="field-notes is-checklist">
+              <li>What's the actual approach, and what already exists that this has to work with or around?</li>
+              <li>Whose judgment does this decision actually need? Turning a spec into a plan takes a person who knows the project and the team, not just the model.</li>
+            </ul>
+          </li>
+          <li>
+            <span class="era">3</span><h3>Implement: build it in pieces.</h3>
+            <p>Small, validated increments, each one a testable piece of functionality, not one giant leap. That same team reported roughly a two-to-three-times increase in throughput over a year running this workflow, with headcount unchanged.<sup class="cite" data-url="https://joshmcdonald.medium.com/running-a-small-team-on-a-big-project-spec-driven-development-with-claude-code-9a1b97f58551" data-note="Joshua McDonald, Apr 28 2026: 'Throughput increased by about a factor of two to three over the past year, while headcount remained unchanged.' Four-engineer team, fourteen-feature roadmap, using Claude Code specifically.">*</sup></p>
+            <ul class="field-notes is-checklist">
+              <li>Can you break this into pieces small enough to check one at a time, instead of one giant leap?</li>
+              <li>After each piece, does it actually do what step 1 said it should?</li>
+            </ul>
+          </li>
+          <li class="is-hinge">
+            <span class="era">4</span><h3>Validate: does it match?</h3>
+            <p>A passing test only proves the code matches the spec, not that the spec was right in the first place.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Piskala paper, Section IX, on the 'false confidence' pitfall: a passing spec test doesn't guarantee correct software, it only guarantees the software matches the spec. If the spec is wrong, the code will faithfully implement the wrong thing.">*</sup> Claude stops when the work looks done, and without an explicit check to run, "looks done" is the only signal you get.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs, Best Practices: 'Claude stops when the work looks done. Without a check it can run, looks done is the only signal available, and you become the verification loop.'">*</sup> Neither spec-kit nor Kiro treats validation as one closing step either, both check continuously between phases instead of saving it all for the end.<sup class="cite" data-url="https://github.com/github/spec-kit" data-note="GitHub spec-kit repo: alongside /speckit.specify, /speckit.plan, /speckit.tasks, and /speckit.implement, it ships /speckit.clarify and /speckit.analyze for ambiguity and consistency checks between phases, not one closing validation step.">*</sup></p>
+            <ul class="field-notes is-checklist">
+              <li>If it doesn't match, was the spec wrong or the build wrong? Either way, the spec stays the authority until you deliberately change it.</li>
+              <li>Would a fresh pair of eyes still agree the spec was asking for the right thing, not just that the code matches it?</li>
+            </ul>
+          </li>
+        </ol>
+        <h3>Put It Together, For Use With Claude</h3>
+        <p>Once you've worked through the questions above, you already have what a real spec needs, you just have to write it down. The fastest way is to hand Claude your answers and ask it to draft the spec for you. Here's a starting point you can copy, fill in, and adapt.</p>
+        <p class="code-block-label">starter-prompt.md</p>
+        <pre class="code-block"><code>I want to build [describe the project in one or two sentences].
+
+Here's what I worked out by going through a spec:
+
+Specify
+- What it should do: [your answer]
+- What "finished" looks like: [your answer]
+
+Plan
+- The approach, and what it has to work with: [your answer]
+
+Implement
+- Pieces that should probably get built and checked separately: [your answer]
+
+Validate
+- How I'll know it's actually done, not just running: [your answer]
+
+Turn this into an actual spec: behavior-focused, testable, and only as
+detailed as it needs to be to remove ambiguity. Then propose a plan
+before you start building anything.</code></pre>
+        <p>One thing this checklist can't do on its own: a spec that isn't updated when the code changes doesn't just go unused, it becomes actively misleading. An agent will follow it confidently even after it's stopped matching reality.<sup class="cite" data-url="https://www.augmentcode.com/blog/what-spec-driven-development-gets-wrong" data-note="Amelia Wattenberger, Augment Code, Feb 20 2026 (updated Jun 18 2026): 'A stale spec misleads agents that don't know any better. They'll execute a plan that no longer matches reality, confidently.'">*</sup> If you revise your project later today, revise the spec too.</p>
+      </section>
+
+      <section class="block reveal" id="s4">
+        <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Why This Connects to Skills</h2></div>
+        <p>Specs, done well, act as modular building blocks Claude can work from directly.<sup class="cite" data-url="https://arxiv.org/pdf/2602.00180" data-note="Piskala paper, Section IV: specifications act as 'super-prompts' that break down complex problems into modular components aligned with agents' context windows.">*</sup> That's close to what a Skill does when it packages expertise for reuse. A Skill is essentially a pre-written spec for a kind of task you'll do again. Once you've written a spec once, the checklist above is what makes it repeatable the next time.</p>
         <p>If this clicks for you, GitHub's spec-kit and AWS's Kiro are two real, free tools built entirely around this loop, worth a look after the workshop.<sup class="cite" data-url="https://github.com/github/spec-kit" data-note="GitHub spec-kit, open-source toolkit for spec-driven development, github.com/github/spec-kit.">*</sup><sup class="cite" data-url="https://kiro.dev/docs/specs/" data-note="AWS Kiro, spec-driven AI IDE, kiro.dev/docs/specs.">*</sup></p>
       </section>
     </article>

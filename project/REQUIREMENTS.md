@@ -8,19 +8,24 @@ resume after the content pass. Do not build anything that calls the Claude
 API from a page until Phase 2 (the proxy) is actually done — see
 [ADR 0007](adr/0007-serverless-claude-proxy.md).
 
-**Where things stand (2026-08-15):** all three days now have real,
-scheduled content on `review/full-site-audit-2` — Day 1 (8/9 sessions, only
+**Where things stand (2026-08-16):** all three days now have real,
+scheduled content, currently on `review/full-site-audit-3` (branched from
+`full-site-audit-2`) — Day 1 (8/9 sessions, only
 `09-project-assignments` still a placeholder), Day 2 (8/8), Day 3 (7/7).
 `live` (production, minimal) is untouched by the Day 2/3 work and still
 only serves `setup.html`/`setup-day-2.html`, by design — see
-[ADR 0018](adr/0018-live-branch-for-partial-production-deploy.md). Day 2's
-content-depth audit is done (see the 2026-08-15 change log entry) — 5 of
-its 8 sessions were rewritten against a new formal content standard, the
-other 3 already met it. Known open threads, not yet scheduled: the
+[ADR 0018](adr/0018-live-branch-for-partial-production-deploy.md).
+Day 2's round-3 audit is done and implemented (see the 2026-08-16 change
+log entry) — all 8 sessions reviewed page by page, 7 of them edited (only
+`08-show-tell` untouched), plus two new reusable components (a file
+viewer, a starter-prompt code block). **Next step**: Day 3's round-3
+audit hasn't started yet. Known open threads, not yet scheduled: the
 workshop-name and em-dash sweeps are still only done on pages that got
 touched directly, not site-wide; VS Code/Claude Code/Git content has no
 scheduled home on any of the 3 days (see the Day 3 change log entry);
-`STUDENT_CLAUDE_GUIDE.md` is still unwritten.
+`STUDENT_CLAUDE_GUIDE.md` is still unwritten; a real visual/Playwright
+check of the two new Day 2 components is still outstanding (no browser
+automation tool was available during the round-3 implementation pass).
 
 Source of truth for build progress on this repo. Check here before starting
 work; update here when a task starts/completes, or when new work is
@@ -107,6 +112,29 @@ Tasks discovered during build that weren't in the original plan. Add here as
 found; promote into a phase above once scoped, or leave here if it doesn't
 map cleanly to one.
 
+- [~] **New workflow: `project/copy-drafts/`, markdown copy drafts for
+      direct editing.** User found dictating copy edits turn by turn (the
+      pattern used for the round-3 audit's Batches 1–7) slow and lossy.
+      Pilot: all 8 Day 2 Overview pages ported to
+      `project/copy-drafts/day-2/*.md` (2026-08-16), one file per topic,
+      with a documented convention (see `project/copy-drafts/README.md`)
+      for citations, comparison columns, term/definition rosters,
+      numbered steps, and exercises. Pages with pending Batch 7 feedback
+      (`01-debrief`, `02-prompting`, `03-claude-md`, `04-skills-best-practices`)
+      carry inline HTML-comment notes pointing back to that feedback
+      rather than pre-guessing final wording. Slides decks aren't
+      ported, still a Claude-authored condensation of Overview at
+      implementation time. **Deferred to a new branch, not
+      `review/full-site-audit-3`** — tracked as part of the broader
+      full-site line-by-line edit pass,
+      [GitHub issue #6](https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/issues/6)
+      (Adiel tagged there for visibility; supersedes the earlier, now
+      closed, issue #5, which scoped this too narrowly to just Day 2).
+      This branch ships with the drafts present but unedited/unimplemented.
+      **If this pans out**: same treatment for Day 1 and Day 3, and a
+      proper Claude Code skill to generate/refresh these drafts (built
+      after this pilot, so it reflects whatever's learned from actually
+      using it once).
 - [x] Resolved: the org/repo is confirmed
       (`github.com/AndrewRCalderon/2026-ai-news-innovation-workshop`, this
       repo's own remote) — `setup.html` now links directly to it. **New
@@ -851,16 +879,19 @@ its resolution lives in conversation with Adiel, not in this repo.
       already logged above (10am–5pm with breaks; the current
       9am–5:45pm build needs condensing). No new information, just
       corroboration from a second source.
-- [ ] **VS Code vs. Claude Desktop** — already being tracked above, but
+- [x] **VS Code vs. Claude Desktop** — already being tracked above, but
       Adiel's note adds a real wrinkle: she describes a Claude Desktop
       interface where you switch between "cowork" and "claude code" via a
       tab, with panels for MCPs/skills/scheduled tasks, and says it's now
       comparable to Codex's interface and "feels like Notion" — closer to
       what students should be comfortable with than raw VS Code.
-      **"Cowork" isn't a term I can independently confirm as an official
-      Claude Desktop feature name** — her notes were dictated, so it may
-      be shorthand or a transcription artifact. Verify the actual current
-      UI/feature names before writing session content around it.
+      **Resolved 2026-08-11**: "Cowork" is real, not a mishearing or
+      transcription artifact — see the "Research complete" entry below
+      (line ~1284) for the full verified breakdown (three tabs: Chat,
+      Cowork, Code; Code is the VS-Code-like surface). Independently
+      reconfirmed 2026-08-16 during the round-3 Day 2 audit while
+      verifying an unrelated VS Code plan-mode detail, still accurate as
+      of current docs.
 - [ ] **How much GitHub to teach — conflicts with the "GitHub Desktop
       only" decision logged above.** Adiel suggests going further: use
       Claude Desktop's GitHub connector (MCP) to handle fork/PR directly
@@ -1487,8 +1518,446 @@ single-purpose, shippable URL.
 
 ---
 
+## Full-scale site review, round 3 (in progress — 2026-08-15)
+
+User is reviewing Day 2 then Day 3 page by page and passing notes in
+batches, same workflow as the first two review rounds above (see
+`review/full-site-audit-2`'s "Full-scale site review" and "Collaborator
+feedback" sections). Logging each batch here as it arrives; not
+prioritized or implemented yet — that happens once the review is
+complete and batches are grouped.
+
+### Batch 1 — Day 2, Topic 1 (Yesterday's Debrief)
+
+Applies to `docs/day-2/01-debrief.html`. This topic wasn't touched by the
+2026-08-15 content-depth revision (logged below in the change log —
+confirmed at the time as already at the right depth for a discussion
+session), so this is fresh feedback, not a follow-up to that pass.
+
+- [x] **s1 lede, closing clause** — **Implemented 2026-08-16.** Reworded
+      to: "The point of a debrief isn't to compare. It's to observe what
+      happened while you were working, in the code and in yourself,
+      before we move on." (Overview; Slides drops the intro sentence and
+      "before we move on" per that page's usual condensed pattern.)
+- [x] **s2 exercise-box, "Group share-out"** — **Implemented 2026-08-16.**
+      Renamed to "Talk It Through," dropped the Time/Format structure,
+      now: read the questions on your own first, then open group
+      conversation, jump in/build on each other/share your own moment, no
+      fixed order. Applied to both Overview and Slides (Slides condensed).
+
+### Batch 2 — Day 2, Topic 2 (Prompting)
+
+Applies to `docs/day-2/02-prompting.html`. This topic *was* one of the 5
+rewritten in the 2026-08-15 content-depth pass — this is a follow-up
+polish round on top of that rewrite, not a first pass.
+
+- [x] **Masthead dek, sentence 1 — confirmed wording.** '"Prompt
+      engineering" used to mean tricks.' → **'"Prompt engineering" used to
+      mean hacks."'** (confirmed via clarifying question; transcript was
+      ambiguous about whether to drop the "prompt engineering" term
+      entirely — user kept it, just swapped "tricks" → "hacks").
+- [x] **Masthead dek, sentence 2, closing clause — implemented
+      2026-08-16.** "...and knowing when Claude can help you get there" →
+      "...and knowing how best to work with Claude to help you get
+      there."
+- [x] **s1 history, "The role-play era" (Dec 2022) item — implemented
+      2026-08-16.** "...was the dominant advice for years." → "...was the
+      dominant advice." per the original reading (not re-confirmed with
+      the user, but low-stakes/reversible).
+- [x] **s1 history, "Claude starts writing prompts for you" (2024) item —
+      implemented 2026-08-16, comparable found.** Research confirmed
+      OpenAI shipped a real comparable the same year: a single "Generate"
+      feature in its Playground (Oct 1 2024) that both drafts and refines
+      prompts, functionally covering what Anthropic split into two named
+      tools. Added as a named comparison with its own citation.
+- [x] **s1 history, "Less scaffolding, more curation" (2025) item —
+      implemented 2026-08-16.** Replaced the vague line with the actual
+      substance from Anthropic's Nov 2025 post: what matters less now
+      (heavy role prompting, XML scaffolding, with the stated reasons)
+      and what matters more (being explicit, explaining reasoning,
+      real examples), live-verified and quoted in the citation notes.
+- [x] **s4 exercise, "Rewrite One of Yours" — implemented 2026-08-16.**
+      Dropped the self-rewrite step. New flow: hand a Day 1 prompt
+      straight to Claude to improve, then compare against 3 questions
+      pulled directly from this session's own before/after content (more
+      specific? a way to check the result? dropped something
+      unnecessary?), then reflect in the deliverable on what you actually
+      wanted and what you could have told Claude the first time. Applied
+      to both Overview and Slides.
+
+### Batch 3 — Day 2, Topic 3 (CLAUDE.md)
+
+Applies to `docs/day-2/03-claude-md.html`. Like Topic 2, this was one of
+the 5 pages rewritten in the 2026-08-15 content-depth pass — this round
+is mostly about making the page land for a non-coder audience, not a
+first pass.
+
+- [x] **s2 "A Real Example" — implemented 2026-08-16.** Added a real
+      GitHub link plus a click-to-open file-viewer (new `<dialog>`
+      component, see [ADR 0019](adr/0019-file-viewer-dialog.md)) holding
+      the actual, byte-faithful text of this repo's `CLAUDE.md`. Closing
+      paragraph now explicitly names what to emulate (point not
+      duplicate, write down what Claude can't guess, organize by when
+      you'll need it) and connects it to the department-decisions reframe
+      below. Applied to both Overview and Slides (duplicated dialog
+      markup, since Slides is a standalone page with no shared script
+      state with Overview).
+- [x] **s3 "What Belongs In One" — cut the two technical example
+      paragraphs — implemented 2026-08-16.** Both removed from Overview
+      and Slides. Kept the Include/Leave-out compare-grid columns (see
+      next item).
+- [x] **s3 Include/Leave-out columns — rewrite for a cross-department
+      audience — implemented 2026-08-16.** Include now leads with
+      design-system and audience-persona examples alongside the
+      structural/gotcha ones. Leave-out grounded in Anthropic's own
+      "Write an effective CLAUDE.md" table (live-verified via research):
+      added "detailed documentation, link to it instead" and
+      "information that changes often" as sourced, quotable categories
+      that were missing before. Did not find external cross-department
+      CLAUDE.md examples to cite (user later steered away from that
+      search, see the s2 note above — this repo's own file became the
+      running example instead).
+- [x] **s3 closing stat-pull — expand into a few self-check questions —
+      implemented 2026-08-16, with an honest caveat.** Research found
+      only one verbatim Anthropic self-check question ("would removing
+      this cause Claude to make mistakes?"). Added one more, grounded in
+      the `/doctor` command's description of what it strips ("could
+      Claude figure this out just by looking at the project itself?")
+      rather than inventing 3-5 questions to hit a round number — the
+      research agent explicitly recommended against presenting more as
+      if Anthropic had framed them as self-checks, and that's the call
+      made here.
+- [x] **s4 exercise, "Draft Your CLAUDE.md" — implemented 2026-08-16.**
+      `/init` exercise kept. 200-line requirement dropped. Deliverable
+      reframed to generate-then-reflect: read what `/init` produced, and
+      for a few things it summarized, ask whether it was explicit or an
+      inferred abstraction. Applied to both Overview and Slides.
+- [x] **Standing direction for this whole section — addressed via the
+      items above**, plus the new file-viewer and department-reframed
+      columns specifically aimed at making CLAUDE.md legible to someone
+      outside engineering.
+
+### Batch 4 — Day 2, Topic 4 (Skills & Best Practices)
+
+Applies to `docs/day-2/04-skills-best-practices.html`. Also one of the 5
+pages from the 2026-08-15 content-depth pass — same pattern as Topics 2–3,
+a follow-up polish/practicability round, not a first pass. Also raised a
+**standing punctuation preference, not scoped to this page** — see the
+note at the end of this batch.
+
+- [x] **Masthead dek — cut after "re-explaining" — implemented
+      2026-08-16.** Now reads: "Package your expertise so it doesn't need
+      re-explaining."
+- [x] **s2 "What Actually Makes This Work" — expand each bullet into an
+      explained if/then pattern — implemented 2026-08-16.** All three
+      bullets rewritten as cause-and-effect (Gotchas from real vs.
+      imagined failures, why skipping the no-skill baseline matters,
+      vague descriptions vs. reliable activation). Overview and Slides.
+- [x] **s3 "A Real Investigation" — replaced entirely — implemented
+      2026-08-16.** New "Build One" section, 5 numbered steps (`.history`,
+      same component now used on Spec-Driven Dev): notice the pattern →
+      create the folder/file → fill in SKILL.md like an onboarding doc →
+      test it two ways (auto-trigger + explicit invoke) → stress-test
+      with real examples in a fresh conversation. Research confirmed the
+      real mechanics (file paths, SKILL.md frontmatter, testing methods)
+      live against Claude Code/Platform docs. **Hagar/MuckRock case
+      study**: removed rather than relocated, no other obvious home for
+      it on this page or elsewhere in Day 2 — flagging per the original
+      side note, not silently dropped.
+- [x] **s4 "Common Failure Patterns" — made practicable — implemented
+      2026-08-16.** "The confident-looking failure" now explains the fix
+      concretely (write real examples, test in a fresh conversation with
+      messy input) and cites an accessible replacement source (see
+      citation-hygiene item below). "The patch spiral" now includes a
+      concrete self-check for when to rebuild ("could someone read the
+      skill and still explain why each rule is there?"). The
+      how-to-test-a-skill content gap is addressed inside the new s3
+      (steps 4–5) rather than as a separate section, since it fit
+      naturally into the build walkthrough.
+- [x] **Drop the closing pull-question entirely — implemented
+      2026-08-16.** Removed from both Overview and Slides.
+- [x] **Citation hygiene, this page — implemented 2026-08-16.** (1) Moot,
+      confirmed: the 3x-repeated Hagar citation was confined to the old
+      s3, which no longer exists. (2) Replaced the paywalled Medium
+      citation with a live-verified, confirmed-accessible source
+      (`linas.substack.com/p/claudeskills`) — medium confidence fit per
+      the research agent (supports the same "passes clean tests, fails on
+      messy real input" claim, though with slightly different specific
+      examples than the original).
+
+**Standing style note surfaced here, applies beyond this page**: user
+wants colons and dashes used sparingly in general across this site's
+copy, favoring full, active sentences over colon-joined clauses (same
+spirit as the existing no-em-dash rule — see
+`feedback_no-em-dashes` — but this is a distinct, broader ask about
+colons specifically, and dashes beyond just em-dashes). Not yet applied
+anywhere; worth a site-wide pass once the audit's grouped, and worth
+saving as a standing preference so future copy work defaults to it.
+
+### Batch 5 — Day 2, Topic 5 (Your Goal & Plan Mode)
+
+Applies to `docs/day-2/05-goal-plan-mode.html` (and its Slides deck for
+the jargon item). Also one of the 5 pages from the 2026-08-15
+content-depth pass.
+
+- [x] **Resequence — reverted.** Batch 5 originally proposed moving Plan
+      Mode before CLAUDE.md. User reviewed this in the round-3 plan
+      (2026-08-16) and said to leave the day's order as-is for now. No
+      file renumbering, `schedule.json`, or `nav.html` changes made.
+- [x] **Jargon pass, both Overview and Slides — implemented 2026-08-16.**
+      s2's "It compiled fine. It broke at runtime." → "Everything looked
+      fine when Claude finished. It broke once someone actually used it."
+      (Overview and Slides, Slides slightly more condensed).
+- [x] **Restructure so the page alone is enough to actually go use Plan
+      Mode — implemented 2026-08-16.** s1 now leads with the concept (2
+      sentences), then a dedicated paragraph spelling out all three
+      approve/review/send-back options in full sentences, then a new
+      paragraph on VS Code's inline-comment-on-plan feature (see below).
+      Access mechanics now read as their own block, not one clause inside
+      a longer paragraph.
+- [x] **Remove s4's exercise-box, defer hands-on plan-mode practice to
+      `07-revisit-build.html` — implemented 2026-08-16.**
+      - **Open question, resolved at implementation**: removed s4
+        entirely (TOC entry + section, both Overview and Slides), rather
+        than keeping its framing text with no exercise attached. The
+        "state your goal, then build" idea now lives properly in Revisit
+        & Build instead. Flagging this as a judgment call, easy to revert
+        if the page reads as ending too abruptly after s3.
+      - **Cross-file change, done**: see the `07-revisit-build.html`
+        change log entry for the new integration exercise.
+      - **Still open, not addressed this pass**: `schedule.json` still
+        types this session `hands-on` even with its hands-on exercise
+        moved out. Left as-is since the session still has an implicit
+        hands-on component reading the page and using plan mode
+        interactively; revisit if that stops feeling accurate.
+      - **New detail added, not in the original batch**: confirmed live
+        (`code.claude.com/docs/en/vs-code`) that the VS Code extension
+        opens a proposed plan as a real Markdown document, letting you
+        highlight text and leave an inline comment on it directly. Added
+        to s1 as a practical detail. Confirmed no equivalent exists in
+        Claude Desktop, so the copy doesn't imply one (also resolves the
+        long-open "cowork" terminology caveat in the Adiel-feedback
+        section above, see that entry's update).
+
+### Batch 6 — Day 2, Topic 6 (Spec-Driven Development)
+
+Applies to `docs/day-2/06-spec-driven-dev.html`. Not one of the 5 pages
+from the 2026-08-15 content-depth pass in terms of scope, but the same
+nontechnical-audience standard applies throughout, per the user's
+explicit audience note below (saved to project memory, see
+[[ai-journalism-workshop-site-build]]).
+
+- [x] **s1 "The Core Idea" — add a "what is a spec" foundation before the
+      AI-specific content — implemented 2026-08-16.** Split into a new
+      s1 "What a Spec Is" (general concept, non-AI, requirements/
+      constraints/acceptance-criteria) followed by s2 "The Core Idea"
+      (existing AI-specific content, unchanged in substance). TOC and
+      section numbering updated in both Overview and Slides.
+- [x] **Jargon: explain each term once, on first use — implemented
+      2026-08-16.** "Pattern completion" glossed on first use ("matching
+      what you ask against patterns they've already seen"); "codebase"
+      glossed on first use ("a large project's existing code, its
+      codebase"); "non-determinism" replaced with plain language
+      ("how unpredictable real development actually is") rather than
+      glossed, since a plain synonym was available.
+- [x] **s2 "The Checklist" — drop the circular diagram, make it an actual
+      checklist — implemented 2026-08-16.** Replaced `.process-wheel`
+      with `.history` (linear steps, already used elsewhere for
+      non-chronological step sequences, e.g. Day 1's AI Tools facilitator
+      roadmap) plus a nested `.field-notes.is-checklist` per step for the
+      self/team questions. All original citations preserved and
+      redistributed into the new structure, nothing dropped. Closing
+      "Put It Together, For Use With Claude" synthesis added, leading
+      into the starter-prompt block (next item). Now s3 after the new s1.
+- [x] **New component: an embedded starter-prompt block — implemented
+      2026-08-16.** New `.code-block`/`.code-block-label` CSS
+      (`docs/css/briefing.css`), a styled `<pre><code>` block, no JS. Used
+      once so far, in the new "Put It Together" step, holding a
+      copy-adaptable prompt template that walks Claude through building a
+      spec from the checklist's answered questions. Condensed version
+      also added to the Slides deck.
+
+**Standing audience definition, surfaced here, applies site-wide, not
+just this page**: user described the workshop audience directly —
+non-technical graduate students taking this workshop to learn AI
+concepts well enough to bring them "into the classroom and beyond" (not
+just for their own use). Capable of real conceptual complexity ("mental
+heavy lifting") as long as it's well-explained in plain language, not a
+reason to oversimplify. Saved to
+[[ai-journalism-workshop-site-build]] as standing context for all
+curriculum copy going forward, pairs with the existing
+[[content-depth-over-surface-level]] research standard.
+
+### Batch 7 — Day 2 round-3, post-implementation corrections (2026-08-16)
+
+User reviewed the round-3 implementation (Batches 1–6, all shipped
+2026-08-16, see the change log entry below) and gave a second pass of
+feedback on 4 of the pages. Logged only, not yet implemented, same
+workflow as the original batches.
+
+**`01-debrief.html`** — s2 exercise-box ("Talk It Through") needs the
+same Time/Description/Deliverable structure used by every other topic's
+exercise-box (it currently reads as one loose paragraph instead). New
+instruction text, close to verbatim from the session (rough draft, not
+final copy): "Let's have an exploratory conversation drawing from the
+questions above. What comes up from your experience yesterday?"
+
+**`02-prompting.html`** — s4 exercise deliverable changes again. Instead
+of writing free-form sentences reflecting on what you wanted the prompt
+to do, the deliverable becomes annotating the original prompt directly,
+using the three comparison questions already in the exercise (more
+specific? added a way to check the result? dropped something
+unnecessary?) as the annotation tool, marking up the prompt itself rather
+than writing about it separately.
+
+**`03-claude-md.html`**:
+- [ ] **File viewer is illegible as a popup.** User reports the
+      `<dialog>`-based file viewer (shipped this round, see
+      [ADR 0019](adr/0019-file-viewer-dialog.md)) shows the file's
+      content as "a long string," not the entire file legibly. Requested
+      fix is a design change, not a bug patch: replace the popup/modal
+      with an inline collapsible element on the page (opens on click,
+      reveals the markdown in full in place), rather than a dialog.
+      **This reverses part of ADR 0019's decision** — will need a
+      superseding ADR entry when implemented, not just a quiet component
+      swap. Worth investigating the popup's actual rendering bug too
+      (root cause not diagnosed yet, no browser tool was available to
+      inspect it live), in case the same bug would recur in whatever
+      replaces it.
+- [ ] **Remove the haddock3/robotics-lab sentence** from the "It states
+      what can't be inferred from code" roster row: "A robotics lab's
+      CLAUDE.md makes the same kind of call for a different reason: it
+      tells Claude explicitly that existing code has been human-verified
+      to work, but isn't necessarily the best implementation, a fact no
+      amount of code-reading would reveal." Cut entirely.
+- [ ] **Weave concrete new examples into the closing paragraph.** User
+      supplied real illustrative examples to fold into "That's the shape
+      worth copying, whatever your own project is about: point instead
+      of duplicate, write down what Claude can't guess on its own, and
+      organize around when you'll actually need each part. The decisions
+      in your file might come from a design system, an audience persona,
+      or a build process like this one, the habit is the same either
+      way." The material to weave in (user's own phrasing): "This is the
+      place where you'd document decisions that you or your team made
+      about fundamental aspects of the product that you are designing.
+      It can be information about audience segments, the tone of the
+      language across the site, words to avoid, or a commitment to only
+      use certain kinds of tools." **Also**: remove any duplicate
+      examples this creates elsewhere on the page — the s3 Include column
+      already lists "Your design system, fonts, colors, spacing" and
+      "What you know about your audience, personas, reading level,
+      assumptions," so check for overlap with the new audience-segment/
+      tone/word-choice/tooling examples before finalizing, dedupe rather
+      than repeat the same illustrations twice on one page.
+
+**`04-skills-best-practices.html`** — structural rewrite, not just copy:
+- [ ] **New section 2: a non-technical "when you'd know you need a
+      skill" scenario.** Illustrates, concretely and without technical
+      jargon, the kind of moment that should prompt someone to turn
+      something into a Skill. Content/example not yet drafted.
+- [x] **Resolved: current s2 ("What Actually Makes This Work") gets
+      folded into Build One (s3), not deleted outright.** User confirmed:
+      fold it in, but adhere to the original feedback already logged for
+      this section (Batch 4 above) when doing so — i.e. the two specific
+      improvements (explain what a Gotchas section actually is and what
+      goes into it, rather than the current phrasing; give a positive
+      example of a specific trigger-description, not just the current
+      negative one, "helps with content creation") must land inside Build
+      One written in Batch 4's established style: an explained if/then,
+      cause-and-effect pattern, not a flat statement of fact. Likely
+      lands inside step 3 ("fill it in like an onboarding doc"), which
+      already touches gotchas and description-writing, but not
+      confirmed, just the natural fit.
+- [ ] **Build One becomes s3** (shifts position as s2 is replaced by the
+      new non-technical scenario section).
+- [ ] **Delete "Common Failure Patterns" (current s4) entirely,
+      replace with a new section on how to think about testing a skill
+      and how to actually do it.** Must be practical and step-by-step,
+      not abstractions, per explicit instruction, and should speak back
+      to the non-technical scenario introduced in the new s2 (i.e., use
+      that same example when illustrating what testing looks like, not a
+      disconnected new example). **Resolved: keep the "Installing skills
+      from strangers" security-hygiene content** (malware in shared
+      skill repos) — user confirmed this guidance is worth keeping, not
+      dropping with the rest of the old s4. Placement not yet decided:
+      likely candidates are a closing note in the new testing section, or
+      a short addition to Build One, since it's about installing
+      someone else's skill rather than testing your own — leaving the
+      exact spot open for implementation.
+
+---
+
 ## Change log
 
+- 2026-08-16 — **Day 2 round-3 audit, implemented**, on
+  `review/full-site-audit-3`. Full arc: user reviewed all 8 Day 2 sessions
+  page by page (Batches 1–6 logged in "Full-scale site review, round 3"
+  above), asked for a grouped implementation plan before building
+  anything (see `~/.claude/plans/ok-let-s-take-stock-shimmying-rose.md`),
+  then approved it with three corrections: use this repo's own CLAUDE.md
+  as the "real example" rather than hunting external cross-department
+  examples, leave Plan Mode's position in the day unchanged (the
+  resequence-before-CLAUDE.md idea from Batch 5 was reverted), and verify
+  before writing whether VS Code's plan-review flow has an inline-comment
+  feature (and whether Claude Desktop has an equivalent) rather than
+  assuming.
+  - **All 8 sessions touched** (Overview + Slides, except 08-show-tell
+    which wasn't in scope): `01-debrief` (lede/exercise reframe),
+    `02-prompting` (dek, history items, exercise), `03-claude-md` (new
+    file-viewer component, cut technical examples, cross-department
+    reframe), `04-skills-best-practices` (new "Build One" step-by-step
+    replacing the case-study section, if/then rewrites, citation fixes),
+    `05-goal-plan-mode` (jargon pass, restructure, exercise removed),
+    `06-spec-driven-dev` (new "What a Spec Is" foundation, checklist
+    rebuilt as steps-with-questions, new starter-prompt component),
+    `07-revisit-build` (exercise rewritten to absorb the plan-mode
+    practice moved out of `05`).
+  - **Research**: 3 background agents (Sonnet, not a heavier model, per
+    explicit user instruction to match model to task rather than default
+    to the most capable one), run before writing per the established
+    plan-then-research-then-write discipline: Prompting (found a real
+    OpenAI comparable, its Oct 2024 Playground "Generate" feature, and
+    pulled Anthropic's actual Nov 2025 best-practices specifics),
+    CLAUDE.md (Anthropic's verbatim Include/Exclude table plus one
+    genuine self-check question, explicitly didn't invent extras),
+    Skills (real SKILL.md mechanics and a live-verified, accessible
+    replacement for a paywalled Medium citation).
+  - **New components, both new to the site**: a `<dialog>`-based
+    click-to-open file viewer (`docs/js/file-viewer.js`, new CSS in
+    `briefing.css`), first used to show this repo's actual `CLAUDE.md`
+    in place, see [ADR 0019](adr/0019-file-viewer-dialog.md); and a
+    styled `<pre><code>` starter-prompt block (`.code-block`), first
+    used in Spec-Driven Dev's checklist. Spec-Driven Dev's checklist
+    itself moved off `.process-wheel` (built for exactly 7 items per
+    ADR 0016, force-fit here for 4) onto `.history` + nested
+    `.field-notes.is-checklist`, the same steps-component now shared
+    with the new Skills build-walkthrough.
+  - **Judgment calls made during implementation, flagged rather than
+    silently decided**: removed `05-goal-plan-mode`'s "State Your Goal"
+    section entirely instead of leaving its framing text with no
+    exercise attached; removed the Hagar/MuckRock case study from Skills
+    rather than relocating it elsewhere, no obvious home found.
+  - **Verification**: `check-slide-parity.js` clean except two accepted,
+    reviewed mismatches (`03-claude-md` s3, `06-spec-driven-dev` s3) —
+    both are real content present in Slides as condensed prose instead
+    of matching `<li>` counts, not dropped items; consistent with the
+    script's own stated allowance for condensed wording. Grepped all
+    touched files for em-dashes (clean, except inside the verbatim
+    CLAUDE.md quote in the new file-viewer, which has to stay
+    byte-faithful to the real file) and for colon-joined clauses
+    (several fixed in both Overview and Slides). `<sup class="cite">`
+    open/close tags balanced across all touched files. All touched pages
+    served 200 from a local static server; new CSS brace-balanced, new
+    JS passes `node --check`; `<dialog>` open/close tags balanced.
+    **Not done**: no Playwright/browser automation tool was available in
+    this session, so the two new components were verified structurally
+    (valid markup, live 200s) but not visually screenshot-tested, unlike
+    this project's usual standard for layout-risk changes (see ADR
+    0016's verification). Worth a real visual pass before this ships.
+  - **Not done, still open**: `08-show-tell` wasn't reviewed in this
+    audit round; Day 3 hasn't been reviewed at all yet (this was
+    explicitly scoped to Day 2 only, per the user's original "start with
+    Day 2, then move to Day 3" instruction).
 - 2026-08-15 — **Day 2 content-depth revision**, on `review/full-site-audit-2`,
   addressing the "surface level... correct-but-generic" feedback logged in
   the 2026-08-13 Day 3 entry below. The user supplied a formal content
