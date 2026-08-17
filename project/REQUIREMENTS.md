@@ -125,8 +125,11 @@ map cleanly to one.
       rather than pre-guessing final wording. Slides decks aren't
       ported, still a Claude-authored condensation of Overview at
       implementation time. **Deferred to a new branch, not
-      `review/full-site-audit-3`** — tracked as
-      [GitHub issue #5](https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/issues/5).
+      `review/full-site-audit-3`** — tracked as part of the broader
+      full-site line-by-line edit pass,
+      [GitHub issue #6](https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/issues/6)
+      (Adiel tagged there for visibility; supersedes the earlier, now
+      closed, issue #5, which scoped this too narrowly to just Day 2).
       This branch ships with the drafts present but unedited/unimplemented.
       **If this pans out**: same treatment for Day 1 and Day 3, and a
       proper Claude Code skill to generate/refresh these drafts (built
