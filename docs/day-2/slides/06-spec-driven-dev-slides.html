@@ -36,37 +36,56 @@
             <p class="cover-dek">AI models are excellent at pattern completion and poor at mind reading. A spec closes that gap.</p>
             <div class="cover-meta"><span>2:00 PM</span><span class="div">·</span><span>30 MIN</span><span class="div">·</span><span>Lecture</span></div>
             <ul class="cover-contents">
-              <li><button type="button" data-jump="s1"><span class="n">01</span> The Core Idea</button></li>
-              <li><button type="button" data-jump="s2"><span class="n">02</span> The Checklist</button></li>
-              <li><button type="button" data-jump="s3"><span class="n">03</span> Why This Connects to Skills</button></li>
+              <li><button type="button" data-jump="s1"><span class="n">01</span> What a Spec Is</button></li>
+              <li><button type="button" data-jump="s2"><span class="n">02</span> The Core Idea</button></li>
+              <li><button type="button" data-jump="s3"><span class="n">03</span> The Checklist</button></li>
+              <li><button type="button" data-jump="s4"><span class="n">04</span> Why This Connects to Skills</button></li>
             </ul>
           </div>
         </section>
 
         <section class="slide" data-slide="s1">
           <div class="slide-inner">
-            <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">The Core Idea</h2></div>
-            <p class="lede">Spec-driven development inverts the usual workflow: the spec becomes the source of truth, code becomes a generated or verified secondary artifact. GitHub's spec-kit independently describes the same inversion.</p>
-            <p>The spec declares intent, the code realizes it. A vague prompt leaves Claude guessing. A spec gives it enough to match your intent instead of inventing one. Works best on new, well-scoped work, less so on a large existing codebase.</p>
+            <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">What a Spec Is</h2></div>
+            <p class="lede">A spec, short for specification, is a written description of what something should do, worked out before anyone builds it. Product and design teams have used them for decades.</p>
+            <p>An engineer writes what a feature needs to accomplish. A designer writes what a screen needs to show. An editor writes what a story needs to cover before a reporter starts. Same habit everywhere. Agree what "done" looks like before you start.</p>
+            <p>A useful spec has three parts. The requirements, what has to be true when it's finished. The constraints, what can't be true. The acceptance criteria, how you'll know it's actually done.</p>
           </div>
         </section>
 
         <section class="slide" data-slide="s2">
           <div class="slide-inner">
-            <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">The Checklist</h2></div>
-            <ol class="process-wheel">
-              <li><span class="era">1</span><h3>Specify</h3><p>What should it do? No implementation details yet. Spec-kit and Kiro both start here too.</p></li>
-              <li><span class="era">2</span><h3>Plan</h3><p>How should you build it? The step that resists automation most, one team found, it needs human judgment.</p></li>
-              <li><span class="era">3</span><h3>Implement</h3><p>Small, validated increments. That team saw ~2-3x throughput over a year running this loop.</p></li>
-              <li class="is-hinge"><span class="era">4</span><h3>Validate</h3><p>Does the code meet the spec? Real tools check continuously between phases, not just at the end.</p></li>
-            </ol>
-            <p class="pull-question">A spec that isn't updated when the code changes doesn't just go unused, it actively misleads.</p>
+            <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">The Core Idea</h2></div>
+            <p class="lede">Spec-driven development applies that same habit to working with an AI coding assistant. It inverts the usual workflow. The spec becomes the source of truth, code becomes something generated and checked against it.</p>
+            <p>AI models are excellent at pattern completion, matching what you ask against patterns they've seen, and poor at mind reading. A vague prompt leaves Claude guessing. A spec gives it enough to match your intent instead of inventing one. Works best on new, well-scoped work, less so on a large existing project's code.</p>
           </div>
         </section>
 
         <section class="slide" data-slide="s3">
           <div class="slide-inner">
-            <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">Why This Connects to Skills</h2></div>
+            <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">The Checklist</h2></div>
+            <ol class="history">
+              <li><span class="era">1</span><h3>Specify</h3><p>What should it do, not how? What does "finished" look like? Only one reasonable reading, or several?</p></li>
+              <li><span class="era">2</span><h3>Plan</h3><p>What's the approach? Whose judgment does this need, not just the model's?</p></li>
+              <li><span class="era">3</span><h3>Implement</h3><p>Small, checkable pieces, not one giant leap. Does each one do what step 1 said?</p></li>
+              <li class="is-hinge"><span class="era">4</span><h3>Validate</h3><p>Does it match the spec? If not, was the spec wrong, or the build? Either way, the spec stays the authority.</p></li>
+            </ol>
+            <p class="code-block-label">starter-prompt.md</p>
+            <pre class="code-block"><code>I want to build [describe the project].
+Here's what I worked out:
+Specify: [what it should do, what "finished" means]
+Plan: [the approach]
+Implement: [pieces to build separately]
+Validate: [how you'll know it's done]
+
+Turn this into a spec, then propose a plan before building.</code></pre>
+            <p class="pull-question">A spec that isn't updated when the code changes doesn't just go unused, it actively misleads.</p>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s4">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Why This Connects to Skills</h2></div>
             <p>Specs, done well, act as modular building blocks Claude can work from directly, close to what a Skill does when it packages expertise for reuse.</p>
             <p class="pull-question">A Skill is essentially a pre-written spec for a kind of task you'll do again.</p>
           </div>

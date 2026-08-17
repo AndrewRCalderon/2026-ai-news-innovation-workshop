@@ -314,6 +314,26 @@ html.briefing-deck, body.briefing-deck { height: 100%; overflow: hidden; margin:
   .process-wheel .era { margin: 0 0 0.2em; }
 }
 
+/* Starter-prompt code block — a copy-able markdown block, e.g. for a
+   prompt template. First use: Spec-Driven Development's checklist. */
+.code-block-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: var(--sp-2); }
+.code-block { margin: var(--sp-2) 0 var(--sp-4); padding: var(--sp-3) var(--sp-4); background: var(--surface); border: 1px solid var(--border-strong); border-radius: 3px; overflow-x: auto; }
+.code-block code { display: block; font-family: var(--mono); font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap; color: var(--ink); }
+
+/* File viewer — a native <dialog> showing a real file's contents in
+   place, click to open/close (not hover, unlike .cite-pop above, which
+   is too small for this). First use: CLAUDE.md's real example
+   (03-claude-md.html). See project/adr/0019-file-viewer-dialog.md. */
+.file-viewer-trigger { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.03em; padding: 0.5em 0.9em; border: 1px solid var(--accent-primary-strong); background: none; color: var(--accent-primary-strong); cursor: pointer; }
+.file-viewer-trigger:hover { background: var(--accent-primary-strong); color: var(--surface); }
+.file-viewer { width: min(680px, 92vw); max-height: 80vh; padding: 0; border: 1px solid var(--border-strong); border-radius: 3px; background: var(--bg); color: var(--ink); }
+.file-viewer::backdrop { background: rgba(0, 0, 0, 0.55); }
+.file-viewer-head { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); }
+.file-viewer-name { font-family: var(--mono); font-size: 0.85rem; font-weight: 700; }
+.file-viewer-close { all: unset; cursor: pointer; font-family: var(--mono); font-size: 1rem; color: var(--ink-soft); padding: 0.2em 0.5em; }
+.file-viewer-close:hover { color: var(--accent-primary-strong); }
+.file-viewer-body { margin: 0; padding: var(--sp-4); font-family: var(--mono); font-size: 0.82rem; line-height: 1.6; white-space: pre-wrap; overflow-y: auto; max-height: calc(80vh - 3.5rem); }
+
 .idea-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--sp-3); margin: var(--sp-4) 0; }
 .idea-card { background: var(--surface); border: 1px solid var(--border-strong); padding: var(--sp-3); }
 .idea-card h3 { margin: 0 0 var(--sp-2); font-size: 1rem; }
