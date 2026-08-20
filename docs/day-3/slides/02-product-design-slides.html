@@ -33,13 +33,13 @@
         <section class="slide slide-cover" data-slide="cover">
           <div class="slide-inner">
             <h1 class="cover-title">Product Design</h1>
-            <p class="cover-dek">Not "is the AI good." Whether the experience around it earns trust.</p>
+            <p class="cover-dek">Not AI for AI's sake, but whether its use earns trust.</p>
             <div class="cover-meta"><span>10:30 AM</span><span class="div">·</span><span>45 MIN</span><span class="div">·</span><span>Lecture</span></div>
             <ul class="cover-contents">
               <li><button type="button" data-jump="s1"><span class="n">01</span> The Confident-Wrongness Problem</button></li>
               <li><button type="button" data-jump="s2"><span class="n">02</span> Framing Changes Everything</button></li>
               <li><button type="button" data-jump="s3"><span class="n">03</span> The One Pattern Every Case Study Agrees On</button></li>
-              <li><button type="button" data-jump="s4"><span class="n">04</span> Design the Disclosure</button></li>
+              <li><button type="button" data-jump="s4"><span class="n">04</span> Design for Transparency</button></li>
             </ul>
           </div>
         </section>
@@ -56,11 +56,8 @@
         <section class="slide" data-slide="s2">
           <div class="slide-inner">
             <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">Framing Changes Everything</h2></div>
-            <div class="stat-pull">
-              <span class="num">43%</span>
-              <span class="cap">comfort: "human-led, AI-assisted"</span>
-            </div>
-            <p>Versus <strong>21%</strong> for "AI-led, with human oversight," describing the same workflow. How you describe what your tool does changes trust, independent of what it actually does.</p>
+            <p class="lede">The same process and product, described two different ways, can get different trust measures.</p>
+            <p>"Human-led, AI-assisted" got 43% comfort, versus 21% for "AI-led, with human oversight," describing the same workflow. Same work, different label, double the comfort.</p>
             <p>And it's a moving target: chatbot use for news rose from 7% to 10% globally in a year, and people mostly reach for one to act on the news, not to feel something about it.</p>
           </div>
         </section>
@@ -75,23 +72,29 @@
               <div class="roster-row"><dt>Adelaide (Forbes)</dt><dd>"We only want to provide our users with our trusted journalism."</dd></div>
               <div class="roster-row"><dt>Rai (Rappler)</dt><dd>Hyper-strict guardrails against outside information.</dd></div>
             </dl>
-            <p>Four small-newsroom bots: the two scoped to a narrow, unchanging job worked reliably. The two trying to search a whole growing archive couldn't keep current with a 3-person newsroom.</p>
+            <p>Scope is the key. Use cases that stick to a narrow, well-defined job answer reliably. A large corpus or a general-purpose tool increases the likelihood of falsehood and inaccuracy.</p>
           </div>
         </section>
 
         <section class="slide" data-slide="s4">
           <div class="slide-inner">
-            <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Design the Disclosure</h2></div>
-            <p class="lede">Detailed disclosures actually reduced trust slightly, though most readers preferred them anyway. The fix: give people the choice.</p>
+            <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Design for Transparency</h2></div>
+            <p class="lede">Telling people you used AI is an interface decision, and the details of that decision measurably change trust.</p>
+            <p>Detailed disclosures actually made readers slightly less trusting than a one-line label, even though most preferred the detailed version. Researchers call this the "transparency dilemma."</p>
+            <p>One study made this concrete: 93% of an AI article's claims linked back to their source, versus 25% for human-written comparisons, and readers rated it more transparent. Six patterns for giving readers that choice:</p>
             <ul class="field-notes">
-              <li>Detail-on-demand: an info icon, not a forced block of text.</li>
-              <li>Highlight-for-glancing: mark the passages AI touched.</li>
-              <li>Outlet-level transparency: publish your policy once.</li>
+              <li><strong>Highlight-for-glancing:</strong> mark the passages AI touched, scannable without breaking flow.</li>
+              <li><strong>Info button:</strong> a small icon readers click for full disclosure, not a forced block of text.</li>
+              <li><strong>Outlet-level disclosure:</strong> publish your AI policy once, not per article.</li>
+              <li><strong>Proportional AI-ratio visualization:</strong> a percentage bar showing how much AI touched.</li>
+              <li><strong>Visual trust stamp:</strong> a badge for responsible AI use.</li>
+              <li><strong>"No AI used" label:</strong> disclosure as a signal that works both directions.</li>
             </ul>
-            <p>One case made this concrete: 93% of an AI article's claims linked back to their source, versus 25% for human-written comparisons, and readers rated it more transparent.</p>
+            <img class="setup-shot" src="/assets/images/product-design-disclosure-patterns.png" alt="Six AI-disclosure patterns mocked up on the same sample article: highlight-for-glancing, info button, outlet-level disclosure, proportional AI-ratio visualization, visual trust stamp, and &quot;no AI used&quot; label">
             <div class="exercise-box">
-              <h3>🎯 Apply This</h3>
-              <p><strong>Description:</strong> What's your one source of truth? Draft one disclosure sentence: "We used [tool] to help us [what it did]. We [verified/reviewed] it by [how]."</p>
+              <h3>🎯 Exercise: Apply This</h3>
+              <p><strong>Description:</strong> For your own project, draft a disclosure plan for AI use and for sourcing. What approach will you experiment with, and why?</p>
+              <p><strong>Deliverable:</strong> Share your thoughts with the group.</p>
             </div>
           </div>
         </section>
