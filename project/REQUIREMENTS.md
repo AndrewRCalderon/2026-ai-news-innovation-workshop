@@ -60,9 +60,10 @@ Automation," Green & Chen). See
 [content-architecture-notes.md](content-architecture-notes.md) for
 editorial patterns pulled from this pass, kept for the Day 1 rewrite.
 
-**2026-08-20, continued: copy-draft re-implementation done.** All of Day 3
-(7/7 pages: `01-recap` through `07-final-show-and-tell`) and 7 of Day 2's 8
-pages (`04-skills-best-practices` excluded, see below) had their live
+**2026-08-20, continued: copy-draft re-implementation done, all 15 pages.**
+All of Day 3 (7/7 pages: `01-recap` through `07-final-show-and-tell`) and
+all of Day 2 (8/8, including `04-skills-best-practices`, implemented in a
+follow-up pass once its draft was reviewed and confirmed) had their live
 Overview HTML and Slides companions rebuilt from the edited copy-drafts,
 matching the established Day 2 round-3 pattern (prose/citations/components
 carried over, page skeleton — nav, breadcrumb, masthead, TOC, footer —
@@ -97,12 +98,14 @@ documented in [ADR 0020](adr/0020-file-viewer-inline-collapsible.md)
 (supersedes [ADR 0019](adr/0019-file-viewer-dialog.md), swapping the
 `<dialog>` popup for a native `<details>` disclosure in the process).
 
-**Still open**: `04-skills-best-practices.md` — the structural rewrite is
-drafted (new §2 non-technical scenario, §3 folded advice, new §4 testing
-section, further revised per a user note to frame Build One around
-directing Claude rather than hand-authoring `SKILL.md`) but **not yet
-implemented into HTML**, paused for the user to finish reviewing the
-draft. The codebase hygiene sweep, the model-selection/token-usage content
+`04-skills-best-practices.html`'s structural rewrite (new §2 non-technical
+scenario, §3's advice folded in and reframed around directing Claude to
+build the skill rather than hand-authoring `SKILL.md`, new §4 testing
+section replacing the old failure-pattern list) is now implemented into
+both Overview and Slides, parity-clean, verified visually. This closes out
+the entire Day 2 + Day 3 copy-draft re-implementation initiative.
+
+**Still open**: the codebase hygiene sweep, the model-selection/token-usage content
 idea (now also covering subagent/consumption-guardrail content, see the
 Newly Identified Tasks entry below), Day 1's still-nonexistent copy-drafts,
 and the site-wide workshop-name/em-dash/colon sweeps (deferred to Day 1's
@@ -2043,40 +2046,29 @@ the exercise as the annotation tool.
       appears there; kept tone-of-language, words-to-avoid, and
       commitment-to-certain-tools as the genuinely new material).
 
-**`04-skills-best-practices.html`** — structural rewrite, not just copy:
-- [ ] **New section 2: a non-technical "when you'd know you need a
-      skill" scenario.** Illustrates, concretely and without technical
-      jargon, the kind of moment that should prompt someone to turn
-      something into a Skill. Content/example not yet drafted.
-- [x] **Resolved: current s2 ("What Actually Makes This Work") gets
-      folded into Build One (s3), not deleted outright.** User confirmed:
-      fold it in, but adhere to the original feedback already logged for
-      this section (Batch 4 above) when doing so — i.e. the two specific
-      improvements (explain what a Gotchas section actually is and what
-      goes into it, rather than the current phrasing; give a positive
-      example of a specific trigger-description, not just the current
-      negative one, "helps with content creation") must land inside Build
-      One written in Batch 4's established style: an explained if/then,
-      cause-and-effect pattern, not a flat statement of fact. Likely
-      lands inside step 3 ("fill it in like an onboarding doc"), which
-      already touches gotchas and description-writing, but not
-      confirmed, just the natural fit.
-- [ ] **Build One becomes s3** (shifts position as s2 is replaced by the
-      new non-technical scenario section).
-- [ ] **Delete "Common Failure Patterns" (current s4) entirely,
-      replace with a new section on how to think about testing a skill
-      and how to actually do it.** Must be practical and step-by-step,
-      not abstractions, per explicit instruction, and should speak back
-      to the non-technical scenario introduced in the new s2 (i.e., use
-      that same example when illustrating what testing looks like, not a
-      disconnected new example). **Resolved: keep the "Installing skills
-      from strangers" security-hygiene content** (malware in shared
-      skill repos) — user confirmed this guidance is worth keeping, not
-      dropping with the rest of the old s4. Placement not yet decided:
-      likely candidates are a closing note in the new testing section, or
-      a short addition to Build One, since it's about installing
-      someone else's skill rather than testing your own — leaving the
-      exact spot open for implementation.
+**`04-skills-best-practices.html`** — structural rewrite, not just copy.
+**All items implemented 2026-08-20:**
+- [x] **New section 2: a non-technical "when you'd know you need a
+      skill" scenario.** Landed as "When You'd Know You Need One": a
+      README-explaining-itself-four-times example, with the same signal
+      shown in reverse (a repeated correction) and a closing line pointing
+      at directing Claude to build the skill.
+- [x] **Old s2 ("What Actually Makes This Work") folded into Build One
+      (s3), not deleted outright.** Landed inside step 3 ("Review the
+      description it wrote"), in if/then cause-and-effect style: the
+      description-specificity point and the watched-not-imagined gotchas
+      point both moved there; the baseline-testing point moved into step 4
+      instead, since that step is literally about testing.
+- [x] **Build One becomes s3**, but further reframed per a user note
+      given while reviewing the draft: steps now center on directing
+      Claude to build the skill and reviewing what it produces ("Direct
+      Claude to build it," "Review the description it wrote"), not
+      hand-authoring `SKILL.md` yourself.
+- [x] **"Common Failure Patterns" (old s4) deleted, replaced with
+      "Testing It For Real."** Practical and step-by-step, speaks back to
+      the new s2 scenario (hands the same README skill a messy real case).
+      "Installing skills from strangers" kept, landed in the new s4 as
+      originally leaning toward (not moved into Build One).
 
 ---
 
