@@ -42,11 +42,6 @@ If a prompt isn't landing, asking Claude to improve it is a legitimate move, not
 
 ## 4. Rewrite One of Yours
 
-<!-- Pending, logged in REQUIREMENTS.md Batch 7: change the deliverable
-     so it's them annotating the prompt itself using the three questions
-     below as a tool of inquiry, rather than writing separate reflection
-     sentences. Description/questions below are unchanged; only the
-     Deliverable line needs to change. -->
 > **Exercise: Rewrite a Day 1 Prompt**
 > - Time: ~15 minutes.
 > - Description: Find a prompt from yesterday that didn't get you what you wanted. Hand it to Claude and ask it to improve the prompt. You can prompt Claude to ask you questions to help it refine your prompt. 

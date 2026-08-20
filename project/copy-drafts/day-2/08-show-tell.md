@@ -1,7 +1,3 @@
-<!-- This page hasn't been reviewed yet in the round-3 audit (no feedback
-     logged in REQUIREMENTS.md). Included here so you can review/edit it
-     the same way as the rest of Day 2, since we're porting the whole day. -->
-
 # Show & Tell + Critique
 
 > We are in day two of building. Let's see what you've done and get some smart feedback from the group.

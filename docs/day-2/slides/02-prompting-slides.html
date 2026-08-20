@@ -53,7 +53,7 @@
               <li class="is-hinge"><span class="era">Dec 2022</span><h3>The role-play era</h3><p>"Awesome ChatGPT Prompts" popularized assigning Claude a persona: "act as a linux terminal," "act as an English translator." This was the dominant advice.</p></li>
               <li><span class="era">2023</span><h3>A six-figure job title</h3><p>"Prompt engineer" postings reportedly reached $335,000.</p></li>
               <li><span class="era">2024</span><h3>Claude starts writing prompts for you</h3><p>Anthropic shipped a Prompt Generator, then a Prompt Improver. OpenAI shipped a similar "Generate" feature the same year.</p></li>
-              <li><span class="era">2025</span><h3>Less scaffolding, more curation</h3><p>Anthropic got specific. Heavy role prompting and XML scaffolding matter less now. Being explicit, explaining your reasoning, and giving real examples matter more.</p></li>
+              <li><span class="era">2025</span><h3>Less scaffolding, more curation</h3><p>Anthropic got specific about curation rather than prompt engineering. Heavy role prompting and XML scaffolding matter less now. Being explicit, explaining your reasoning, and giving real examples plus curated contextualization matter more.</p></li>
             </ol>
           </div>
         </section>
@@ -61,24 +61,7 @@
         <section class="slide" data-slide="s2">
           <div class="slide-inner">
             <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">What Works Now</h2></div>
-            <p class="lede">Fewer "always" and "never" rules. A long list of directives is a strong impulse for Claude, especially once one conflicts with what you actually asked for.</p>
-            <div class="compare-grid">
-              <div class="compare-col is-primary">
-                <h3>Before</h3>
-                <ul>
-                  <li>"if you make a front-end change, always verify"</li>
-                  <li>"implement a function that validates email addresses"</li>
-                </ul>
-              </div>
-              <div class="compare-col is-secondary">
-                <h3>After</h3>
-                <ul>
-                  <li>"when you make larger changes, please run the app locally"</li>
-                  <li>"write validateEmail. test cases: user@example.com true, invalid false. run tests after"</li>
-                </ul>
-              </div>
-            </div>
-            <p class="pull-question">Give Claude a way to check its own work. Claude Code's creator: "this is another 2-3x."</p>
+            <p class="lede">Two failure patterns worth recognizing when they happen:</p>
             <ul class="field-notes">
               <li>The kitchen sink session: unrelated tasks piled into one conversation. Fix: one goal per session, /clear before the next.</li>
               <li>Correcting the same thing twice: the context is cluttered, not clearer. Fix: clear it and rewrite the prompt.</li>
@@ -108,7 +91,7 @@
                 <li>Did it add a way to check the result?</li>
                 <li>Did it drop something unnecessary?</li>
               </ul>
-              <p><strong>Deliverable:</strong> What did you actually want the prompt to do? What could you have told Claude the first time to get there?</p>
+              <p><strong>Deliverable:</strong> Your original prompt, marked up directly, noting where each question above applies.</p>
             </div>
           </div>
         </section>

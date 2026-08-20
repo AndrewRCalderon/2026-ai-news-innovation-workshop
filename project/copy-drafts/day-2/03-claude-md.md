@@ -20,21 +20,15 @@ CLAUDE.md is for what's true every time you open a new chat. It's foundational c
 
 This workshop's own repository has a CLAUDE.md file. It's not a hypothetical, it's the actual file governing how this website gets built. [See it on GitHub](https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/blob/main/CLAUDE.md), or open the whole thing right here.
 
-<!-- Pending, logged in REQUIREMENTS.md Batch 7: this button currently
-     opens a popup that user reports is illegible ("shows a long string").
-     Fix is a design change, not a copy edit: replace with an inline
-     collapsible element that opens in place instead of a popup. Not
-     something to resolve in this markdown file — the embedded file
-     content below is a verbatim, byte-faithful copy of this repo's real
-     CLAUDE.md, not something to edit here; edit the actual CLAUDE.md
-     file if it needs to change. -->
-[Embedded file viewer: shows this repo's actual `CLAUDE.md`, verbatim.]
-
 Three things worth noticing about it, and worth copying into your own:
 
 **It points, it doesn't duplicate**: Instead of listing every task, it says: read `project/REQUIREMENTS.md` for current status. The file stays short because it delegates to other files rather than repeating their contents.
-**It states what can't be inferred from code**: A rule like "any non-trivial technical decision gets a new numbered file in `project/adr/`" isn't something Claude could guess by reading the codebase. That's exactly the kind of thing that belongs here. 
+**It states what can't be inferred from code**: A rule like "any non-trivial technical decision gets a new numbered file in `project/adr/`" isn't something Claude could guess by reading the codebase. That's exactly the kind of thing that belongs here.
 **It's organized by when you'd need it**: Sections for "before starting work," "while working," and "repo layout" map to the actual moments in a session, not an abstract table of contents.
+
+[Embedded file viewer, inline collapsible: shows this repo's actual `CLAUDE.md`, verbatim. Not something to edit here; edit the actual CLAUDE.md file if it needs to change.]
+
+That's the shape worth copying, whatever your own project is about: point instead of duplicate, write down what Claude can't guess on its own, and organize around when you'll actually need each part. It's also the place to document decisions your team has already made about the product itself, the tone of the language across your site, words to avoid, or a commitment to only use certain kinds of tools. The decisions in your file might come from a design system, an audience persona, or a build process like this one, the habit is the same either way.
 
 ## 3. What Belongs In One
 

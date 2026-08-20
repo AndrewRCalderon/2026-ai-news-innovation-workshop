@@ -39,7 +39,6 @@
               <li><button type="button" data-jump="s1"><span class="n">01</span> What a Spec Is</button></li>
               <li><button type="button" data-jump="s2"><span class="n">02</span> The Core Idea</button></li>
               <li><button type="button" data-jump="s3"><span class="n">03</span> The Checklist</button></li>
-              <li><button type="button" data-jump="s4"><span class="n">04</span> Why This Connects to Skills</button></li>
             </ul>
           </div>
         </section>
@@ -67,27 +66,21 @@
             <ol class="history">
               <li><span class="era">1</span><h3>Specify</h3><p>What should it do, not how? What does "finished" look like? Only one reasonable reading, or several?</p></li>
               <li><span class="era">2</span><h3>Plan</h3><p>What's the approach? Whose judgment does this need, not just the model's?</p></li>
-              <li><span class="era">3</span><h3>Implement</h3><p>Small, checkable pieces, not one giant leap. Does each one do what step 1 said?</p></li>
+              <li><span class="era">3</span><h3>Implement</h3><p>Small, checkable pieces, not one giant leap. Does each one do what it said?</p></li>
               <li class="is-hinge"><span class="era">4</span><h3>Validate</h3><p>Does it match the spec? If not, was the spec wrong, or the build? Either way, the spec stays the authority.</p></li>
             </ol>
             <p class="code-block-label">starter-prompt.md</p>
             <pre class="code-block"><code>I want to build [describe the project].
 Here's what I worked out:
 Specify: [what it should do, what "finished" means]
-Plan: [the approach]
+Plan: [approach + what it has to work with]
 Implement: [pieces to build separately]
 Validate: [how you'll know it's done]
 
-Turn this into a spec, then propose a plan before building.</code></pre>
-            <p class="pull-question">A spec that isn't updated when the code changes doesn't just go unused, it actively misleads.</p>
-          </div>
-        </section>
-
-        <section class="slide" data-slide="s4">
-          <div class="slide-inner">
-            <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Why This Connects to Skills</h2></div>
-            <p>Specs, done well, act as modular building blocks Claude can work from directly, close to what a Skill does when it packages expertise for reuse.</p>
-            <p class="pull-question">A Skill is essentially a pre-written spec for a kind of task you'll do again.</p>
+Turn this into requirements.md, architecture.md, and tasks.md.
+Update CLAUDE.md to point to them, then treat them as the
+source of truth.</code></pre>
+            <p class="pull-question">Files that aren't updated when the project changes don't just go unused, they actively mislead.</p>
           </div>
         </section>
 

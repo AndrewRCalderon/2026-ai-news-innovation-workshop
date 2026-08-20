@@ -320,19 +320,21 @@ html.briefing-deck, body.briefing-deck { height: 100%; overflow: hidden; margin:
 .code-block { margin: var(--sp-2) 0 var(--sp-4); padding: var(--sp-3) var(--sp-4); background: var(--surface); border: 1px solid var(--border-strong); border-radius: 3px; overflow-x: auto; }
 .code-block code { display: block; font-family: var(--mono); font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap; color: var(--ink); }
 
-/* File viewer — a native <dialog> showing a real file's contents in
-   place, click to open/close (not hover, unlike .cite-pop above, which
-   is too small for this). First use: CLAUDE.md's real example
-   (03-claude-md.html). See project/adr/0019-file-viewer-dialog.md. */
-.file-viewer-trigger { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.03em; padding: 0.5em 0.9em; border: 1px solid var(--accent-primary-strong); background: none; color: var(--accent-primary-strong); cursor: pointer; }
-.file-viewer-trigger:hover { background: var(--accent-primary-strong); color: var(--surface); }
-.file-viewer { width: min(680px, 92vw); max-height: 80vh; padding: 0; border: 1px solid var(--border-strong); border-radius: 3px; background: var(--bg); color: var(--ink); }
-.file-viewer::backdrop { background: rgba(0, 0, 0, 0.55); }
-.file-viewer-head { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); }
+/* File viewer — a native <details>/<summary> disclosure showing a real
+   file's contents inline, in place, rather than in an overlay. First use:
+   CLAUDE.md's real example (03-claude-md.html). See
+   project/adr/0020-file-viewer-inline-collapsible.md (supersedes
+   project/adr/0019-file-viewer-dialog.md, whose <dialog>-based popup
+   proved illegible). */
+.file-viewer-inline { border: 1px solid var(--border-strong); border-radius: 3px; margin: var(--sp-3) 0; background: var(--bg); color: var(--ink); }
+.file-viewer-inline > summary { cursor: pointer; list-style: none; font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.03em; padding: 0.5em 0.9em; color: var(--accent-primary-strong); }
+.file-viewer-inline > summary::-webkit-details-marker { display: none; }
+.file-viewer-inline > summary:hover { background: var(--accent-primary-strong); color: var(--surface); }
+.file-viewer-inline[open] > summary { border-bottom: 1px solid var(--border); }
+.file-viewer-head { display: flex; align-items: center; padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--border); }
 .file-viewer-name { font-family: var(--mono); font-size: 0.85rem; font-weight: 700; }
-.file-viewer-close { all: unset; cursor: pointer; font-family: var(--mono); font-size: 1rem; color: var(--ink-soft); padding: 0.2em 0.5em; }
-.file-viewer-close:hover { color: var(--accent-primary-strong); }
-.file-viewer-body { margin: 0; padding: var(--sp-4); font-family: var(--mono); font-size: 0.82rem; line-height: 1.6; white-space: pre-wrap; overflow-y: auto; max-height: calc(80vh - 3.5rem); }
+.file-viewer-body { margin: 0; padding: var(--sp-4); font-family: var(--mono); font-size: 0.82rem; line-height: 1.6; white-space: pre-wrap; overflow-x: auto; overflow-y: auto; max-height: 60vh; }
+.file-viewer-body code { white-space: pre-wrap; background: none; border: none; padding: 0; }
 
 .idea-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--sp-3); margin: var(--sp-4) 0; }
 .idea-card { background: var(--surface); border: 1px solid var(--border-strong); padding: var(--sp-3); }

@@ -56,22 +56,17 @@
           <div class="slide-inner">
             <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">A Real Example</h2></div>
             <p>This workshop's own repo has a CLAUDE.md file. It's not hypothetical, it's the actual file governing this website's build.</p>
-            <button type="button" class="file-viewer-trigger" data-file-viewer="claude-md-example">Open CLAUDE.md →</button>
             <dl class="roster">
               <div class="roster-row"><dt>It points, it doesn't duplicate</dt><dd>Delegates to other files instead of repeating them.</dd></div>
-              <div class="roster-row"><dt>States what can't be inferred</dt><dd>Rules Claude couldn't guess from reading code, like a robotics lab's note that existing code is human-verified but not necessarily optimal.</dd></div>
+              <div class="roster-row"><dt>States what can't be inferred</dt><dd>Rules Claude couldn't guess from reading code.</dd></div>
               <div class="roster-row"><dt>Organized by when you'd need it</dt><dd>Maps to actual moments in a session.</dd></div>
             </dl>
-            <p>The habit worth copying: point instead of duplicate, write down what Claude can't guess, organize around when you'll need it.</p>
-          </div>
-        </section>
-
-        <dialog class="file-viewer" id="claude-md-example">
-          <div class="file-viewer-head">
-            <span class="file-viewer-name">CLAUDE.md</span>
-            <button type="button" class="file-viewer-close" data-file-viewer-close aria-label="Close">✕</button>
-          </div>
-          <pre class="file-viewer-body"><code># CLAUDE.md — Maintainer / Build Guide
+            <details class="file-viewer-inline">
+              <summary>Open CLAUDE.md →</summary>
+              <div class="file-viewer-head">
+                <span class="file-viewer-name">CLAUDE.md</span>
+              </div>
+              <pre class="file-viewer-body"><code># CLAUDE.md — Maintainer / Build Guide
 
 This file is for Claude Code sessions working **on** this repository —
 building the workshop website itself. It is not shown to workshop students.
@@ -110,7 +105,10 @@ are separate files).
 - `STUDENT_CLAUDE_GUIDE.md`, `SUBMISSION_GUIDE.md` — content students copy
   into their own workflow. Treat as content-fill deliverables, not this
   file's concern.</code></pre>
-        </dialog>
+            </details>
+            <p>The habit worth copying: point instead of duplicate, write down what Claude can't guess, organize around when you'll need it. It's also where you'd note your product's tone, words to avoid, or a commitment to certain tools.</p>
+          </div>
+        </section>
 
         <section class="slide" data-slide="s3">
           <div class="slide-inner">
@@ -180,6 +178,5 @@ are separate files).
 
   <script src="/js/deck.js"></script>
   <script src="/js/citations.js"></script>
-  <script src="/js/file-viewer.js"></script>
 </body>
 </html>
