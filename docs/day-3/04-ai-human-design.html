@@ -15,16 +15,17 @@
 
     <header class="masthead">
       <h1 class="masthead-title">AI-Human Design</h1>
-      <p class="masthead-dek">"Keep a human in the loop" isn't automatically the safe choice. It's a design decision, and like any design decision, it can be done badly.</p>
+      <p class="masthead-dek">Neither human-in-the-loop nor full automation is the safe default. Both are design decisions, made stage by stage, and either one can be gotten wrong.</p>
       <div class="masthead-meta"><span id="topic-time">--</span><span class="div">·</span><span id="topic-duration">--</span><span class="div">·</span><span id="topic-type">--</span></div>
     </header>
 
     <nav class="toc" aria-label="Sections in this briefing">
       <ol>
-        <li><a href="#s1"><span class="n">01</span> Before You Automate, Three Questions</a></li>
+        <li><a href="#s1"><span class="n">01</span> Human in the Loop Isn't the Default</a></li>
         <li><a href="#s2"><span class="n">02</span> A Checkpoint Isn't Automatically Safer</a></li>
         <li><a href="#s3"><span class="n">03</span> What a Real Checkpoint Looks Like</a></li>
         <li><a href="#s4"><span class="n">04</span> Two Failures, Opposite Directions</a></li>
+        <li><a href="#s5"><span class="n">05</span> Same Judgment, When You're the One Coding</a></li>
       </ol>
     </nav>
 
@@ -35,8 +36,10 @@
 
     <article>
       <section class="block reveal" id="s1">
-        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">Before You Automate, Three Questions</h2></div>
-        <p class="lede">Microsoft's own guidelines for human-AI interaction, tested across 20 shipped products, don't give a hard threshold. They give three things worth checking before you let a tool act unsupervised.<sup class="cite" data-url="https://www.microsoft.com/en-us/research/blog/guidelines-for-human-ai-interaction-design/" data-note="Amershi et al., 'Guidelines for Human-AI Interaction,' CHI 2019, Microsoft Research: 18 guidelines validated against 20 shipped AI products with 49 design practitioners.">*</sup></p>
+        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">Human in the Loop Isn't the Default</h2></div>
+        <p class="lede">AI is often used to automate a process end to end. For a while, the default answer to a safety question was to add a human checkpoint. Human oversight matters, but it isn't automatically the responsible choice any more than automation is. The real question is which one actually fits a given stage of a given process.</p>
+        <p>Two situations that look similar from the outside can call for opposite answers. Sometimes you slow a process down by adding a human step you don't strictly need. You do it anyway because the person benefits from sitting with the output. It deepens their own understanding of the work, or gives them context they'll need at a later stage. Other times a human's perspective, context, or verification genuinely isn't needed at a given point. You let the process run automated from top to bottom and bring a person in only at the very end, to check the final result.</p>
+        <p>Microsoft's own guidelines for human-AI interaction, tested across 20 shipped products, don't give a hard threshold for which situation you're in. They give three things worth checking before you let a tool act unsupervised.<sup class="cite" data-url="https://www.microsoft.com/en-us/research/blog/guidelines-for-human-ai-interaction-design/" data-note="Amershi et al., 'Guidelines for Human-AI Interaction,' CHI 2019, Microsoft Research: 18 guidelines validated against 20 shipped AI products with 49 design practitioners.">*</sup></p>
         <ul class="field-notes">
           <li>How cheap is it to notice and undo the mistake? If correction is cheap, more autonomy is defensible. If it's expensive, the checkpoint needs to come before the action, not after.<sup class="cite" data-url="https://www.microsoft.com/en-us/research/blog/guidelines-for-human-ai-interaction-design/" data-note="Amershi et al., Guideline 9: support efficient correction. Guidelines 7/8: support efficient invocation and dismissal.">*</sup></li>
           <li>Does the tool tell you when it's unsure, or does it guess with the same confidence every time?<sup class="cite" data-url="https://www.microsoft.com/en-us/research/blog/guidelines-for-human-ai-interaction-design/" data-note="Amershi et al., Guideline 10: scope services when in doubt, degrade gracefully instead of guessing when uncertain.">*</sup></li>
@@ -73,10 +76,17 @@
         <p class="lede">One company removed a checkpoint that was working. A study found adding one can backfire. Both are real.</p>
         <p><strong>Zillow Offers</strong> originally had pricing experts vet every algorithm-generated home value estimate. Under growth pressure in 2021, "Project Ketchup" explicitly barred those experts from adjusting the algorithm's numbers. Purchase volume doubled the next quarter. Then the algorithm's blind spots, no longer caught by anyone, caught up: a $421 million loss in a single quarter, the business shut down, about 25% of the company laid off.<sup class="cite" data-url="https://jise.org/Volume35/n1/JISE2024v35n1pp67-72.pdf" data-note="Gudigantala & Mehrotra, 'When Strength Turns Into Weakness,' Journal of Information Systems Education 35(1), Winter 2024. Zillow's 'Project Ketchup' barred pricing experts from adjusting the algorithm's home value estimates in early 2021. Purchase volume more than doubled the next quarter, followed by a $421M Q3 2021 loss, the business unit shut down, about 25% of workforce laid off.">*</sup></p>
         <p>Set that against Section 02: giving people an algorithm's output to adjust made outcomes worse, not better, in a separate controlled study. Put together, the two aren't a contradiction, they're the same lesson twice. Whether you keep the human or remove them, it's a specific, testable design choice for this exact task, not a value you apply uniformly everywhere.</p>
+      </section>
+
+      <section class="block reveal" id="s5">
+        <div class="block-head"><span class="block-eyebrow">05</span><h2 class="block-title">Same Judgment, When You're the One Coding</h2></div>
+        <p class="lede">Full Fact deciding which claims are worth checking, and Zillow's removed pricing checkpoint, are versions of the same decision you make constantly while you build. Does this particular step need a human, or can it run on its own?</p>
+        <p>A formatting fix Claude proposes is cheap to undo and easy to verify at a glance. Let it commit. A change to how your app handles user data or credentials is expensive to undo and hard to verify just by reading a summary. That one is worth reviewing line by line before it ships, even if it slows you down. Plan Mode, from Day 2, is built around this same choice. It's a checkpoint you add on purpose before a costly action, not because you don't trust the tool, but because reviewing the plan is where you catch a wrong assumption while it's still cheap to fix.</p>
+        <p>Sometimes the right call is to read every line anyway, even on a low-stakes change, because doing so is how you actually learn what your own codebase does. That's the same tradeoff from Section 01. Not every checkpoint exists to catch an error. Some exist because you're the one who benefits from being in the loop.</p>
         <div class="exercise-box">
           <h3>🎯 Apply This</h3>
           <p><strong>Time:</strong> A few minutes, individually.</p>
-          <p><strong>Description:</strong> For one part of your project: is it currently automated, checkpointed, or fully manual? Using the three questions from Section 01, is that actually the right call, or did you default to it without deciding?</p>
+          <p><strong>Description:</strong> For one part of your project: is it currently automated, checkpointed, or fully manual? Using the questions from Section 01, is that actually the right call for this stage, or did you default to it without deciding?</p>
           <p><strong>Deliverable:</strong> One sentence stating the decision and why.</p>
         </div>
       </section>

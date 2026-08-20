@@ -8,7 +8,7 @@ CLAUDE.md is a plain-text file Claude reads automatically at the start of every 
 
 A simple test for whether something belongs in yours: has Claude made the same mistake twice, or have you typed the same correction into chat more than once? That's the signal. [3]
 
-One distinction worth knowing before next session: CLAUDE.md is for what's true every time. If something's only relevant sometimes, a specific kind of task you do occasionally, that's what Skills, covered right after lunch, are for instead. [4]
+CLAUDE.md is for what's true every time you open a new chat. It's foundational context. If something's only relevant sometimes, a specific kind of task you do occasionally, that's what Skills are for instead. [4]
 
 **Sources**
 1. https://code.claude.com/docs/en/memory — Claude Code Docs, "How Claude remembers your project": CLAUDE.md files are markdown files that give Claude persistent instructions for a project, your personal workflow, or your entire organization. Claude reads them at the start of every session.
@@ -32,36 +32,15 @@ This workshop's own repository has a CLAUDE.md file. It's not a hypothetical, it
 
 Three things worth noticing about it, and worth copying into your own:
 
-<!-- Pending, logged in REQUIREMENTS.md Batch 7: remove the second
-     sentence of the second item below (the haddock3/robotics-lab
-     example) entirely. Left in place here so you can see exactly what's
-     being cut; delete it directly if you agree, or edit instead. -->
 **It points, it doesn't duplicate**: Instead of listing every task, it says: read `project/REQUIREMENTS.md` for current status. The file stays short because it delegates to other files rather than repeating their contents.
-**It states what can't be inferred from code**: A rule like "any non-trivial technical decision gets a new numbered file in `project/adr/`" isn't something Claude could guess by reading the codebase. That's exactly the kind of thing that belongs here. A robotics lab's CLAUDE.md makes the same kind of call for a different reason: it tells Claude explicitly that existing code has been human-verified to work, but isn't necessarily the best implementation, a fact no amount of code-reading would reveal. [1]
+**It states what can't be inferred from code**: A rule like "any non-trivial technical decision gets a new numbered file in `project/adr/`" isn't something Claude could guess by reading the codebase. That's exactly the kind of thing that belongs here. 
 **It's organized by when you'd need it**: Sections for "before starting work," "while working," and "repo layout" map to the actual moments in a session, not an abstract table of contents.
-
-<!-- Pending, logged in REQUIREMENTS.md Batch 7: weave these examples
-     into the closing paragraph below (user's own phrasing, to fold in,
-     not to add verbatim as a new paragraph): "This is the place where
-     you'd document decisions that you or your team made about
-     fundamental aspects of the product that you are designing. It can
-     be information about audience segments, the tone of the language
-     across the site, words to avoid, or a commitment to only use
-     certain kinds of tools." Also: check for overlap with the Include
-     column in section 3 below (which already mentions design system and
-     audience persona examples) and remove any duplicate examples once
-     this is folded in, don't repeat the same illustration twice on one
-     page. Edit the paragraph below directly to do this weave. -->
-That's the shape worth copying, whatever your own project is about: point instead of duplicate, write down what Claude can't guess on its own, and organize around when you'll actually need each part. The decisions in your file might come from a design system, an audience persona, or a build process like this one, the habit is the same either way.
-
-**Sources**
-1. https://github.com/haddocking/haddock3/blob/main/CLAUDE.md — haddocking/haddock3 CLAUDE.md (Utrecht University): "All code in this project is functional, meaning it has been verified by humans that it produces the expected results, but that does not mean that the code is in its best implementation. If you copy code from somewhere else, try to improve it, do not assume it is already optimal." (this citation goes away if the sentence it supports is cut, per the pending edit above)
 
 ## 3. What Belongs In One
 
 The most common mistake isn't leaving something out. It's putting too much in. [1]
 
-A CLAUDE.md isn't only an engineering file. It's a record of decisions your whole team has already made, so Claude doesn't have to guess at them or get them re-explained every session.
+A CLAUDE.md is a record of decisions your whole team has already made, so Claude doesn't have to guess at them or get them re-explained every session.
 
 **Include**
 - Decisions Claude can't guess on its own, a command, a required step, a deadline
@@ -92,12 +71,12 @@ A CLAUDE.md isn't only an engineering file. It's a record of decisions your whol
 
 ## 4. Write Your Own
 
-Claude Code can generate a starting CLAUDE.md by analyzing your project directly, with the `/init` command. [1] That's a starting point, not a finished product. It should grow from the actual friction points in your workflow, not a theoretical checklist. [2]
+Claude Code can generate a starting CLAUDE.md by analyzing your project directly, with the `/init` command. [1] For this workshop, you don't have to start blank. We gave you a real starting file, [STUDENT_CLAUDE_GUIDE.md](https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/blob/main/STUDENT_CLAUDE_GUIDE.md), already written for a student building their first AI-assisted project. Copy it into your own project as `CLAUDE.md`, then let Claude update it based on what it actually observed about how you worked yesterday, instead of writing everything from scratch. Either way, it should keep growing from the actual friction points & insights in your workflow, not a theoretical checklist. [2]
 
-> **Exercise: Draft Your CLAUDE.md**
+> **Exercise: Update Your CLAUDE.md**
 > - Time: ~15 minutes.
-> - Description: Run `/init` on your Day 1 project and let Claude generate a CLAUDE.md from the current state of things, don't write it yourself first.
-> - Deliverable: Read what Claude produced. Pick two or three things it summarized and, for each one, ask yourself whether it was explicit, a decision you actually made or told Claude directly, or whether it's an abstraction Claude inferred from a pattern in how you'd been working that you weren't even aware of. Come ready to share one of each.
+> - Description: Copy `STUDENT_CLAUDE_GUIDE.md` into your Day 1 project as `CLAUDE.md`. Then ask Claude to review your Day 1 session and update the file: what did it notice about technical decisions that you made, what you already understood without needing it explained, where you got stuck? Don't write the changes yourself first.
+> - Deliverable: Read what Claude changed. Pick two or three edits and, for each one, ask yourself whether it's something you actually told Claude directly, or something it inferred from a pattern in how you worked that you weren't even aware of. Share what stood out to you.
 
 **Sources**
 1. https://code.claude.com/docs/en/memory — Claude Code Docs: the /init command generates a starting CLAUDE.md by analyzing the codebase; re-run it to get improvement suggestions rather than overwrite.

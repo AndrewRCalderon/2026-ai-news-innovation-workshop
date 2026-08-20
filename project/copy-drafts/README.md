@@ -1,9 +1,14 @@
 # Copy drafts
 
 Markdown working copies of topic-page prose, meant to be edited directly
-(not dictated) and diffed. Pilot run: Day 2 (`day-2/`). If this workflow
-holds up, Day 1 and Day 3 get the same treatment, and generating these
-drafts becomes a repeatable skill instead of a one-off port.
+(not dictated) and diffed. Pilot run: Day 2 (`day-2/`), 2026-08-16. The
+pilot held up, so Day 3 (`day-3/`) was ported the same way on 2026-08-19,
+all 7 sessions, including the three (`02-product-design`,
+`04-ai-human-design`, `05-where-you-can-take-this`) rewritten that same
+day for the Adiel PR #8 response, so the drafts reflect current site
+content, not the pre-rewrite version. Day 1 is still unported. If a
+repeatable skill for generating/refreshing these drafts gets built, it's
+worth doing now that two days have gone through this by hand.
 
 ## Why this exists
 

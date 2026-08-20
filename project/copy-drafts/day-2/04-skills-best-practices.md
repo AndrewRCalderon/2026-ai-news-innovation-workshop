@@ -20,15 +20,15 @@
 
 # Skills & Best Practices
 
-> Package your expertise so it doesn't need re-explaining.
+> Package your expertise.
 
 ## 1. What a Skill Is
 
-A Skill is a reusable, filesystem-based resource: a folder of instructions, scripts, and reference material that gives Claude domain-specific expertise, organized roughly like an onboarding guide you'd hand a new hire. [1]
+A Skill is a reusable, filesystem-based resource. It's a folder of instructions, scripts, and reference material that gives Claude domain-specific expertise and targeted functionality. [1]
 
-The difference from just writing a good prompt: a prompt is conversation-level, for one task. A Skill loads on demand, so the same guidance doesn't need repeating across every new conversation. [2] Anthropic introduced Skills in October 2025, framing them around a simple idea: real work needs procedural knowledge and organizational context, not just a capable model. [3]
+The difference from just writing a prompt is that a prompt is a conversation, whereas a Skill loads on demand or on trigger in conversation, so the same guidance doesn't need repeating across every new conversation. [2] Anthropic introduced Skills in October 2025, framing them around a simple idea: real work needs procedural knowledge and organizational context, not just a capable model. [3]
 
-People have already built skills for this exact job: a 14-skill collection for journalists covers AP style, source and deepfake verification, and FOIA request templates, free to install. [4] Worth a look after this session.
+People have already built skills for this exact job. For example, a 14-skill collection for journalists covers AP style, source and deepfake verification, and FOIA request templates, free to install. [4] Worth a look after this session.
 
 **Sources**
 1. https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview — Claude Platform Docs, Agent Skills Overview: Skills are reusable, filesystem-based resources that give Claude domain-specific expertise. They exist as directories containing instructions, executable code, and reference materials, organized like an onboarding guide you'd create for a new team member.
@@ -46,10 +46,11 @@ People have already built skills for this exact job: a 14-skill collection for j
      statements) — that's the original standing instruction for this
      content (REQUIREMENTS.md Batch 4), reconfirmed for the fold-in. -->
 
-The team that built Claude Code uses Skills internally for its own production work, and their account of what makes one hold up is sharper than the general best-practices advice. [1]
+The team that built Claude Code uses Skills internally for its own production work, and their account of what makes one work is useful: [1]
 
-- When you're deciding what to put in a skill's Gotchas section, use failures you actually watched happen, not ones you imagined in advance. That section is the highest-signal part of any skill, and a guess about what might go wrong teaches Claude to guard against a problem that was never real. [2]
-- Before you trust a new skill, run the task once without it loaded. If you skip that step, you have no baseline, so you can't actually tell what the skill changed, only that something happened. [3]
+- When you're deciding where to create a skill, ask yourself if this is a task that you will need to repeat multiple times. Moreover, ask yourself whether this is a specialized task that need to be performed with specific context & is important for the overall function of the product or workflow.
+- Notice what failures you actually watched happen, not ones you imagined in advance. The so-called "gotcha" section is where you document edge cases as you use the skill. It creates a safeguard against what might go wrong out in the wild. [2]
+- Before you trust a new skill, run the task once without it loaded just using your general-purpose model. If you skip that step, you have no baseline, so you can't actually tell what the skill changed, only that something happened. [3]
 - If Claude doesn't reliably reach for a skill when it should, the problem is usually the description, not the instructions inside it. A vague one, "helps with content creation," won't trigger reliably. Write one specific enough to say exactly when to use it, and Claude will find it. [4]
 
 **Sources**
@@ -66,11 +67,9 @@ The team that built Claude Code uses Skills internally for its own production wo
      if/then cause-and-effect, matching this section's own existing
      voice, not as a flat restatement. -->
 
-Five steps, from noticing you need one to actually trusting it.
-
 1. **Notice the pattern.** You'll know it's worth turning into a Skill the same way you'd know something belongs in your CLAUDE.md. You've explained the same thing to Claude more than once, or corrected the same mistake twice.
-2. **Create the folder and the file.** A Skill lives in its own folder, named after the skill, with one required file inside it called SKILL.md. [1] For a skill you want everywhere, it goes somewhere Claude always checks. For a skill specific to one project, like this workshop's, it goes inside that project instead. Ask Claude to set the folder up for you if you're not sure where that is.
-3. **Fill it in like an onboarding doc.** At the top, a short description of what the skill does and exactly when Claude should use it. That description is literally what Claude matches against your requests, so vague doesn't work. [2] Below that, write the instructions the way you'd brief a new hire, what to do, in what order, and any gotchas you already know about.
+2. **Create the folder and the file.** A Skill lives in its own folder, named after the skill, with one required file inside it called SKILL.md. [1] Ask Claude to set the folder up for you if you're not sure where that is.
+3. **Fill it in like an onboarding doc.** At the top, a short description of what the skill does and exactly when Claude should use it. That description is literally what Claude matches against your requests, so vague doesn't work. [2] Below that, write the instructions the way you'd brief a new hire on what to do, in what order, and any gotchas you already know about.
 4. **Test it two ways.** Ask a question that matches your own description, and see if Claude reaches for the skill on its own. Then try invoking it directly by typing the skill's name as a command, to confirm it works even when it doesn't trigger automatically. [3]
 5. **Stress-test it honestly.** Write down a few real, specific examples of what a good result looks like, not abstract rules. [4] Once it seems to work, hand it to a fresh conversation that doesn't know how you built it, and try it on messy, real input, not just the cases you had in mind while writing it. [5]
 
@@ -90,13 +89,9 @@ Five steps, from noticing you need one to actually trusting it.
      in section 2. KEEP "Installing skills from strangers" below,
      confirmed — either here or moved into Build One, your call. -->
 
-Independent builders who've shipped dozens of skills describe the same failures in their own words, worth watching for in your own sessions today:
-
-**The confident-looking failure**: A skill that passes the test cases you wrote for it can still fail on real input, a missing field, an unexpected format, an edge case you didn't think to write down. Fix: write down a few concrete real examples, not abstract rules, then test the skill in a fresh conversation that doesn't know how it was built, using messy input, not just the cases you had in mind while writing it. [1]
-**The patch spiral**: Treating every new failure as a one-line edit until the skill accumulates contradictory rules nobody remembers the reason for. Fix: after a couple of patches, stop and rebuild from what actually failed instead of layering on another exception. A quick way to tell you've hit that point: could someone read the skill start to finish and still explain why each rule is there? If not, it's time to rebuild, not patch again. [2]
-**Installing skills from strangers**: One public skills marketplace passed 40,000 listings within months of launch, and shared skill repos have already been found shipping malware that exfiltrates tokens and cloud credentials. Fix: read a skill's actual instructions before installing it, the same way you'd check a browser extension's permissions. [3]
+**The patch spiral**: Treating every new failure as a one-line edit until the skill accumulates contradictory rules nobody remembers the reason for. Fix: after a couple of patches, stop and rebuild from what actually failed instead of layering on another exception. A quick way to tell you've hit that point: could someone read the skill start to finish and still explain why each rule is there? If not, it's time to rebuild, not patch again. [1]
+**Installing skills from strangers**: One public skills marketplace passed 40,000 listings within months of launch, and shared skill repos have already been found shipping malware that exfiltrates tokens and cloud credentials. Fix: read a skill's actual instructions before installing it, the same way you'd check a browser extension's permissions. [2]
 
 **Sources**
-1. https://linas.substack.com/p/claudeskills — Linas Beliūnas, "The Ultimate Guide to Claude Skills": describes the "Fragile Skill" pattern, working on clean inputs but collapsing on edge cases like missing fields, wrong types, or corrupted data. Fix: feed it the worst-case version of every input.
-2. https://alexmcfarland.substack.com/p/5-reasons-your-claude-skills-keep — Alex McFarland: describes a "patch spiral," where every failure gets a quick fix until the skill accumulates contradictory rules, instead of being rebuilt from what was actually observed to fail.
-3. https://news.ycombinator.com/item?id=49169640 — Hacker News thread, "Agent skills that bring team coding standards to Claude Code and Codex": commenters warned that a linked skill repo contained malware exfiltrating GitHub tokens, AWS keys, and Kubernetes secrets. Separately reported: a skills marketplace exceeded 40,000 listings within months of the feature's October 2025 launch.
+1. https://alexmcfarland.substack.com/p/5-reasons-your-claude-skills-keep — Alex McFarland: describes a "patch spiral," where every failure gets a quick fix until the skill accumulates contradictory rules, instead of being rebuilt from what was actually observed to fail.
+2. https://news.ycombinator.com/item?id=49169640 — Hacker News thread, "Agent skills that bring team coding standards to Claude Code and Codex": commenters warned that a linked skill repo contained malware exfiltrating GitHub tokens, AWS keys, and Kubernetes secrets. Separately reported: a skills marketplace exceeded 40,000 listings within months of the feature's October 2025 launch.

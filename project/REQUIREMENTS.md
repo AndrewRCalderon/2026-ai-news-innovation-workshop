@@ -27,6 +27,61 @@ scheduled home on any of the 3 days (see the Day 3 change log entry);
 check of the two new Day 2 components is still outstanding (no browser
 automation tool was available during the round-3 implementation pass).
 
+**2026-08-19**: Adiel's [PR #8](https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/pull/8)
+(Day 2 & 3 review notes) read, digested, and implemented — see
+"Collaborator feedback — Adiel, PR #8" below. Done: the
+`docs/day-3/04-ai-human-design.html` rewrite (new human-in-the-loop/
+automate framework, new §05 coding-judgment section), the §05 condense +
+Day 3 schedule reorder (`docs/data/schedule.json`), the Product Design
+§02 citation refresh, and `STUDENT_CLAUDE_GUIDE.md` (new file, repo root)
+plus its linked Day 2 §03 exercise rework. **Still open**: 3-5 additional
+media-industry role examples for §05 slide 2 (background research
+launched, not yet merged in), and a citable public source for the
+Capelouto example on that same slide. The line-by-line copy edit pass is
+still queued after this.
+
+**2026-08-20**: the media-industry role research from 08-19 got merged into
+§05 slide 2 (Business Insider, NPR, NYT added; Capelouto citation still
+outstanding, flagged inline in the file). Then the line-by-line copy edit
+pass happened: Day 2's 8 `project/copy-drafts/day-2/*.md` files got a full
+user edit pass, and Day 3 was ported fresh (`project/copy-drafts/day-3/*.md`,
+all 7 sessions, from current post-PR-#8 site content) and given the same
+treatment. Both days then got a citation-integrity pass (a script checking
+every `**Sources**` list against actual `[n]` usage — orphaned citations
+removed or relocated to where they fit, per standing rule: user removes a
+sentence, its citation goes too; new unsourced content is fine if an
+existing citation "somewhat supports" it), plus typo fixes, two missing
+section-numbers restored (`04-ai-human-design.md`, `07-final-show-and-tell.md`,
+both confirmed intentional content cuts), an "AI-Human Design" →
+"Human-AI Design" rename (in the copy-drafts only, not yet live — see
+task below), and three new researched citations added to
+`04-ai-human-design.md` (Vaccaro et al. 2024, Bainbridge 1983 "Ironies of
+Automation," Green & Chen). See
+[content-architecture-notes.md](content-architecture-notes.md) for
+editorial patterns pulled from this pass, kept for the Day 1 rewrite.
+
+**⚠️ Next step, not yet done: none of this copy-draft editing has been
+re-implemented into the live `docs/day-2/*.html` / `docs/day-3/*.html` /
+their `slides/` companions.** The copy-drafts are the current source of
+truth for wording; the live HTML pages (including
+`docs/day-3/02-product-design.html`, `04-ai-human-design.html`, and
+`05-where-you-can-take-this.html`, which got a direct-to-HTML pass on
+2026-08-19 *before* the copy-draft workflow started) are now stale
+relative to them. Re-implementing is the next real task: read each
+`project/copy-drafts/day-N/*.md`, rebuild the matching Overview HTML
+(citations, components, structure) and a fresh condensed Slides version,
+same as the established Day 2 round-3 pattern.
+
+**Other open items from today, all logged below in their own entries,
+listed here just for a fast scan**: `04-skills-best-practices.md`'s big
+structural rewrite is still deferred (user: "let's get through the other
+edits and return to this one"); the Day 3 schedule 15-min reallocation
+(Final Coding Time +15, Where Can You Take This -15) is scoped but not
+applied to `schedule.json`; the AI-Human rename needs to cascade to
+`schedule.json`/HTML/slides; the codebase hygiene sweep and the
+model-selection/token-usage content idea are both unscoped, deferred
+tasks. Day 1 still has no copy-drafts.
+
 Source of truth for build progress on this repo. Check here before starting
 work; update here when a task starts/completes, or when new work is
 discovered that wasn't in the original scope. Architecture *decisions* (the
@@ -94,7 +149,35 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 - [x] `docs/setup.html` — **rebuilt 2026-08-11 as Day 1 only**, with a real
       interactive checklist, ready to send to students. Day 2's setup
       content moved to a new, currently-unlinked `docs/setup-day-2.html`.
-- [ ] `STUDENT_CLAUDE_GUIDE.md` written (day-specific guidance students paste into their own Claude sessions — see ADR 0009 for why this isn't named `CLAUDE.md`)
+- [x] `STUDENT_CLAUDE_GUIDE.md` written (day-specific guidance students
+      paste into their own Claude sessions — see
+      [ADR 0009](adr/0009-separate-maintainer-claude-md.md) for why this
+      isn't named `CLAUDE.md`). **Implemented 2026-08-19**, growing out of
+      Adiel's PR #8 glossary note (see "Collaborator feedback — Adiel,
+      PR #8" below) — three required sections, all written:
+      1. Pedagogical-explanation instructions for Claude: don't
+         over-explain; insert reflection checkpoints inviting the
+         student to check their own understanding and ask for a simpler
+         explanation if something didn't land.
+      2. Common vibe-coding pitfalls: security/credential hygiene (never
+         commit secrets, use env vars, check `.gitignore`), folder/code
+         hygiene, using Plan Mode before going deep on an approach,
+         testing with a smaller/cheaper model and matching model choice
+         to task size, smart credential management generally.
+      3. Using `gh`/git effectively for their own product repo — distinct
+         from the Day 1 fork-and-submit *workshop-submission* flow
+         already covered in `docs/day-1/08-fork-and-submit.html`:
+         committing regularly, using PRs, general practices supporting
+         good product design and development.
+      **Linked task, implemented 2026-08-19**: reworked the Day 2 §03
+      exercise in `docs/day-2/03-claude-md.html` (Overview + Slides) and
+      `project/copy-drafts/day-2/03-claude-md.md:93-100`. New version:
+      students copy `STUDENT_CLAUDE_GUIDE.md` in as their `CLAUDE.md` and
+      ask Claude to update it based on what it observed about how they
+      worked on Day 1, instead of generating cold via `/init`. The
+      pending Batch 7 edits on that same page (file-viewer popup fix,
+      paragraph weave, both in section 2, not section 4) were left
+      untouched, as planned.
 - [~] `resources.html` populated with real links — established pattern:
       when a topic's review turns up a genuinely useful external
       compilation/reference (not something we'd host/maintain ourselves),
@@ -112,6 +195,63 @@ Tasks discovered during build that weren't in the original plan. Add here as
 found; promote into a phase above once scoped, or leave here if it doesn't
 map cleanly to one.
 
+- [ ] **Rename "AI-Human Design" to "Human-AI Design," site-wide.** Decided
+      2026-08-20 while editing `project/copy-drafts/day-3/04-ai-human-design.md`
+      (its H1 already reads "Human-AI Design"; `01-recap.md`'s summary
+      updated to match). Still needs to cascade to the live site at
+      implementation time: `docs/data/schedule.json` (`"title": "AI-Human
+      Design"`), `docs/day-3/04-ai-human-design.html` (title tag, H1,
+      breadcrumb, masthead), `docs/day-3/slides/04-ai-human-design-slides.html`
+      (title, chrome-eyebrow, cover-title), and any other page that names
+      this session. The filename itself (`04-ai-human-design.*`) doesn't
+      need to change — same reasoning as the earlier schedule-reorder
+      task: nothing reads the filename, only what's displayed.
+- [ ] **Day 3 schedule: shift 15 min from Where Can You Take This to Final
+      Coding Time.** Raised 2026-08-20. Scoped, ready to implement, just
+      deferred alongside the other pending tasks. Change to
+      `docs/data/schedule.json`: Final Coding Time goes from 60 to 75
+      min (2:00-3:15 PM instead of 2:00-3:00 PM); Where Can You Take
+      This goes from 45 to 30 min, shifting to 3:15-3:45 PM. Final Show
+      & Tell stays fixed at 3:45 PM, unchanged. **Flag for whoever
+      implements**: §05's content was condensed to 3 slides for the
+      45-minute slot (see the 2026-08-19 PR #8 implementation entry
+      above); check it still fits comfortably in 30, especially the new
+      reflection/discussion slide 3, which is meant to prompt an actual
+      conversation, not just be read through quickly.
+- [ ] **New content: model selection, token usage, choosing smaller models
+      for sub-tasks.** Raised 2026-08-20 while reviewing
+      `project/copy-drafts/day-3/04-ai-human-design.md`. **Not scoped —
+      explicitly deferred to a planning conversation later, not something
+      to design now.** Open question from the user, unresolved on
+      purpose: does this need its own section (replacing something), or
+      can it be sprinkled into existing Day 2 sections instead? User's
+      instinct leans toward the latter, but wants to explore/plan it
+      together before deciding. Note for that future conversation: there's
+      already a small seed of this idea in `STUDENT_CLAUDE_GUIDE.md`'s
+      pitfalls section ("testing with a smaller/cheaper model and
+      matching model choice to task size") — worth checking for overlap
+      before scoping this further, so the two don't end up saying the
+      same thing in two places.
+- [ ] **Codebase hygiene sweep: non-functional breadcrumbs and AI slop.**
+      User noticed, while reviewing the Day 2 copy-draft edit pass, that
+      the repo has accumulated HTML comments and other non-functional
+      artifacts left behind by AI-assisted editing (pending-edit notes,
+      structural TODOs, dangling comments that now describe an already-
+      resolved state — see the 2026-08-20 review of the Day 2 copy-draft
+      edits for concrete examples in `03-claude-md.md` and
+      `04-skills-best-practices.md`). **Deferred, not scoped yet.** When
+      picked up: sweep `docs/` and `project/copy-drafts/` for HTML
+      comments and other non-functional markers that are stale, resolved,
+      or were never meant to ship; distinguish "genuinely still pending"
+      from "leftover scaffolding" before deleting anything. Same pass
+      should look more broadly for other AI-slop patterns (dead code,
+      unused citations left in a Sources list after the sentence citing
+      them was cut, orphaned components) since the effect is the same:
+      wasted tokens on every future session that reads these files, on
+      top of being confusing to a human reader. Also see
+      [content-architecture-notes.md](content-architecture-notes.md) for
+      editorial (not code) patterns from the same review, kept for the
+      eventual Day 1 pass rather than as a task here.
 - [~] **New workflow: `project/copy-drafts/`, markdown copy drafts for
       direct editing.** User found dictating copy edits turn by turn (the
       pattern used for the round-3 audit's Batches 1–7) slow and lossy.
@@ -131,10 +271,19 @@ map cleanly to one.
       (Adiel tagged there for visibility; supersedes the earlier, now
       closed, issue #5, which scoped this too narrowly to just Day 2).
       This branch ships with the drafts present but unedited/unimplemented.
-      **If this pans out**: same treatment for Day 1 and Day 3, and a
-      proper Claude Code skill to generate/refresh these drafts (built
-      after this pilot, so it reflects whatever's learned from actually
-      using it once).
+      **Extended to Day 3, 2026-08-19**: pilot held up, so all 7 Day 3
+      Overview pages ported to `project/copy-drafts/day-3/*.md`, same
+      convention, no new structural cases needed except a `[Stat
+      callout: ...]` bracketed note for `.stat-pull` (not seen in Day 2,
+      first used on `02-product-design.md` and `04-ai-human-design.md`).
+      Ported from current (post-PR-#8-implementation) site content, not
+      the pre-rewrite version, so `02-product-design`,
+      `04-ai-human-design`, and `05-where-you-can-take-this` already
+      reflect this session's rewrites — the Capelouto citation gap on
+      `05` is flagged inline in its draft too, same as the live page.
+      Day 1 is still unported. **If this pans out further**: a proper
+      Claude Code skill to generate/refresh these drafts (built after
+      both pilots, so it reflects what's been learned using it twice).
 - [x] Resolved: the org/repo is confirmed
       (`github.com/AndrewRCalderon/2026-ai-news-innovation-workshop`, this
       repo's own remote) — `setup.html` now links directly to it. **New
@@ -1884,6 +2033,207 @@ than writing about it separately.
       a short addition to Build One, since it's about installing
       someone else's skill rather than testing your own — leaving the
       exact spot open for implementation.
+
+---
+
+## Collaborator feedback — Adiel, PR #8 (2026-08-17)
+
+Adiel (co-instructor) opened
+[PR #8](https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/pull/8)
+"Day 2 & 3 review notes for discussion" from her fork, adding
+`project/review-notes/2026-08-17-adiel.md` — notes from reading Day 2 and
+Day 3 on the main preview build (91ea88d), no site files touched.
+**Not merged**; digested into requirement items below, same workflow as
+PR #1 above. User left 9 inline GH review comments responding to specific
+paragraphs (pulled via `gh api repos/.../pulls/8/comments`); those
+comments, plus follow-up direction given directly in conversation, are
+what actually resolved each item — logged here alongside Adiel's original
+point so the reasoning traces back to the PR without reopening it.
+
+- [x] **Glossary idea (her §1, "Things to maybe add")** — Adiel proposed
+      a collective class-glossary exercise (students teach Claude to PR a
+      shared glossary doc as they hit new terms). **Superseded**: user's
+      GH reply proposed a different mechanism instead — give students a
+      `Claude.md` on Day 2 with the exercise changed from "generate one
+      from scratch via `/init`" to "ask Claude to update this starting
+      file based on what it observed about how you worked on Day 1."
+      That starting file carries pedagogical instructions ("explain X,"
+      assume a nontechnical user needs things explained). This is the
+      origin of the `STUDENT_CLAUDE_GUIDE.md` task below — the glossary
+      idea itself goes unaddressed unless picked up separately later.
+- [x] **Common-pitfalls lesson (her §2)** — Adiel: "Yes! 100%... I
+      struggled with size/granularity, wasn't sure what to assume was
+      'basic' vs. advanced," floated a dedicated slide/lesson or a
+      standalone resource page. **Content and placement both decided**:
+      lives in `STUDENT_CLAUDE_GUIDE.md` (see task below), not a separate
+      slide or resource page.
+- [x] **Product Design §02 citations** — Adiel suggested 3 more-recent
+      sources for slides 2 & 4 (audience preferences around AI):
+      - Reuters Institute, *Digital News Report 2026*, ["Emerging uses of
+        AI chatbots for news and what it means for
+        journalism"](https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/emerging-uses-ai-chatbots-news-and-what-it-means-journalism),
+        June 16 2026 — chatbot use for news rose 7%→10% globally in a
+        year.
+      - CNTI, ["Action, Ease & Personalization: AI Chatbot News
+        Experiences"](https://cnti.org/reports/chatbots-for-news/),
+        Jan 22 2026 — people use chatbots to *act* and *understand* far
+        more than to know about or feel something about the news.
+      - Florent Daudens, ["The half of journalism AI can't do
+        yet"](https://fdaudens.substack.com/p/is-ai-better-at-our-jobs-than-us),
+        June 23 2026 — 93% of an AI article's claims linked back to
+        source, vs. 25% for the human-written comparison.
+      **Confirmed** ("Love it. Yes.") — work these into
+      `docs/day-3/02-product-design.html` /
+      `slides/02-product-design-slides.html`, slides 2 and 4.
+- [x] **AI-Human Design, "judgment doing two jobs" (her §2 under
+      "Suggested page changes")** — Adiel: the word "judgment" does two
+      different jobs in the same lecture (the thing never automated in
+      the Full Fact section, vs. the thing people get worse at when they
+      adjust an algorithm, in the Green & Chen study section just
+      before). User's GH reply: "a lot of my intuitions are literally
+      about 'how I code'... there might be a conversation here between
+      judgment and the admonishments [pitfalls] you alluded to."
+      **Resolved differently than first logged in this file** — not
+      offloaded to `STUDENT_CLAUDE_GUIDE.md`; becomes its own new section
+      within `docs/day-3/04-ai-human-design.html` itself, bridging the
+      editorial-judgment examples to judgment as it shows up in students'
+      own AI-assisted coding practice. See the §04 rewrite task below.
+- [ ] **AI-Human Design, Adiel's 3-question framing** — her suggested
+      reframe: at each point in a process, ask whether the criteria can
+      be written down, whether the person has information the model
+      doesn't, and whether either of them can check the result. User's
+      GH reply: "I think I get what you mean but I'd love for you to
+      explain on our call so I am sure I grasp your meaning." **Not
+      adopted for the §04 rewrite** — user's own notes (below) are the
+      confirmed direction instead. This stays a "discuss on the call"
+      item, tracked here, not blocking the rewrite.
+- [x] **Where Can You Take This — Capelouto** — Adiel suggested adding
+      J.D. Capelouto (Semafor: breaking-news reporter with no programming
+      background, built newsroom tools via GPT Builder, now helping
+      oversee the Semafor intern) alongside Andy Sullivan (Reuters) and
+      Joe Amditis (skills library) as examples of people who started from
+      a repetitive task they disliked, no budget, nobody's permission.
+      **Confirmed** ("Oh yes, great!") — added to §05 slide 1 alongside
+      Sullivan and Amditis. **Still open**: no citable public source for
+      the Capelouto claim yet, unlike the other two examples on that
+      page. Flagged inline in `docs/day-3/05-where-you-can-take-this.html`
+      with an HTML comment; find and add a source before this ships.
+- [x] **Course wrap-up** — Adiel: the section currently ends on a
+      developer-slowdown stat that feels like an odd note right before
+      final builds; proposed a "where we started, where we are now"
+      closing review, timing TBD (before final build vs. after
+      presentations in the 15-min Closing & Celebration slot). User built
+      on this in GH comments (a dynamic, energizing "map" reflection with
+      peer share-out) and initially leaned toward doing it before the
+      final build. **Resolved differently in conversation** — final
+      shape is a schedule reorder (Final Coding Time moves right after
+      lunch, Where Can You Take This moves after it, immediately before
+      Final Show & Tell) plus a third slide added to §05 with reflection
+      questions tied directly into the show-and-tell. See the §05 task
+      below; no separate wrap-up page or Closing & Celebration change
+      needed. **Implemented 2026-08-19.**
+
+**Not yet decided**: whether to merge/close PR #8 now that its content is
+digested here (no site files in the PR to merge, same situation as PR #1)
+— flagged as a follow-up, not done as part of this logging pass.
+
+### New task: `docs/day-3/04-ai-human-design.html` + slides rewrite
+
+**Implemented 2026-08-19.** Replace the current judgment-framing thesis
+with the user's own framework:
+
+- Reframe the section's core question: AI is often used to automate
+  processes/tasks; there was an emphasis on human-in-the-loop, but that
+  shouldn't be the default any more than automation should. Give
+  students questions to ask themselves at each stage of a process to
+  decide which fits.
+- Two concrete cases to build the framework around:
+  - Deliberately slow a process down by adding a human checkpoint
+    anyway, because the human benefits from sitting with the output at
+    that stage — it deepens their own knowledge or adds context they'll
+    need later.
+  - Skip the human at a given point because their perspective, context,
+    or verification isn't actually needed there — automate
+    top-to-bottom, bring a human in only at the very end to verify the
+    final output.
+- Draw from human-AI design literature where it genuinely supports this
+  framing; the intuition itself comes from practitioner experience, not
+  the literature — don't force a citation that doesn't fit.
+- Existing Full Fact / Zillow / Green & Chen study material can likely
+  stay as supporting examples, re-slotted under this framework rather
+  than rewritten from scratch — confirm fit when actually drafting.
+- **New section, on the page itself**: bridges this framework to
+  judgment as it shows up in students' own AI-assisted coding practice —
+  connect the editorial-judgment examples (Full Fact deciding which
+  claims to check, Zillow's removed pricing checkpoint) to the same
+  human-in-the-loop-vs-automate questions applied to their own coding
+  choices. Content not yet drafted.
+- Adiel's 3-question framing stays a separate, non-blocking "discuss on
+  the call" item (logged above), not folded into this rewrite.
+
+### New task: condense §05 + schedule reorder
+
+**Implemented 2026-08-19**, with one item still resolved differently
+than first logged here: no file rename was needed. Investigation found
+the index page and Overview prev/next links are both driven dynamically
+from `schedule.json` order, not filenames; only 3 hardcoded "Next
+section →" links in the Slides decks needed manual updates
+(`04-ai-human-design-slides.html`, `05-...-slides.html`,
+`06-...-slides.html`), all done. Filenames stay as-is, now
+non-chronological (`05` runs after `06` in the actual schedule) —
+cosmetic only, nothing reads the prefix.
+
+**Schedule change** in `docs/data/schedule.json` (lines 46-49): swap the
+order of `day-3/05-where-you-can-take-this` and
+`day-3/06-final-coding-time`. Durations make this a clean swap with no
+other time changes needed: Final Coding Time moves to 2:00-3:00 PM (was
+2:45-3:45), Where Can You Take This moves to 3:00-3:45 PM (was 2:00-2:45),
+Final Show & Tell stays 3:45-4:45 PM unchanged, immediately after.
+
+Flag for implementation: the `NN-` filename prefixes
+(`05-where-you-can-take-this.html`, `06-final-coding-time.html`, both
+Overview and `slides/`) currently encode schedule order. Decide then
+whether to rename the files to match the new order or leave them as-is;
+either way, check both pages (and slides companions) for hard-coded
+next/previous-session copy that assumes the old order.
+
+**Content change**, `docs/day-3/05-where-you-can-take-this.html` +
+`slides/05-where-you-can-take-this-slides.html`: condense from 4 sections
+to 3 slides:
+
+1. Industry-integration observation: AI is being folded into *existing*
+   roles more than it's minting dedicated AI job titles — reporters
+   using AI to augment investigations, data journalists using it to
+   scrape/analyze/visualize.
+2. High-level strategic AI-focused roles that do exist, backed by real
+   examples: keep Sullivan and Amditis, add Capelouto (confirmed above).
+   **Implemented 2026-08-19.** Background research turned up 4
+   candidates; 3 were well-sourced and added to the roster (now 6 total
+   with the original 3): Julia Hood, Newsroom AI Lead, Business Insider
+   (Talking Biz News); Erica Osher, VP AI Labs, NPR (Editor & Publisher,
+   corroborated by 3 other outlets); Zach Seward, Editorial Director of
+   AI Initiatives, NYT (TheWrap, role dates to Dec 2023 but confirmed
+   still current into 2026). **Excluded**: Arlyn Gajilan, Global Editor
+   AI Development & Integration, Reuters — real role, but sourcing was
+   one independent newsletter plus a company org-chart site, weaker than
+   the bar the rest of this page holds to. A Nieman Lab piece likely
+   covers her directly (blocked WebFetch during research); worth adding
+   later if someone can pull that article.
+3. **New** — reflection/discussion slide: questions framing a
+   conversation about what students are taking away from the whole
+   program, what will stick with them, explicitly asked so they can
+   incorporate those takeaways into Final Show & Tell, which now
+   immediately follows on the new schedule.
+
+This replaces the separate "course wrap-up" item entirely — the
+reflection lives inside §05 itself, timed right before presentations.
+
+### Product Design §02 citation refresh
+
+**Implemented 2026-08-19.** See the PR #8 item above — confirmed, no open
+questions. Worked Adiel's 3 sources into
+`docs/day-3/02-product-design.html` +
+`slides/02-product-design-slides.html`, slides 2 and 4.
 
 ---
 

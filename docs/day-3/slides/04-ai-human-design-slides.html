@@ -14,7 +14,7 @@
       <a href="/">AI News Innovation Workshop</a><span class="sep">·</span><a href="/day-3/">Day 3</a><span class="sep">·</span><a href="../04-ai-human-design.html">AI-Human Design</a><span class="sep">·</span>Slides
     </span>
     <div class="chrome-right">
-      <span class="chrome-counter" id="counter">01 / 04</span>
+      <span class="chrome-counter" id="counter">01 / 05</span>
       <button type="button" class="chrome-fs" id="fs-toggle" aria-label="Toggle fullscreen">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M8 3H5a2 2 0 0 0-2 2v3"></path>
@@ -33,21 +33,22 @@
         <section class="slide slide-cover" data-slide="cover">
           <div class="slide-inner">
             <h1 class="cover-title">AI-Human Design</h1>
-            <p class="cover-dek">"Keep a human in the loop" isn't automatically the safe choice. It's a design decision.</p>
+            <p class="cover-dek">Neither human-in-the-loop nor full automation is the safe default. Both are design decisions.</p>
             <div class="cover-meta"><span>12:15 PM</span><span class="div">·</span><span>45 MIN</span><span class="div">·</span><span>Lecture</span></div>
             <ul class="cover-contents">
-              <li><button type="button" data-jump="s1"><span class="n">01</span> Before You Automate, Three Questions</button></li>
+              <li><button type="button" data-jump="s1"><span class="n">01</span> Human in the Loop Isn't the Default</button></li>
               <li><button type="button" data-jump="s2"><span class="n">02</span> A Checkpoint Isn't Automatically Safer</button></li>
               <li><button type="button" data-jump="s3"><span class="n">03</span> What a Real Checkpoint Looks Like</button></li>
               <li><button type="button" data-jump="s4"><span class="n">04</span> Two Failures, Opposite Directions</button></li>
+              <li><button type="button" data-jump="s5"><span class="n">05</span> Same Judgment, When You're Coding</button></li>
             </ul>
           </div>
         </section>
 
         <section class="slide" data-slide="s1">
           <div class="slide-inner">
-            <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">Before You Automate, Three Questions</h2></div>
-            <p class="lede">No hard threshold, but three things worth checking first.</p>
+            <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">Human in the Loop Isn't the Default</h2></div>
+            <p class="lede">Neither is full automation. Sometimes you add a human step you don't strictly need, because they benefit from sitting with the output. Other times their perspective isn't needed at all, so you automate top to bottom and check only the final result.</p>
             <ul class="field-notes">
               <li>How cheap is it to notice and undo the mistake?</li>
               <li>Does the tool tell you when it's unsure?</li>
@@ -85,9 +86,17 @@
             <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Two Failures, Opposite Directions</h2></div>
             <p>Zillow removed a working checkpoint under growth pressure, purchase volume doubled, then a $421M quarterly loss followed and the business shut down.</p>
             <p>Section 02's study found adding a checkpoint can backfire too. Same lesson twice: it's a specific, testable choice, not a value applied uniformly.</p>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s5">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">05</span><h2 class="block-title">Same Judgment, When You're Coding</h2></div>
+            <p class="lede">Full Fact's filtering and Zillow's checkpoint are the same decision you make constantly while you build: does this step need a human?</p>
+            <p>A formatting fix is cheap to undo, let it commit. A change to how your app handles credentials is expensive to undo, read it line by line. Plan Mode is this same choice, built in: a checkpoint you add on purpose before something costly, so you catch a wrong assumption while it's still cheap to fix.</p>
             <div class="exercise-box">
               <h3>🎯 Apply This</h3>
-              <p><strong>Description:</strong> For one part of your project, automated, checkpointed, or manual? Is that the right call, or a default?</p>
+              <p><strong>Description:</strong> For one part of your project, automated, checkpointed, or manual? Is that the right call for this stage, or a default?</p>
             </div>
           </div>
         </section>
@@ -97,7 +106,7 @@
             <div class="end-links">
               <a href="#" data-jump="cover">↺ Restart</a>
               <a href="/day-3/">← Back to schedule</a>
-              <a href="../05-where-you-can-take-this.html">Next section →</a>
+              <a href="../06-final-coding-time.html">Next section →</a>
             </div>
           </div>
         </section>

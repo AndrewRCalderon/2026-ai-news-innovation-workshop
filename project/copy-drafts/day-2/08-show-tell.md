@@ -4,7 +4,7 @@
 
 # Show & Tell + Critique
 
-> Two days of building, out loud. The goal isn't a polished pitch, it's honest feedback you can actually use tomorrow.
+> We are in day two of building. Let's see what you've done and get some smart feedback from the group.
 
 ## 1. Format
 
@@ -12,7 +12,7 @@ Everyone presents, and everyone gives feedback. A few minutes each, structured t
 
 - Show what you built, live if you can. Broken is fine, unfinished is fine.
 - Say what you set out to build, and where it actually landed. If those are different, say why.
-- Name one thing you'd try next, if you had another day.
+- Name one thing you want to try next and solicit feedback.
 
 ## 2. Giving a Useful Critique
 
@@ -20,14 +20,14 @@ Everyone presents, and everyone gives feedback. A few minutes each, structured t
 
 **Ask this**
 - What problem is this actually solving, and for whom?
-- What's the riskiest assumption this project is making?
-- What would make you trust this more?
+- What's the biggest assumption this project is making?
+- What's your next step, and why?
 
 **Not this**
 - "That's cool" without saying why
-- Rebuilding their idea into your idea
-- Feedback on polish when the idea itself is still unproven
+- Rebuilding their idea based on what matters to you
+- Feedback on polish when the idea itself is still under construction
 
 > **Exercise: Structured critique**
-> - Description: For each presenter, the group answers three things out loud: what's working, what's the likely next problem they'll hit, and one honest question.
-> - Deliverable: Nothing written, just said. The presenter's job is to listen, not defend.
+> - Description: Each of you give a quick presentation (5 mins max). The group provides feedback and asks questions (5 mins)
+> - Deliverable: The presenter's job is to listen, not defend. Feedback is genuine and self-aware, not ego-driven.
