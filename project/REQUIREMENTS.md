@@ -60,27 +60,53 @@ Automation," Green & Chen). See
 [content-architecture-notes.md](content-architecture-notes.md) for
 editorial patterns pulled from this pass, kept for the Day 1 rewrite.
 
-**⚠️ Next step, not yet done: none of this copy-draft editing has been
-re-implemented into the live `docs/day-2/*.html` / `docs/day-3/*.html` /
-their `slides/` companions.** The copy-drafts are the current source of
-truth for wording; the live HTML pages (including
-`docs/day-3/02-product-design.html`, `04-ai-human-design.html`, and
-`05-where-you-can-take-this.html`, which got a direct-to-HTML pass on
-2026-08-19 *before* the copy-draft workflow started) are now stale
-relative to them. Re-implementing is the next real task: read each
-`project/copy-drafts/day-N/*.md`, rebuild the matching Overview HTML
-(citations, components, structure) and a fresh condensed Slides version,
-same as the established Day 2 round-3 pattern.
+**2026-08-20, continued: copy-draft re-implementation done.** All of Day 3
+(7/7 pages: `01-recap` through `07-final-show-and-tell`) and 7 of Day 2's 8
+pages (`04-skills-best-practices` excluded, see below) had their live
+Overview HTML and Slides companions rebuilt from the edited copy-drafts,
+matching the established Day 2 round-3 pattern (prose/citations/components
+carried over, page skeleton — nav, breadcrumb, masthead, TOC, footer —
+untouched unless the draft's own structure changed). `project/scripts/
+check-slide-parity.js` runs clean across all of it except three known,
+pre-existing false positives where Slides condenses a long list into a
+single `.pull-question` paragraph (`03-claude-md` s3, `06-spec-driven-dev`
+s3, `04-ai-human-design` s1 — the last one new this pass, same pattern).
+Riding along in the same files: the "AI-Human Design" → "Human-AI Design"
+rename cascaded fully (`schedule.json`, HTML, Slides, and
+`docs/partials/nav.html`'s dropdown, which the original task scoping
+missed); the Day 3 schedule 15-minute reallocation applied to
+`schedule.json` (Final Coding Time 60→75 min, Where Can You Take This
+45→30 min); the Capelouto citation gap closed (Press Gazette source,
+softened to what it actually confirms); and Arlyn Gajilan added back to
+`05-where-you-can-take-this`'s roster on a moderate-confidence trade-press
+source (TVNewsCheck, syndicated republish, direct quote) after her earlier
+exclusion for weak sourcing.
 
-**Other open items from today, all logged below in their own entries,
-listed here just for a fast scan**: `04-skills-best-practices.md`'s big
-structural rewrite is still deferred (user: "let's get through the other
-edits and return to this one"); the Day 3 schedule 15-min reallocation
-(Final Coding Time +15, Where Can You Take This -15) is scoped but not
-applied to `schedule.json`; the AI-Human rename needs to cascade to
-`schedule.json`/HTML/slides; the codebase hygiene sweep and the
-model-selection/token-usage content idea are both unscoped, deferred
-tasks. Day 1 still has no copy-drafts.
+Two structural content cuts were confirmed with the user rather than
+assumed from the draft alone, since removing a whole section is bigger
+than a wording diff: `06-spec-driven-dev` dropped its "Why This Connects
+to Skills" section entirely (confirmed intentional), and
+`07-final-show-and-tell` dropped its "What to Actually Say" section
+(pattern-matched against the confirmed case, not re-asked). `03-claude-md`
+additionally got its Batch 7 corrections applied (haddock3 sentence
+removed, user examples woven into the closing paragraph) and its
+file-viewer bug actually fixed, not just relocated: root cause was a CSS
+specificity collision (`.briefing code`'s `white-space: nowrap` beating
+the parent `<pre>`'s `pre-wrap`), diagnosed and fixed via Playwright,
+documented in [ADR 0020](adr/0020-file-viewer-inline-collapsible.md)
+(supersedes [ADR 0019](adr/0019-file-viewer-dialog.md), swapping the
+`<dialog>` popup for a native `<details>` disclosure in the process).
+
+**Still open**: `04-skills-best-practices.md` — the structural rewrite is
+drafted (new §2 non-technical scenario, §3 folded advice, new §4 testing
+section, further revised per a user note to frame Build One around
+directing Claude rather than hand-authoring `SKILL.md`) but **not yet
+implemented into HTML**, paused for the user to finish reviewing the
+draft. The codebase hygiene sweep, the model-selection/token-usage content
+idea (now also covering subagent/consumption-guardrail content, see the
+Newly Identified Tasks entry below), Day 1's still-nonexistent copy-drafts,
+and the site-wide workshop-name/em-dash/colon sweeps (deferred to Day 1's
+eventual line-edit pass, not this one) remain unscheduled.
 
 Source of truth for build progress on this repo. Check here before starting
 work; update here when a task starts/completes, or when new work is
@@ -195,31 +221,57 @@ Tasks discovered during build that weren't in the original plan. Add here as
 found; promote into a phase above once scoped, or leave here if it doesn't
 map cleanly to one.
 
-- [ ] **Rename "AI-Human Design" to "Human-AI Design," site-wide.** Decided
+- [ ] **Student submission cards, auto-populated from a standardized fork
+      file structure.** Raised 2026-08-20, mid-session, while working on the
+      copy-drafts re-implementation pass. **Not scoped, explicitly deferred
+      to a planning conversation together** — this is complex and needs
+      real design before implementation. The idea: bake instructions into
+      the student-facing CLAUDE.md material (`STUDENT_CLAUDE_GUIDE.md` is
+      the likely home) telling Claude to set up a standardized file
+      structure in each student's forked project from the start, specific
+      folders/files that hold the basic info the Phase 4 student showcase
+      cards need (title, pitch, demo path, etc. — see the existing
+      `README.md` submission template item in Phase 4 above, which this
+      would extend rather than replace). As a student's project grows and
+      its structure changes, the same CLAUDE.md instructions should tell
+      Claude to preserve or update those essential submission folders/files
+      whenever it restructures the rest of the project, so the source data
+      for the cards stays intact without the student having to remember a
+      separate submission step. Open questions for that future planning
+      session: exact file/folder shape to standardize on, how the
+      `docs/students/index.html` hub page would actually pull from each
+      fork (build-time generation vs. some other mechanism, given this is a
+      static site with no server), how this interacts with the still-open
+      Phase 1 "student submissions end-to-end" verification item above, and
+      whether this folds into the existing Phase 4 tasks
+      (`docs/students/index.html`, student portfolio page template,
+      extended `README.md` template) or becomes its own initiative.
+- [x] **Rename "AI-Human Design" to "Human-AI Design," site-wide.** Decided
       2026-08-20 while editing `project/copy-drafts/day-3/04-ai-human-design.md`
       (its H1 already reads "Human-AI Design"; `01-recap.md`'s summary
-      updated to match). Still needs to cascade to the live site at
-      implementation time: `docs/data/schedule.json` (`"title": "AI-Human
-      Design"`), `docs/day-3/04-ai-human-design.html` (title tag, H1,
-      breadcrumb, masthead), `docs/day-3/slides/04-ai-human-design-slides.html`
-      (title, chrome-eyebrow, cover-title), and any other page that names
-      this session. The filename itself (`04-ai-human-design.*`) doesn't
-      need to change — same reasoning as the earlier schedule-reorder
-      task: nothing reads the filename, only what's displayed.
-- [ ] **Day 3 schedule: shift 15 min from Where Can You Take This to Final
-      Coding Time.** Raised 2026-08-20. Scoped, ready to implement, just
-      deferred alongside the other pending tasks. Change to
-      `docs/data/schedule.json`: Final Coding Time goes from 60 to 75
-      min (2:00-3:15 PM instead of 2:00-3:00 PM); Where Can You Take
-      This goes from 45 to 30 min, shifting to 3:15-3:45 PM. Final Show
-      & Tell stays fixed at 3:45 PM, unchanged. **Flag for whoever
-      implements**: §05's content was condensed to 3 slides for the
-      45-minute slot (see the 2026-08-19 PR #8 implementation entry
-      above); check it still fits comfortably in 30, especially the new
-      reflection/discussion slide 3, which is meant to prompt an actual
-      conversation, not just be read through quickly.
+      updated to match). **Implemented 2026-08-20**, as part of that page's
+      full copy-draft re-implementation (see the Day 3 §04 restructure
+      below): `docs/data/schedule.json` (`"title"`),
+      `docs/day-3/04-ai-human-design.html` (title tag, H1, breadcrumb,
+      masthead), `docs/day-3/slides/04-ai-human-design-slides.html` (title,
+      chrome-eyebrow, cover-title), and `docs/partials/nav.html`'s dropdown
+      entry, which the original scoping missed. Filename left unchanged, as
+      planned.
+- [x] **Day 3 schedule: shift 15 min from Where Can You Take This to Final
+      Coding Time.** Raised 2026-08-20. **Implemented 2026-08-20** as part
+      of the copy-draft re-implementation pass: `docs/data/schedule.json`
+      updated, Final Coding Time 60→75 min (2:00-3:15 PM), Where Can You
+      Take This 45→30 min (3:15-3:45 PM), Final Show & Tell unchanged at
+      3:45 PM. Both pages' Overview and Slides cover-meta updated to match
+      (Slides hardcodes this per ADR 0011, so it needed a manual edit, not
+      just the JSON change). §05's content (3 slides, including the
+      reflection/discussion slide) was carried over as-is, not further
+      trimmed for the shorter 30-minute slot — worth a facilitator's eye
+      the first time it's actually run at this length, since that's not
+      something a copy pass alone can validate.
 - [ ] **New content: model selection, token usage, choosing smaller models
-      for sub-tasks.** Raised 2026-08-20 while reviewing
+      for sub-tasks, and now also subagent/consumption guardrails.**
+      Raised 2026-08-20 while reviewing
       `project/copy-drafts/day-3/04-ai-human-design.md`. **Not scoped —
       explicitly deferred to a planning conversation later, not something
       to design now.** Open question from the user, unresolved on
@@ -232,6 +284,22 @@ map cleanly to one.
       matching model choice to task size") — worth checking for overlap
       before scoping this further, so the two don't end up saying the
       same thing in two places.
+      **Extended, same day, still 2026-08-20**: a live example of this
+      exact topic came up mid-session (this repo's own build work), when
+      the user asked Claude to introspect on whether its own subagent
+      spawning was judicious, given a large share of session usage was
+      coming from the Agent/Task subsystem. That exchange (a self-
+      assessment of actual agent-call costs in this session, plus
+      guardrail advice: explicit effort caps in agent prompts, preferring
+      Explore over general-purpose for read-only tasks, cheaper-model
+      overrides for simple lookups, and checking Claude Code's actual
+      cost-breakdown/settings mechanics rather than guessing) is exactly
+      the kind of practicable guidance this future content should cover,
+      not just "smaller models exist." When this gets planned: decide
+      whether subagent/guardrail management is its own beat within this
+      content or folded into the model-selection material, and where it
+      fits relative to the existing `STUDENT_CLAUDE_GUIDE.md` pitfalls
+      seed.
 - [ ] **Codebase hygiene sweep: non-functional breadcrumbs and AI slop.**
       User noticed, while reviewing the Day 2 copy-draft edit pass, that
       the repo has accumulated HTML comments and other non-functional
@@ -1941,63 +2009,39 @@ curriculum copy going forward, pairs with the existing
 
 User reviewed the round-3 implementation (Batches 1–6, all shipped
 2026-08-16, see the change log entry below) and gave a second pass of
-feedback on 4 of the pages. Logged only, not yet implemented, same
-workflow as the original batches.
+feedback on 4 of the pages. Logged only at the time; **all of
+`01-debrief.html`, `02-prompting.html`, and `03-claude-md.html`'s items
+below implemented 2026-08-20** as part of the copy-draft re-implementation
+pass (`04-skills-best-practices.html`'s structural rewrite is tracked
+separately below, still open).
 
-**`01-debrief.html`** — s2 exercise-box ("Talk It Through") needs the
+**`01-debrief.html`** — [x] s2 exercise-box ("Talk It Through") given the
 same Time/Description/Deliverable structure used by every other topic's
-exercise-box (it currently reads as one loose paragraph instead). New
-instruction text, close to verbatim from the session (rough draft, not
-final copy): "Let's have an exploratory conversation drawing from the
-questions above. What comes up from your experience yesterday?"
+exercise-box.
 
-**`02-prompting.html`** — s4 exercise deliverable changes again. Instead
-of writing free-form sentences reflecting on what you wanted the prompt
-to do, the deliverable becomes annotating the original prompt directly,
-using the three comparison questions already in the exercise (more
-specific? added a way to check the result? dropped something
-unnecessary?) as the annotation tool, marking up the prompt itself rather
-than writing about it separately.
+**`02-prompting.html`** — [x] s4 exercise deliverable changed: instead of
+free-form reflection sentences, the deliverable is now annotating the
+original prompt directly, using the three comparison questions already in
+the exercise as the annotation tool.
 
 **`03-claude-md.html`**:
-- [ ] **File viewer is illegible as a popup.** User reports the
-      `<dialog>`-based file viewer (shipped this round, see
-      [ADR 0019](adr/0019-file-viewer-dialog.md)) shows the file's
-      content as "a long string," not the entire file legibly. Requested
-      fix is a design change, not a bug patch: replace the popup/modal
-      with an inline collapsible element on the page (opens on click,
-      reveals the markdown in full in place), rather than a dialog.
-      **This reverses part of ADR 0019's decision** — will need a
-      superseding ADR entry when implemented, not just a quiet component
-      swap. Worth investigating the popup's actual rendering bug too
-      (root cause not diagnosed yet, no browser tool was available to
-      inspect it live), in case the same bug would recur in whatever
-      replaces it.
-- [ ] **Remove the haddock3/robotics-lab sentence** from the "It states
-      what can't be inferred from code" roster row: "A robotics lab's
-      CLAUDE.md makes the same kind of call for a different reason: it
-      tells Claude explicitly that existing code has been human-verified
-      to work, but isn't necessarily the best implementation, a fact no
-      amount of code-reading would reveal." Cut entirely.
-- [ ] **Weave concrete new examples into the closing paragraph.** User
-      supplied real illustrative examples to fold into "That's the shape
-      worth copying, whatever your own project is about: point instead
-      of duplicate, write down what Claude can't guess on its own, and
-      organize around when you'll actually need each part. The decisions
-      in your file might come from a design system, an audience persona,
-      or a build process like this one, the habit is the same either
-      way." The material to weave in (user's own phrasing): "This is the
-      place where you'd document decisions that you or your team made
-      about fundamental aspects of the product that you are designing.
-      It can be information about audience segments, the tone of the
-      language across the site, words to avoid, or a commitment to only
-      use certain kinds of tools." **Also**: remove any duplicate
-      examples this creates elsewhere on the page — the s3 Include column
-      already lists "Your design system, fonts, colors, spacing" and
-      "What you know about your audience, personas, reading level,
-      assumptions," so check for overlap with the new audience-segment/
-      tone/word-choice/tooling examples before finalizing, dedupe rather
-      than repeat the same illustrations twice on one page.
+- [x] **File viewer is illegible as a popup.** Fixed 2026-08-20: replaced
+      the `<dialog>`-based viewer with a native `<details>`/`<summary>`
+      inline collapsible, see
+      [ADR 0020](adr/0020-file-viewer-inline-collapsible.md) (supersedes
+      [ADR 0019](adr/0019-file-viewer-dialog.md)). Root cause diagnosed
+      this time via Playwright: `.briefing code`'s `white-space: nowrap`
+      was winning over the parent `<pre>`'s `pre-wrap` on CSS
+      specificity, so the markup swap alone reproduced the identical bug
+      until a `.file-viewer-body code` override was added. Same fix
+      applied to the Slides companion.
+- [x] **Remove the haddock3/robotics-lab sentence** from the "It states
+      what can't be inferred from code" roster row. Done.
+- [x] **Weave concrete new examples into the closing paragraph.** Done,
+      deduped against s3's Include column per the original instruction
+      (dropped "audience segments" specifically since that already
+      appears there; kept tone-of-language, words-to-avoid, and
+      commitment-to-certain-tools as the genuinely new material).
 
 **`04-skills-best-practices.html`** — structural rewrite, not just copy:
 - [ ] **New section 2: a non-technical "when you'd know you need a
