@@ -6,9 +6,14 @@ pilot held up, so Day 3 (`day-3/`) was ported the same way on 2026-08-19,
 all 7 sessions, including the three (`02-product-design`,
 `04-ai-human-design`, `05-where-you-can-take-this`) rewritten that same
 day for the Adiel PR #8 response, so the drafts reflect current site
-content, not the pre-rewrite version. Day 1 is still unported. If a
-repeatable skill for generating/refreshing these drafts gets built, it's
-worth doing now that two days have gone through this by hand.
+content, not the pre-rewrite version. **Day 1 (`day-1/`) ported
+2026-08-21**, all 9 real-content pages (8 scheduled topics plus the bonus
+`people-to-follow` resource page) — see `day-1/README.md` for a
+cross-page pattern summary specific to that pass, pulled from
+`project/content-architecture-notes.md`. `09-project-assignments.html`
+is still a TODO stub, not ported. If a repeatable skill for generating/
+refreshing these drafts gets built, it's worth doing now that three days
+have gone through this by hand.
 
 ## Why this exists
 
@@ -58,6 +63,31 @@ Each file mirrors one Overview page (`day-2/01-debrief.md` ↔
   `.exercise-box`.
 - **Starter-prompt / code blocks** — a fenced code block, exactly as it
   should read on the page.
+- **Data tables** (a `.resource-table`) — a standard GFM markdown table,
+  columns in the same order as the page. If the table also drives
+  filter pills (a `.filter-pills` component, e.g. `people-to-follow.md`),
+  add a `[Table, maps to .resource-table...]` structural note above it
+  explaining the pill values come from one of the table's own columns —
+  no separate authoring needed for the pills.
+- **Pulled-out stats** (a `.stat-pull`) — a `[Stat callout, maps to
+  .stat-pull]` structural note, then `**Number** — Caption [n]` on one
+  line and the aside sentence on the next. First used in
+  `day-1/01-state-of-ai.md`.
+- **Three/four-up emphasis blocks** (a `.stakes`) — visually distinct
+  from `.roster` (a pull-out layout, not an inline term list) but same
+  markdown shape, `**Label**: text.` one per line. Since the two look
+  identical in markdown, add a `[Maps to .stakes, not .roster]`
+  structural note above so re-implementation picks the right component.
+  First used in `day-1/01-state-of-ai.md`.
+- **Circular step diagrams** (a `.process-wheel`) — same numbered-step
+  markdown shape as `.history` (`1. **Title.** Body.`), but a different
+  component (a repeating cycle, not a chronological timeline). Add a
+  `[Maps to .process-wheel, not .history]` structural note above it.
+  First used in `day-1/05-problem-statement-discussion.md`.
+- **Chip strips** (a `.chip-strip`, a horizontal row of year/label
+  pairs) — a `[Chip strip, maps to .chip-strip]` structural note, then
+  the pairs on one line separated by `·`, e.g. `1995 Internet access ·
+  2007 Smartphones`. First used in `day-1/01-state-of-ai.md`.
 - Anything in `[square brackets, not bold]` is a structural note from
   Claude, not prose to edit, e.g. a pointer to an embedded file viewer
   whose content lives in a separate file.

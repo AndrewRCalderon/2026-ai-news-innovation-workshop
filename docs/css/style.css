@@ -12,6 +12,14 @@
   --text-secondary: #646464;
   --serif: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --heading-font: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Aliases of briefing.css's border/surface tokens, kept in sync by value
+     so pages that only load style.css (nav, home) can match briefing pages. */
+  --surface: #fffdf9;
+  --border: rgba(124, 58, 237, 0.18);
+  --border-strong: rgba(124, 58, 237, 0.32);
+  --purple-hover: rgba(149, 90, 245, 0.08);
+  --purple-active: rgba(149, 90, 245, 0.12);
 }
 
 * {
@@ -43,20 +51,13 @@ main {
   padding: 1.5rem;
 }
 
-/* Home page — light alignment with the briefing template's editorial feel
-   (docs/css/briefing.css): same serif reading font, same --sp-* rhythm on
-   section spacing, no structural change to this page's markup. */
-#home { font-family: var(--serif); }
-#home main > p { font-size: 1.06rem; }
-#home main section + section { margin-top: 2.5rem; }
-
 /* Nav */
 .site-nav {
   background: var(--cream);
   border-bottom: 1px solid var(--purple-light);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 30;
 }
 
 .site-nav-inner {
@@ -66,49 +67,114 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
-.site-nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.site-nav-brand-logo {
-  height: 28px;
-  width: auto;
-  display: block;
-}
-
-.site-nav-logo {
-  font-weight: bold;
-  color: var(--purple-dark);
+/* .site-nav prefix on these (rather than bare .site-nav-brand /
+   .site-nav-links a / .day-trigger-link / .day-flyout a) deliberately
+   raises specificity above briefing.css's ".briefing a" — nav is
+   injected as a child of <body class="briefing"> on every day/setup
+   page, and without the extra ancestor class its own link colors lose
+   that cascade fight, leaving every nav link (active or not) rendered
+   in the briefing accent color instead of the site's nav palette. */
+.site-nav .site-nav-brand {
+  font-family: var(--heading-font);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  color: var(--orange-dark);
   text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-nav-brand-emoji {
+  font-size: 0.9em;
+}
+
+.site-nav-brand-emoji--left {
+  margin-right: 0.3rem;
+}
+
+.site-nav-brand-emoji--right {
+  margin-left: 0.3rem;
 }
 
 .site-nav-toggle {
   display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  width: 40px;
+  height: 40px;
   background: none;
   border: none;
   cursor: pointer;
+  padding: 0.4rem;
+}
+
+.site-nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-primary);
 }
 
 .site-nav-links {
   list-style: none;
   display: flex;
-  gap: 1.25rem;
+  gap: 0.25rem;
   margin: 0;
   padding: 0;
-  position: relative;
+  align-items: center;
 }
 
 .site-nav-links > li {
   position: relative;
 }
 
-.site-nav-links a {
+.site-nav .site-nav-links a {
   text-decoration: none;
   color: var(--text-primary);
+}
+
+.site-nav-link {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+}
+
+.site-nav-link:hover {
+  background: var(--purple-hover);
+}
+
+.site-nav .site-nav-link.is-active {
+  font-weight: 600;
+  color: var(--purple-dark);
+  background: var(--purple-active);
+}
+
+.dropdown-trigger {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.dropdown-trigger:hover,
+.has-dropdown.is-open > .dropdown-trigger {
+  background: var(--purple-hover);
+}
+
+.dropdown-caret {
+  font-size: 0.6rem;
+  color: var(--text-secondary);
 }
 
 .dropdown {
@@ -117,15 +183,103 @@ main {
   position: absolute;
   top: 100%;
   left: 0;
-  background: var(--cream);
-  border: 1px solid var(--purple-light);
-  padding: 0.5rem;
-  min-width: 200px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  min-width: 220px;
+  margin: 0;
+  padding: 0.6rem 0.4rem 0.4rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  z-index: 20;
 }
 
 .has-dropdown:hover .dropdown,
-.has-dropdown:focus-within .dropdown {
+.has-dropdown.is-open .dropdown {
   display: block;
+}
+
+.day-item {
+  position: relative;
+}
+
+.day-trigger {
+  display: flex;
+  align-items: stretch;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.day-trigger:hover,
+.day-item.is-open > .day-trigger {
+  background: var(--purple-hover);
+  color: var(--purple-dark);
+}
+
+.site-nav .day-trigger-link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.6rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.day-caret-btn {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0.55rem 0.6rem;
+  color: inherit;
+}
+
+.day-index {
+  font-family: var(--heading-font);
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--purple);
+}
+
+.day-caret {
+  font-size: 0.6rem;
+  color: var(--text-secondary);
+}
+
+.day-flyout {
+  display: none;
+  list-style: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  min-width: 230px;
+  margin: 0 0 0 0.25rem;
+  padding: 0.4rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  z-index: 21;
+}
+
+.day-item.is-open > .day-flyout {
+  display: block;
+}
+
+.site-nav .day-flyout a {
+  display: block;
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.86rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.site-nav .day-flyout a:hover {
+  background: var(--purple-hover);
+  color: var(--purple-dark);
 }
 
 /* Breadcrumb */
@@ -212,6 +366,20 @@ main {
   justify-content: space-between;
   color: var(--text-secondary);
   font-size: 0.875rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.site-footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.site-footer-logo {
+  height: 22px;
+  width: auto;
+  display: block;
 }
 
 .site-footer-links {
@@ -222,14 +390,26 @@ main {
   padding: 0;
 }
 
+/* Same ".site-footer" specificity bump as the nav links above — the
+   footer is also injected into <body class="briefing"> on every
+   day/setup page, so its links need to out-rank ".briefing a" too. */
+.site-footer .site-footer-links a {
+  color: var(--orange-dark);
+}
+
+.site-footer .site-footer-links a:hover {
+  color: var(--purple-dark);
+}
+
 @media (max-width: 720px) {
   .site-nav-toggle {
-    display: block;
+    display: flex;
   }
 
   .site-nav-links {
     display: none;
     flex-direction: column;
+    align-items: stretch;
     position: absolute;
     top: 100%;
     left: 0;
@@ -237,17 +417,45 @@ main {
     background: var(--cream);
     border-bottom: 1px solid var(--purple-light);
     padding: 1rem 1.5rem;
+    gap: 0.2rem;
   }
 
   .site-nav-links.is-open {
     display: flex;
   }
 
+  .dropdown-trigger {
+    width: 100%;
+    justify-content: space-between;
+  }
+
   .dropdown {
     position: static;
-    display: block;
+    display: none;
     border: none;
-    padding-left: 1rem;
+    box-shadow: none;
+    background: none;
+    margin: 0;
+    padding: 0.2rem 0 0.2rem 1rem;
+  }
+
+  .has-dropdown.is-open .dropdown {
+    display: block;
+  }
+
+  .day-flyout {
+    position: static;
+    display: none;
+    border: none;
+    box-shadow: none;
+    background: none;
+    margin: 0.2rem 0 0.2rem 0.5rem;
+    padding: 0.2rem 0 0.2rem 0.75rem;
+    border-left: 2px solid var(--border);
+  }
+
+  .day-item.is-open > .day-flyout {
+    display: block;
   }
 
   .site-footer-inner {
@@ -281,3 +489,186 @@ main {
 .collapsible > summary:hover { background: var(--purple-light); }
 .collapsible[open] > summary { border-bottom: 1px solid var(--purple-light); }
 .collapsible-body { padding: 1rem 1.1rem; }
+
+/* Home page — editorial masthead + numbered sections, aligned with the
+   briefing template's look (docs/css/briefing.css) without loading it. */
+.home-main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.home-masthead {
+  margin: 3.5rem auto 3rem;
+}
+
+.home-eyebrow {
+  font-family: var(--heading-font);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin: 0 0 0.75rem;
+}
+
+.home-masthead h1 {
+  font-size: clamp(2.2rem, 5.5vw, 3.2rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.home-dek {
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin: 1rem 0 0;
+  max-width: 46ch;
+  line-height: 1.5;
+}
+
+.home-meta {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  font-family: var(--heading-font);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.home-meta-div {
+  color: var(--border-strong);
+}
+
+.home-jumpto {
+  margin: 0 0 3rem;
+  border-top: 1px solid var(--purple-light);
+  border-bottom: 1px solid var(--purple-light);
+  padding: 1.5rem 0;
+}
+
+.home-jumpto-label {
+  margin: 0 0 1rem;
+  font-family: var(--heading-font);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.home-jumpto-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+
+.home-jumpto-links a {
+  font-family: var(--heading-font);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.home-jumpto-links a:hover {
+  color: var(--purple-dark);
+}
+
+.home-section {
+  padding-top: 2.5rem;
+}
+
+.home-section:last-child {
+  padding-bottom: 4rem;
+}
+
+.home-section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.home-section-eyebrow {
+  font-family: var(--heading-font);
+  font-size: 0.85rem;
+  color: var(--purple);
+}
+
+.home-section-head h2 {
+  font-size: clamp(1.4rem, 3.2vw, 1.85rem);
+  margin: 0;
+}
+
+.day-list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--purple-light);
+}
+
+.day-list-row {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--purple-light);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.day-list-row:hover {
+  color: var(--purple-dark);
+}
+
+.day-list-num {
+  font-family: var(--heading-font);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--purple);
+}
+
+.day-list-title {
+  display: block;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.day-list-desc {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+}
+
+.day-list-arrow {
+  font-family: var(--heading-font);
+  color: var(--purple);
+}
+
+.start-links {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.start-link-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.start-link-card:hover {
+  border-color: var(--purple-dark);
+}
+
+.start-link-arrow {
+  font-family: var(--heading-font);
+  color: var(--purple);
+}
