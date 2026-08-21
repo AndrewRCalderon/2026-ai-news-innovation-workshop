@@ -111,6 +111,78 @@ Newly Identified Tasks entry below), Day 1's still-nonexistent copy-drafts,
 and the site-wide workshop-name/em-dash/colon sweeps (deferred to Day 1's
 eventual line-edit pass, not this one) remain unscheduled.
 
+**2026-08-20, continued: `STUDENT_CLAUDE_GUIDE.md`'s three open threads
+resolved in one pass.** User asked to prioritize this file specifically.
+Closed: the line-1716 Claude-Desktop-vs-Claude-Code tooling gap (new
+"Where this file kicks in" section), the submission-card file-structure
+idea (new `SUBMISSION.md` template shipped at repo root, see
+[ADR 0021](adr/0021-student-submission-metadata-file.md)), and the
+model-selection/subagent-guardrail content seed (new "Choosing the right
+model for the task" section, deliberately AI-in-the-loop after an early
+draft put the burden on the student instead and was corrected mid-review).
+Also reworked, per direct user request mid-pass: "How to explain things to
+me" changed from Claude assuming the student's vocabulary level to Claude
+asking the student directly via a short onboarding question set. Three
+things intentionally left open rather than forced to a premature answer:
+the `SUBMISSION.md` field set (provisional, two rounds of user edits mid-
+review, explicitly to be revisited once seen in real use), the
+demo-path-field question, and the harvesting mechanism for
+`docs/students/index.html` — see the "Student submission cards" and
+"Live-test `STUDENT_CLAUDE_GUIDE.md`" entries below. The guide itself is
+not marked fully done until that live test happens.
+
+**2026-08-20, continued: the above `SUBMISSION.md` work corrected after
+missing prior ADRs.** Walking through how a student's fork would actually
+work in Claude Desktop surfaced that this session's `SUBMISSION.md`/
+`ADR 0021` work hadn't checked `project/adr/` first, and conflicted with
+three already-accepted decisions:
+[ADR 0003](adr/0003-daily-merge-branch-workflow.md) (per-day submission
+folders), [ADR 0004](adr/0004-submissions-inside-docs.md) (path inside
+`docs/`), and [ADR 0008](adr/0008-readme-driven-portfolio-data.md)
+(README-driven portfolio data, hand-built pages). Reconciled directly with
+the user and written up as
+[ADR 0022](adr/0022-continuous-student-folder.md), which supersedes 0003's
+folder-namespacing, 0008's data-source decision, and 0021 entirely. Net
+result: one continuous folder per student
+(`docs/submissions/your-name/`, replacing the per-day scheme), created
+during Day 1's Fork & Submit, where both `SUBMISSION.md` and
+`STUDENT_CLAUDE_GUIDE.md`-as-`CLAUDE.md` get **copied** (not moved, since
+the root copies are linked from live pages) alongside the actual project
+work. This also fixed a pre-existing bug in
+`docs/day-1/08-fork-and-submit.html`/its Slides (missing `docs/` prefix on
+the submissions path) and required reframing the Day 2 §03 `CLAUDE.md`
+exercise (`docs/day-2/03-claude-md.html` + Slides +
+`project/copy-drafts/day-2/03-claude-md.md`), since the file now arrives a
+day earlier than that exercise originally assumed. Full detail in the
+Phase 5 `STUDENT_CLAUDE_GUIDE.md` bullet and the "Student submission
+cards" Newly Identified Task below.
+
+**2026-08-20, end of day — session stopped on daily usage limit, picking up
+tomorrow.** Quick orientation for next session, so it doesn't need to
+re-read this whole file cold:
+
+1. **First thing to do**: finish validating the "Modulate how much the
+   guide makes Claude ask vs. just act" fix (Newly Identified Tasks below).
+   The design/implementation is done (broadened onboarding question 2,
+   reworded Plan Mode bullet), but the live-test that was supposed to
+   confirm it works came back inconclusive — turn 2 of the test did
+   model-selection research but created no files despite a "just go, build
+   something" instruction, and the session ran out of usage before it
+   could be re-run or dug into. Don't trust the fix until this is actually
+   resolved one way or the other.
+2. **Then**, per the priority order worked out with the user today (still
+   valid, nothing since has changed it): **Day 1 copy-drafts** is the
+   biggest real content gap — Days 2/3 both got full copy-draft edit
+   passes, Day 1 never started, and `09-project-assignments.html` is still
+   a placeholder. Everything else in "Newly identified tasks" below
+   (model-selection/subagent content planning, codebase hygiene sweep,
+   workshop-name/em-dash sweep) can wait behind that.
+3. Nothing from today is left half-implemented except item 1 above — see
+   the two 2026-08-20 entries just above this one for the full detail on
+   what shipped (the `STUDENT_CLAUDE_GUIDE.md` rework, the `SUBMISSION.md`/
+   `ADR 0022` architecture correction, and today's onboarding-question
+   broadening).
+
 Source of truth for build progress on this repo. Check here before starting
 work; update here when a task starts/completes, or when new work is
 discovered that wasn't in the original scope. Architecture *decisions* (the
@@ -157,7 +229,7 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 
 - [ ] `docs/students/index.html` hub page
 - [ ] Student portfolio page template
-- [ ] Extended `README.md` submission template (adds title/pitch + demo path fields)
+- [x] ~~Extended `README.md` submission template (adds title/pitch + demo path fields)~~ — **superseded 2026-08-20** by `SUBMISSION.md` as its own dedicated file (see [ADR 0022](adr/0022-continuous-student-folder.md), which supersedes [ADR 0008](adr/0008-readme-driven-portfolio-data.md)'s README-based approach). Nothing left to build here.
 - [ ] `.github/pull_request_template.md`
 - [ ] `SUBMISSION_GUIDE.md`
 
@@ -178,7 +250,7 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 - [x] `docs/setup.html` — **rebuilt 2026-08-11 as Day 1 only**, with a real
       interactive checklist, ready to send to students. Day 2's setup
       content moved to a new, currently-unlinked `docs/setup-day-2.html`.
-- [x] `STUDENT_CLAUDE_GUIDE.md` written (day-specific guidance students
+- [~] `STUDENT_CLAUDE_GUIDE.md` written (day-specific guidance students
       paste into their own Claude sessions — see
       [ADR 0009](adr/0009-separate-maintainer-claude-md.md) for why this
       isn't named `CLAUDE.md`). **Implemented 2026-08-19**, growing out of
@@ -207,6 +279,52 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
       pending Batch 7 edits on that same page (file-viewer popup fix,
       paragraph weave, both in section 2, not section 4) were left
       untouched, as planned.
+      **Revised 2026-08-20**, closing the three open threads logged
+      against this file (see "Newly identified tasks" below for their
+      full history): added a "Where this file kicks in" section
+      orienting students to the Day 1 (Claude Desktop) → Day 2 (VS Code /
+      Claude Code / GitHub Desktop) tooling shift, resolving the line-1716
+      gap below; reworked "How to explain things to me" from
+      assumption-based instructions into onboarding questions Claude asks
+      the student directly; replaced the single model-choice bullet in
+      "Things to watch for" with a new "Choosing the right model for the
+      task" section, AI-in-the-loop (Claude surfaces model options and
+      tradeoffs in plain language, student picks — not the student
+      justifying a choice unprompted); added a "Keeping submission info
+      current" section pointing at the new `SUBMISSION.md` (see task
+      below); "Using git and GitHub" gained a line naming GitHub Desktop
+      and Claude-Code-runs-git-directly as the two real paths, replacing
+      the previous tool-agnostic phrasing. See
+      [ADR 0021](adr/0021-student-submission-metadata-file.md) for the
+      `SUBMISSION.md` decision specifically.
+      **Corrected, same day, still 2026-08-20**: the above `SUBMISSION.md`/
+      `ADR 0021` work didn't check existing architecture first and
+      conflicted with it — [ADR 0003](adr/0003-daily-merge-branch-workflow.md)
+      already had students working in a per-day folder
+      (`submissions/day-N/name/`), [ADR 0004](adr/0004-submissions-inside-docs.md)
+      already placed that inside `docs/`, and
+      [ADR 0008](adr/0008-readme-driven-portfolio-data.md) already decided
+      portfolio data comes from an extended `README.md`, not a separate
+      file. Reconciled via [ADR 0022](adr/0022-continuous-student-folder.md),
+      which supersedes 0003's folder-namespacing, 0008's data-source
+      decision, and 0021 entirely: one continuous folder per student for
+      the whole workshop (`docs/submissions/your-name/`, not per-day),
+      `SUBMISSION.md`'s field set kept (superseding 0008's), and both
+      `STUDENT_CLAUDE_GUIDE.md`-as-`CLAUDE.md` and `SUBMISSION.md`
+      **copied** (not moved) into that folder during Day 1's Fork & Submit
+      — moving would delete the root copies that `docs/setup-day-2.html`
+      and `docs/day-2/03-claude-md.html` already link to. `STUDENT_CLAUDE_GUIDE.md`'s
+      "Where this file kicks in" and "Keeping submission info current"
+      sections updated to name the folder explicitly. This also meant
+      reframing the Day 2 §03 `docs/day-2/03-claude-md.html` exercise
+      (Overview + Slides + `project/copy-drafts/day-2/03-claude-md.md`):
+      since `CLAUDE.md` now arrives Day 1, not Day 2, the exercise shifted
+      from "copy it in" to "review and update what's already there,"
+      including explicitly asking students to reconsider whether every
+      guardrail still earns its place after a day of real use.
+      **Not yet considered complete**: needs a live test on a real project
+      (not just a read-through) before this bullet closes for good — see
+      the "Newly identified tasks" entries below.
 - [~] `resources.html` populated with real links — established pattern:
       when a topic's review turns up a genuinely useful external
       compilation/reference (not something we'd host/maintain ourselves),
@@ -224,31 +342,44 @@ Tasks discovered during build that weren't in the original plan. Add here as
 found; promote into a phase above once scoped, or leave here if it doesn't
 map cleanly to one.
 
-- [ ] **Student submission cards, auto-populated from a standardized fork
+- [~] **Student submission cards, auto-populated from a standardized fork
       file structure.** Raised 2026-08-20, mid-session, while working on the
-      copy-drafts re-implementation pass. **Not scoped, explicitly deferred
-      to a planning conversation together** — this is complex and needs
-      real design before implementation. The idea: bake instructions into
-      the student-facing CLAUDE.md material (`STUDENT_CLAUDE_GUIDE.md` is
-      the likely home) telling Claude to set up a standardized file
-      structure in each student's forked project from the start, specific
-      folders/files that hold the basic info the Phase 4 student showcase
-      cards need (title, pitch, demo path, etc. — see the existing
-      `README.md` submission template item in Phase 4 above, which this
-      would extend rather than replace). As a student's project grows and
-      its structure changes, the same CLAUDE.md instructions should tell
-      Claude to preserve or update those essential submission folders/files
-      whenever it restructures the rest of the project, so the source data
-      for the cards stays intact without the student having to remember a
-      separate submission step. Open questions for that future planning
-      session: exact file/folder shape to standardize on, how the
-      `docs/students/index.html` hub page would actually pull from each
-      fork (build-time generation vs. some other mechanism, given this is a
-      static site with no server), how this interacts with the still-open
-      Phase 1 "student submissions end-to-end" verification item above, and
-      whether this folds into the existing Phase 4 tasks
-      (`docs/students/index.html`, student portfolio page template,
-      extended `README.md` template) or becomes its own initiative.
+      copy-drafts re-implementation pass. **Scoped and implemented
+      2026-08-20, then corrected same day**: a single pre-built template
+      file, `SUBMISSION.md`, shipped at repo root so every student fork
+      inherits it. First pass (`ADR 0021`) put it in a `submissions/day-N/`-
+      style scheme without checking prior art; that conflicted with
+      already-accepted [ADR 0003](adr/0003-daily-merge-branch-workflow.md)/
+      [0004](adr/0004-submissions-inside-docs.md)/[0008](adr/0008-readme-driven-portfolio-data.md)
+      and was corrected via [ADR 0022](adr/0022-continuous-student-folder.md)
+      (supersedes 0003's folder-namespacing, 0008's data-source decision,
+      and 0021 entirely). Current state: one folder per student,
+      `docs/submissions/your-name/`, used across all three days (not
+      per-day); both `SUBMISSION.md` and `STUDENT_CLAUDE_GUIDE.md`-as-
+      `CLAUDE.md` copied (not moved) into it during Day 1's Fork & Submit,
+      root copies left intact since they're linked from live pages.
+      `STUDENT_CLAUDE_GUIDE.md`'s "Keeping submission info current" section
+      instructs Claude to help students fill `SUBMISSION.md` in early and
+      keep it updated through restructures.
+      **Confirmed scale**: 5–7 student forks, not dozens — relevant to how
+      little the read side actually needs automating.
+      **No harvesting mechanism needed**: ADR 0008's "hand-built, not
+      auto-generated" stance for portfolio pages is explicitly retained by
+      ADR 0022 — this was previously logged as an open/undesigned question,
+      but it was already answered by prior art, just not the data-source
+      part of that same ADR.
+      **Still open, not resolved by this pass**:
+      - The field set (see `SUBMISSION.md` itself — the user has been
+        revising it directly) is **provisional**, flagged as wanting to be
+        seen in real use before finalizing. Revisit once students have
+        actually filled one in.
+      - Whether a demo-path field should be added back — it was in the
+        original Phase 4 scope and earlier drafts of this task, but isn't
+        in the current field set; unclear if that was deliberate.
+      - How this interacts with the still-open Phase 1 "student
+        submissions end-to-end" verification item above, and whether it
+        folds into the existing Phase 4 tasks (`docs/students/index.html`,
+        student portfolio page template) or stays its own thing.
 - [x] **Rename "AI-Human Design" to "Human-AI Design," site-wide.** Decided
       2026-08-20 while editing `project/copy-drafts/day-3/04-ai-human-design.md`
       (its H1 already reads "Human-AI Design"; `01-recap.md`'s summary
@@ -303,6 +434,89 @@ map cleanly to one.
       content or folded into the model-selection material, and where it
       fits relative to the existing `STUDENT_CLAUDE_GUIDE.md` pitfalls
       seed.
+      **`STUDENT_CLAUDE_GUIDE.md` side implemented 2026-08-20**: the old
+      passive pitfalls-seed bullet was replaced with a standalone
+      "Choosing the right model for the task" section — deliberately
+      **AI-in-the-loop**, not student-burdened: Claude surfaces the model
+      options and their tradeoffs in plain language before a subtask, and
+      the student picks, rather than being expected to justify a choice
+      unprompted (an earlier draft got this backwards and was corrected
+      mid-review). **Still open**: the broader in-class content question
+      (a dedicated Day 2 lesson vs. just this guide content) — this pass
+      only closes the guide-side seed, not the bigger unscoped idea above.
+- [x] **Live-test `STUDENT_CLAUDE_GUIDE.md` on a real project.** Raised
+      2026-08-20, right after the guide's onboarding-questions/model-choice/
+      submission-info rework (see the Phase 5 bullet above).
+      **Done 2026-08-20**: ran a fresh subagent session with `CLAUDE.md`
+      (copied from `STUDENT_CLAUDE_GUIDE.md`) in a scratch project, given a
+      plausible Day 1/2 student request (an RSS headline summarizer, no
+      coding background). What worked: all three onboarding questions
+      asked verbatim-in-spirit, genuinely stopped rather than guessing
+      answers and continuing; credential hygiene flagged proactively before
+      it was relevant; `SUBMISSION.md` correctly left unfilled rather than
+      guessed, since there was no real project direction yet.
+      **Surfaced two real gaps, not yet fixed — see the new task right
+      below**: the guide gives no guidance on safe pre-work scaffolding
+      (a folder, `.gitignore`, stub script) before onboarding questions are
+      answered, so the test session defaulted to 100% asking, zero
+      building; and the "more than a file or two" Plan Mode trigger has no
+      real line, a first scaffold is often 4-5 trivial files that's still
+      one small conceptual unit. Caveat: this validates the *instructions*
+      produce the intended behavior once read, not whether Claude Desktop/
+      Code actually auto-discovers `CLAUDE.md` the way documented — that
+      mechanism is still unverified directly.
+- [~] **Modulate how much the guide makes Claude ask vs. just act, based on
+      the onboarding-question answers themselves.** Raised 2026-08-20,
+      directly off the live-test findings above. User's concern: the
+      guide's current asking-first instinct is correct in spirit
+      (students shouldn't have to make every choice, Claude should suggest
+      and explain) but shouldn't fully stall real development either.
+      **Designed and implemented 2026-08-20**, same day, once the user
+      came back to it: broadened "How to explain things to me"'s second
+      onboarding question from just "when something breaks" to also cover
+      "when we're starting something new" — one question now covers both
+      error-handling explanation depth *and* general build-vs-ask pacing,
+      with an explicit line stating the answer is the default for how much
+      to build before checking in generally, not just for explanations.
+      Deliberately reused the existing question rather than adding a
+      fourth one, to keep the file from growing.
+      Resolves both concrete gaps the live test found: **(1) pre-work
+      scaffolding ambiguity** — now governed directly by the broadened
+      question's answer, instead of being unaddressed. **(2) the fuzzy
+      Plan-Mode file-count trigger** — reworded to be explicitly about risk/
+      reversibility only ("expensive or awkward to undo"), a hard safety
+      net that holds regardless of the calibration answer, with an
+      explicit carve-out that a first rough scaffold isn't what it's about
+      even if it's more than a file or two — deferring that specific case
+      to the calibration question instead of counting files.
+      **Live-test attempted 2026-08-20, inconclusive, needs finishing.**
+      Same fresh-subagent method as the first test, refreshed scratch
+      `CLAUDE.md` to this revision, same RSS-summarizer request. Turn 1
+      (asking the onboarding questions): confirmed the broadened question
+      reads and asks correctly. Turn 2: sent the subagent "student"
+      answers signaling "just go" on pace — but the run that came back
+      only did model-selection research (Haiku vs. Sonnet for the
+      summarization call, via the `claude-api` skill) and created **no
+      files** in the scratch project, despite the explicit "just go, build
+      a rough first version" instruction. Session ended (daily usage
+      limit) before this could be dug into further or re-run. **Genuinely
+      unresolved, not a pass or a fail** — could mean the wording still
+      doesn't push hard enough toward action, or could be an artifact of
+      how the test subagent handled a resumed/background turn rather than
+      a real reflection of the guide's instructions. **First thing to pick
+      up next session**: re-run or continue this test cleanly to actually
+      find out before trusting the fix. Scratch project still exists at
+      `/private/tmp/.../scratchpad/live-test-project` for this session
+      only — won't persist to a new session, so this needs a fresh setup
+      next time (see `STUDENT_CLAUDE_GUIDE.md`'s live-test task description
+      above for the method: copy the file in as `CLAUDE.md`, spawn a fresh
+      subagent, give it a plausible student request, don't hint it's a
+      test).
+      **Noted but not acted on**: the same "make Claude suggest instead of
+      asking for every choice" principle could arguably extend to
+      "Choosing the right model for the task" too (still always asks
+      before proceeding), but that wasn't a live-test finding, so left
+      alone rather than scope-creeping this pass.
 - [ ] **Codebase hygiene sweep: non-functional breadcrumbs and AI slop.**
       User noticed, while reviewing the Day 2 copy-draft edit pass, that
       the repo has accumulated HTML comments and other non-functional
@@ -1713,9 +1927,13 @@ single-purpose, shippable URL.
 
 ### Downstream, not yet touched
 
-- [ ] `STUDENT_CLAUDE_GUIDE.md` (still unwritten, Phase 5) will need to
-      reflect Claude Desktop for Day 1 vs. Claude Code for Day 2 once
-      drafted.
+- [x] `STUDENT_CLAUDE_GUIDE.md` reflects the Claude Desktop (Day 1) vs.
+      VS Code/Claude Code/GitHub Desktop (Day 2+) tooling shift.
+      **Resolved 2026-08-20** — confirmed as a real, still-open gap (not
+      stale) when revisited: the guide said nothing about the shift, so a
+      new "Where this file kicks in" section was added. See the Phase 5
+      `STUDENT_CLAUDE_GUIDE.md` bullet above for the full change list from
+      this pass.
 - [ ] Adiel's 21 per-page content notes (logged in the "Collaborator
       feedback" section above) — in progress, see next section.
 - [x] Resolved 2026-08-13: **Day 2 is built.** Retimed to the same

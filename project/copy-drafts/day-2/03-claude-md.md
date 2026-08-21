@@ -65,11 +65,11 @@ A CLAUDE.md is a record of decisions your whole team has already made, so Claude
 
 ## 4. Write Your Own
 
-Claude Code can generate a starting CLAUDE.md by analyzing your project directly, with the `/init` command. [1] For this workshop, you don't have to start blank. We gave you a real starting file, [STUDENT_CLAUDE_GUIDE.md](https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/blob/main/STUDENT_CLAUDE_GUIDE.md), already written for a student building their first AI-assisted project. Copy it into your own project as `CLAUDE.md`, then let Claude update it based on what it actually observed about how you worked yesterday, instead of writing everything from scratch. Either way, it should keep growing from the actual friction points & insights in your workflow, not a theoretical checklist. [2]
+Claude Code can generate a starting CLAUDE.md by analyzing your project directly, with the `/init` command. [1] For this workshop, you didn't start blank: [STUDENT_CLAUDE_GUIDE.md](https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/blob/main/STUDENT_CLAUDE_GUIDE.md) is already sitting in your `docs/submissions/your-name/` folder as `CLAUDE.md`, copied there yesterday during Fork & Submit. Today's task is reviewing it, not introducing it: ask Claude to update it based on what it actually observed about how you worked yesterday, instead of writing everything from scratch. Either way, it should keep growing from the actual friction points & insights in your workflow, not a theoretical checklist. [2]
 
 > **Exercise: Update Your CLAUDE.md**
 > - Time: ~15 minutes.
-> - Description: Copy `STUDENT_CLAUDE_GUIDE.md` into your Day 1 project as `CLAUDE.md`. Then ask Claude to review your Day 1 session and update the file: what did it notice about technical decisions that you made, what you already understood without needing it explained, where you got stuck? Don't write the changes yourself first.
+> - Description: Open the `CLAUDE.md` already in your `docs/submissions/your-name/` folder. Ask Claude to review your Day 1 session and update the file: what did it notice about technical decisions that you made, what you already understood without needing it explained, where you got stuck? Also ask whether every guardrail in the file still earns its place — a day of experience in, some of it (like the onboarding questions about explaining basic terms) might already be more scaffolding than you need. Don't write the changes yourself first.
 > - Deliverable: Read what Claude changed. Pick two or three edits and, for each one, ask yourself whether it's something you actually told Claude directly, or something it inferred from a pattern in how you worked that you weren't even aware of. Share what stood out to you.
 
 **Sources**
