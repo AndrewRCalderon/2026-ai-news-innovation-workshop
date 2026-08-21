@@ -20,21 +20,15 @@ CLAUDE.md is for what's true every time you open a new chat. It's foundational c
 
 This workshop's own repository has a CLAUDE.md file. It's not a hypothetical, it's the actual file governing how this website gets built. [See it on GitHub](https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/blob/main/CLAUDE.md), or open the whole thing right here.
 
-<!-- Pending, logged in REQUIREMENTS.md Batch 7: this button currently
-     opens a popup that user reports is illegible ("shows a long string").
-     Fix is a design change, not a copy edit: replace with an inline
-     collapsible element that opens in place instead of a popup. Not
-     something to resolve in this markdown file — the embedded file
-     content below is a verbatim, byte-faithful copy of this repo's real
-     CLAUDE.md, not something to edit here; edit the actual CLAUDE.md
-     file if it needs to change. -->
-[Embedded file viewer: shows this repo's actual `CLAUDE.md`, verbatim.]
-
 Three things worth noticing about it, and worth copying into your own:
 
 **It points, it doesn't duplicate**: Instead of listing every task, it says: read `project/REQUIREMENTS.md` for current status. The file stays short because it delegates to other files rather than repeating their contents.
-**It states what can't be inferred from code**: A rule like "any non-trivial technical decision gets a new numbered file in `project/adr/`" isn't something Claude could guess by reading the codebase. That's exactly the kind of thing that belongs here. 
+**It states what can't be inferred from code**: A rule like "any non-trivial technical decision gets a new numbered file in `project/adr/`" isn't something Claude could guess by reading the codebase. That's exactly the kind of thing that belongs here.
 **It's organized by when you'd need it**: Sections for "before starting work," "while working," and "repo layout" map to the actual moments in a session, not an abstract table of contents.
+
+[Embedded file viewer, inline collapsible: shows this repo's actual `CLAUDE.md`, verbatim. Not something to edit here; edit the actual CLAUDE.md file if it needs to change.]
+
+That's the shape worth copying, whatever your own project is about: point instead of duplicate, write down what Claude can't guess on its own, and organize around when you'll actually need each part. It's also the place to document decisions your team has already made about the product itself, the tone of the language across your site, words to avoid, or a commitment to only use certain kinds of tools. The decisions in your file might come from a design system, an audience persona, or a build process like this one, the habit is the same either way.
 
 ## 3. What Belongs In One
 
@@ -71,11 +65,11 @@ A CLAUDE.md is a record of decisions your whole team has already made, so Claude
 
 ## 4. Write Your Own
 
-Claude Code can generate a starting CLAUDE.md by analyzing your project directly, with the `/init` command. [1] For this workshop, you don't have to start blank. We gave you a real starting file, [STUDENT_CLAUDE_GUIDE.md](https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/blob/main/STUDENT_CLAUDE_GUIDE.md), already written for a student building their first AI-assisted project. Copy it into your own project as `CLAUDE.md`, then let Claude update it based on what it actually observed about how you worked yesterday, instead of writing everything from scratch. Either way, it should keep growing from the actual friction points & insights in your workflow, not a theoretical checklist. [2]
+Claude Code can generate a starting CLAUDE.md by analyzing your project directly, with the `/init` command. [1] For this workshop, you didn't start blank: [STUDENT_CLAUDE_GUIDE.md](https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/blob/main/STUDENT_CLAUDE_GUIDE.md) is already sitting in your `docs/submissions/your-name/` folder as `CLAUDE.md`, copied there yesterday during Fork & Submit. Today's task is reviewing it, not introducing it: ask Claude to update it based on what it actually observed about how you worked yesterday, instead of writing everything from scratch. Either way, it should keep growing from the actual friction points & insights in your workflow, not a theoretical checklist. [2]
 
 > **Exercise: Update Your CLAUDE.md**
 > - Time: ~15 minutes.
-> - Description: Copy `STUDENT_CLAUDE_GUIDE.md` into your Day 1 project as `CLAUDE.md`. Then ask Claude to review your Day 1 session and update the file: what did it notice about technical decisions that you made, what you already understood without needing it explained, where you got stuck? Don't write the changes yourself first.
+> - Description: Open the `CLAUDE.md` already in your `docs/submissions/your-name/` folder. Ask Claude to review your Day 1 session and update the file: what did it notice about technical decisions that you made, what you already understood without needing it explained, where you got stuck? Also ask whether every guardrail in the file still earns its place — a day of experience in, some of it (like the onboarding questions about explaining basic terms) might already be more scaffolding than you need. Don't write the changes yourself first.
 > - Deliverable: Read what Claude changed. Pick two or three edits and, for each one, ask yourself whether it's something you actually told Claude directly, or something it inferred from a pattern in how you worked that you weren't even aware of. Share what stood out to you.
 
 **Sources**

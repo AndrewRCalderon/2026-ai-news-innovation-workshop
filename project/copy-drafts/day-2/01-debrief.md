@@ -26,13 +26,8 @@ Getting stuck isn't a sign you did something wrong. It's information, and a lot 
 - Did Claude misunderstand what you wanted, or did you not know what to ask for?
 - Was there a point where you weren't sure if Claude was on the right track before you'd spent time finding out?
 
-<!-- Pending, logged in REQUIREMENTS.md Batch 7: restructure this into the
-     Time/Description/Deliverable pattern used by other exercises, and the
-     instruction was headed toward something like "Let's have an
-     exploratory conversation drawing from the questions above. What
-     comes up from your experience yesterday?" — write the actual final
-     version below, this was only ever a rough spoken draft. -->
-
 > **Exercise: Talk It Through**
 >
-> - Description: Take a minute to read back over the questions above on your own. Speak up when something resonates, build on what someone else says, or share your own moment. Let's listen and talk.
+> - Time: ~10 minutes.
+> - Description: Take a minute to read back over the questions above on your own. Then let's have an exploratory conversation drawing from them. What comes up from your experience yesterday? Jump in when something resonates, build on what someone else says, or share your own moment. It doesn't need to go in order.
+> - Deliverable: Nothing written. Come ready to name one specific moment, either something that worked or something you got stuck on, when we open it up.

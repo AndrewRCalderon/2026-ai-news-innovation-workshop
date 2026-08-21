@@ -55,14 +55,15 @@
         <section class="slide" data-slide="s2">
           <div class="slide-inner">
             <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">When to Use It</h2></div>
-            <p class="lede">"The first time I let Claude Code take a serious auth change straight from prompt to patch, it changed nine files. Three were subtly wrong." Looked fine when Claude finished. Broke once someone used it.</p>
+            <p class="lede">Jumping straight to coding can produce code that solves the wrong problem, wastes tokens, and jumbles up your codebase.</p>
             <blockquote class="pull-question">A bad plan is a paragraph. A bad implementation is an afternoon.</blockquote>
+            <p>Three criteria that can help you intuit whether you should use plan mode:</p>
             <ul class="field-notes">
               <li><strong>Uncertainty.</strong> Do you know the approach, or are you still figuring out "done"?</li>
               <li><strong>Blast radius.</strong> One easy-to-undo file, or several touching something hard to reverse?</li>
               <li><strong>Familiarity.</strong> Code you know well, or a part you haven't touched?</li>
             </ul>
-            <p>Fast check: if you could describe the diff in one sentence, skip the plan, unless one of the axes above says otherwise.</p>
+            <p>Fast check: if you could describe the change in one sentence, skip the plan.</p>
           </div>
         </section>
 

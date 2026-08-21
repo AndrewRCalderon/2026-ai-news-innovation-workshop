@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI-Human Design - Day 3 - AI News Innovation Workshop</title>
+  <title>Human-AI Design - Day 3 - AI News Innovation Workshop</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/briefing.css">
 </head>
@@ -11,21 +11,20 @@
   <div id="nav"></div>
 
   <main>
-    <div class="breadcrumb"><a href="/">Home</a> &gt; <a href="/day-3/">Day 3</a> &gt; AI-Human Design</div>
+    <div class="breadcrumb"><a href="/">Home</a> &gt; <a href="/day-3/">Day 3</a> &gt; Human-AI Design</div>
 
     <header class="masthead">
-      <h1 class="masthead-title">AI-Human Design</h1>
-      <p class="masthead-dek">Neither human-in-the-loop nor full automation is the safe default. Both are design decisions, made stage by stage, and either one can be gotten wrong.</p>
+      <h1 class="masthead-title">Human-AI Design</h1>
+      <p class="masthead-dek">Neither human-in-the-loop nor full automation is the safe default. Both are design decisions.</p>
       <div class="masthead-meta"><span id="topic-time">--</span><span class="div">·</span><span id="topic-duration">--</span><span class="div">·</span><span id="topic-type">--</span></div>
     </header>
 
     <nav class="toc" aria-label="Sections in this briefing">
       <ol>
         <li><a href="#s1"><span class="n">01</span> Human in the Loop Isn't the Default</a></li>
-        <li><a href="#s2"><span class="n">02</span> A Checkpoint Isn't Automatically Safer</a></li>
-        <li><a href="#s3"><span class="n">03</span> What a Real Checkpoint Looks Like</a></li>
-        <li><a href="#s4"><span class="n">04</span> Two Failures, Opposite Directions</a></li>
-        <li><a href="#s5"><span class="n">05</span> Same Judgment, When You're the One Coding</a></li>
+        <li><a href="#s2"><span class="n">02</span> Human-in-the-loop in Practice</a></li>
+        <li><a href="#s3"><span class="n">03</span> Humans can make things better or worse</a></li>
+        <li><a href="#s4"><span class="n">04</span> Same Judgment, When You're the One Coding</a></li>
       </ol>
     </nav>
 
@@ -37,57 +36,52 @@
     <article>
       <section class="block reveal" id="s1">
         <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">Human in the Loop Isn't the Default</h2></div>
-        <p class="lede">AI is often used to automate a process end to end. For a while, the default answer to a safety question was to add a human checkpoint. Human oversight matters, but it isn't automatically the responsible choice any more than automation is. The real question is which one actually fits a given stage of a given process.</p>
-        <p>Two situations that look similar from the outside can call for opposite answers. Sometimes you slow a process down by adding a human step you don't strictly need. You do it anyway because the person benefits from sitting with the output. It deepens their own understanding of the work, or gives them context they'll need at a later stage. Other times a human's perspective, context, or verification genuinely isn't needed at a given point. You let the process run automated from top to bottom and bring a person in only at the very end, to check the final result.</p>
-        <p>Microsoft's own guidelines for human-AI interaction, tested across 20 shipped products, don't give a hard threshold for which situation you're in. They give three things worth checking before you let a tool act unsupervised.<sup class="cite" data-url="https://www.microsoft.com/en-us/research/blog/guidelines-for-human-ai-interaction-design/" data-note="Amershi et al., 'Guidelines for Human-AI Interaction,' CHI 2019, Microsoft Research: 18 guidelines validated against 20 shipped AI products with 49 design practitioners.">*</sup></p>
+        <p class="lede">AI is often used to automate a process end-to-end when we want to standardize across domains, increase efficiency and productivity. But that isn't always the most reasonable choice from an AI-human interaction perspective. Human oversight matters, not just for safety but also for enhancing human experience while using AI. This means that when to automate and when to add human-in-the-loop is a serious design question at every stage in product design and development.</p>
+        <p>For example, you might slow a process down by adding human intervention, but you do it anyway because the person benefits from sitting with the output. It deepens their own understanding of the work, or allows them to add context you'll need at a later stage. Other times a human's perspective, context, or verification genuinely isn't needed at a given point or can be standardized as documentation, so you let the process run automated from top to bottom and bring a person in only at the very end, to check the final result.</p>
+        <p>Recent research provides guidance on how to make the decision between automation or human-in-the-loop, or both:</p>
         <ul class="field-notes">
-          <li>How cheap is it to notice and undo the mistake? If correction is cheap, more autonomy is defensible. If it's expensive, the checkpoint needs to come before the action, not after.<sup class="cite" data-url="https://www.microsoft.com/en-us/research/blog/guidelines-for-human-ai-interaction-design/" data-note="Amershi et al., Guideline 9: support efficient correction. Guidelines 7/8: support efficient invocation and dismissal.">*</sup></li>
-          <li>Does the tool tell you when it's unsure, or does it guess with the same confidence every time?<sup class="cite" data-url="https://www.microsoft.com/en-us/research/blog/guidelines-for-human-ai-interaction-design/" data-note="Amershi et al., Guideline 10: scope services when in doubt, degrade gracefully instead of guessing when uncertain.">*</sup></li>
-          <li>Can you actually see why it did what it did, or is it a black box you'd have to take on faith?<sup class="cite" data-url="https://www.microsoft.com/en-us/research/blog/guidelines-for-human-ai-interaction-design/" data-note="Amershi et al., Guideline 11: make clear why the system did what it did.">*</sup></li>
+          <li><strong>Would a human actually make this better, or just slower?</strong> A large 2024 meta-analysis found human-AI teams often perform worse than whichever party is stronger alone. The pattern: pairing tends to hurt on decision/judgment tasks and help on drafting/creation. So lean human-led on judgment calls (what to publish, is this true); let AI carry more of the drafting.<sup class="cite" data-url="https://www.nature.com/articles/s41562-024-02024-1" data-note="Vaccaro, Almaatouq & Malone, 'When combinations of humans and AI are useful: A systematic review and meta-analysis,' Nature Human Behaviour, Oct. 28 2024: meta-analysis of 106 studies found human-AI combinations 'performed significantly worse than the best of humans or AI alone' (Hedges' g = -0.23); the loss was concentrated in decision tasks (g = -0.27, significant), while creation/content-generation tasks showed synergy gains (g = 0.19).">*</sup></li>
+          <li><strong>Is the human a real decision-maker, or a rubber stamp?</strong> A checkpoint only adds value if the person has the context, authority, and time to genuinely override, not just click "approve." Nominal authority isn't enough: one study found this same "the human has final say" assumption unrealistic in practice, without real guidelines or training behind it.<sup class="cite" data-url="https://www.benzevgreen.com/wp-content/uploads/2019/02/19-fat.pdf" data-note="Ben Green & Yiling Chen, 'Disparate Interactions: An Algorithm-in-the-Loop Analysis of Fairness in Risk Assessments,' FAT* '19 (ACM): 'Many proponents defend the deployment of risk assessments on the grounds that judges have the final say and can discern when to rely on the predictions provided... But our results indicate that this is an unrealistic expectation,' and separately, 'the current approach of presenting predictions to judges without sufficient guidelines or training comes with the issues of poor interpretation and disparate interactions.'">*</sup></li>
+          <li><strong>Will the reviewer stay sharp enough to catch mistakes?</strong> "Physical skills deteriorate when they are not used," and a formerly experienced operator who has only been monitoring an automated process may no longer be one: their oversight decays right when it's needed most.<sup class="cite" data-url="https://www.sciencedirect.com/science/article/abs/pii/0005109883900468" data-note="Lisanne Bainbridge, 'Ironies of Automation,' Automatica 19(6), 1983, pp. 775-779: 'physical skills deteriorate when they are not used... This means that a formerly experienced operator who has been monitoring an automated process may now be an inexperienced one. If he takes over he may set the process into oscillation.'">*</sup></li>
+          <li><strong>Is this a domain where oversight isn't optional?</strong> High-stakes or regulated uses (credit, employment, essential services) legally require a human. And ask who's accountable when it's wrong: Air Canada was held liable for its own chatbot's invented policy.<sup class="cite" data-url="https://www.forbes.com/sites/marisagarcia/2024/02/19/what-air-canada-lost-in-remarkable-lying-ai-chatbot-case/" data-note="Forbes, Feb 19 2024, and Canada's Civil Resolution Tribunal ruling: Air Canada argued its chatbot was a separate legal entity responsible for its own actions. The tribunal rejected this, ordering a $650.88 refund and ruling Air Canada fully responsible for the chatbot's output.">*</sup></li>
+          <li><strong>Are there red lines you hold regardless of capability?</strong> A newsroom might simply decide to bar AI from fact-checking or generating news images entirely, a decision made on values, not on how good the tool is.</li>
         </ul>
-        <p>Separately, Google's own design guidance names four situations to keep a human checkpoint regardless of how good the AI is: the task has real physical, emotional, or financial stakes; it's something the person enjoys doing; there's a social obligation to be present for it; or it depends on idiosyncratic taste that's hard to actually specify.<sup class="cite" data-url="https://pair.withgoogle.com/chapter/feedback-controls/" data-note="Google PAIR Guidebook, Feedback + Control chapter: keep a human checkpoint for high physical/emotional/financial stakes, task enjoyment, personal/social obligation, or idiosyncratic creative vision hard to specify in a prompt.">*</sup></p>
+        <p>For another perspective, Google's design guidance names four situations to keep a human checkpoint regardless of how good the AI is:</p>
+        <ul class="field-notes">
+          <li>The task has real physical, emotional, or financial stakes</li>
+          <li>It's something the person enjoys doing</li>
+          <li>There's a social obligation to be present for it</li>
+          <li>It depends on idiosyncratic taste that's hard to actually standardize, like editing.<sup class="cite" data-url="https://pair.withgoogle.com/chapter/feedback-controls/" data-note="Google PAIR Guidebook, Feedback + Control chapter: keep a human checkpoint for high physical/emotional/financial stakes, task enjoyment, personal/social obligation, or idiosyncratic creative vision hard to specify in a prompt.">*</sup></li>
+        </ul>
       </section>
 
       <section class="block reveal" id="s2">
-        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">A Checkpoint Isn't Automatically Safer</h2></div>
-        <p class="lede">Here's the finding worth sitting with: a controlled study gave 554 people an algorithm's prediction and let them adjust it, the textbook "human in the loop" design. It made things worse.</p>
-        <div class="stat-pull">
-          <span class="num">46.5%</span>
-          <span class="cap">higher false-positive rate than the algorithm alone</span>
-        </div>
-        <p>Only 23.7% of participants actually beat the algorithm by adjusting it; 64.1% did worse.<sup class="cite" data-url="https://www.benzevgreen.com/wp-content/uploads/2019/02/19-fat.pdf" data-note="Green & Chen, 'Disparate Interactions: An Algorithm-in-the-Loop Analysis of Fairness in Risk Assessments,' FAT* 2019 (ACM), N=554. Participants shown an algorithm's prediction had 46.5% higher false-positive rate and 2.6% lower average reward than the algorithm alone. 23.7% beat the algorithm; 64.1% did worse.">*</sup> Worse still: it introduced a racial bias that wasn't in the algorithm by itself. When the score suggested higher risk than a person's own instinct, that push toward a higher score was 25.9% stronger for Black defendants than white defendants.<sup class="cite" data-url="https://www.benzevgreen.com/wp-content/uploads/2019/02/19-fat.pdf" data-note="Same study: when the algorithm suggested higher risk than the human's instinct, the push toward a higher score was 25.9% stronger for Black defendants than white defendants (p=0.02); participants deviated to a higher risk score 36.4% more often for Black defendants.">*</sup></p>
-        <p class="pull-question">"How can we expect people to navigate the balance between their own judgment and a risk assessment's when they are unable to accurately assess their own or the algorithm's performance in the first place?"<sup class="cite" data-url="https://www.benzevgreen.com/wp-content/uploads/2019/02/19-fat.pdf" data-note="Green & Chen, direct quote from the paper's discussion section.">*</sup></p>
-        <p>The lesson isn't "don't use humans." It's that adding a human checkpoint is a design decision that has to be tested, the same as any other, not assumed safe because it sounds responsible.</p>
-      </section>
-
-      <section class="block reveal" id="s3">
-        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">What a Real Checkpoint Looks Like</h2></div>
-        <p class="lede">Full Fact, a 15-journalist fact-checking newsroom, draws an explicit line: automate the high-volume filtering, never automate the judgment call.</p>
+        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">Human-in-the-loop in Practice</h2></div>
+        <p class="lede">Full Fact, a 15-journalist fact-checking newsroom, draws an explicit line around automating the high-volume filtering, never automate the judgment call.</p>
         <dl class="roster">
           <div class="roster-row"><dt>Fully automated</dt><dd>Topic classification, claim extraction, ranking which claims are worth checking, matching against past fact-checks.<sup class="cite" data-url="https://fullfact.org/blog/2025/feb/how-ai-can-help-fact-checkers/" data-note="Full Fact, Feb 11 2025: fully automated tasks include topic classification, claim extraction and labeling, checkworthiness scoring, media monitoring, and claim-matching against a database of prior fact-checks.">*</sup></dd></div>
           <div class="roster-row"><dt>Never automated</dt><dd>Deciding if a claim is actually true, and writing the published fact-check. "We never ask it 'Is this claim true?' because no model can reliably answer that."<sup class="cite" data-url="https://fullfact.org/blog/2025/feb/how-ai-can-help-fact-checkers/" data-note="Full Fact: 'We never ask it Is this claim true? because no model...can reliably answer that as it depends on real-world knowledge and reasoning.' The actual writing is done by fact checkers, reviewed and edited by colleagues.">*</sup></dd></div>
         </dl>
         <p>AP's own newsroom rule states the same idea plainly: any AI output is "unvetted source material," staff still apply normal sourcing standards before it goes anywhere near publication.<sup class="cite" data-url="https://www.poynter.org/ethics-trust/2023/new-ap-stylebook-guidelines-artificial-intelligence-chatgpt/" data-note="Poynter, Aug 16 2023, on AP's guidelines: 'Any output from a generative AI tool should be treated as unvetted source material. AP staff must apply their editorial judgment and AP's sourcing standards when considering any information for publication.'">*</sup></p>
-        <p>One practical test for whether a "review" step is real or theater, worth stealing directly: read it, understand it, validate it, then write your response in your own words. That last step is the only one that actually proves the first three happened, since claiming to have reviewed something costs nothing, but rewriting it yourself does.<sup class="cite" data-url="https://simonwillison.net/2026/Aug/3/dont-be-a-meat-proxy/" data-note="Simon Willison, 'Don't be a meat proxy,' Aug 3 2026: before forwarding or publishing AI output, read it, understand it, validate it, then write a response in your own words. The rewriting step is what actually proves the review happened, since you can't fake writing something yourself.">*</sup></p>
+      </section>
+
+      <section class="block reveal" id="s3">
+        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">Humans can make things better or worse</h2></div>
+        <p class="lede"><strong>Zillow Offers</strong> originally had pricing experts vet every algorithm-generated home value estimate. Under growth pressure in 2021, "Project Ketchup" explicitly barred those experts from adjusting the algorithm's numbers. Purchase volume doubled the next quarter. Then the algorithm's blind spots, no longer caught by anyone, caught up: a $421 million loss in a single quarter, the business shut down, about 25% of the company laid off.<sup class="cite" data-url="https://jise.org/Volume35/n1/JISE2024v35n1pp67-72.pdf" data-note="Gudigantala & Mehrotra, 'When Strength Turns Into Weakness,' Journal of Information Systems Education 35(1), Winter 2024. Zillow's 'Project Ketchup' barred pricing experts from adjusting the algorithm's home value estimates in early 2021. Purchase volume more than doubled the next quarter, followed by a $421M Q3 2021 loss, the business unit shut down, about 25% of workforce laid off.">*</sup></p>
+        <p>This doesn't mean that automation beats humans. It means that whether you keep the human or remove them, it's a specific, testable design choice for each task, not a value you apply uniformly everywhere.</p>
       </section>
 
       <section class="block reveal" id="s4">
-        <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Two Failures, Opposite Directions</h2></div>
-        <p class="lede">One company removed a checkpoint that was working. A study found adding one can backfire. Both are real.</p>
-        <p><strong>Zillow Offers</strong> originally had pricing experts vet every algorithm-generated home value estimate. Under growth pressure in 2021, "Project Ketchup" explicitly barred those experts from adjusting the algorithm's numbers. Purchase volume doubled the next quarter. Then the algorithm's blind spots, no longer caught by anyone, caught up: a $421 million loss in a single quarter, the business shut down, about 25% of the company laid off.<sup class="cite" data-url="https://jise.org/Volume35/n1/JISE2024v35n1pp67-72.pdf" data-note="Gudigantala & Mehrotra, 'When Strength Turns Into Weakness,' Journal of Information Systems Education 35(1), Winter 2024. Zillow's 'Project Ketchup' barred pricing experts from adjusting the algorithm's home value estimates in early 2021. Purchase volume more than doubled the next quarter, followed by a $421M Q3 2021 loss, the business unit shut down, about 25% of workforce laid off.">*</sup></p>
-        <p>Set that against Section 02: giving people an algorithm's output to adjust made outcomes worse, not better, in a separate controlled study. Put together, the two aren't a contradiction, they're the same lesson twice. Whether you keep the human or remove them, it's a specific, testable design choice for this exact task, not a value you apply uniformly everywhere.</p>
-      </section>
-
-      <section class="block reveal" id="s5">
-        <div class="block-head"><span class="block-eyebrow">05</span><h2 class="block-title">Same Judgment, When You're the One Coding</h2></div>
+        <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Same Judgment, When You're the One Coding</h2></div>
         <p class="lede">Full Fact deciding which claims are worth checking, and Zillow's removed pricing checkpoint, are versions of the same decision you make constantly while you build. Does this particular step need a human, or can it run on its own?</p>
-        <p>A formatting fix Claude proposes is cheap to undo and easy to verify at a glance. Let it commit. A change to how your app handles user data or credentials is expensive to undo and hard to verify just by reading a summary. That one is worth reviewing line by line before it ships, even if it slows you down. Plan Mode, from Day 2, is built around this same choice. It's a checkpoint you add on purpose before a costly action, not because you don't trust the tool, but because reviewing the plan is where you catch a wrong assumption while it's still cheap to fix.</p>
+        <p>A formatting fix Claude proposes is cheap to undo and easy to verify at a glance. Let it commit. A change to how your app handles user data or credentials is expensive to undo and hard to verify just by reading a summary. That one is worth reviewing line by line before it ships, even if it slows you down.</p>
+        <p>Plan Mode, from Day 2, is built around this same choice. It's a checkpoint you add on purpose before a costly action, not because you don't trust the tool, but because reviewing the plan is where you catch a wrong assumption while it's still cheap to fix. And it deepens your expertise and understanding, which means you can explain it, like we discussed in Safe & Auditable Design.</p>
         <p>Sometimes the right call is to read every line anyway, even on a low-stakes change, because doing so is how you actually learn what your own codebase does. That's the same tradeoff from Section 01. Not every checkpoint exists to catch an error. Some exist because you're the one who benefits from being in the loop.</p>
         <div class="exercise-box">
-          <h3>🎯 Apply This</h3>
-          <p><strong>Time:</strong> A few minutes, individually.</p>
-          <p><strong>Description:</strong> For one part of your project: is it currently automated, checkpointed, or fully manual? Using the questions from Section 01, is that actually the right call for this stage, or did you default to it without deciding?</p>
-          <p><strong>Deliverable:</strong> One sentence stating the decision and why.</p>
+          <h3>🎯 Exercise: Apply This</h3>
+          <p><strong>Time:</strong> While coding</p>
+          <p><strong>Description:</strong> As we move into coding time, ask yourself what parts of your project are currently automated, checkpointed, or fully manual? Using the questions from Section 01, ask yourself whether that's actually the right call for this stage, or did you default without deciding?</p>
+          <p><strong>Deliverable:</strong> Deliberateness in your human-ai design choices</p>
         </div>
       </section>
     </article>

@@ -38,28 +38,24 @@
         <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">What It Is</h2></div>
         <p class="lede">CLAUDE.md is a plain-text file Claude reads automatically at the start of every session.<sup class="cite" data-url="https://code.claude.com/docs/en/memory" data-note="Claude Code Docs, &quot;How Claude remembers your project&quot;: CLAUDE.md files are markdown files that give Claude persistent instructions for a project, your personal workflow, or your entire organization. Claude reads them at the start of every session.">*</sup> Every Claude Code session starts with an empty context window. Without this file, you're re-explaining your project's conventions, commands, and quirks from scratch, every time.<sup class="cite" data-url="https://claude.com/blog/using-claude-md-files" data-note="Anthropic blog, Nov 25 2025, &quot;Using CLAUDE.md files&quot;: think of it as a configuration file that Claude automatically incorporates into every conversation, ensuring it always knows your project structure, coding standards, and preferred workflows.">*</sup></p>
         <p>A simple test for whether something belongs in yours: has Claude made the same mistake twice, or have you typed the same correction into chat more than once? That's the signal.<sup class="cite" data-url="https://code.claude.com/docs/en/memory" data-note="Claude Code Docs: add to CLAUDE.md when Claude makes the same mistake a second time, a code review catches something Claude should have known, or you type the same correction into chat that you typed last session.">*</sup></p>
-        <p>One distinction worth knowing before next session: CLAUDE.md is for what's true every time. If something's only relevant sometimes, a specific kind of task you do occasionally, that's what Skills, covered right after lunch, are for instead.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs, Best Practices: 'For domain knowledge or workflows that are only relevant sometimes, use skills instead' of CLAUDE.md.">*</sup></p>
+        <p>CLAUDE.md is for what's true every time you open a new chat. It's foundational context. If something's only relevant sometimes, a specific kind of task you do occasionally, that's what Skills are for instead.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs, Best Practices: 'For domain knowledge or workflows that are only relevant sometimes, use skills instead' of CLAUDE.md.">*</sup></p>
       </section>
 
       <section class="block reveal" id="s2">
         <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">A Real Example</h2></div>
         <p>This workshop's own repository has a CLAUDE.md file. It's not a hypothetical, it's the actual file governing how this website gets built. <a href="https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/blob/main/CLAUDE.md" target="_blank" rel="noopener noreferrer">See it on GitHub</a>, or open the whole thing right here.</p>
-        <button type="button" class="file-viewer-trigger" data-file-viewer="claude-md-example">Open CLAUDE.md →</button>
         <p>Three things worth noticing about it, and worth copying into your own:</p>
         <dl class="roster">
           <div class="roster-row"><dt>It points, it doesn't duplicate</dt><dd>Instead of listing every task, it says: read <code>project/REQUIREMENTS.md</code> for current status. The file stays short because it delegates to other files rather than repeating their contents.</dd></div>
-          <div class="roster-row"><dt>It states what can't be inferred from code</dt><dd>A rule like "any non-trivial technical decision gets a new numbered file in <code>project/adr/</code>" isn't something Claude could guess by reading the codebase. That's exactly the kind of thing that belongs here. A robotics lab's CLAUDE.md makes the same kind of call for a different reason: it tells Claude explicitly that existing code has been human-verified to work, but isn't necessarily the best implementation, a fact no amount of code-reading would reveal.<sup class="cite" data-url="https://github.com/haddocking/haddock3/blob/main/CLAUDE.md" data-note="haddocking/haddock3 CLAUDE.md (Utrecht University): 'All code in this project is functional, meaning it has been verified by humans that it produces the expected results, but that does not mean that the code is in its best implementation. If you copy code from somewhere else, try to improve it, do not assume it is already optimal.'">*</sup></dd></div>
+          <div class="roster-row"><dt>It states what can't be inferred from code</dt><dd>A rule like "any non-trivial technical decision gets a new numbered file in <code>project/adr/</code>" isn't something Claude could guess by reading the codebase. That's exactly the kind of thing that belongs here.</dd></div>
           <div class="roster-row"><dt>It's organized by when you'd need it</dt><dd>Sections for "before starting work," "while working," and "repo layout" map to the actual moments in a session, not an abstract table of contents.</dd></div>
         </dl>
-        <p>That's the shape worth copying, whatever your own project is about: point instead of duplicate, write down what Claude can't guess on its own, and organize around when you'll actually need each part. The decisions in your file might come from a design system, an audience persona, or a build process like this one, the habit is the same either way.</p>
-      </section>
-
-      <dialog class="file-viewer" id="claude-md-example">
-        <div class="file-viewer-head">
-          <span class="file-viewer-name">CLAUDE.md</span>
-          <button type="button" class="file-viewer-close" data-file-viewer-close aria-label="Close">✕</button>
-        </div>
-        <pre class="file-viewer-body"><code># CLAUDE.md — Maintainer / Build Guide
+        <details class="file-viewer-inline">
+          <summary>Open CLAUDE.md →</summary>
+          <div class="file-viewer-head">
+            <span class="file-viewer-name">CLAUDE.md</span>
+          </div>
+          <pre class="file-viewer-body"><code># CLAUDE.md — Maintainer / Build Guide
 
 This file is for Claude Code sessions working **on** this repository —
 building the workshop website itself. It is not shown to workshop students.
@@ -98,12 +94,14 @@ are separate files).
 - `STUDENT_CLAUDE_GUIDE.md`, `SUBMISSION_GUIDE.md` — content students copy
   into their own workflow. Treat as content-fill deliverables, not this
   file's concern.</code></pre>
-      </dialog>
+        </details>
+        <p>That's the shape worth copying, whatever your own project is about: point instead of duplicate, write down what Claude can't guess on its own, and organize around when you'll actually need each part. It's also the place to document decisions your team has already made about the product itself, the tone of the language across your site, words to avoid, or a commitment to only use certain kinds of tools. The decisions in your file might come from a design system, an audience persona, or a build process like this one, the habit is the same either way.</p>
+      </section>
 
       <section class="block reveal" id="s3">
         <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">What Belongs In One</h2></div>
         <p class="lede">The most common mistake isn't leaving something out. It's putting too much in.<sup class="cite" data-url="https://code.claude.com/docs/en/best-practices" data-note="Claude Code Docs, &quot;Best practices for Claude Code&quot;: bloated CLAUDE.md files cause Claude to ignore your actual instructions. Target under 200 lines per file, longer files consume more context and reduce adherence.">*</sup></p>
-        <p>A CLAUDE.md isn't only an engineering file. It's a record of decisions your whole team has already made, so Claude doesn't have to guess at them or get them re-explained every session.</p>
+        <p>A CLAUDE.md is a record of decisions your whole team has already made, so Claude doesn't have to guess at them or get them re-explained every session.</p>
         <div class="compare-grid">
           <div class="compare-col is-primary">
             <h3>Include</h3>
@@ -136,12 +134,12 @@ are separate files).
 
       <section class="block reveal" id="s4">
         <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Write Your Own</h2></div>
-        <p>Claude Code can generate a starting CLAUDE.md by analyzing your project directly, with the <code>/init</code> command.<sup class="cite" data-url="https://code.claude.com/docs/en/memory" data-note="Claude Code Docs: the /init command generates a starting CLAUDE.md by analyzing the codebase; re-run it to get improvement suggestions rather than overwrite.">*</sup> That works, but you don't have to start blank. This workshop gives you a real starting file, <a href="https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/blob/main/STUDENT_CLAUDE_GUIDE.md" target="_blank" rel="noopener noreferrer">STUDENT_CLAUDE_GUIDE.md</a>, already written for a student building their first AI-assisted project. Copy it into your own project as <code>CLAUDE.md</code>, then let Claude update it based on what it actually observed about how you worked yesterday, instead of writing everything from scratch. Either way, it should keep growing from the actual friction points in your workflow, not a theoretical checklist.<sup class="cite" data-url="https://claude.com/blog/using-claude-md-files" data-note="Anthropic blog: start simple with basic project structure, then expand based on actual friction points in your workflow. Your file should reflect how your team actually develops software, not theoretical best practices that sound good but don't match reality.">*</sup></p>
+        <p>Claude Code can generate a starting CLAUDE.md by analyzing your project directly, with the <code>/init</code> command.<sup class="cite" data-url="https://code.claude.com/docs/en/memory" data-note="Claude Code Docs: the /init command generates a starting CLAUDE.md by analyzing the codebase; re-run it to get improvement suggestions rather than overwrite.">*</sup> For this workshop, you didn't start blank: <a href="https://github.com/AndrewRCalderon/2026-ai-news-innovation-workshop/blob/main/STUDENT_CLAUDE_GUIDE.md" target="_blank" rel="noopener noreferrer">STUDENT_CLAUDE_GUIDE.md</a> is already sitting in your <code>docs/submissions/your-name/</code> folder as <code>CLAUDE.md</code>, copied there yesterday during Fork &amp; Submit. Today's task is reviewing it, not introducing it: ask Claude to update it based on what it actually observed about how you worked yesterday, instead of writing everything from scratch. Either way, it should keep growing from the actual friction points and insights in your workflow, not a theoretical checklist.<sup class="cite" data-url="https://claude.com/blog/using-claude-md-files" data-note="Anthropic blog: start simple with basic project structure, then expand based on actual friction points in your workflow. Your file should reflect how your team actually develops software, not theoretical best practices that sound good but don't match reality.">*</sup></p>
         <div class="exercise-box">
           <h3>🎯 Exercise: Update Your CLAUDE.md</h3>
           <p><strong>Time:</strong> ~15 minutes.</p>
-          <p><strong>Description:</strong> Copy <code>STUDENT_CLAUDE_GUIDE.md</code> into your Day 1 project as <code>CLAUDE.md</code>. Then ask Claude to review your Day 1 session and update the file: what did it notice about how you asked questions, what you already understood without needing it explained, where you got stuck? Don't write the changes yourself first.</p>
-          <p><strong>Deliverable:</strong> Read what Claude changed. Pick two or three edits and, for each one, ask yourself whether it's something you actually told Claude directly, or something it inferred from a pattern in how you worked that you weren't even aware of. Come ready to share one of each.</p>
+          <p><strong>Description:</strong> Open the <code>CLAUDE.md</code> already in your <code>docs/submissions/your-name/</code> folder. Ask Claude to review your Day 1 session and update the file: what did it notice about technical decisions that you made, what you already understood without needing it explained, where you got stuck? Also ask whether every guardrail in the file still earns its place — a day of experience in, some of it (like the onboarding questions about explaining basic terms) might already be more scaffolding than you need. Don't write the changes yourself first.</p>
+          <p><strong>Deliverable:</strong> Read what Claude changed. Pick two or three edits and, for each one, ask yourself whether it's something you actually told Claude directly, or something it inferred from a pattern in how you worked that you weren't even aware of. Share what stood out to you.</p>
         </div>
       </section>
     </article>
@@ -160,6 +158,5 @@ are separate files).
   <script src="/js/topic-metadata.js"></script>
   <script src="/js/reveal.js"></script>
   <script src="/js/citations.js"></script>
-  <script src="/js/file-viewer.js"></script>
 </body>
 </html>

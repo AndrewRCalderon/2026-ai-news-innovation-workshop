@@ -15,15 +15,15 @@
 
     <header class="masthead">
       <h1 class="masthead-title">Safe &amp; Auditable Design</h1>
-      <p class="masthead-dek">"Responsible AI" sounds like a value statement. What it actually means is a specific, checkable set of habits.</p>
+      <p class="masthead-dek">"Responsible AI" sounds like a value statement. What it actually means is how our promises map to our behaviors.</p>
       <div class="masthead-meta"><span id="topic-time">--</span><span class="div">·</span><span id="topic-duration">--</span><span class="div">·</span><span id="topic-type">--</span></div>
     </header>
 
     <nav class="toc" aria-label="Sections in this briefing">
       <ol>
-        <li><a href="#s1"><span class="n">01</span> What "Auditable" Actually Means</a></li>
+        <li><a href="#s1"><span class="n">01</span> What "Auditable" Means (in this context)</a></li>
         <li><a href="#s2"><span class="n">02</span> When It Goes Wrong</a></li>
-        <li><a href="#s3"><span class="n">03</span> What Real Newsrooms Require</a></li>
+        <li><a href="#s3"><span class="n">03</span> Behavior is the key</a></li>
         <li><a href="#s4"><span class="n">04</span> A Working Checklist</a></li>
       </ol>
     </nav>
@@ -35,24 +35,23 @@
 
     <article>
       <section class="block reveal" id="s1">
-        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">What "Auditable" Actually Means</h2></div>
-        <p class="lede">Not "we could theoretically explain this." A record that actually lets you explain it, after the fact, when someone asks.</p>
-        <p>The right first question isn't "what can we log." It's <strong>which actions would we need to explain later</strong>, if someone asked why the tool did what it did.<sup class="cite" data-url="https://www.metacto.com/blogs/ai-audit-trails-what-to-log-when-agents-touch-business-systems" data-note="MetaCTO, AI audit trails guide: the right first question is not what can we log, but which actions would we need to explain later.">*</sup> For a small project, that's answerable with four fields per run: what went in, what came out, what the system did with it, and whether it was allowed.<sup class="cite" data-url="https://www.metacto.com/blogs/ai-audit-trails-what-to-log-when-agents-touch-business-systems" data-note="Same source: a minimum viable audit trail answers four questions for any AI decision: what data went in, what came out, what the system did with it, and whether it was allowed.">*</sup> A spreadsheet row, not an engineering system.</p>
+        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">What "Auditable" Means (in this context)</h2></div>
+        <p class="lede">Not "we could theoretically explain this." A record that actually lets you explain it, after the fact, how you used AI and how it influenced the product.</p>
+        <p>We want to ask ourselves <strong>which actions would we need to explain later</strong>, if someone asked why the tool did what it did.<sup class="cite" data-url="https://www.metacto.com/blogs/ai-audit-trails-what-to-log-when-agents-touch-business-systems" data-note="MetaCTO, AI audit trails guide: the right first question is not what can we log, but which actions would we need to explain later.">*</sup> For most projects, that's answerable with four inquiries: what went in, what came out, what the system did with it, and whether it was allowed.<sup class="cite" data-url="https://www.metacto.com/blogs/ai-audit-trails-what-to-log-when-agents-touch-business-systems" data-note="Same source: a minimum viable audit trail answers four questions for any AI decision: what data went in, what came out, what the system did with it, and whether it was allowed.">*</sup></p>
       </section>
 
       <section class="block reveal" id="s2">
         <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">When It Goes Wrong</h2></div>
-        <p class="lede">Two real failures, for two different reasons, both worth knowing exactly.</p>
+        <p class="lede">To cite two examples:</p>
         <dl class="roster">
-          <div class="roster-row"><dt>NYC's MyCity chatbot</dt><dd>Told business owners it was legal to take workers' tips, reject Section 8 tenants, and refuse cash, all false. After journalists exposed it in March 2024, it kept giving the same wrong answers for over a year before finally being shut down.<sup class="cite" data-url="https://themarkup.org/artificial-intelligence/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law" data-note="The Markup, March 29 2024: NYC's official business chatbot gave false legal guidance on tips, Section 8 tenants, and cash refusal. The chatbot stayed live giving the same wrong answers for over a year after the reporting, with no internal monitoring loop catching it; shut down in 2025.">*</sup> The failure wasn't the wrong answer, it was having no mechanism to catch and fix a known, public error.</dd></div>
+          <div class="roster-row"><dt>NYC's MyCity chatbot</dt><dd>Falsely told business owners it was legal to take workers' tips, reject Section 8 tenants, and refuse cash. After journalists exposed it in March 2024, it kept giving the same wrong answers for over a year before finally being shut down.<sup class="cite" data-url="https://themarkup.org/artificial-intelligence/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law" data-note="The Markup, March 29 2024: NYC's official business chatbot gave false legal guidance on tips, Section 8 tenants, and cash refusal. The chatbot stayed live giving the same wrong answers for over a year after the reporting, with no internal monitoring loop catching it; shut down in 2025.">*</sup> The failure was not only the wrong answer, but the delay in quickly shutting down the tool when the falsehood was exposed.</dd></div>
           <div class="roster-row"><dt>Air Canada's chatbot</dt><dd>Told a customer he could claim a bereavement discount retroactively. That was wrong, and Air Canada argued the chatbot was "a separate legal entity responsible for its own actions." A tribunal rejected that outright and made the airline pay.<sup class="cite" data-url="https://www.forbes.com/sites/marisagarcia/2024/02/19/what-air-canada-lost-in-remarkable-lying-ai-chatbot-case/" data-note="Forbes, Feb 19 2024, and Canada's Civil Resolution Tribunal ruling: Air Canada argued its chatbot was a separate legal entity responsible for its own actions. The tribunal rejected this, ordering a $650.88 refund and ruling Air Canada fully responsible for the chatbot's output.">*</sup></dd></div>
         </dl>
-        <p class="pull-question">There's no such thing as "the AI said it, not us." Whoever deploys the tool owns what it outputs.</p>
-        <p>One more worth knowing, because it shows the other side: after being caught publishing an AI error, CNET went back and manually checked all 77 of its AI-written financial explainers. 41 of them, 53%, had real errors: wrong math, misstated numbers, incomplete names.<sup class="cite" data-url="https://www.cnn.com/2023/01/25/tech/cnet-ai-tool-news-stories" data-note="CNN, Jan 25 2023: after an AI-written article error was flagged, CNET manually reviewed all 77 of its published AI financial explainers. 41 (53%) contained factual errors, including a compounding-interest example that misstated $300 in interest as $10,300 total.">*</sup> That's what auditability is actually for: not preventing every mistake, but being able to go back and find them once you suspect there's a problem.</p>
+        <p class="pull-question">The two safety axes here are responsiveness and accountability, which are central tenets of responsible AI.</p>
       </section>
 
       <section class="block reveal" id="s3">
-        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">What Real Newsrooms Require</h2></div>
+        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">Behavior is the key</h2></div>
         <p>A study of 52 published newsroom AI policies found about 90% required disclosure when AI was used. Only 8% specified how the policy would actually be enforced.<sup class="cite" data-url="https://journalistsresource.org/home/generative-ai-policies-newsrooms/" data-note="Journalist's Resource, Dec 12 2023, analysis of 52 newsroom AI policies: about 90% required disclosure when AI was used in a story; only 8% specified how the policy would be enforced. 69% named hallucination as a risk; 54% warned about source protection.">*</sup> A policy that states values but has no enforcement mechanism isn't actually auditable, no matter how well it reads.</p>
         <p>The newsrooms that got specific:</p>
         <ul class="field-notes">
@@ -64,10 +63,10 @@
 
       <section class="block reveal" id="s4">
         <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">A Working Checklist</h2></div>
-        <p class="lede">Drawn from NIST's AI Risk Management Framework, the actual US government standard, simplified to what a small team can use.<sup class="cite" data-url="https://airc.nist.gov/airmf-resources/airmf/5-sec-core/" data-note="NIST AI Risk Management Framework 1.0, released Jan 26 2023 (NIST AI 100-1). Core functions: Govern, Map, Measure, Manage.">*</sup></p>
+        <p class="lede">Drawn from NIST's AI Risk Management Framework, the actual US government standard, these questions can help you enshrine responsible AI as promises.<sup class="cite" data-url="https://airc.nist.gov/airmf-resources/airmf/5-sec-core/" data-note="NIST AI Risk Management Framework 1.0, released Jan 26 2023 (NIST AI 100-1). Core functions: Govern, Map, Measure, Manage.">*</sup></p>
         <ul class="field-notes is-checklist">
-          <li>Have you written one paragraph on what this is for, and where it shouldn't be used?<sup class="cite" data-url="https://airc.nist.gov/airmf-resources/airmf/5-sec-core/" data-note="NIST AI RMF, MAP 1.1: intended purposes, potentially beneficial uses, and prospective settings must be documented.">*</sup></li>
-          <li>Have you written down what happens if it's wrong, not just what happens if it's right?<sup class="cite" data-url="https://airc.nist.gov/airmf-resources/airmf/5-sec-core/" data-note="NIST AI RMF, MAP 3.1/3.2: potential benefits and potential costs from AI errors must both be examined and documented.">*</sup></li>
+          <li>Have you written one paragraph on what AI is being used for, and where it shouldn't be used in your product?<sup class="cite" data-url="https://airc.nist.gov/airmf-resources/airmf/5-sec-core/" data-note="NIST AI RMF, MAP 1.1: intended purposes, potentially beneficial uses, and prospective settings must be documented.">*</sup></li>
+          <li>Have you written down what happens when AI fails, not just what happens if it's right?<sup class="cite" data-url="https://airc.nist.gov/airmf-resources/airmf/5-sec-core/" data-note="NIST AI RMF, MAP 3.1/3.2: potential benefits and potential costs from AI errors must both be examined and documented.">*</sup></li>
           <li>Do you have a kill switch? A way to actually turn it off if it's producing bad output.<sup class="cite" data-url="https://airc.nist.gov/airmf-resources/airmf/5-sec-core/" data-note="NIST AI RMF, MANAGE 2.4: mechanisms exist to supersede, disengage, or deactivate AI systems that demonstrate performance or outcomes inconsistent with intended use.">*</sup></li>
           <li>Is there somewhere a user can flag a wrong answer, and does anyone actually look at it?<sup class="cite" data-url="https://airc.nist.gov/airmf-resources/airmf/5-sec-core/" data-note="NIST AI RMF, MANAGE 4.1: post-deployment monitoring plans exist, including mechanisms for capturing and evaluating input from users, appeal, redress, and override.">*</sup></li>
         </ul>

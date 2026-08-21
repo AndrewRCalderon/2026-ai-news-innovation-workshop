@@ -62,7 +62,8 @@
         <p>From here on, you're not clicking through GitHub yourself — you're telling Claude what you want, in plain language, and it does the GitHub work through the connector.</p>
         <ul class="field-notes">
           <li>Tell Claude your fork's URL and ask it to create a branch called <code>day-1</code> in it.</li>
-          <li>Ask it to work inside <code>submissions/day-1/your-name/</code> — that's your own folder, so your changes never conflict with anyone else's.</li>
+          <li>Ask it to create <code>docs/submissions/your-name/</code> — that's your own folder for the rest of the workshop, so your changes never conflict with anyone else's. Same folder every day, not a new one each time.</li>
+          <li>Ask it to copy (not move) <code>STUDENT_CLAUDE_GUIDE.md</code> into that folder and rename the copy to <code>CLAUDE.md</code> — Claude only reads project instructions from a file with that exact name, so the rename isn't optional. Copy <code>SUBMISSION.md</code> in alongside it, filename unchanged. Fill in what you can of <code>SUBMISSION.md</code> so far — the root copies of both files stay where they are.</li>
           <li>If you're building your project in the Code tab with a local project folder, say so — Claude can connect what you're working on locally to your fork on GitHub through the connector.</li>
         </ul>
         <blockquote class="pull-question">You don't need to know the underlying git commands — you need to be able to describe what you want, clearly.</blockquote>

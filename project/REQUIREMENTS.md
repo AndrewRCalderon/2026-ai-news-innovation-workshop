@@ -60,27 +60,128 @@ Automation," Green & Chen). See
 [content-architecture-notes.md](content-architecture-notes.md) for
 editorial patterns pulled from this pass, kept for the Day 1 rewrite.
 
-**⚠️ Next step, not yet done: none of this copy-draft editing has been
-re-implemented into the live `docs/day-2/*.html` / `docs/day-3/*.html` /
-their `slides/` companions.** The copy-drafts are the current source of
-truth for wording; the live HTML pages (including
-`docs/day-3/02-product-design.html`, `04-ai-human-design.html`, and
-`05-where-you-can-take-this.html`, which got a direct-to-HTML pass on
-2026-08-19 *before* the copy-draft workflow started) are now stale
-relative to them. Re-implementing is the next real task: read each
-`project/copy-drafts/day-N/*.md`, rebuild the matching Overview HTML
-(citations, components, structure) and a fresh condensed Slides version,
-same as the established Day 2 round-3 pattern.
+**2026-08-20, continued: copy-draft re-implementation done, all 15 pages.**
+All of Day 3 (7/7 pages: `01-recap` through `07-final-show-and-tell`) and
+all of Day 2 (8/8, including `04-skills-best-practices`, implemented in a
+follow-up pass once its draft was reviewed and confirmed) had their live
+Overview HTML and Slides companions rebuilt from the edited copy-drafts,
+matching the established Day 2 round-3 pattern (prose/citations/components
+carried over, page skeleton — nav, breadcrumb, masthead, TOC, footer —
+untouched unless the draft's own structure changed). `project/scripts/
+check-slide-parity.js` runs clean across all of it except three known,
+pre-existing false positives where Slides condenses a long list into a
+single `.pull-question` paragraph (`03-claude-md` s3, `06-spec-driven-dev`
+s3, `04-ai-human-design` s1 — the last one new this pass, same pattern).
+Riding along in the same files: the "AI-Human Design" → "Human-AI Design"
+rename cascaded fully (`schedule.json`, HTML, Slides, and
+`docs/partials/nav.html`'s dropdown, which the original task scoping
+missed); the Day 3 schedule 15-minute reallocation applied to
+`schedule.json` (Final Coding Time 60→75 min, Where Can You Take This
+45→30 min); the Capelouto citation gap closed (Press Gazette source,
+softened to what it actually confirms); and Arlyn Gajilan added back to
+`05-where-you-can-take-this`'s roster on a moderate-confidence trade-press
+source (TVNewsCheck, syndicated republish, direct quote) after her earlier
+exclusion for weak sourcing.
 
-**Other open items from today, all logged below in their own entries,
-listed here just for a fast scan**: `04-skills-best-practices.md`'s big
-structural rewrite is still deferred (user: "let's get through the other
-edits and return to this one"); the Day 3 schedule 15-min reallocation
-(Final Coding Time +15, Where Can You Take This -15) is scoped but not
-applied to `schedule.json`; the AI-Human rename needs to cascade to
-`schedule.json`/HTML/slides; the codebase hygiene sweep and the
-model-selection/token-usage content idea are both unscoped, deferred
-tasks. Day 1 still has no copy-drafts.
+Two structural content cuts were confirmed with the user rather than
+assumed from the draft alone, since removing a whole section is bigger
+than a wording diff: `06-spec-driven-dev` dropped its "Why This Connects
+to Skills" section entirely (confirmed intentional), and
+`07-final-show-and-tell` dropped its "What to Actually Say" section
+(pattern-matched against the confirmed case, not re-asked). `03-claude-md`
+additionally got its Batch 7 corrections applied (haddock3 sentence
+removed, user examples woven into the closing paragraph) and its
+file-viewer bug actually fixed, not just relocated: root cause was a CSS
+specificity collision (`.briefing code`'s `white-space: nowrap` beating
+the parent `<pre>`'s `pre-wrap`), diagnosed and fixed via Playwright,
+documented in [ADR 0020](adr/0020-file-viewer-inline-collapsible.md)
+(supersedes [ADR 0019](adr/0019-file-viewer-dialog.md), swapping the
+`<dialog>` popup for a native `<details>` disclosure in the process).
+
+`04-skills-best-practices.html`'s structural rewrite (new §2 non-technical
+scenario, §3's advice folded in and reframed around directing Claude to
+build the skill rather than hand-authoring `SKILL.md`, new §4 testing
+section replacing the old failure-pattern list) is now implemented into
+both Overview and Slides, parity-clean, verified visually. This closes out
+the entire Day 2 + Day 3 copy-draft re-implementation initiative.
+
+**Still open**: the codebase hygiene sweep, the model-selection/token-usage content
+idea (now also covering subagent/consumption-guardrail content, see the
+Newly Identified Tasks entry below), Day 1's still-nonexistent copy-drafts,
+and the site-wide workshop-name/em-dash/colon sweeps (deferred to Day 1's
+eventual line-edit pass, not this one) remain unscheduled.
+
+**2026-08-20, continued: `STUDENT_CLAUDE_GUIDE.md`'s three open threads
+resolved in one pass.** User asked to prioritize this file specifically.
+Closed: the line-1716 Claude-Desktop-vs-Claude-Code tooling gap (new
+"Where this file kicks in" section), the submission-card file-structure
+idea (new `SUBMISSION.md` template shipped at repo root, see
+[ADR 0021](adr/0021-student-submission-metadata-file.md)), and the
+model-selection/subagent-guardrail content seed (new "Choosing the right
+model for the task" section, deliberately AI-in-the-loop after an early
+draft put the burden on the student instead and was corrected mid-review).
+Also reworked, per direct user request mid-pass: "How to explain things to
+me" changed from Claude assuming the student's vocabulary level to Claude
+asking the student directly via a short onboarding question set. Three
+things intentionally left open rather than forced to a premature answer:
+the `SUBMISSION.md` field set (provisional, two rounds of user edits mid-
+review, explicitly to be revisited once seen in real use), the
+demo-path-field question, and the harvesting mechanism for
+`docs/students/index.html` — see the "Student submission cards" and
+"Live-test `STUDENT_CLAUDE_GUIDE.md`" entries below. The guide itself is
+not marked fully done until that live test happens.
+
+**2026-08-20, continued: the above `SUBMISSION.md` work corrected after
+missing prior ADRs.** Walking through how a student's fork would actually
+work in Claude Desktop surfaced that this session's `SUBMISSION.md`/
+`ADR 0021` work hadn't checked `project/adr/` first, and conflicted with
+three already-accepted decisions:
+[ADR 0003](adr/0003-daily-merge-branch-workflow.md) (per-day submission
+folders), [ADR 0004](adr/0004-submissions-inside-docs.md) (path inside
+`docs/`), and [ADR 0008](adr/0008-readme-driven-portfolio-data.md)
+(README-driven portfolio data, hand-built pages). Reconciled directly with
+the user and written up as
+[ADR 0022](adr/0022-continuous-student-folder.md), which supersedes 0003's
+folder-namespacing, 0008's data-source decision, and 0021 entirely. Net
+result: one continuous folder per student
+(`docs/submissions/your-name/`, replacing the per-day scheme), created
+during Day 1's Fork & Submit, where both `SUBMISSION.md` and
+`STUDENT_CLAUDE_GUIDE.md`-as-`CLAUDE.md` get **copied** (not moved, since
+the root copies are linked from live pages) alongside the actual project
+work. This also fixed a pre-existing bug in
+`docs/day-1/08-fork-and-submit.html`/its Slides (missing `docs/` prefix on
+the submissions path) and required reframing the Day 2 §03 `CLAUDE.md`
+exercise (`docs/day-2/03-claude-md.html` + Slides +
+`project/copy-drafts/day-2/03-claude-md.md`), since the file now arrives a
+day earlier than that exercise originally assumed. Full detail in the
+Phase 5 `STUDENT_CLAUDE_GUIDE.md` bullet and the "Student submission
+cards" Newly Identified Task below.
+
+**2026-08-20, end of day — session stopped on daily usage limit, picking up
+tomorrow.** Quick orientation for next session, so it doesn't need to
+re-read this whole file cold:
+
+1. **First thing to do**: finish validating the "Modulate how much the
+   guide makes Claude ask vs. just act" fix (Newly Identified Tasks below).
+   The design/implementation is done (broadened onboarding question 2,
+   reworded Plan Mode bullet), but the live-test that was supposed to
+   confirm it works came back inconclusive — turn 2 of the test did
+   model-selection research but created no files despite a "just go, build
+   something" instruction, and the session ran out of usage before it
+   could be re-run or dug into. Don't trust the fix until this is actually
+   resolved one way or the other.
+2. **Then**, per the priority order worked out with the user today (still
+   valid, nothing since has changed it): **Day 1 copy-drafts** is the
+   biggest real content gap — Days 2/3 both got full copy-draft edit
+   passes, Day 1 never started, and `09-project-assignments.html` is still
+   a placeholder. Everything else in "Newly identified tasks" below
+   (model-selection/subagent content planning, codebase hygiene sweep,
+   workshop-name/em-dash sweep) can wait behind that.
+3. Nothing from today is left half-implemented except item 1 above — see
+   the two 2026-08-20 entries just above this one for the full detail on
+   what shipped (the `STUDENT_CLAUDE_GUIDE.md` rework, the `SUBMISSION.md`/
+   `ADR 0022` architecture correction, and today's onboarding-question
+   broadening).
 
 Source of truth for build progress on this repo. Check here before starting
 work; update here when a task starts/completes, or when new work is
@@ -128,7 +229,7 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 
 - [ ] `docs/students/index.html` hub page
 - [ ] Student portfolio page template
-- [ ] Extended `README.md` submission template (adds title/pitch + demo path fields)
+- [x] ~~Extended `README.md` submission template (adds title/pitch + demo path fields)~~ — **superseded 2026-08-20** by `SUBMISSION.md` as its own dedicated file (see [ADR 0022](adr/0022-continuous-student-folder.md), which supersedes [ADR 0008](adr/0008-readme-driven-portfolio-data.md)'s README-based approach). Nothing left to build here.
 - [ ] `.github/pull_request_template.md`
 - [ ] `SUBMISSION_GUIDE.md`
 
@@ -149,7 +250,7 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 - [x] `docs/setup.html` — **rebuilt 2026-08-11 as Day 1 only**, with a real
       interactive checklist, ready to send to students. Day 2's setup
       content moved to a new, currently-unlinked `docs/setup-day-2.html`.
-- [x] `STUDENT_CLAUDE_GUIDE.md` written (day-specific guidance students
+- [~] `STUDENT_CLAUDE_GUIDE.md` written (day-specific guidance students
       paste into their own Claude sessions — see
       [ADR 0009](adr/0009-separate-maintainer-claude-md.md) for why this
       isn't named `CLAUDE.md`). **Implemented 2026-08-19**, growing out of
@@ -178,6 +279,52 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
       pending Batch 7 edits on that same page (file-viewer popup fix,
       paragraph weave, both in section 2, not section 4) were left
       untouched, as planned.
+      **Revised 2026-08-20**, closing the three open threads logged
+      against this file (see "Newly identified tasks" below for their
+      full history): added a "Where this file kicks in" section
+      orienting students to the Day 1 (Claude Desktop) → Day 2 (VS Code /
+      Claude Code / GitHub Desktop) tooling shift, resolving the line-1716
+      gap below; reworked "How to explain things to me" from
+      assumption-based instructions into onboarding questions Claude asks
+      the student directly; replaced the single model-choice bullet in
+      "Things to watch for" with a new "Choosing the right model for the
+      task" section, AI-in-the-loop (Claude surfaces model options and
+      tradeoffs in plain language, student picks — not the student
+      justifying a choice unprompted); added a "Keeping submission info
+      current" section pointing at the new `SUBMISSION.md` (see task
+      below); "Using git and GitHub" gained a line naming GitHub Desktop
+      and Claude-Code-runs-git-directly as the two real paths, replacing
+      the previous tool-agnostic phrasing. See
+      [ADR 0021](adr/0021-student-submission-metadata-file.md) for the
+      `SUBMISSION.md` decision specifically.
+      **Corrected, same day, still 2026-08-20**: the above `SUBMISSION.md`/
+      `ADR 0021` work didn't check existing architecture first and
+      conflicted with it — [ADR 0003](adr/0003-daily-merge-branch-workflow.md)
+      already had students working in a per-day folder
+      (`submissions/day-N/name/`), [ADR 0004](adr/0004-submissions-inside-docs.md)
+      already placed that inside `docs/`, and
+      [ADR 0008](adr/0008-readme-driven-portfolio-data.md) already decided
+      portfolio data comes from an extended `README.md`, not a separate
+      file. Reconciled via [ADR 0022](adr/0022-continuous-student-folder.md),
+      which supersedes 0003's folder-namespacing, 0008's data-source
+      decision, and 0021 entirely: one continuous folder per student for
+      the whole workshop (`docs/submissions/your-name/`, not per-day),
+      `SUBMISSION.md`'s field set kept (superseding 0008's), and both
+      `STUDENT_CLAUDE_GUIDE.md`-as-`CLAUDE.md` and `SUBMISSION.md`
+      **copied** (not moved) into that folder during Day 1's Fork & Submit
+      — moving would delete the root copies that `docs/setup-day-2.html`
+      and `docs/day-2/03-claude-md.html` already link to. `STUDENT_CLAUDE_GUIDE.md`'s
+      "Where this file kicks in" and "Keeping submission info current"
+      sections updated to name the folder explicitly. This also meant
+      reframing the Day 2 §03 `docs/day-2/03-claude-md.html` exercise
+      (Overview + Slides + `project/copy-drafts/day-2/03-claude-md.md`):
+      since `CLAUDE.md` now arrives Day 1, not Day 2, the exercise shifted
+      from "copy it in" to "review and update what's already there,"
+      including explicitly asking students to reconsider whether every
+      guardrail still earns its place after a day of real use.
+      **Not yet considered complete**: needs a live test on a real project
+      (not just a read-through) before this bullet closes for good — see
+      the "Newly identified tasks" entries below.
 - [~] `resources.html` populated with real links — established pattern:
       when a topic's review turns up a genuinely useful external
       compilation/reference (not something we'd host/maintain ourselves),
@@ -195,31 +342,70 @@ Tasks discovered during build that weren't in the original plan. Add here as
 found; promote into a phase above once scoped, or leave here if it doesn't
 map cleanly to one.
 
-- [ ] **Rename "AI-Human Design" to "Human-AI Design," site-wide.** Decided
+- [~] **Student submission cards, auto-populated from a standardized fork
+      file structure.** Raised 2026-08-20, mid-session, while working on the
+      copy-drafts re-implementation pass. **Scoped and implemented
+      2026-08-20, then corrected same day**: a single pre-built template
+      file, `SUBMISSION.md`, shipped at repo root so every student fork
+      inherits it. First pass (`ADR 0021`) put it in a `submissions/day-N/`-
+      style scheme without checking prior art; that conflicted with
+      already-accepted [ADR 0003](adr/0003-daily-merge-branch-workflow.md)/
+      [0004](adr/0004-submissions-inside-docs.md)/[0008](adr/0008-readme-driven-portfolio-data.md)
+      and was corrected via [ADR 0022](adr/0022-continuous-student-folder.md)
+      (supersedes 0003's folder-namespacing, 0008's data-source decision,
+      and 0021 entirely). Current state: one folder per student,
+      `docs/submissions/your-name/`, used across all three days (not
+      per-day); both `SUBMISSION.md` and `STUDENT_CLAUDE_GUIDE.md`-as-
+      `CLAUDE.md` copied (not moved) into it during Day 1's Fork & Submit,
+      root copies left intact since they're linked from live pages.
+      `STUDENT_CLAUDE_GUIDE.md`'s "Keeping submission info current" section
+      instructs Claude to help students fill `SUBMISSION.md` in early and
+      keep it updated through restructures.
+      **Confirmed scale**: 5–7 student forks, not dozens — relevant to how
+      little the read side actually needs automating.
+      **No harvesting mechanism needed**: ADR 0008's "hand-built, not
+      auto-generated" stance for portfolio pages is explicitly retained by
+      ADR 0022 — this was previously logged as an open/undesigned question,
+      but it was already answered by prior art, just not the data-source
+      part of that same ADR.
+      **Still open, not resolved by this pass**:
+      - The field set (see `SUBMISSION.md` itself — the user has been
+        revising it directly) is **provisional**, flagged as wanting to be
+        seen in real use before finalizing. Revisit once students have
+        actually filled one in.
+      - Whether a demo-path field should be added back — it was in the
+        original Phase 4 scope and earlier drafts of this task, but isn't
+        in the current field set; unclear if that was deliberate.
+      - How this interacts with the still-open Phase 1 "student
+        submissions end-to-end" verification item above, and whether it
+        folds into the existing Phase 4 tasks (`docs/students/index.html`,
+        student portfolio page template) or stays its own thing.
+- [x] **Rename "AI-Human Design" to "Human-AI Design," site-wide.** Decided
       2026-08-20 while editing `project/copy-drafts/day-3/04-ai-human-design.md`
       (its H1 already reads "Human-AI Design"; `01-recap.md`'s summary
-      updated to match). Still needs to cascade to the live site at
-      implementation time: `docs/data/schedule.json` (`"title": "AI-Human
-      Design"`), `docs/day-3/04-ai-human-design.html` (title tag, H1,
-      breadcrumb, masthead), `docs/day-3/slides/04-ai-human-design-slides.html`
-      (title, chrome-eyebrow, cover-title), and any other page that names
-      this session. The filename itself (`04-ai-human-design.*`) doesn't
-      need to change — same reasoning as the earlier schedule-reorder
-      task: nothing reads the filename, only what's displayed.
-- [ ] **Day 3 schedule: shift 15 min from Where Can You Take This to Final
-      Coding Time.** Raised 2026-08-20. Scoped, ready to implement, just
-      deferred alongside the other pending tasks. Change to
-      `docs/data/schedule.json`: Final Coding Time goes from 60 to 75
-      min (2:00-3:15 PM instead of 2:00-3:00 PM); Where Can You Take
-      This goes from 45 to 30 min, shifting to 3:15-3:45 PM. Final Show
-      & Tell stays fixed at 3:45 PM, unchanged. **Flag for whoever
-      implements**: §05's content was condensed to 3 slides for the
-      45-minute slot (see the 2026-08-19 PR #8 implementation entry
-      above); check it still fits comfortably in 30, especially the new
-      reflection/discussion slide 3, which is meant to prompt an actual
-      conversation, not just be read through quickly.
+      updated to match). **Implemented 2026-08-20**, as part of that page's
+      full copy-draft re-implementation (see the Day 3 §04 restructure
+      below): `docs/data/schedule.json` (`"title"`),
+      `docs/day-3/04-ai-human-design.html` (title tag, H1, breadcrumb,
+      masthead), `docs/day-3/slides/04-ai-human-design-slides.html` (title,
+      chrome-eyebrow, cover-title), and `docs/partials/nav.html`'s dropdown
+      entry, which the original scoping missed. Filename left unchanged, as
+      planned.
+- [x] **Day 3 schedule: shift 15 min from Where Can You Take This to Final
+      Coding Time.** Raised 2026-08-20. **Implemented 2026-08-20** as part
+      of the copy-draft re-implementation pass: `docs/data/schedule.json`
+      updated, Final Coding Time 60→75 min (2:00-3:15 PM), Where Can You
+      Take This 45→30 min (3:15-3:45 PM), Final Show & Tell unchanged at
+      3:45 PM. Both pages' Overview and Slides cover-meta updated to match
+      (Slides hardcodes this per ADR 0011, so it needed a manual edit, not
+      just the JSON change). §05's content (3 slides, including the
+      reflection/discussion slide) was carried over as-is, not further
+      trimmed for the shorter 30-minute slot — worth a facilitator's eye
+      the first time it's actually run at this length, since that's not
+      something a copy pass alone can validate.
 - [ ] **New content: model selection, token usage, choosing smaller models
-      for sub-tasks.** Raised 2026-08-20 while reviewing
+      for sub-tasks, and now also subagent/consumption guardrails.**
+      Raised 2026-08-20 while reviewing
       `project/copy-drafts/day-3/04-ai-human-design.md`. **Not scoped —
       explicitly deferred to a planning conversation later, not something
       to design now.** Open question from the user, unresolved on
@@ -232,6 +418,105 @@ map cleanly to one.
       matching model choice to task size") — worth checking for overlap
       before scoping this further, so the two don't end up saying the
       same thing in two places.
+      **Extended, same day, still 2026-08-20**: a live example of this
+      exact topic came up mid-session (this repo's own build work), when
+      the user asked Claude to introspect on whether its own subagent
+      spawning was judicious, given a large share of session usage was
+      coming from the Agent/Task subsystem. That exchange (a self-
+      assessment of actual agent-call costs in this session, plus
+      guardrail advice: explicit effort caps in agent prompts, preferring
+      Explore over general-purpose for read-only tasks, cheaper-model
+      overrides for simple lookups, and checking Claude Code's actual
+      cost-breakdown/settings mechanics rather than guessing) is exactly
+      the kind of practicable guidance this future content should cover,
+      not just "smaller models exist." When this gets planned: decide
+      whether subagent/guardrail management is its own beat within this
+      content or folded into the model-selection material, and where it
+      fits relative to the existing `STUDENT_CLAUDE_GUIDE.md` pitfalls
+      seed.
+      **`STUDENT_CLAUDE_GUIDE.md` side implemented 2026-08-20**: the old
+      passive pitfalls-seed bullet was replaced with a standalone
+      "Choosing the right model for the task" section — deliberately
+      **AI-in-the-loop**, not student-burdened: Claude surfaces the model
+      options and their tradeoffs in plain language before a subtask, and
+      the student picks, rather than being expected to justify a choice
+      unprompted (an earlier draft got this backwards and was corrected
+      mid-review). **Still open**: the broader in-class content question
+      (a dedicated Day 2 lesson vs. just this guide content) — this pass
+      only closes the guide-side seed, not the bigger unscoped idea above.
+- [x] **Live-test `STUDENT_CLAUDE_GUIDE.md` on a real project.** Raised
+      2026-08-20, right after the guide's onboarding-questions/model-choice/
+      submission-info rework (see the Phase 5 bullet above).
+      **Done 2026-08-20**: ran a fresh subagent session with `CLAUDE.md`
+      (copied from `STUDENT_CLAUDE_GUIDE.md`) in a scratch project, given a
+      plausible Day 1/2 student request (an RSS headline summarizer, no
+      coding background). What worked: all three onboarding questions
+      asked verbatim-in-spirit, genuinely stopped rather than guessing
+      answers and continuing; credential hygiene flagged proactively before
+      it was relevant; `SUBMISSION.md` correctly left unfilled rather than
+      guessed, since there was no real project direction yet.
+      **Surfaced two real gaps, not yet fixed — see the new task right
+      below**: the guide gives no guidance on safe pre-work scaffolding
+      (a folder, `.gitignore`, stub script) before onboarding questions are
+      answered, so the test session defaulted to 100% asking, zero
+      building; and the "more than a file or two" Plan Mode trigger has no
+      real line, a first scaffold is often 4-5 trivial files that's still
+      one small conceptual unit. Caveat: this validates the *instructions*
+      produce the intended behavior once read, not whether Claude Desktop/
+      Code actually auto-discovers `CLAUDE.md` the way documented — that
+      mechanism is still unverified directly.
+- [~] **Modulate how much the guide makes Claude ask vs. just act, based on
+      the onboarding-question answers themselves.** Raised 2026-08-20,
+      directly off the live-test findings above. User's concern: the
+      guide's current asking-first instinct is correct in spirit
+      (students shouldn't have to make every choice, Claude should suggest
+      and explain) but shouldn't fully stall real development either.
+      **Designed and implemented 2026-08-20**, same day, once the user
+      came back to it: broadened "How to explain things to me"'s second
+      onboarding question from just "when something breaks" to also cover
+      "when we're starting something new" — one question now covers both
+      error-handling explanation depth *and* general build-vs-ask pacing,
+      with an explicit line stating the answer is the default for how much
+      to build before checking in generally, not just for explanations.
+      Deliberately reused the existing question rather than adding a
+      fourth one, to keep the file from growing.
+      Resolves both concrete gaps the live test found: **(1) pre-work
+      scaffolding ambiguity** — now governed directly by the broadened
+      question's answer, instead of being unaddressed. **(2) the fuzzy
+      Plan-Mode file-count trigger** — reworded to be explicitly about risk/
+      reversibility only ("expensive or awkward to undo"), a hard safety
+      net that holds regardless of the calibration answer, with an
+      explicit carve-out that a first rough scaffold isn't what it's about
+      even if it's more than a file or two — deferring that specific case
+      to the calibration question instead of counting files.
+      **Live-test attempted 2026-08-20, inconclusive, needs finishing.**
+      Same fresh-subagent method as the first test, refreshed scratch
+      `CLAUDE.md` to this revision, same RSS-summarizer request. Turn 1
+      (asking the onboarding questions): confirmed the broadened question
+      reads and asks correctly. Turn 2: sent the subagent "student"
+      answers signaling "just go" on pace — but the run that came back
+      only did model-selection research (Haiku vs. Sonnet for the
+      summarization call, via the `claude-api` skill) and created **no
+      files** in the scratch project, despite the explicit "just go, build
+      a rough first version" instruction. Session ended (daily usage
+      limit) before this could be dug into further or re-run. **Genuinely
+      unresolved, not a pass or a fail** — could mean the wording still
+      doesn't push hard enough toward action, or could be an artifact of
+      how the test subagent handled a resumed/background turn rather than
+      a real reflection of the guide's instructions. **First thing to pick
+      up next session**: re-run or continue this test cleanly to actually
+      find out before trusting the fix. Scratch project still exists at
+      `/private/tmp/.../scratchpad/live-test-project` for this session
+      only — won't persist to a new session, so this needs a fresh setup
+      next time (see `STUDENT_CLAUDE_GUIDE.md`'s live-test task description
+      above for the method: copy the file in as `CLAUDE.md`, spawn a fresh
+      subagent, give it a plausible student request, don't hint it's a
+      test).
+      **Noted but not acted on**: the same "make Claude suggest instead of
+      asking for every choice" principle could arguably extend to
+      "Choosing the right model for the task" too (still always asks
+      before proceeding), but that wasn't a live-test finding, so left
+      alone rather than scope-creeping this pass.
 - [ ] **Codebase hygiene sweep: non-functional breadcrumbs and AI slop.**
       User noticed, while reviewing the Day 2 copy-draft edit pass, that
       the repo has accumulated HTML comments and other non-functional
@@ -1642,9 +1927,13 @@ single-purpose, shippable URL.
 
 ### Downstream, not yet touched
 
-- [ ] `STUDENT_CLAUDE_GUIDE.md` (still unwritten, Phase 5) will need to
-      reflect Claude Desktop for Day 1 vs. Claude Code for Day 2 once
-      drafted.
+- [x] `STUDENT_CLAUDE_GUIDE.md` reflects the Claude Desktop (Day 1) vs.
+      VS Code/Claude Code/GitHub Desktop (Day 2+) tooling shift.
+      **Resolved 2026-08-20** — confirmed as a real, still-open gap (not
+      stale) when revisited: the guide said nothing about the shift, so a
+      new "Where this file kicks in" section was added. See the Phase 5
+      `STUDENT_CLAUDE_GUIDE.md` bullet above for the full change list from
+      this pass.
 - [ ] Adiel's 21 per-page content notes (logged in the "Collaborator
       feedback" section above) — in progress, see next section.
 - [x] Resolved 2026-08-13: **Day 2 is built.** Retimed to the same
@@ -1941,98 +2230,63 @@ curriculum copy going forward, pairs with the existing
 
 User reviewed the round-3 implementation (Batches 1–6, all shipped
 2026-08-16, see the change log entry below) and gave a second pass of
-feedback on 4 of the pages. Logged only, not yet implemented, same
-workflow as the original batches.
+feedback on 4 of the pages. Logged only at the time; **all of
+`01-debrief.html`, `02-prompting.html`, and `03-claude-md.html`'s items
+below implemented 2026-08-20** as part of the copy-draft re-implementation
+pass (`04-skills-best-practices.html`'s structural rewrite is tracked
+separately below, still open).
 
-**`01-debrief.html`** — s2 exercise-box ("Talk It Through") needs the
+**`01-debrief.html`** — [x] s2 exercise-box ("Talk It Through") given the
 same Time/Description/Deliverable structure used by every other topic's
-exercise-box (it currently reads as one loose paragraph instead). New
-instruction text, close to verbatim from the session (rough draft, not
-final copy): "Let's have an exploratory conversation drawing from the
-questions above. What comes up from your experience yesterday?"
+exercise-box.
 
-**`02-prompting.html`** — s4 exercise deliverable changes again. Instead
-of writing free-form sentences reflecting on what you wanted the prompt
-to do, the deliverable becomes annotating the original prompt directly,
-using the three comparison questions already in the exercise (more
-specific? added a way to check the result? dropped something
-unnecessary?) as the annotation tool, marking up the prompt itself rather
-than writing about it separately.
+**`02-prompting.html`** — [x] s4 exercise deliverable changed: instead of
+free-form reflection sentences, the deliverable is now annotating the
+original prompt directly, using the three comparison questions already in
+the exercise as the annotation tool.
 
 **`03-claude-md.html`**:
-- [ ] **File viewer is illegible as a popup.** User reports the
-      `<dialog>`-based file viewer (shipped this round, see
-      [ADR 0019](adr/0019-file-viewer-dialog.md)) shows the file's
-      content as "a long string," not the entire file legibly. Requested
-      fix is a design change, not a bug patch: replace the popup/modal
-      with an inline collapsible element on the page (opens on click,
-      reveals the markdown in full in place), rather than a dialog.
-      **This reverses part of ADR 0019's decision** — will need a
-      superseding ADR entry when implemented, not just a quiet component
-      swap. Worth investigating the popup's actual rendering bug too
-      (root cause not diagnosed yet, no browser tool was available to
-      inspect it live), in case the same bug would recur in whatever
-      replaces it.
-- [ ] **Remove the haddock3/robotics-lab sentence** from the "It states
-      what can't be inferred from code" roster row: "A robotics lab's
-      CLAUDE.md makes the same kind of call for a different reason: it
-      tells Claude explicitly that existing code has been human-verified
-      to work, but isn't necessarily the best implementation, a fact no
-      amount of code-reading would reveal." Cut entirely.
-- [ ] **Weave concrete new examples into the closing paragraph.** User
-      supplied real illustrative examples to fold into "That's the shape
-      worth copying, whatever your own project is about: point instead
-      of duplicate, write down what Claude can't guess on its own, and
-      organize around when you'll actually need each part. The decisions
-      in your file might come from a design system, an audience persona,
-      or a build process like this one, the habit is the same either
-      way." The material to weave in (user's own phrasing): "This is the
-      place where you'd document decisions that you or your team made
-      about fundamental aspects of the product that you are designing.
-      It can be information about audience segments, the tone of the
-      language across the site, words to avoid, or a commitment to only
-      use certain kinds of tools." **Also**: remove any duplicate
-      examples this creates elsewhere on the page — the s3 Include column
-      already lists "Your design system, fonts, colors, spacing" and
-      "What you know about your audience, personas, reading level,
-      assumptions," so check for overlap with the new audience-segment/
-      tone/word-choice/tooling examples before finalizing, dedupe rather
-      than repeat the same illustrations twice on one page.
+- [x] **File viewer is illegible as a popup.** Fixed 2026-08-20: replaced
+      the `<dialog>`-based viewer with a native `<details>`/`<summary>`
+      inline collapsible, see
+      [ADR 0020](adr/0020-file-viewer-inline-collapsible.md) (supersedes
+      [ADR 0019](adr/0019-file-viewer-dialog.md)). Root cause diagnosed
+      this time via Playwright: `.briefing code`'s `white-space: nowrap`
+      was winning over the parent `<pre>`'s `pre-wrap` on CSS
+      specificity, so the markup swap alone reproduced the identical bug
+      until a `.file-viewer-body code` override was added. Same fix
+      applied to the Slides companion.
+- [x] **Remove the haddock3/robotics-lab sentence** from the "It states
+      what can't be inferred from code" roster row. Done.
+- [x] **Weave concrete new examples into the closing paragraph.** Done,
+      deduped against s3's Include column per the original instruction
+      (dropped "audience segments" specifically since that already
+      appears there; kept tone-of-language, words-to-avoid, and
+      commitment-to-certain-tools as the genuinely new material).
 
-**`04-skills-best-practices.html`** — structural rewrite, not just copy:
-- [ ] **New section 2: a non-technical "when you'd know you need a
-      skill" scenario.** Illustrates, concretely and without technical
-      jargon, the kind of moment that should prompt someone to turn
-      something into a Skill. Content/example not yet drafted.
-- [x] **Resolved: current s2 ("What Actually Makes This Work") gets
-      folded into Build One (s3), not deleted outright.** User confirmed:
-      fold it in, but adhere to the original feedback already logged for
-      this section (Batch 4 above) when doing so — i.e. the two specific
-      improvements (explain what a Gotchas section actually is and what
-      goes into it, rather than the current phrasing; give a positive
-      example of a specific trigger-description, not just the current
-      negative one, "helps with content creation") must land inside Build
-      One written in Batch 4's established style: an explained if/then,
-      cause-and-effect pattern, not a flat statement of fact. Likely
-      lands inside step 3 ("fill it in like an onboarding doc"), which
-      already touches gotchas and description-writing, but not
-      confirmed, just the natural fit.
-- [ ] **Build One becomes s3** (shifts position as s2 is replaced by the
-      new non-technical scenario section).
-- [ ] **Delete "Common Failure Patterns" (current s4) entirely,
-      replace with a new section on how to think about testing a skill
-      and how to actually do it.** Must be practical and step-by-step,
-      not abstractions, per explicit instruction, and should speak back
-      to the non-technical scenario introduced in the new s2 (i.e., use
-      that same example when illustrating what testing looks like, not a
-      disconnected new example). **Resolved: keep the "Installing skills
-      from strangers" security-hygiene content** (malware in shared
-      skill repos) — user confirmed this guidance is worth keeping, not
-      dropping with the rest of the old s4. Placement not yet decided:
-      likely candidates are a closing note in the new testing section, or
-      a short addition to Build One, since it's about installing
-      someone else's skill rather than testing your own — leaving the
-      exact spot open for implementation.
+**`04-skills-best-practices.html`** — structural rewrite, not just copy.
+**All items implemented 2026-08-20:**
+- [x] **New section 2: a non-technical "when you'd know you need a
+      skill" scenario.** Landed as "When You'd Know You Need One": a
+      README-explaining-itself-four-times example, with the same signal
+      shown in reverse (a repeated correction) and a closing line pointing
+      at directing Claude to build the skill.
+- [x] **Old s2 ("What Actually Makes This Work") folded into Build One
+      (s3), not deleted outright.** Landed inside step 3 ("Review the
+      description it wrote"), in if/then cause-and-effect style: the
+      description-specificity point and the watched-not-imagined gotchas
+      point both moved there; the baseline-testing point moved into step 4
+      instead, since that step is literally about testing.
+- [x] **Build One becomes s3**, but further reframed per a user note
+      given while reviewing the draft: steps now center on directing
+      Claude to build the skill and reviewing what it produces ("Direct
+      Claude to build it," "Review the description it wrote"), not
+      hand-authoring `SKILL.md` yourself.
+- [x] **"Common Failure Patterns" (old s4) deleted, replaced with
+      "Testing It For Real."** Practical and step-by-step, speaks back to
+      the new s2 scenario (hands the same README skill a messy real case).
+      "Installing skills from strangers" kept, landed in the new s4 as
+      originally leaning toward (not moved into Build One).
 
 ---
 
