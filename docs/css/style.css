@@ -256,3 +256,28 @@ main {
     align-items: flex-start;
   }
 }
+
+/* Collapsible section — a native <details>/<summary> disclosure for
+   content that's useful but shouldn't dominate the page by default
+   (e.g. resources.html's AI Tools Landscape). */
+.collapsible {
+  border: 1px solid var(--purple-light);
+  border-radius: 4px;
+  margin: 1.5rem 0;
+}
+.collapsible > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.85rem 1.1rem;
+  font-weight: 600;
+  color: var(--purple-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.collapsible > summary::-webkit-details-marker { display: none; }
+.collapsible > summary::after { content: "+"; font-weight: 400; }
+.collapsible[open] > summary::after { content: "\2212"; }
+.collapsible > summary:hover { background: var(--purple-light); }
+.collapsible[open] > summary { border-bottom: 1px solid var(--purple-light); }
+.collapsible-body { padding: 1rem 1.1rem; }

@@ -44,7 +44,7 @@ Specs are best for new, well-scoped work. On a large project's existing codebase
 
 Once you've worked through the questions above, you already have what a real spec needs, you just have to write it down. The fastest way is to hand Claude your answers and ask it to turn them into actual files, not just a paragraph back in chat. Here's a starting point you can copy, fill in, and adapt for any project, this workshop or otherwise.
 
-`starter-prompt.md`
+`spec-driven-starter-prompt.md`
 ```
 I want to build [describe the project in one or two sentences].
 
@@ -56,10 +56,10 @@ Specify
 
 Plan
 - My actual approach to building this: [your answer]
-- What architecutre and components already exist, such as code, tools, data, that this product has to work with or around: [your answer]
+- What architecture and components already exist, such as code, tools, data, that this product has to work with or around: [your answer]
 
 Implement
-- Architecture that should probably get built and checked separately: [your answer]
+- The pieces I'll build and check one at a time, in the order I'd tackle them: [your answer]
 
 Validate
 - How I'll know it's actually done, not just running: [your answer]

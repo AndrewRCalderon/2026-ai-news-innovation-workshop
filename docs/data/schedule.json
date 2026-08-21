@@ -1,5 +1,5 @@
 {
-  "note": "Day 1 times/durations confirmed 2026-08-11, Day 2 confirmed 2026-08-13, Day 3 confirmed 2026-08-13 (see project/REQUIREMENTS.md). Day 2 AM block (02-05) rebalanced 2026-08-15 during the content-depth revision pass; total day span unchanged (10am-1pm, lunch, 2pm-5pm).",
+  "note": "Day 1 times/durations confirmed 2026-08-11, Day 2 confirmed 2026-08-13, Day 3 confirmed 2026-08-13 (see project/REQUIREMENTS.md). Day 2 AM block (02-05) rebalanced 2026-08-15 during the content-depth revision pass; total day span unchanged (10am-1pm, lunch, 2pm-5pm). Day 3 PM block rebalanced 2026-08-21: Final Show & Tell must start at 4:00 PM (faculty invited for that time), so a break was inserted after Where Can You Take This (3:45-4:00 PM) and Final Show & Tell/Closing & Celebration compressed from 75 to 60 min combined (60/15 -> 50/10) to hold the 5:00 PM end time.",
   "days": [
     {
       "day": 1,
@@ -46,8 +46,9 @@
         { "id": "day-3/lunch", "title": "Lunch", "time": "1:00 PM", "duration": "60 min", "type": "lunch", "url": null },
         { "id": "day-3/06-final-coding-time", "title": "Final Coding Time", "time": "2:00 PM", "duration": "75 min", "type": "hands-on", "url": "/day-3/06-final-coding-time.html", "summary": "Last build session of the workshop." },
         { "id": "day-3/05-where-you-can-take-this", "title": "Where Can You Take This?", "time": "3:15 PM", "duration": "30 min", "type": "lecture", "url": "/day-3/05-where-you-can-take-this.html", "summary": "Where in the news industry these specific skills are being used, and what you're taking with you." },
-        { "id": "day-3/07-final-show-and-tell", "title": "Final Show & Tell", "time": "3:45 PM", "duration": "60 min", "type": "discussion", "url": "/day-3/07-final-show-and-tell.html", "summary": "Demo what you built over three days." },
-        { "id": "day-3/closing", "title": "Closing & Celebration", "time": "4:45 PM", "duration": "15 min", "type": "wrap", "url": null }
+        { "id": "day-3/break-2", "title": "Break", "time": "3:45 PM", "duration": "15 min", "type": "break", "url": null },
+        { "id": "day-3/07-final-show-and-tell", "title": "Final Show & Tell", "time": "4:00 PM", "duration": "50 min", "type": "discussion", "url": "/day-3/07-final-show-and-tell.html", "summary": "Demo what you built over three days." },
+        { "id": "day-3/closing", "title": "Closing & Celebration", "time": "4:50 PM", "duration": "10 min", "type": "wrap", "url": null }
       ]
     }
   ]

@@ -161,27 +161,101 @@ cards" Newly Identified Task below.
 tomorrow.** Quick orientation for next session, so it doesn't need to
 re-read this whole file cold:
 
-1. **First thing to do**: finish validating the "Modulate how much the
-   guide makes Claude ask vs. just act" fix (Newly Identified Tasks below).
-   The design/implementation is done (broadened onboarding question 2,
-   reworded Plan Mode bullet), but the live-test that was supposed to
-   confirm it works came back inconclusive — turn 2 of the test did
-   model-selection research but created no files despite a "just go, build
-   something" instruction, and the session ran out of usage before it
-   could be re-run or dug into. Don't trust the fix until this is actually
-   resolved one way or the other.
-2. **Then**, per the priority order worked out with the user today (still
-   valid, nothing since has changed it): **Day 1 copy-drafts** is the
-   biggest real content gap — Days 2/3 both got full copy-draft edit
-   passes, Day 1 never started, and `09-project-assignments.html` is still
-   a placeholder. Everything else in "Newly identified tasks" below
-   (model-selection/subagent content planning, codebase hygiene sweep,
-   workshop-name/em-dash sweep) can wait behind that.
-3. Nothing from today is left half-implemented except item 1 above — see
-   the two 2026-08-20 entries just above this one for the full detail on
-   what shipped (the `STUDENT_CLAUDE_GUIDE.md` rework, the `SUBMISSION.md`/
-   `ADR 0022` architecture correction, and today's onboarding-question
-   broadening).
+1. ~~First thing to do: finish validating the "Modulate how much the guide
+   makes Claude ask vs. just act" fix.~~ **Done 2026-08-21** — redesigned,
+   re-ran, confirmed passing with ground-truth-verified evidence. See the
+   task itself in "Newly identified tasks" below for detail.
+2. **Next up**: per the priority order worked out with the user on
+   2026-08-20 (still valid, nothing since has changed it): **Day 1
+   copy-drafts** is the biggest real content gap — Days 2/3 both got full
+   copy-draft edit passes, Day 1 never started, and
+   `09-project-assignments.html` is still a placeholder. Everything else
+   in "Newly identified tasks" below (model-selection/subagent content
+   planning, codebase hygiene sweep, workshop-name/em-dash sweep) can wait
+   behind that. This hasn't been scoped yet — treat it as its own planning
+   pass first (same pattern as the Day 2/3 copy-draft pilot got), not
+   something to start implementing cold.
+3. Also logged 2026-08-21, not yet scoped: a Claude-model comparison table
+   (task fit, cost, consumption) as an idea for the still-unscoped
+   model-selection content task below — not something to design now.
+
+**2026-08-21, continued: quick-wins batch done, plus a real architecture
+change (student submission cards go auto-generated).** Took stock of the
+whole file and, per the user's choice, worked the small independent items
+before Day 1 copy-drafts:
+
+- **Spec-driven-dev content bug found and fixed**: the copy-pasteable
+  starter prompt in `docs/day-2/06-spec-driven-dev.html` §3 had an
+  `Implement` line ("Pieces that should probably get built and checked
+  separately: [your answer]") that didn't tell a student what to actually
+  write there, worded three different ways across the live HTML, Slides,
+  and copy-draft (drift, not intent). Reworded to directly answer the
+  checklist question above it in the same section: "The pieces I'll build
+  and check one at a time, in the order I'd tackle them: [your answer]."
+  Also renamed the code block's `starter-prompt.md` label to
+  `spec-driven-starter-prompt.md` (all three files) so a student can find
+  it later among their own files, and fixed a stray "architecutre" typo in
+  the copy-draft.
+- **`docs/setup-day-2.html` deleted** — confirmed fully orphaned (zero
+  inbound links) and fully superseded by `setup.html`'s own "Days 2 and 3"
+  section, which already covers the same install steps.
+- **`docs/resources.html` Day 2 and Day 3 sections populated**, same
+  prose-link style as Day 1's section, pulled from citations already
+  live-verified inline on those days' pages (not fresh research) — 10
+  Day 2 links across all 5 sessions including Plan Mode and Spec-Driven
+  Development (missed on the first draft), 8 Day 3 links across all 4
+  cited sessions including Human-AI Design's Google PAIR Guidebook and
+  Vaccaro et al. meta-analysis (also missed on the first draft, then
+  added after the user flagged it). Deliberately broad — user may trim.
+- **`.github/pull_request_template.md` created** — a native GitHub
+  feature, auto-populates the PR description box for anyone opening a PR
+  against the repo with a short checklist matching Fork & Submit's actual
+  flow (day-numbered branch, work confined to the student's own folder,
+  `SUBMISSION.md` updated, no secrets).
+- **`SUBMISSION_GUIDE.md` reconsidered, not built.** Original reason
+  (ADR 0009) was stale — `setup.html`/`08-fork-and-submit.html` already
+  point students to `STUDENT_CLAUDE_GUIDE.md` directly. Instead, enriched
+  `SUBMISSION.md` itself: a note that it becomes a public card once
+  merged, plus one example under each field's existing prompt — guidance
+  lives where a student is already looking, no new file to maintain.
+- **Real architecture change, not just a quick win**: mid-session the user
+  asked to verify the submissions pipeline with a mock folder, which
+  surfaced that no card-rendering mechanism existed at all yet
+  (`docs/students/index.html` was a TODO stub). User wants cards
+  **auto-generated live from `main`**, reversing ADR 0008/0022's
+  hand-built-rendering decision (their `SUBMISSION.md`-as-data-source
+  decision is unchanged). Written up as
+  [ADR 0023](adr/0023-auto-generated-submission-cards.md): the site's
+  first client-side use of GitHub's own public API — `docs/students/index.html`
+  now discovers folders under `docs/submissions/` via the Contents API and
+  renders each student's `SUBMISSION.md` as a card via new
+  `docs/js/submissions-gallery.js`, same "fetch and render, no backend"
+  pattern as `project-ideas.js` (ADR 0017). Full detail, including the
+  named coupling/rate-limit/availability tradeoffs, in the ADR and in the
+  "Student submission cards" task below.
+- **Pipeline verified end-to-end, the original ask**: built a mock
+  `docs/submissions/example-student/` (real `CLAUDE.md` + filled-in
+  `SUBMISSION.md`, built the same way Fork & Submit's own instructions
+  would produce one), confirmed via direct `curl` that the GitHub Contents
+  API actually behaves as expected against this repo (including a real
+  surprise: an empty `docs/submissions/` returns **404**, not an empty
+  array — the renderer treats that as the empty state, not an error), unit
+  -tested the field parser against hardcoded strings (filled, untouched
+  placeholder, and missing-field cases), then ran a full browser
+  (Playwright) test of the real page and script with the network calls
+  mocked to return the mock student's data — confirmed the card renders
+  with correct field values, the empty-state message shows on a 404, the
+  error-state message shows on a real failure, and a missing field renders
+  "Not yet filled in." instead of breaking the card. Mock folder deleted
+  after verification, per the plan's default (not shipping a fake entry
+  into what real students will see).
+- **New task logged, not built**: per the user's request once this test
+  wrapped, "Newly identified tasks" below now has a testing-strategy task
+  — identify which of this project's bigger architecture bets (GitHub API
+  dependency chief among them) warrant standalone, repeatable unit/
+  integration tests, using today's ad-hoc verification (parser unit test +
+  Playwright mocked-route integration test) as the proven starting
+  pattern.
 
 Source of truth for build progress on this repo. Check here before starting
 work; update here when a task starts/completes, or when new work is
@@ -227,11 +301,20 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 
 ## Phase 4 — Student showcase
 
-- [ ] `docs/students/index.html` hub page
-- [ ] Student portfolio page template
+- [x] `docs/students/index.html` hub page — **built 2026-08-21**, cards
+      auto-generated client-side from `docs/submissions/` on `main` via
+      GitHub's API, see [ADR 0023](adr/0023-auto-generated-submission-cards.md)
+      and the "Student submission cards" task below.
+- [x] ~~Student portfolio page template~~ — **superseded 2026-08-21**: per
+      ADR 0023, a full page per student is explicitly out of scope for
+      now. The card itself is the display unit, linking out to each
+      student's fork via the Fork URL field.
 - [x] ~~Extended `README.md` submission template (adds title/pitch + demo path fields)~~ — **superseded 2026-08-20** by `SUBMISSION.md` as its own dedicated file (see [ADR 0022](adr/0022-continuous-student-folder.md), which supersedes [ADR 0008](adr/0008-readme-driven-portfolio-data.md)'s README-based approach). Nothing left to build here.
-- [ ] `.github/pull_request_template.md`
-- [ ] `SUBMISSION_GUIDE.md`
+- [x] `.github/pull_request_template.md` — **built 2026-08-21**, a short
+      checklist matching Fork & Submit's actual flow.
+- [x] ~~`SUBMISSION_GUIDE.md`~~ — **reconsidered 2026-08-21, not built**:
+      the original reason (ADR 0009) was stale; guidance enriched directly
+      into `SUBMISSION.md`'s own inline field prompts instead.
 
 ## Phase 5 — Content fill
 
@@ -325,14 +408,43 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
       **Not yet considered complete**: needs a live test on a real project
       (not just a read-through) before this bullet closes for good — see
       the "Newly identified tasks" entries below.
-- [~] `resources.html` populated with real links — established pattern:
+- [x] `resources.html` populated with real links — established pattern:
       when a topic's review turns up a genuinely useful external
       compilation/reference (not something we'd host/maintain ourselves),
       link it from the relevant day's section here as it's found, rather
-      than waiting for a dedicated content-fill pass. First entry added:
-      Day 1's newsroom AI policies index (from Topic 2). Day 2/3 sections
-      still fully unpopulated.
-- [ ] Sample/placeholder student portfolio pages created for 2-3 students to validate the template
+      than waiting for a dedicated content-fill pass. Day 1 entry: the
+      newsroom AI policies index (from Topic 2). **Day 2 and Day 3
+      populated 2026-08-21** (10 and 8 links respectively, drawn from
+      citations already live-verified inline on those days' pages) —
+      deliberately broad first drafts, flagged as open to trimming.
+- [x] ~~Sample/placeholder student portfolio pages created for 2-3
+      students to validate the template~~ — **superseded 2026-08-21**: no
+      separate page template exists anymore (ADR 0023, cards are the
+      display unit). Validated instead via a mock
+      `docs/submissions/example-student/` run through a full Playwright
+      render test, then deleted rather than left as a permanent sample —
+      see the "Student submission cards" task below.
+- [x] **`resources.html`'s "AI Tools Landscape" wrapped in a collapsible.**
+      Raised 2026-08-21 — the ~20-tool, 7-category list was dominating the
+      page above the fold. **Built**: a new `.collapsible`/`.collapsible-body`
+      component in `docs/css/style.css` (native `<details>`/`<summary>`,
+      closed by default, matches the `.file-viewer-inline` disclosure
+      pattern already used elsewhere per
+      [ADR 0020](adr/0020-file-viewer-inline-collapsible.md), though a
+      separate component since `resources.html` doesn't load
+      `briefing.css`). Verified open/closed states visually via
+      Playwright.
+- [ ] **Remove `resources.html`'s "Tools & Setup" section entirely.**
+      Raised 2026-08-21. It's two placeholder link-TBD entries (GitHub,
+      Claude Code / VS Code setup) that were never filled in and are now
+      redundant with `setup.html`'s actual install instructions. Not yet
+      removed — logged only.
+- [ ] **Review the AI Tools Landscape list for currency.** Raised
+      2026-08-21, alongside the collapsible change above. Pricing and
+      tool relevance in that list (Claude, ChatGPT, Gemini, Perplexity,
+      Cursor, Midjourney, etc.) haven't been re-verified since originally
+      written and drift fast — needs a research pass to confirm the list
+      is accurate before treating it as final, not just a copy edit.
 
 ---
 
@@ -361,25 +473,82 @@ map cleanly to one.
       `STUDENT_CLAUDE_GUIDE.md`'s "Keeping submission info current" section
       instructs Claude to help students fill `SUBMISSION.md` in early and
       keep it updated through restructures.
-      **Confirmed scale**: 5–7 student forks, not dozens — relevant to how
-      little the read side actually needs automating.
-      **No harvesting mechanism needed**: ADR 0008's "hand-built, not
-      auto-generated" stance for portfolio pages is explicitly retained by
-      ADR 0022 — this was previously logged as an open/undesigned question,
-      but it was already answered by prior art, just not the data-source
-      part of that same ADR.
+      **Confirmed scale**: 5–7 student forks, not dozens.
+      **Reversed 2026-08-21**: ADR 0008/0022's "hand-built, not
+      auto-generated" rendering stance is superseded by
+      [ADR 0023](adr/0023-auto-generated-submission-cards.md) — the user
+      asked for a live pipeline test (a mock folder run through Fork &
+      Submit's own instructions, checked against a rendered card), which
+      surfaced that no rendering mechanism existed at all yet, and decided
+      cards should auto-generate from `main` instead of being transcribed
+      by hand. `SUBMISSION.md` stays the data source (0008/0022's
+      unchanged part); only the rendering mechanism changed. Built:
+      `docs/js/submissions-gallery.js` (GitHub Contents API to discover
+      `docs/submissions/` folders, `raw.githubusercontent.com` to fetch
+      each `SUBMISSION.md`, parsed client-side — no manifest, no CI, no
+      backend, same pattern as `project-ideas.js`/ADR 0017) and
+      `docs/students/index.html`, now wired to it.
+      **Pipeline verified end-to-end 2026-08-21**: a mock
+      `docs/submissions/example-student/` (real `CLAUDE.md` copy + a
+      filled-in `SUBMISSION.md`) exercised the actual fetch → parse →
+      render path via a Playwright browser test with the network calls
+      mocked to the mock student's data — confirmed the card renders
+      correctly, an empty `docs/submissions/` (real finding: this 404s,
+      not an empty array) shows the empty-state message, a real API
+      failure shows the error-state message, and a missing/unfilled field
+      renders "Not yet filled in." instead of breaking. Mock folder
+      deleted afterward rather than kept as a permanent sample.
+      **New coupling risk, named in ADR 0023**: `SUBMISSION.md`'s field
+      set is still provisional (see below) — a field *rename* breaks
+      parsing for that field until `submissions-gallery.js` is updated to
+      match, mitigated by matching on field-label text rather than line
+      position and failing per-field rather than breaking the whole card,
+      but the coupling itself is real, not eliminated. Worth weighing
+      before the field set changes again.
       **Still open, not resolved by this pass**:
       - The field set (see `SUBMISSION.md` itself — the user has been
         revising it directly) is **provisional**, flagged as wanting to be
         seen in real use before finalizing. Revisit once students have
-        actually filled one in.
+        actually filled one in — and now that rendering is automated, a
+        field-set change has a real downstream cost, see above.
       - Whether a demo-path field should be added back — it was in the
         original Phase 4 scope and earlier drafts of this task, but isn't
         in the current field set; unclear if that was deliberate.
-      - How this interacts with the still-open Phase 1 "student
-        submissions end-to-end" verification item above, and whether it
-        folds into the existing Phase 4 tasks (`docs/students/index.html`,
-        student portfolio page template) or stays its own thing.
+      - A separate full portfolio page per student (distinct from the
+        card) is explicitly out of scope per ADR 0023, not just
+        unresolved — the card is the display unit for now.
+- [ ] **New: identify standalone unit/integration tests for this
+      project's bigger architecture bets.** Raised 2026-08-21, right after
+      the submission-cards pipeline test above. User's reasoning: as this
+      site takes on real external dependencies (GitHub's API being the
+      first, via ADR 0023) rather than just static HTML/CSS/JS, there
+      should be a repeatable way to notice when something breaks and fix
+      it, not just discover it live. **Not scoped or built yet** — this is
+      a planning task: go through the project's architecture decisions
+      (`project/adr/`) and identify which ones are actually load-bearing
+      enough to warrant a standalone, repeatable test, versus which are
+      static enough that a test would just be overhead.
+      `docs/js/submissions-gallery.js`'s dependency on GitHub's public API
+      is the clearest current candidate — it's the site's only runtime
+      call to a service this project doesn't control, and its two edge
+      cases (an empty `docs/submissions/` 404ing rather than returning an
+      empty array; a missing/renamed `SUBMISSION.md` field) were only
+      caught by hand this session, not by anything repeatable.
+      `check-slide-parity.js` is the one precedent already in the repo for
+      what a standalone, repeatable check looks like here, though it
+      checks content parity, not runtime behavior.
+      **Concrete starting pattern, proven this session but not yet saved
+      to the repo** (built as scratch verification, not committed): a
+      parser unit test (hardcoded `SUBMISSION.md` strings — fully filled,
+      untouched placeholder, missing field entirely — checked against
+      expected parsed output, no network) plus a Playwright integration
+      test (real page, real script, network calls mocked via
+      `page.route()` to return canned responses) covering the populated,
+      empty-404, error, and missing-field states. When this gets scoped:
+      decide whether to formalize these into `project/scripts/` (matching
+      `check-slide-parity.js`'s precedent) and whether Playwright becomes
+      a tracked project capability (it was available this session via
+      `npx`, not as a project dependency) or stays an ad-hoc tool.
 - [x] **Rename "AI-Human Design" to "Human-AI Design," site-wide.** Decided
       2026-08-20 while editing `project/copy-drafts/day-3/04-ai-human-design.md`
       (its H1 already reads "Human-AI Design"; `01-recap.md`'s summary
@@ -403,6 +572,21 @@ map cleanly to one.
       trimmed for the shorter 30-minute slot — worth a facilitator's eye
       the first time it's actually run at this length, since that's not
       something a copy pass alone can validate.
+- [x] **Day 3 schedule: Final Show & Tell must start at 4:00 PM, not
+      3:45 PM.** Raised 2026-08-21. Faculty were invited for 4:00 PM
+      specifically, so the schedule had to move to match. **Implemented
+      2026-08-21**: `docs/data/schedule.json` updated. Final Coding Time
+      and Where Can You Take This are unchanged (2:00-3:15 PM, 3:15-3:45 PM).
+      A new 15-minute break (`day-3/break-2`) was inserted at 3:45 PM.
+      Final Show & Tell now starts at 4:00 PM, compressed 60→50 min.
+      Closing & Celebration now starts at 4:50 PM, compressed 15→10 min.
+      Total PM span still ends 5:00 PM. §07's Slides cover-meta was
+      updated to match by hand (Slides hardcodes this per ADR 0011); the
+      Overview page's masthead-meta and both pages' prev/next nav read
+      schedule.json directly, so no manual edit was needed there. The new
+      break needed no timeline/CSS changes, `docs/js/timeline.js` already
+      renders any session with `url: null` as a break-styled item,
+      established by the existing `day-3/break-1`.
 - [ ] **New content: model selection, token usage, choosing smaller models
       for sub-tasks, and now also subagent/consumption guardrails.**
       Raised 2026-08-20 while reviewing
@@ -444,6 +628,17 @@ map cleanly to one.
       mid-review). **Still open**: the broader in-class content question
       (a dedicated Day 2 lesson vs. just this guide content) — this pass
       only closes the guide-side seed, not the bigger unscoped idea above.
+      **New idea, 2026-08-21, still not scoped — address in the future
+      planning conversation, not now**: a reference table of Claude models
+      (Haiku, Sonnet, Opus, etc.) with the practical decision-making
+      information students would actually use — what kind of task each is
+      best suited for, relative cost, how token-consumptive it is, and
+      whatever else practitioners typically weigh (context window, speed,
+      reasoning depth). Would live somewhere in this same model-selection
+      content once it's actually scoped — exact placement (its own
+      section, a resource-page table, folded into Day 2) is part of what
+      that future planning conversation needs to decide, same as the rest
+      of this task.
 - [x] **Live-test `STUDENT_CLAUDE_GUIDE.md` on a real project.** Raised
       2026-08-20, right after the guide's onboarding-questions/model-choice/
       submission-info rework (see the Phase 5 bullet above).
@@ -465,7 +660,7 @@ map cleanly to one.
       produce the intended behavior once read, not whether Claude Desktop/
       Code actually auto-discovers `CLAUDE.md` the way documented — that
       mechanism is still unverified directly.
-- [~] **Modulate how much the guide makes Claude ask vs. just act, based on
+- [x] **Modulate how much the guide makes Claude ask vs. just act, based on
       the onboarding-question answers themselves.** Raised 2026-08-20,
       directly off the live-test findings above. User's concern: the
       guide's current asking-first instinct is correct in spirit
@@ -489,29 +684,34 @@ map cleanly to one.
       explicit carve-out that a first rough scaffold isn't what it's about
       even if it's more than a file or two — deferring that specific case
       to the calibration question instead of counting files.
-      **Live-test attempted 2026-08-20, inconclusive, needs finishing.**
-      Same fresh-subagent method as the first test, refreshed scratch
-      `CLAUDE.md` to this revision, same RSS-summarizer request. Turn 1
-      (asking the onboarding questions): confirmed the broadened question
-      reads and asks correctly. Turn 2: sent the subagent "student"
-      answers signaling "just go" on pace — but the run that came back
-      only did model-selection research (Haiku vs. Sonnet for the
-      summarization call, via the `claude-api` skill) and created **no
-      files** in the scratch project, despite the explicit "just go, build
-      a rough first version" instruction. Session ended (daily usage
-      limit) before this could be dug into further or re-run. **Genuinely
-      unresolved, not a pass or a fail** — could mean the wording still
-      doesn't push hard enough toward action, or could be an artifact of
-      how the test subagent handled a resumed/background turn rather than
-      a real reflection of the guide's instructions. **First thing to pick
-      up next session**: re-run or continue this test cleanly to actually
-      find out before trusting the fix. Scratch project still exists at
-      `/private/tmp/.../scratchpad/live-test-project` for this session
-      only — won't persist to a new session, so this needs a fresh setup
-      next time (see `STUDENT_CLAUDE_GUIDE.md`'s live-test task description
-      above for the method: copy the file in as `CLAUDE.md`, spawn a fresh
-      subagent, give it a plausible student request, don't hint it's a
-      test).
+      **Live-test finished and confirmed working, 2026-08-21.** First
+      attempt (2026-08-20) was inconclusive: the two-turn structure
+      (spawn agent → get turn 1 → `SendMessage` a resumed/backgrounded
+      agent with turn 2 answers) produced a truncated-looking response
+      that only did model-selection research and created no files,
+      despite a "just go" instruction — never resolved whether that was
+      the guide's wording or a test-methodology artifact. Redesigned the
+      test to close that gap: one **single foreground agent call**
+      presenting the full exchange (opening request + calibration answers)
+      in one shot, rather than a resumed background turn — and per the
+      user's request, run on **Haiku 4.5** (`model: "haiku"`) to avoid
+      burning tokens on a repeat test, on the reasoning that this is
+      primarily an instruction-following check, not a deep-reasoning one.
+      **Clean pass, ground-truth verified** (checked the scratch
+      directory directly, not just the agent's self-report): given a
+      "just go, build a rough first version" pace answer, it actually
+      created a real, appropriately-rough scaffold (`summarize_feed.py`,
+      `requirements.txt`, `.env.example`, `.gitignore`, `README.md`) and
+      made one `git commit`, unprompted, matching "Using git and GitHub."
+      `.gitignore` correctly excluded `.env` (credential hygiene). Model
+      choice was handled silently, correctly citing "only when
+      non-obvious" from the student's own answer, rather than turning
+      into a blocking question. Plan Mode correctly did not trigger, and
+      the agent's self-assessment quoted the exact "Things to watch for"
+      line that justified skipping it. `SUBMISSION.md` was filled in with
+      real, relevant project content once there was an actual direction,
+      matching "Keeping submission info current." **This closes out the
+      task — the fix works as designed.**
       **Noted but not acted on**: the same "make Claude suggest instead of
       asking for every choice" principle could arguably extend to
       "Choosing the right model for the task" too (still always asks
@@ -634,9 +834,10 @@ has no production URL.
       of the prior `live`-only copy edits (GitHub connector walkthrough,
       contact info split out, "workshop account" → "email account," Git/
       GitHub-Desktop blockquote removed, redundant "Setup" breadcrumb
-      removed). **`docs/setup-day-2.html` is orphaned on both branches**
-      now — nothing links to it since setup.html absorbed its content.
-      Left in place rather than deleted; still needs a decision.
+      removed). **`docs/setup-day-2.html` was orphaned on both branches**
+      — nothing linked to it since setup.html absorbed its content.
+      **Deleted 2026-08-21** after confirming zero inbound links anywhere
+      in `docs/` or `STUDENT_CLAUDE_GUIDE.md`.
 - [x] **Checklist label flex bug.** Fixed as a side effect of the
       `setup.html` port (the fix was in the markup — text wrapped in a
       `<span>` inside each label — not a standalone CSS change).
