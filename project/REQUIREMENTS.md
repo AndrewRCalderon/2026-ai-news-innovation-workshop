@@ -257,6 +257,95 @@ before Day 1 copy-drafts:
   Playwright mocked-route integration test) as the proven starting
   pattern.
 
+**2026-08-21, continued: Day 1 copy-drafts ported** (the biggest
+remaining content gap named above), plus `resources.html` quick wins,
+testing-strategy scoping, and a codebase-hygiene-sweep re-scope, all
+worked in one session per the user's "all of it" call — em-dash sweep
+dropped from scope since the user already did that manually.
+
+- **Day 1 ported to `project/copy-drafts/day-1/*.md`**: all 9 real-content
+  pages (`01-state-of-ai` through `08-fork-and-submit`, plus the bonus
+  `people-to-follow` resource page), ~1,122 lines total, following the
+  Day 2/3 convention in `project/copy-drafts/README.md`. Two recon passes
+  ran first so the user could see impact before approving: a porting-
+  scope pass (all 9 files, plus confirming `09-project-assignments.html`
+  is still a TODO stub and not a port target) and a content-architecture
+  audit checking Day 1 against the 6 patterns logged in
+  `content-architecture-notes.md` from the Day 2/3 pass. That audit found
+  Day 1's biggest gap is voice, not incidental drift — `01-state-of-ai`'s
+  §1 heading and `04-product-discussion`'s §1 heading both bake first-
+  person-plural directly into the `<h2>` ("The Moment We're In," "Why We
+  Start Out Loud"), a structural choice, not a wording tweak. Per the
+  copy-drafts workflow (Claude drafts a faithful mirror, the human makes
+  editorial calls), these hotspots were flagged inline as `<!-- -->`
+  comments in the affected files rather than silently resolved during
+  porting, plus a new `project/copy-drafts/day-1/README.md` summarizing
+  all the cross-page patterns (voice, citation-density-by-page-type,
+  4 bare self-directed-question-lists, thin grounding on the 3 explainer
+  pages) for the user to decide once before the line edit, per
+  `content-architecture-notes.md`'s own ask. Three new components not yet
+  in the copy-drafts convention (`.stat-pull`, `.stakes`, `.process-wheel`,
+  `.chip-strip`, and a markdown-table mapping for `.resource-table`) got
+  a documented representation added to `project/copy-drafts/README.md`'s
+  Format section. Spot-checked 3 drafts against source HTML (citation
+  counts, section counts, table row counts) — all matched exactly.
+  **Line-by-line edit itself is still open** — that's the user's own pass,
+  intentionally done last, not part of this porting step. See the "New
+  workflow" task below for the updated status.
+- **`resources.html` quick wins, `testing-strategy` scoping, and
+  `codebase-hygiene-sweep` re-scoping**: see their own task entries below
+  for what changed in each.
+
+**2026-08-21, continued: home page & nav redesign implemented**, from a
+design handoff delivered outside the repo (`Home.dc.html` + `README.md`).
+Rebuilt `docs/index.html` (masthead, jump-to strip, numbered Workshop-Days
+row list, Getting-Started cards — new `.home-*` classes in `style.css`, no
+`briefing.css` dependency added) and `docs/partials/nav.html` (Day 1/2/3
+collapsed into one "Days" menu with a second-level per-day flyout;
+click+hover+outside-click+Escape all wired in `docs/js/nav.js`; logo moved
+from nav to footer). See [ADR 0024](adr/0024-nav-home-redesign.md) for the
+implementation decisions (single shared nav markup instead of the
+handoff's duplicate desktop/mobile trees; day labels link to `/day-N/`
+directly with a separate caret toggling the flyout; new `.is-active`
+current-page state). Verified with Playwright against a local static
+server (desktop click/hover, mobile tap-accordion, outside-click close,
+active-link state, day-page navigation) — screenshots matched the
+handoff's fidelity bar; zero console errors.
+
+- **Found and fixed in the same pass, not part of the original handoff
+  scope**: every nav/footer link rendered in `briefing.css`'s accent
+  purple on every day/setup page (any `<body class="briefing">` page),
+  regardless of state, because `.briefing a`'s specificity beat the nav's
+  own link-color rules — invisible before because nothing contrasted
+  against it; visible now that `.is-active` needed to actually stand out.
+  Root cause and fix are in ADR 0024.
+- **Follow-on, same session, after the user reviewed the live result**: a
+  nav-brand emoji (🤖 + 🧠, picked via AskUserQuestion, moved from
+  right-of-wordmark to robot-left/brain-right after a first pass put both
+  on the right) and a new Instructors page — see the "Nav-brand emoji" and
+  "Instructors page" entries below for what shipped vs. what's still open.
+- **Two real Days-menu bugs found and fixed after the user tried it live,
+  not caught in the original verification pass**: (1) clicking "Days" (or
+  a day's caret) with a real mouse could silently close the menu instead
+  of opening it — a genuine click-vs-hover event-ordering race, not the
+  Playwright-only artifact it was first assumed to be; fixed by detecting
+  hover-capable pointers and making click idempotent-open there instead of
+  toggling. (2) A separate bug where clicking into the menu left it stuck
+  visually open (via `:focus-within` in CSS) even after JS correctly
+  closed it on mouseleave; fixed by removing the now-redundant
+  `:focus-within` rule. Full root-cause writeup in the "Update, same day"
+  section of [ADR 0024](adr/0024-nav-home-redesign.md) — including the
+  admission that the first bug's symptom was actually seen during initial
+  testing and wrongly dismissed instead of flagged.
+- **Small fun addition, user-requested**: `docs/js/click-effect.js` — on
+  any click anywhere on the site, a 🤖/🧠 pair pops at the cursor and
+  fades over ~0.6s (skips the drift animation under
+  `prefers-reduced-motion`). Wired onto all 59 real HTML pages (every
+  Overview page and every Slides deck, not just partial-having pages) via
+  a one-time batch script-tag insertion before `</body>`, verified none
+  were double-inserted and every file still has exactly one `<body>`/
+  `</body>` pair after.
+
 Source of truth for build progress on this repo. Check here before starting
 work; update here when a task starts/completes, or when new work is
 discovered that wasn't in the original scope. Architecture *decisions* (the
@@ -434,28 +523,47 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
       separate component since `resources.html` doesn't load
       `briefing.css`). Verified open/closed states visually via
       Playwright.
-- [ ] **Wrap `resources.html`'s other sections in the same collapsible.**
+- [x] **Wrap `resources.html`'s other sections in the same collapsible.**
       Raised 2026-08-21, right after the AI Tools Landscape collapsible
       shipped — user liked the pattern and wants Day 1/2/3 Resources
       (each a plain `<section>` today) converted to the same
-      `.collapsible`/`.collapsible-body` disclosure. Not yet implemented —
-      logged only. Worth deciding open-vs-closed-by-default per section
-      when this is picked up (AI Tools Landscape defaults closed since
-      it's the longest/most stale-prone; the Day 1/2/3 lists are shorter
-      and more likely something a visitor actually wants to see
-      immediately, so defaulting them open may be the better call rather
-      than applying the exact same default everywhere).
-- [ ] **Remove `resources.html`'s "Tools & Setup" section entirely.**
+      `.collapsible`/`.collapsible-body` disclosure. **Built 2026-08-21**:
+      all three sections converted, defaulted **open** (`<details
+      class="collapsible" open>`) unlike AI Tools Landscape's closed
+      default — per the reasoning logged when this was raised, these
+      lists are shorter and more likely something a visitor wants to see
+      immediately. Verified via a local static server + Playwright: all
+      three open by default, toggle closed on click, no JS dependency
+      (the `.collapsible` CSS is pure `<details>`/`<summary>`, already
+      confirmed as the only usage pattern in `docs/`).
+- [x] **Remove `resources.html`'s "Tools & Setup" section entirely.**
       Raised 2026-08-21. It's two placeholder link-TBD entries (GitHub,
       Claude Code / VS Code setup) that were never filled in and are now
-      redundant with `setup.html`'s actual install instructions. Not yet
-      removed — logged only.
-- [ ] **Review the AI Tools Landscape list for currency.** Raised
+      redundant with `setup.html`'s actual install instructions. **Removed
+      2026-08-21**, confirmed via Playwright that the section no longer
+      renders on the page.
+- [x] **Review the AI Tools Landscape list for currency.** Raised
       2026-08-21, alongside the collapsible change above. Pricing and
       tool relevance in that list (Claude, ChatGPT, Gemini, Perplexity,
       Cursor, Midjourney, etc.) haven't been re-verified since originally
       written and drift fast — needs a research pass to confirm the list
       is accurate before treating it as final, not just a copy edit.
+      **Researched and updated 2026-08-21** (background research agent,
+      all 22 tools checked against current pricing pages): 9 of 22 had
+      drifted and were corrected — **DALL-E** was retired by OpenAI in
+      May 2026 and replaced with **GPT Image 2** (swapped in, with a note
+      explaining the replacement, since this is a bigger change than a
+      price tweak); **Replit**'s "Boost" tier was renamed "Core" and its
+      price rose $13→$25/mo ($20 annual); **Airtable**'s "Pro" tier was
+      renamed "Team" and priced per-seat, roughly doubling from the
+      site's stated figure; **Canva** Pro rose $13→$18/mo; **Synthesia**'s
+      range shifted $30–60→$29–89/mo; **Gemini**'s paid tier was renamed
+      "Advanced"→"Google AI Pro" ($19.99/mo, the price itself was already
+      close); **Descript**'s "Pro" tier was renamed "Hobbyist" ($16/mo
+      annual); **ElevenLabs** Starter dropped $11→$6/mo; **Make** Pro rose
+      $15→$16/mo. The other 13 tools (Claude, ChatGPT, Perplexity, Claude
+      Code, GitHub Copilot, Cursor, Midjourney, Zotero, Google Scholar,
+      Jupyter + Claude, Zapier) checked out as current, no changes made.
 
 ---
 
@@ -465,6 +573,90 @@ Tasks discovered during build that weren't in the original plan. Add here as
 found; promote into a phase above once scoped, or leave here if it doesn't
 map cleanly to one.
 
+- [ ] **Day 1 citation-grounding rework.** Raised 2026-08-21 — the user
+      wants Day 1 to go through the same editorial discipline Day 2/3 got:
+      research surfaces real sources → prose gets rewritten to match
+      *exactly* what the source supports (named people/orgs/numbers,
+      hedged confidence where sourcing is weaker) → each page's
+      **Sources** list gets reconciled against its inline `[n]` usage.
+      Not "bolt citations onto what's already written" — verify and
+      tighten to match. This is the user's own line-by-line pass, done in
+      a fresh session — this entry is the scoped brief for that session,
+      not a scoping task itself. Everything below is already documented
+      in `project/copy-drafts/day-1/README.md` and
+      `project/content-architecture-notes.md` (both written during the
+      2026-08-21 porting pass) — re-read those two files first; this is a
+      pointer into them, not a duplicate.
+      - **Triage** (a recommendation, confirm/adjust before editing):
+        - *Tier 1 — verify existing citations against sources, add
+          workshop-specific framing*: `01-state-of-ai` (24 citations,
+          already specific/traceable — furthest from voice target, bakes
+          first-person-plural into its §1 heading), `03-use-cases` (25
+          citations, verified specific/traceable by reading the live
+          page — flagged "generic/theoretical" in-draft, which on
+          inspection means thin workshop framing, not weak sourcing; its
+          two example lists were also just collapsible-wrapped, see the
+          "Use-cases collapsible" entry below — that's a structural
+          change only, doesn't touch the citation work here).
+        - *Tier 2 — needs new/better sourcing*: `02-industry-conversation`
+          (one citation explicitly self-flagged "no URL — reflects
+          general perception, not a formal study" — the clearest case for
+          new research), `05-problem-statement-discussion` (1 citation),
+          `people-to-follow` (1 citation, thin grounding).
+        - *Tier 3 — skip, working as designed*: `04-product-discussion`
+          (voice/heading fix only, zero citation work needed),
+          `06-ai-tools`, `07-explore-claude-desktop`,
+          `08-fork-and-submit` (all zero-citation activity pages, already
+          closest to the target pattern).
+      - **Cross-cutting decisions to make once, up front**, not
+        page-by-page: voice (facilitator "we" vs. the declarative
+        narrator voice used elsewhere — affects `01`§1/`04`§1 headings
+        specifically, smaller instances in `02`/`05`/`07`);
+        citation-density-vs-conciseness (if trimming, keep the Sources
+        list in sync); named sub-headings for the 3 remaining bare
+        self-directed-question lists (`02`§5, `05`§3, `06`§2 — Day 2's
+        `01-debrief.md` "### Self Reflection" is the model).
+      - **Not started** — no line-by-line editing, no new source
+        research done yet.
+- [x] **Use-cases collapsible.** Raised 2026-08-21, same planning session
+      as the task above, while scoping it — the user separately wanted
+      `docs/day-1/03-use-cases.html`'s two long example lists (§s2, 9
+      rows; §s3, 11 rows) to stop reading as clunky embedded content.
+      **Done same day**: wrapped each `<dl class="roster">` in
+      `<details class="collapsible"><summary>See all N examples</summary>
+      <div class="collapsible-body">...</div></details>`, closed by
+      default — the exact pattern already used for `resources.html`'s "AI
+      Tools Landscape" block, no new CSS needed. `.block-head`
+      (eyebrow/`<h2>`) and section IDs (`#s2`/`#s3`) were left untouched
+      on purpose, since the page's own TOC and `resources.html`'s
+      existing links anchor to them — verified both still work. Citation
+      popovers (`<sup class="cite">`) still function inside the opened
+      collapsible. No new files, no slides-deck change, no
+      `resources.html` change, no copy-draft change.
+- [x] **Nav-brand emoji.** Raised 2026-08-21, mid-session, during the nav/
+      home redesign. User picked 🤖 + 🧠 (robot, human brain — no heart)
+      via AskUserQuestion. **Done same day**: added to
+      `docs/partials/nav.html`'s brand wordmark, both wrapped in
+      `aria-hidden` spans (`.site-nav-brand-emoji` in `style.css`) so
+      screen readers still just hear "AI News Innovation Workshop."
+      **Repositioned same day**: first pass put both emoji on the right;
+      corrected to robot on the left, brain on the right
+      (`.site-nav-brand-emoji--left`/`--right` for the differing margins).
+- [~] **Instructors page.** Raised 2026-08-21, same session — profiles for
+      Andrew and Adiel. User confirmed it should be linked from the end of
+      the top-level nav, and picked the "stub page + copy-draft" option
+      via AskUserQuestion over "nav link only." **Scaffolding done same
+      day**: `docs/instructors.html` (two `.idea-card` placeholders,
+      reusing the existing generic card component rather than inventing a
+      new one), nav link added at the end of `docs/partials/nav.html`
+      (after Setup), `project/copy-drafts/instructors.md` created with
+      placeholder title/bio fields for both — flagged inline as not a
+      normal Overview-page-mirror draft (no citations/sections) since this
+      isn't a schedule-tied topic page. **Still open**: actual bio copy,
+      titles, and (optionally) photos — none supplied yet. Once
+      `instructors.md` is filled in, port it into the two `.idea-card`
+      blocks in `docs/instructors.html` per the usual copy-drafts
+      workflow (see [copy-drafts/README.md](copy-drafts/README.md)).
 - [~] **Student submission cards, auto-populated from a standardized fork
       file structure.** Raised 2026-08-20, mid-session, while working on the
       copy-drafts re-implementation pass. **Scoped and implemented
@@ -560,6 +752,32 @@ map cleanly to one.
       `check-slide-parity.js`'s precedent) and whether Playwright becomes
       a tracked project capability (it was available this session via
       `npx`, not as a project dependency) or stays an ad-hoc tool.
+      **Scoped 2026-08-21** (still not built — this pass is the recon and
+      recommendation, not the implementation): `package.json` currently
+      has zero `devDependencies`/`dependencies`/`scripts` at all, so
+      adding repeatable tests means introducing tooling from scratch, not
+      extending something that already exists. `project/adr/` has 23
+      entries; ADR 0023 (GitHub API dependency) is the clear standout —
+      it's the only ADR describing a runtime call to a service this
+      project doesn't control, with two edge cases (the empty-folder 404,
+      a renamed `SUBMISSION.md` field) that were only caught by hand.
+      Everything else in `project/adr/` describes static HTML/CSS/JS
+      structure or one-time build decisions — not load-bearing in the
+      same way, so not recommending standalone tests for those.
+      **Recommendation**: formalize the parser-unit-test half of this
+      session's proven pattern into `project/scripts/` now, matching
+      `check-slide-parity.js`'s shape exactly (plain Node, no framework,
+      run manually via `node project/scripts/<name>.js`) — that part adds
+      no new dependency. The Playwright integration-test half is a real
+      **new-dependency decision** (`package.json` goes from nothing to a
+      tracked `devDependency`), which per this repo's own CLAUDE.md
+      warrants an ADR if committed to, not something to slip in as a side
+      effect of a scoping pass. **Left as an open yes/no for the user**:
+      keep Playwright ad-hoc (`npx`, as used this session and for the
+      resources.html Playwright checks in the same 2026-08-21 session) or
+      commit it as a tracked devDependency with its own ADR. Neither the
+      parser script nor Playwright-as-dependency has been built yet —
+      this entry is the scoping conclusion only.
 - [x] **Rename "AI-Human Design" to "Human-AI Design," site-wide.** Decided
       2026-08-20 while editing `project/copy-drafts/day-3/04-ai-human-design.md`
       (its H1 already reads "Human-AI Design"; `01-recap.md`'s summary
@@ -748,6 +966,33 @@ map cleanly to one.
       [content-architecture-notes.md](content-architecture-notes.md) for
       editorial (not code) patterns from the same review, kept for the
       eventual Day 1 pass rather than as a task here.
+      **Re-scoped 2026-08-21** (recon only, nothing swept yet): grepped
+      `docs/` and `project/copy-drafts/` for `<!-- -->` HTML comments —
+      found almost none. Only two real hits, both false positives: a JS
+      regex literal in `docs/js/submissions-gallery.js` that merely
+      contains the string `<!--`, and one line in this project's own
+      `project/copy-drafts/README.md` that mentions HTML comments as a
+      category, not an actual comment. So the "stale/resolved comment"
+      framing this task was raised under doesn't describe a real backlog
+      — by the time of this recon, the Batch-7-era comments the user
+      originally flagged (in `03-claude-md.md`/`04-skills-best-practices.md`)
+      had already been cleared during the Day 2/3 copy-draft
+      implementation pass. **What the sweep actually found instead**: 7
+      literal `TODO` placeholders visible on live pages —
+      `docs/day-1/index.html:16,20` (the day's summary copy) and
+      `docs/day-1/09-project-assignments.html:27,32,33,41,45` (already a
+      known-unwritten placeholder page, tracked separately in Phase 3/5
+      above). Not fixing either today: `index.html`'s summary depends on
+      Day 1's content actually being finalized, which this session's
+      copy-draft port is a step toward but doesn't complete, and
+      `09-project-assignments` is already correctly tracked elsewhere.
+      **Note for whoever picks this up next**: the Day 1 copy-drafts
+      ported this same session (`project/copy-drafts/day-1/*.md`)
+      intentionally carry new `<!-- -->` comments flagging content-
+      architecture hotspots (voice, bare question lists) per the
+      established convention — those are exactly the "genuinely still
+      pending" kind this task's own framing says to leave alone, not
+      examples of the slop it's meant to catch.
 - [~] **New workflow: `project/copy-drafts/`, markdown copy drafts for
       direct editing.** User found dictating copy edits turn by turn (the
       pattern used for the round-3 audit's Batches 1–7) slow and lossy.
@@ -777,9 +1022,23 @@ map cleanly to one.
       `04-ai-human-design`, and `05-where-you-can-take-this` already
       reflect this session's rewrites — the Capelouto citation gap on
       `05` is flagged inline in its draft too, same as the live page.
-      Day 1 is still unported. **If this pans out further**: a proper
-      Claude Code skill to generate/refresh these drafts (built after
-      both pilots, so it reflects what's been learned using it twice).
+      **Extended to Day 1, 2026-08-21**: all 9 real-content pages ported
+      to `project/copy-drafts/day-1/*.md` (the biggest remaining content
+      gap named at the top of this file). New structural cases this time:
+      `.stakes` (same markdown shape as `.roster`, flagged inline since
+      they'd otherwise be ambiguous), `.process-wheel` (same shape as
+      `.history`, same reason), `.chip-strip`, and a markdown-table
+      mapping for `.resource-table`/`.filter-pills` (`people-to-follow.md`).
+      All five now documented in this README's Format section above.
+      Also shipped: `day-1/README.md`, a cross-page pattern summary (voice,
+      citation density, bare question lists, grounding) pulled from
+      `content-architecture-notes.md`, so the user can make those calls
+      once before editing instead of per-page. Full detail in the
+      2026-08-21 change-log entry near the top of this file. **Line-by-line
+      edit not yet done** — porting only; the edit itself is the user's
+      own pass, queued next. **If this pans out further**: a proper
+      Claude Code skill to generate/refresh these drafts (worth building
+      now that all three days have gone through this by hand).
 - [x] Resolved: the org/repo is confirmed
       (`github.com/AndrewRCalderon/2026-ai-news-innovation-workshop`, this
       repo's own remote) — `setup.html` now links directly to it. **New

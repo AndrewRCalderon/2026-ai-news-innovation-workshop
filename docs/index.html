@@ -3,30 +3,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Journalism Workshop</title>
+  <title>AI News Innovation Workshop</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body id="home">
   <div id="nav"></div>
 
-  <main>
-    <h1>AI Journalism Workshop</h1>
-    <p>A 3-day workshop on building AI-powered journalism tools with Claude.</p>
+  <main class="home-main">
+    <header class="home-masthead">
+      <p class="home-eyebrow">Tow-Knight Center &middot; Journalism Futures</p>
+      <h1>AI News Innovation Workshop</h1>
+      <p class="home-dek">A 3-day workshop on building AI-powered journalism tools with Claude, from first prototype to something you'd actually ship.</p>
+      <div class="home-meta">
+        <span>3 Days</span><span class="home-meta-div">&middot;</span><span>Hands-on</span><span class="home-meta-div">&middot;</span><span>No ML background needed</span>
+      </div>
+    </header>
 
-    <section>
-      <h2>Workshop Days</h2>
-      <ul>
-        <li><a href="/day-1/">Day 1 — Experimentation &amp; MVP</a></li>
-        <li><a href="/day-2/">Day 2 — Iteration &amp; Depth</a></li>
-        <li><a href="/day-3/">Day 3 — Polish &amp; Shipping</a></li>
-      </ul>
+    <nav class="home-jumpto" aria-label="Jump to section">
+      <p class="home-jumpto-label">Jump to</p>
+      <div class="home-jumpto-links">
+        <a href="#days">Workshop Days</a>
+        <a href="#start">Getting Started</a>
+      </div>
+    </nav>
+
+    <section class="home-section" id="days">
+      <div class="home-section-head">
+        <span class="home-section-eyebrow">01</span>
+        <h2>Workshop Days</h2>
+      </div>
+      <div class="day-list">
+        <a class="day-list-row" href="/day-1/">
+          <span class="day-list-num">01</span>
+          <span>
+            <span class="day-list-title">State of the Art &amp; Experimentation</span>
+            <span class="day-list-desc">State of AI, use cases, and your first working prototype.</span>
+          </span>
+          <span class="day-list-arrow">&rarr;</span>
+        </a>
+        <a class="day-list-row" href="/day-2/">
+          <span class="day-list-num">02</span>
+          <span>
+            <span class="day-list-title">Iteration &amp; Depth</span>
+            <span class="day-list-desc">Prompting, CLAUDE.md, skills, and spec-driven development.</span>
+          </span>
+          <span class="day-list-arrow">&rarr;</span>
+        </a>
+        <a class="day-list-row" href="/day-3/">
+          <span class="day-list-num">03</span>
+          <span>
+            <span class="day-list-title">Polish &amp; Shipping</span>
+            <span class="day-list-desc">Product design, safe AI patterns, and final show &amp; tell.</span>
+          </span>
+          <span class="day-list-arrow">&rarr;</span>
+        </a>
+      </div>
     </section>
 
-    <section>
-      <h2>Getting Started</h2>
-      <p><a href="/setup.html">Pre-workshop setup guide</a></p>
-      <p><a href="/resources.html">Resources</a></p>
-      <p><a href="/students/">Student showcase</a></p>
+    <section class="home-section" id="start">
+      <div class="home-section-head">
+        <span class="home-section-eyebrow">02</span>
+        <h2>Getting Started</h2>
+      </div>
+      <div class="start-links">
+        <a class="start-link-card" href="/setup.html">
+          <span>Pre-workshop setup guide</span>
+          <span class="start-link-arrow">&rarr;</span>
+        </a>
+        <a class="start-link-card" href="/resources.html">
+          <span>Resources</span>
+          <span class="start-link-arrow">&rarr;</span>
+        </a>
+        <a class="start-link-card" href="/students/">
+          <span>Student showcase</span>
+          <span class="start-link-arrow">&rarr;</span>
+        </a>
+      </div>
     </section>
   </main>
 
@@ -34,5 +86,6 @@
 
   <script src="/js/partials.js"></script>
   <script src="/js/nav.js"></script>
+  <script src="/js/click-effect.js"></script>
 </body>
 </html>
