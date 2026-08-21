@@ -434,6 +434,17 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
       separate component since `resources.html` doesn't load
       `briefing.css`). Verified open/closed states visually via
       Playwright.
+- [ ] **Wrap `resources.html`'s other sections in the same collapsible.**
+      Raised 2026-08-21, right after the AI Tools Landscape collapsible
+      shipped — user liked the pattern and wants Day 1/2/3 Resources
+      (each a plain `<section>` today) converted to the same
+      `.collapsible`/`.collapsible-body` disclosure. Not yet implemented —
+      logged only. Worth deciding open-vs-closed-by-default per section
+      when this is picked up (AI Tools Landscape defaults closed since
+      it's the longest/most stale-prone; the Day 1/2/3 lists are shorter
+      and more likely something a visitor actually wants to see
+      immediately, so defaulting them open may be the better call rather
+      than applying the exact same default everywhere).
 - [ ] **Remove `resources.html`'s "Tools & Setup" section entirely.**
       Raised 2026-08-21. It's two placeholder link-TBD entries (GitHub,
       Claude Code / VS Code setup) that were never filled in and are now
