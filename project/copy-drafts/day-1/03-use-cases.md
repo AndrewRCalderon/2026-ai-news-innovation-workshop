@@ -2,7 +2,7 @@
 
 > Not everything is a good AI problem. Knowing which is the real skill.
 
-<!-- Content-architecture note: heaviest-cited Day 1 page (25 citations) and zero workshop-specific grounding language — reads fully generic/theoretical throughout, per content-architecture-notes.md. §6 below also has a bare question list with no sub-heading. -->
+<!-- Content-architecture note, updated 2026-08-21: §4 and §5 rewritten with real, dated incidents (Cody Enterprise, Ars Technica, AP, ICIJ) per user request, and 3 stale (2019-2021) capability citations in §3 swapped for 2023+ equivalents. §6's bare question list now has a sub-heading. Still open: §2/§3's own prose (the newsroom/outside-journalism use-case lists) reads generic/theoretical throughout and wasn't touched in this pass since the user confirmed those sections work well as-is; still the heaviest-cited Day 1 page. -->
 
 ## 1. What Does AI Actually Do?
 
@@ -36,47 +36,52 @@ It's easy to get lost in abstractions. These are real, deployed use cases, not t
 Not journalism-specific — most of these originated elsewhere — but a few of them actually show up on the business side of most newsrooms too, not just outside them:
 
 **Customer service**: A chatbot handles "why was this retracted?" and "how do I subscribe?" so people can focus on real complaints. This is exactly what handles subscriber support at most newsrooms, not just other industries. Catch: confidently wrong answers need human oversight. [1]
-**Content moderation**: Flags spam and off-topic comments for human review at scale — the same tooling most newsroom comment sections run on. Catch: reflects training-data bias; can unfairly suppress voices without a human check. [2]
+**Content moderation**: Flags spam and off-topic comments for human review at scale, the same tooling most newsroom comment sections run on. Catch: tested against matched sentence pairs, toxicity classifiers score African American English as more toxic than equivalent Standard English in up to 77% of cases. That's a measured bias, not a hypothetical one. [2]
 **Search & recommendation**: Understands intent, not just keywords; suggests relevant follow-up reading. Catch: can create filter bubbles if not designed carefully. [3]
-**Video & audio**: Transcribes interviews, extracts quotes, generates captions automatically. Catch: accuracy drops with accents, noise, and jargon — proofread transcripts. [4]
+**Video & audio**: Transcribes interviews, extracts quotes, generates captions automatically. Catch: accuracy drops with accent and dialect. A 2024 study of real healthcare conversations found the best-performing transcription system had a 50% word-error rate for Black speakers versus 33% for white speakers. Proofread transcripts. [4]
 **Sentiment analysis**: Flags where anger or concern concentrates across thousands of comments. Catch: misreads sarcasm and irony — "great job on that terrible decision" can read as positive. [5]
 **Scientific research**: Google DeepMind's AlphaFold predicts a protein's 3D structure from its sequence, solving a 50-year "grand challenge" in biology. Catch: predictions are computational hypotheses that still need lab verification. [6]
 **Legal**: Harvey AI now supports 142,000+ legal professionals across 1,500+ organizations, including roughly half of the Am Law 100 — used for contract review and, closest to journalism's own work, discovery: parsing massive document dumps for what actually matters. One firm, Lynn Pinker Hurst & Schwegmann, says it saves 8+ hours per lawyer per week using it for early case assessment across hundreds of files. Catch: still requires a lawyer to verify what it surfaces — same as any AI-assisted document review. [7]
 **Finance**: Mastercard's Decision Intelligence Pro scans roughly a trillion data points to flag fraudulent transactions in under 50 milliseconds, improving detection rates 20% on average — up to 300% in some cases. Catch: a high false-positive rate means real transactions get blocked too; it's a filter, not a final judge. [8]
 **Healthcare**: IDx-DR became the first FDA-authorized autonomous AI diagnostic tool, screening for diabetic eye disease without a specialist reading the image. Catch: works only within a narrow, validated task — it defers ambiguous cases rather than guessing. [9]
-**Software & coding**: A study testing GitHub Copilot on security-relevant coding tasks found about 40% of its suggested code contained exploitable vulnerabilities. Catch: AI coding assistants reproduce the flaws present in their training data. [10]
+**Software & coding**: A 2023 study of real, accepted Copilot suggestions in live GitHub projects found 27.3%, roughly 1 in 4, contained a security weakness. Catch: AI coding assistants still reproduce flaws present in their training data, even as the rate improves. [10]
 **Accessibility (outside journalism)**: Be My Eyes' "Be My AI," powered by GPT-4 with vision, describes photographed scenes for blind and low-vision users. Catch: documented hallucinations — confidently describing objects or text that aren't actually there. [11]
 
 **Sources**
 1. https://www.zendesk.com/blog/ai/chatbots/ai-chatbot-use-cases/ — Zendesk documents how AI chatbots handle routine requests and escalate to humans with full context when needed.
-2. https://aclanthology.org/P19-1163/ — A peer-reviewed study found tweets in African American English were up to twice as likely to be mislabeled as offensive by automated moderation systems.
+2. https://arxiv.org/abs/2401.12720 — Resende, Nery, Benevenuto, Zannettou & Figueiredo (2024): testing toxicity classifiers, including Google's Perspective API, on matched sentence pairs, African American English scored higher toxicity than Standard English in 77% of pairs from spoken-language datasets and 48% from YouTube comments.
 3. https://en.wikipedia.org/wiki/Filter_bubble — The "filter bubble" concept, coined by Eli Pariser in 2011, describes how personalized algorithms can narrow the information people see.
-4. https://www.pnas.org/doi/10.1073/pnas.1915768117 — A study found leading speech-recognition systems had nearly double the error rate for Black speakers compared to white speakers.
+4. https://academic.oup.com/jamiaopen/article/7/4/ooae130/7920671 — Zolnoori et al., JAMIA Open, Dec 2024: testing four current speech-recognition systems on real home-healthcare conversations, the best-performing system had a median word-error rate of 50% for Black patients versus 33% for white patients.
 5. https://www.brandwatch.com/social-media-glossary/sentiment-analysis/ — Brandwatch's glossary notes that sarcasm, irony, and cultural context remain difficult for sentiment-analysis algorithms to interpret.
 6. https://deepmind.google/blog/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology/ — DeepMind's AlphaFold predicts protein 3D structure with near-experimental accuracy, though its predictions still require lab verification.
 7. https://en.wikipedia.org/wiki/Harvey_(software) — Harvey AI: legal-AI platform valued at $11B as of March 2026, used by 142,000+ legal professionals at 1,500+ organizations including roughly half the Am Law 100.
 8. https://www.cnbc.com/2024/02/01/mastercard-launches-gpt-like-ai-model-to-help-banks-detect-fraud.html — CNBC, Feb 1, 2024: Mastercard's Decision Intelligence Pro model scans about one trillion data points, improving fraud-detection rates by an average of 20% (up to 300% in some cases) in under 50 milliseconds per transaction.
 9. https://engineering.uiowa.edu/news-all/2018/04/fda-permits-marketing-idx-dr-automated-detection-diabetic-retinopathy-primary-care — IDx-DR was the first FDA-authorized autonomous AI diagnostic device, screening for diabetic eye disease in primary care without a specialist.
-10. https://arxiv.org/abs/2108.09293 — A study found about 40% of GitHub Copilot's suggested code across security-relevant scenarios contained exploitable vulnerabilities.
+10. https://arxiv.org/abs/2310.02059 — Fu, Liang, Tahir, Li, Shahin, Yu & Chen (2023, accepted ACM Transactions on Software Engineering and Methodology 2025): analyzing 733 real, accepted AI-suggested code snippets pulled from live GitHub projects, 27.3% contained a security weakness spanning 43 CWE categories, down from an earlier ~40% estimate for older-generation tools.
 11. https://techcrunch.com/2023/09/26/openais-gpt-4-with-vision-still-has-flaws-paper-reveals/ — Be My Eyes' "Be My AI" describes photographed scenes for blind and low-vision users, but researchers documented hallucinations in its descriptions.
 
 ## 4. Not a Good Use Case (Yet)
 
-- **Investigative reporting** — AI can't call a source, dig through an archive with judgment, earn a whistleblower's trust, or read between the lines of what someone isn't saying — the parts that actually make it investigative. It can help with pieces of the process (see Data Journalism and Records & FOIA Analysis above); it just can't do the whole thing.
-- **Original breaking news** — it synthesizes existing information; by the time it "knows" a story, the news is already public.
-- **Opinion requiring deep expertise** — AI can draft structure, but not credibility or unique perspective.
-- **Stories requiring human experience** — homelessness, racial justice: the reporting itself is human work.
-- **Real-time verification** — training data has a cutoff, but that's a workflow problem, not a hard wall: point it at live search or a real-time feed and it can work with current information. What it still can't do is verify a live source itself, or tell you something is true just because it's recent.
+- **Originating quotes or facts.** A reporter at a Wyoming paper resigned in 2024 after admitting an AI tool had fabricated quotes attributed to the state's governor. [1] A senior reporter at Ars Technica, a publication that covers AI for a living, was fired in 2026 for the same failure: fabricated quotes attributed to a real engineer. [2] If specialists who understand these tools that well can still be caught by their own fabrications, treat anything AI hands you as a fact or a quote as unverified until you've confirmed it independently.
+- **Investigative reporting.** AI can't call a source, dig through an archive with judgment, earn a whistleblower's trust, or read between the lines of what someone isn't saying, the parts that actually make it investigative. It can help with pieces of the process (see Data Journalism and Records & FOIA Analysis above); it just can't do the whole thing.
+- **Original breaking news.** It synthesizes existing information. By the time it "knows" a story, the news is already public.
+- **Opinion requiring deep expertise.** AI can draft structure, but not credibility or unique perspective.
+- **Stories requiring human experience.** Homelessness, racial justice: the reporting itself is human work.
+- **Real-time verification.** Training data has a cutoff, but that's a workflow problem, not a hard wall. Point it at live search or a real-time feed and it can work with current information. What it still can't do is verify a live source itself, or tell you something is true just because it's recent.
+
+**Sources**
+1. https://www.cbsnews.com/news/reporter-artificial-intelligence-fake-quotes-stories-cody-enterprise-wyoming/ — CBS News, Aug 2024: Cody Enterprise reporter Aaron Pelczar resigned after admitting he used an AI writing tool that fabricated quotes, including some attributed to Wyoming Gov. Mark Gordon.
+2. https://futurism.com/artificial-intelligence/ars-technica-fires-reporter-ai-quotes — Futurism, Feb-Mar 2026: Ars Technica fired senior reporter Benj Edwards after he published fabricated quotes, generated by ChatGPT and attributed to a real engineer, in a story about an AI-agent controversy.
 
 ## 5. The Pattern
 
-Where AI actually works, and where it doesn't:
+This isn't a hunch. It shows up in how the models actually get benchmarked, and in real newsroom deployments. One large evaluation found current AI agents succeed on nearly 100% of short, well-defined tasks, but under 10% of tasks that take a human more than four hours. Task length and ambiguity predict failure better than anything else does. [1] AP's automated earnings stories worked at newsroom scale because the task was repetitive and the underlying data was structured, freeing an estimated three full-time reporters a year. [2] ICIJ's passport-detection tool followed the same shape: it narrowed 110,000-plus candidate documents to 3,000 for human review, an "at least this many" task, not an exhaustive one. [3] Both examples pair with the incidents in the section above: when the task drifts outside this pattern (originating a quote, verifying a fact in real time) is exactly where things went wrong.
 
 **Works When**
 - The task is repetitive and structured.
 - Input data is high-quality.
-- It's finding needles in haystacks — pattern recognition, lead generation, surfacing what a human would miss at scale.
-- You need an "at least this many" count, not an exhaustive one — finding as many examples as you can, not every single one.
+- It's finding needles in haystacks: pattern recognition, lead generation, surfacing what a human would miss at scale.
+- You need an "at least this many" count, not an exhaustive one, finding as many examples as you can, not every single one.
 - It augments human work, not replaces it.
 - You can verify the output yourself.
 - Mistakes are tolerable.
@@ -89,11 +94,14 @@ Where AI actually works, and where it doesn't:
 - Readers need to trust a human made the call.
 - It requires real-world experience you haven't had.
 
+**Sources**
+1. https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/ — METR, March 2025: AI agents succeed on nearly 100% of short, well-specified tasks but under 10% of tasks that take humans 4+ hours; performance drops sharply as tasks get longer and less defined.
+2. https://www.poynter.org/reporting-editing/2015/robot-writing-increased-aps-earnings-stories-by-tenfold/ — Poynter, 2015: AP's Automated Insights partnership expanded earnings-story coverage from about 300 to about 4,700 companies a quarter, freeing an estimated three full-time-equivalent reporters annually.
+3. https://www.icij.org/inside-icij/2025/05/how-we-use-machine-learning-to-find-passports-and-unlock-one-key-to-offshore-secrecy/ — ICIJ, 2025: a machine-learning passport-detection tool built with OsloMet University/NRK narrowed 110,000+ candidate documents to 3,000 for human review during the Pandora Papers investigation.
+
 ## 6. The Practical Question
 
-<!-- Content-architecture note: bare question list below, no sub-heading — flagged pattern from content-architecture-notes.md. -->
-
-Before reaching for AI, ask yourself:
+### Questions to Ask Before Reaching for AI
 
 - Does this need original judgment *every single time* — or can I design the process so judgment only happens on a smaller, surfaced set? [1]
 - Is my input data trustworthy and high-quality? [2]
