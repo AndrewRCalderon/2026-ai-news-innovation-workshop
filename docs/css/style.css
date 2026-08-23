@@ -590,12 +590,6 @@ main {
   margin-bottom: 1.5rem;
 }
 
-.home-section-eyebrow {
-  font-family: var(--heading-font);
-  font-size: 0.85rem;
-  color: var(--purple);
-}
-
 .home-section-head h2 {
   font-size: clamp(1.4rem, 3.2vw, 1.85rem);
   margin: 0;

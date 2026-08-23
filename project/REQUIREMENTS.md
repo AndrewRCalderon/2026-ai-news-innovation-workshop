@@ -346,6 +346,19 @@ handoff's fidelity bar; zero console errors.
   were double-inserted and every file still has exactly one `<body>`/
   `</body>` pair after.
 
+**2026-08-21**: on `review/full-site-audit-6`. User felt `01-state-of-ai.md`
+and `02-industry-conversation.md` (Day 1's first-ported copy-drafts,
+predating the research-first discipline) read repetitive and shallower
+than Day 2/3, and asked for a from-scratch, research-first rewrite of
+both, explicitly not repeating Day 3's material. Both rewritten via 5
+parallel background research agents plus a follow-up 6th for citation
+currency; `03-use-cases.md` §4/§5 also grounded with real incidents per a
+mid-pass user request. Full detail in the matching 2026-08-21 "Change
+log" entry below. **Drafts only, awaiting user review** before any
+`docs/day-1/*.html` implementation. Also drafted `project/copy-drafts/
+instructors.md`'s two bios from public sources, pending the user's edit
+pass (separate change-log entry).
+
 Source of truth for build progress on this repo. Check here before starting
 work; update here when a task starts/completes, or when new work is
 discovered that wasn't in the original scope. Architecture *decisions* (the
@@ -868,6 +881,37 @@ map cleanly to one.
       section, a resource-page table, folded into Day 2) is part of what
       that future planning conversation needs to decide, same as the rest
       of this task.
+      **New idea, 2026-08-22, still not scoped**: a plain-language
+      explainer of Claude Code's own context/token-management controls
+      came up in this session (the user was actively confused about how
+      to use them) and is worth folding into this same content once it's
+      scoped, since it's the same underlying skill ("manage your usage
+      deliberately") as model selection. What was actually explained,
+      reusable as a first draft when this gets built:
+      - **`/clear`**: wipes the conversation entirely and starts fresh
+        (CLAUDE.md/memory/skills reload automatically). Use when the next
+        task is genuinely unrelated to the current thread.
+      - **`/compact`**: condenses the conversation so far into a summary
+        and keeps going in the same session, continuity preserved, detail
+        traded away. Use at a natural task boundary when staying in the
+        same thread but not needing the full blow-by-blow of what led here.
+      - **Rewind** (Esc Esc): an undo, not a token-management move, rolls
+        conversation and/or file state back to an earlier checkpoint. Use
+        to correct a wrong turn, not to save tokens (though it has that
+        side effect).
+      - **Auto-compact**: happens automatically near the context limit, no
+        user action needed, worth saying explicitly so students don't
+        think they have to manage this by hand.
+      - **Background agents/subagents** as a token-management technique in
+        their own right, not just a delegation tool: a subagent's search/
+        fetch noise stays in its own context, only its summary lands in
+        the main thread. This is arguably the highest-leverage lever for a
+        long working session and ties directly to the existing subagent-
+        guardrail material already logged above (2026-08-20 entry).
+      Also worth deciding when this gets scoped: whether this belongs in
+      `STUDENT_CLAUDE_GUIDE.md` itself (a natural fit alongside "Choosing
+      the right model for the task") or in Day 2's in-class content, same
+      open question as the rest of this task.
 - [x] **Live-test `STUDENT_CLAUDE_GUIDE.md` on a real project.** Raised
       2026-08-20, right after the guide's onboarding-questions/model-choice/
       submission-info rework (see the Phase 5 bullet above).
@@ -1034,11 +1078,19 @@ map cleanly to one.
       citation density, bare question lists, grounding) pulled from
       `content-architecture-notes.md`, so the user can make those calls
       once before editing instead of per-page. Full detail in the
-      2026-08-21 change-log entry near the top of this file. **Line-by-line
-      edit not yet done** — porting only; the edit itself is the user's
-      own pass, queued next. **If this pans out further**: a proper
-      Claude Code skill to generate/refresh these drafts (worth building
-      now that all three days have gone through this by hand).
+      2026-08-21 change-log entry near the top of this file. **Update,
+      same day**: rather than a line-by-line prose edit, `01-state-of-ai.md`
+      and `02-industry-conversation.md` got a full research-first rewrite
+      instead (see the matching 2026-08-21 "Change log" entry below) after
+      the user felt they read shallower and more repetitive than Day 2/3.
+      `03-use-cases.md` §4/§5 got a lighter, targeted pass in the same
+      session. The other 6 Day 1 pages are still queued for the user's own
+      line-by-line pass, unchanged by this. **Resolved 2026-08-21**: this
+      research-first discipline (now used 4 times: Day 2, Day 3, this Day 1
+      rewrite, and its own follow-up grounding pass) is now a project skill,
+      [`.claude/skills/ground-content/SKILL.md`](../.claude/skills/ground-content/SKILL.md)
+      — invoke it directly for future grounding passes instead of
+      re-deriving the process.
 - [x] Resolved: the org/repo is confirmed
       (`github.com/AndrewRCalderon/2026-ai-news-innovation-workshop`, this
       repo's own remote) — `setup.html` now links directly to it. **New
@@ -2963,6 +3015,147 @@ questions. Worked Adiel's 3 sources into
 ---
 
 ## Change log
+
+- 2026-08-22 — **`instructors.html` implemented for real (was a
+  placeholder stub) and the home page updated to link to it.** Ported
+  both bios from `project/copy-drafts/instructors.md` (finalized by the
+  user since the 2026-08-21 draft: Andrew's title conflict resolved to
+  "Network Weaver, Journalism + Design Lab · Adjunct Professor, CUNY
+  Craig Newmark Graduate School of Journalism," a link to his personal
+  site added). Each `.idea-card` got an `id` (`andrew-calderon`,
+  `adiel-kaplan`) so other pages can link directly to a person's bio.
+  Adiel's headshot (downloaded 2026-08-21) is now wired in via a new
+  `.idea-card img` rule in `briefing.css` (96px circular thumbnail);
+  Andrew's card has no photo yet, left as an HTML comment noting where
+  one goes rather than a broken image reference. On `index.html`: the
+  masthead's "3 Days · Hands-on · No ML background needed" meta line
+  replaced with "Instructors: Andrew Calderón, Adiel Kaplan" (each name
+  linking to their `instructors.html` anchor), and the "01"/"02"
+  `.home-section-eyebrow` numbering removed from the "Workshop Days" and
+  "Getting Started" section headers per user direction ("those headers
+  don't need to be enumerated"); the now-unused `.home-section-eyebrow`
+  CSS rule was deleted rather than left dead.
+- 2026-08-21 — **Day 1's `01-state-of-ai.md` and `02-industry-conversation.md`
+  rewritten from scratch, research-first**, on `review/full-site-audit-6`.
+  These two were the first Day 1 pages ported to `project/copy-drafts/`
+  (2026-08-04), before the site adopted its "plan → research via parallel
+  background agents → write" discipline established for Day 2/3 (see the
+  2026-08-13/08-19 entries below). Rereading them, the same shallowness
+  Day 2 got flagged for showed up here too, plus real overlap the other
+  days didn't have: both pages independently listed newsroom AI tools
+  (NYT, WaPo, Sahan Journal, Outlier Media in `01` §5; WaPo, Reuters, NYT
+  in `02` §5), answering the same question twice with different examples.
+  User also asked explicitly that this pass not repeat content Day 3
+  already owns (Day 3's Product Design/Safe & Auditable Design own named
+  newsroom AI products like Chowbot/Ask FT/Adelaide/Rai and policy
+  specifics like WBEZ/LAist/CBC), so Day 3's actual page content was read
+  first to build a dedup list before writing anything.
+  - **Confirmed with user first**: switch both pages to the declarative
+    narrator voice used on Day 2/3 (drops `01`'s "The Moment We're In"
+    heading and `02`'s scattered first-person-plural); scope this pass to
+    the copy-drafts only, `docs/day-1/*.html` stays untouched until these
+    drafts are reviewed.
+  - **Division of labor** (fixes the page-to-page overlap): `01` now owns
+    the technology-level story (what changed, pace/scale, history,
+    capability limits for an individual journalist); `02` owns the
+    industry debates and newsroom adoption/policy data, including the
+    newsroom-tool material consolidated out of `01`.
+  - **Research**: 5 parallel background agents (general-purpose, live-fetch
+    only), each briefed to find multiple sources and concrete named
+    examples/numbers rather than cite from memory: AI adoption pace
+    (explicitly briefed to inflect toward news-industry data, not just
+    general-population stats, per user direction mid-pass), AI history
+    timeline verification, the scaling/AGI debate (real named voices:
+    Sutskever, Amodei, LeCun, Marcus), newsroom AI adoption survey data,
+    and named newsroom AI incidents. A 6th agent found 2023+ replacements
+    for 4 stale (2017-2021) capability citations, after the user set a
+    standing rule mid-pass: any citation describing *current* AI
+    behavior/accuracy needs to be 2023 or later since older tools aren't
+    representative, but the deliberate historical timeline in `01` §3 is
+    exempt since dropping pre-2023 milestones (AlexNet, AlphaGo, GPT-3)
+    would gut its purpose.
+  - **Genuinely new findings worth flagging**: AP was automating earnings
+    stories via Wordsmith back in 2014, a pre-ChatGPT newsroom-AI anchor
+    now opening `01`'s history timeline. Newsroom AI adoption doesn't
+    follow the assumed small/mid/large maturity ladder the old `02` §4
+    asserted uncited — a measured (not self-reported) study found smaller
+    papers (under 100K circulation) show *more* detectable AI use (9.3%)
+    than larger ones (1.7%), and ownership predicts AI governance far
+    better than size does. Journalists are adopting AI faster than the
+    public (82%, Muck Rack) while trusting it less than almost anyone
+    (62% of UK journalists call it a threat), a tension used directly in
+    `02`'s disagreement list. Five dated, named newsroom AI-failure
+    incidents (Sports Illustrated, CNET, Gannett, Chicago Sun-Times,
+    Tagesspiegel) replaced `02`'s old unattributed skeptic/optimist
+    bullets, paired against one clear counterexample (BBC Eye's
+    multi-agent Ukraine investigation).
+  - **`03-use-cases.md` also touched**, per user request mid-pass:
+    §4 ("Not a Good Use Case Yet") and §5 ("The Pattern") were generic
+    assertions with no citations, unlike §2-3's already-strong named
+    examples. Grounded both with incidents not used elsewhere (Cody
+    Enterprise and Ars Technica fabricated-quote firings for §4; AP,
+    ICIJ's passport-detection tool, and METR's task-length benchmark for
+    §5). Also swapped 3 stale citations in §3 (2019 AAE-moderation-bias
+    study, 2020 speech-recognition-disparity study, 2021 Copilot-
+    vulnerability study) for 2023+ equivalents under the new currency
+    rule, and added a sub-heading to §6's previously-bare question list.
+  - **Verification**: grepped all three files for em-dashes in prose
+    (clean, except inside the site-wide "URL — description" citation-list
+    convention, which is a structural format used on every page, not
+    prose dash-itis) and for first-person-plural in headings (clean).
+    Cross-checked every new named incident/stat against Day 3's actual
+    page content and the rest of the site for collisions (none found).
+    Spot-checked citation URLs live; the only failures were bot-blocking
+    on Bloomberg/Oxford Academic/GlobeNewswire, not dead links, each
+    already independently corroborated by the research agents that fetched
+    them. Updated `project/copy-drafts/day-1/README.md`'s cross-page notes
+    to mark voice/citation-density/bare-list/grounding as resolved for
+    `01`-`03` specifically (still open for `04`-`08`).
+  - **Not done**: `docs/day-1/*.html` implementation. These are drafts
+    pending the user's review.
+- 2026-08-21 (later) — **Follow-up: 3 sections the research pass missed,
+  grounded.** User caught this by diffing: both files were "M" (modified,
+  uncommitted) in git when this session started, meaning the user had
+  hand-edited them before the rewrite; comparing the last commit against
+  what got read confirmed most of those edits carried through (the
+  relocated `.stakes` block, "You Should Be Wary," the trimmed history
+  entries), but 3 sections stayed assertion-only because none of the 5
+  research agents had been briefed on them: `01` §4 ("What This Means for
+  Journalists," the You Can/You Should Be Wary lists), `01` §5 ("Who's
+  Building It"), and `02` §1 (the 4-item disagreement list). 3 more
+  background agents researched each. First attempt failed outright (all
+  3 agents hit the account's monthly spend limit mid-run); user confirmed
+  the limit had reset and they were retried successfully. Real findings:
+  ChatGPT's app-market share fell below 50% for the first time in May
+  2026 (46.4%, Sensor Tower/TechCrunch) while Anthropic passed OpenAI on
+  U.S. business spend share the same year; open-weight models closed the
+  gap to the leading proprietary model from ~13 points to ~6 in a year
+  (Artificial Analysis); an AI fact-checker correctly caught false
+  headlines 90% of the time but true ones only 15% (DeVerna et al., PNAS/
+  arXiv 2024); people co-writing with an opinionated AI were twice as
+  likely to adopt its stance, mostly without noticing (Jakesch et al.,
+  CHI 2023); and AI-labeled news articles were 8.2x more likely to
+  contain a hallucination than human-written ones, 41% vs. 5% (the same
+  University of Maryland/Pangram study already cited elsewhere on `02`
+  for a different finding, an accepted same-page reuse, not a new
+  citation). One deliberate exclusion: the CJR/Tow Center 8-AI-search-
+  tools study was found by the `01` §5 research agent but NOT used, since
+  it's already Day 3 Product Design's centerpiece citation. Re-verified
+  em-dash-in-prose and cross-page collision (against Day 3 and the rest
+  of the site) on all new content; clean.
+- 2026-08-21 — **Instructors page bios drafted**, `project/copy-drafts/
+  instructors.md`. Adiel's bio pulled near-verbatim from
+  journalismfutures.org/about (already well-written, concise); her
+  headshot downloaded to `docs/assets/images/adiel-kaplan-headshot.jpg`
+  (converted from WebP to JPEG) but not yet wired into `instructors.html`,
+  which has no image slot in its `.idea-card` markup yet. Andrew's bio
+  synthesized from his CUNY faculty page (more conventional bio voice)
+  plus Pulitzer/Marshall Project/byline credits from his personal site;
+  LinkedIn's About section is truncated behind login so it only
+  contributed the headline. Flagged for the user to resolve: his own site
+  and CUNY's page disagree on his Journalism + Design Lab title ("Network
+  Weaver" vs. "Product Design + Tech Lead"). Both bios need the user's own
+  edit pass per the established copy-drafts workflow.
 
 - 2026-08-16 — **Day 2 round-3 audit, implemented**, on
   `review/full-site-audit-3`. Full arc: user reviewed all 8 Day 2 sessions
