@@ -343,6 +343,7 @@ html.briefing-deck, body.briefing-deck { height: 100%; overflow: hidden; margin:
 .idea-card p { margin: 0 0 var(--sp-2); font-size: 0.9rem; }
 .idea-card p:last-child { margin-bottom: 0; }
 .idea-card img { width: 96px; height: 96px; object-fit: cover; border-radius: 50%; margin-bottom: var(--sp-2); }
+#adiel-kaplan img { object-position: center 15%; }
 
 .submission-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--sp-3); margin: var(--sp-4) 0; }
 .submission-card { background: var(--surface); border: 1px solid var(--border-strong); padding: var(--sp-3); }
