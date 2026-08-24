@@ -73,31 +73,60 @@ Keep the subject line **plain ASCII** — use a hyphen, not an em dash. Non-ASCI
 get MIME-encoded into `=?utf-8?b?...?=` gibberish in the raw `.eml`, and they bloat the
 Gmail compose URL. Em dashes in the body are fine.
 
-**Body.** Plain text, roughly 150–250 words. This structure, in this order:
+**Body.** Plain text. **Four sentences maximum**, not counting the numbered questions.
+Breaking-news PR inboxes get triaged in seconds — a long email buries the ask. Exactly this
+structure, in this order:
 
-1. **Who you are, one line.** Name, outlet, and that you're on deadline.
-2. **What the story is, two or three sentences.** The actual thesis, not a vague gesture.
-   A comms person who understands the story writes you a useful statement; one who doesn't
-   sends boilerplate.
-3. **What it says about them specifically.** The claim you're putting to this company, drawn
-   from the brief's "What I already have" field. This is the part that makes it a genuine
-   request for comment rather than a survey — they can respond to something concrete.
-4. **The numbered questions**, company name substituted in.
-5. **Terms.** On the record, attributed to a named spokesperson (or whatever the brief says).
-   Offer a call if that's faster for them.
-6. **The deadline, stated plainly**, with timezone and date — and the consequence, neutrally
-   phrased: *"If I don't hear back by then, the story will note that {COMPANY} did not
-   respond to a request for comment by press time."* That sentence is standard practice and
-   is what actually gets replies. Keep it matter-of-fact, never threatening.
-7. **Your direct line**, so they can call instead of drafting.
+1. **Who you are** — one sentence. Name and outlet. Nothing else.
+2. **The story** — one sentence. The actual thesis, compressed. If it takes three sentences to
+   explain, compress it; do not spend a second sentence here.
+3. **What it says about them** — one sentence, ending in the handoff to the questions. Drawn
+   from the brief's "What I already have" field. This is what makes it a real request for
+   comment rather than a survey.
+4. **The numbered questions**, company name substituted in. These don't count toward the four.
+5. **The deadline** — one sentence, last line, nothing after it. Format: `My deadline is 4 ET
+   today.`
 
-Do **not** type the signature into the body — the pipeline handles it. Gmail inserts the
-reporter's real signature automatically; the `.eml` files get `config/signature.txt` embedded.
-Putting it in the body too would sign every email twice.
+Example (Nike, pink cleats):
 
-**Tone.** Neutral, specific, unhurried in register even though the deadline is short. No
-flattery, no "I hope this finds you well," no implied accusation. Respect the reader's time:
-they are also on deadline.
+```
+Hello,
+
+I'm Grace Thomas, a reporter with NYCity News Service.
+
+The story examines a pattern: every major athletic brand released pink cleats timed to
+the 2026 World Cup, and my reporting indicates they were working from similar market
+research concluding that pink offers the highest visibility against the green of the pitch.
+
+Nike released at least one pink cleat colorway timed to the tournament, which is why I'm
+bringing these questions to you:
+
+1. Why did Nike choose pink for the boots worn by players at the World Cup?
+2. Why did Nike release pink cleats for consumers to purchase during this period?
+3. Did Nike rely on market research indicating pink would have the highest on-pitch
+   visibility, and if so, was that research conducted internally or by an outside firm?
+
+My deadline is 4 ET today.
+```
+
+**Do not include any of the following.** Each was deliberately cut. Do not add them back
+because they seem helpful or standard:
+
+- Any sign-off — no "Thank you," "Best," or "Sincerely." The Gmail signature is the close.
+- The signature itself. The pipeline handles it: Gmail appends the reporter's real signature,
+  and the `.eml` files embed `config/signature.txt`. Writing it into the body signs twice.
+- "If I don't hear back, the story will note that X did not respond by press time."
+- An offer to share the passage before publication for an accuracy check.
+- A statement of terms ("on the record, attributed to a named spokesperson"). The reporter
+  chose to leave terms out of the email and establish them in the reply thread.
+- An offer to take a call, or a phone number.
+- Any sentence after the deadline line.
+
+The `terms` field in the brief still gets recorded in `drafts.json` for the reporter's own
+reference — it just doesn't appear in the email body.
+
+**Tone.** Neutral, specific, plain. No flattery, no "I hope this finds you well," no implied
+accusation. Respect the reader's time: they are also on deadline.
 
 ### 4. Write `drafts.json`
 
