@@ -1,10 +1,12 @@
 # Problem Statement
 
-> You won't get this perfect today. That's fine — this is a starting point, not a final answer.
+> You won't know your entire product design today. This is just a starting point, not a final answer.
 
 ## 1. The Design Process Is Circular
 
-The mistake people make: thinking there's a straight line from "idea" to "finished project." Reality: design is messy and circular. [1] This morning in Product Discussion, you and the group worked through the first two steps below — identify a problem, ask questions. Now it's your turn to work through the rest, on your own.
+The mistake people make when approaching a problem is thinking there's a straight line from "idea" to "finished project." Any creative endeavor is messy and circular. [1] This morning in Product Discussion, you and your group worked through the first two steps below: identify a problem, ask questions.
+
+Now it's time to revisit what you said about your idea.
 
 [Maps to `.process-wheel`, not `.history` — a circular 7-step diagram, not a chronological timeline]
 1. **Identify a problem.** Or think you do.
@@ -27,28 +29,28 @@ A series of questions meant to help you think, not to be "answered correctly."
 - What frustrates you about how you access, share, or create information?
 - What task do you do repeatedly that feels inefficient?
 - What question do you want to be able to answer faster?
-- Where do you see people struggling — sources, readers, yourself, other reporters?
+- Where do you see people struggling (sources, readers, yourself, other reporters)?
 
 ### Go deeper
 
-- Who experiences this problem — you, reporters, editors, readers, multiple groups?
+- Who experiences this problem (you, reporters, editors, readers, multiple groups)?
 - How do they currently solve it?
-- Why isn't the current solution good enough — cost, time, quality, accessibility?
+- Why isn't the current solution good enough (cost, time, quality, accessibility)?
 - If this problem disappeared, what would change?
 
 ### Think about scale
 
 - How many people face this problem, and how often?
-- What's the cost of not solving it — time, money, missed stories, bad decisions?
+- What's the cost of not solving it (time, money, missed stories, bad decisions)?
 
-## 3. Get Specific
+## 3. Get Curious with Hypothesis Testing
 
 <!-- Content-architecture note: bare question list below, no sub-heading — flagged pattern from content-architecture-notes.md. Also has first-person-plural ("we're not expecting specificity yet; we're working toward it") against the declarative voice elsewhere. -->
 
-The questions above are ways into a problem space — not something to nail on the first pass. At this stage, we're not expecting specificity yet; we're working toward it. Being able to answer the questions below is the goal. One way to start closing that gap is by forming a hypothesis, which is exactly where the next section picks up.
+The questions above are ways into a problem space. At this stage, we're not expecting specificity yet; we're working toward it. One way to start closing that gap is by forming a hypothesis, which is exactly where the next section picks up.
 
 - Can you describe the problem in one sentence? If not, you might not understand it well enough yet.
-- Is this a real problem, or are you assuming — have you actually talked to people about it?
+- Is this a real problem, or are you assuming, meaning have you actually talked to people about it?
 
 ## 4. Form a Hypothesis
 
@@ -58,7 +60,7 @@ A hypothesis is: **"If I do X, then Y will happen."** For an AI project: "If I u
 - "If I use AI to generate drafts of routine earnings reports, then business reporters can spend more time on investigative stories."
 - "If I use AI to tag and categorize reader comments by topic, then we can respond to common questions faster and improve engagement."
 
-To sharpen it: What specifically will AI do — analyze, generate, summarize, categorize? What will change as a result? How will you know if it worked? Who benefits? And it has to be testable — can you actually try it, measure the outcome, and learn something either way?
+To sharpen it: What specifically will AI do (analyze, generate, summarize, categorize)? What will change as a result? How will you know if it worked? Who benefits? And it has to be testable. Can you actually try it, measure the outcome, and learn something either way?
 
 ## 5. Articulate Your Goal
 
@@ -72,12 +74,12 @@ Your goal is what you're actually trying to build and test. Three parts:
 
 ## 6. Workshop Activity
 
-Using the sections above, work through the exercise below on your own — turning the idea you shared this morning into a real problem, hypothesis, and goal. Then we'll go around and share.
+Using the sections above, work through the exercise below to turn your idea into a real problem, hypothesis, and goal. Then we'll go around and share.
 
 > **Exercise: Build Your Problem Statement**
 >
 > - Time: ~20 minutes on your own, then share-out as a group.
 > - Description: Fill in: **Problem** (one sentence) → **Hypothesis** (if I do X, then Y will happen for Z) → **Goal** (I want to solve [problem] by [solution] so that [outcome]) → **Success metric** (I'll know it works when...) → **Why this matters**.
-> - Deliverable: A filled-in problem statement, hypothesis, and goal — not a perfect answer, just something concrete to build on tomorrow.
+> - Deliverable: A filled-in problem statement, hypothesis, and goal. We will come back to it throughout the workshop.
 
-If reformulating your idea this way reveals gaps in your thinking, that's normal — those gaps are exactly where more research will help.
+If reformulating your idea this way reveals gaps in your thinking, that's good. Those gaps are exactly where more research will help and  if you are pressed for time to do research, where you can be transparent about your assumptions.

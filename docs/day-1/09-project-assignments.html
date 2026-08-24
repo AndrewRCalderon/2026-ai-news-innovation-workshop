@@ -5,47 +5,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Project Assignments — Day 1 — AI Journalism Workshop</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/briefing.css">
 </head>
-<body data-day="1" data-session-id="day-1/09-project-assignments">
+<body class="briefing briefing-overview" data-day="1" data-session-id="day-1/09-project-assignments">
   <div id="nav"></div>
 
   <main>
     <div class="breadcrumb"><a href="/">Home</a> &gt; <a href="/day-1/">Day 1</a> &gt; Project Assignments</div>
 
-    <header class="topic-header">
-      <h1>Project Assignments</h1>
-      <div class="topic-metadata">
-        <span class="badge" id="topic-time">--</span>
-        <span class="badge" id="topic-duration">--</span>
-        <span class="badge" id="topic-type">--</span>
-      </div>
+    <header class="masthead">
+      <h1 class="masthead-title">Project Assignments</h1>
+      <p class="masthead-dek">Open Claude Desktop and start building.</p>
+      <div class="masthead-meta"><span id="topic-time">--</span><span class="div">·</span><span id="topic-duration">--</span><span class="div">·</span><span id="topic-type">--</span></div>
     </header>
 
-    <div class="topic-layout">
-      <article class="topic-content">
-        <h2>Overview</h2>
-        <p><em>TODO: hands-on project experimentation time — try out your idea and see what happens, with a workshop buddy.</em></p>
+    <nav class="toc" aria-label="Sections in this briefing">
+      <ol>
+        <li><a href="#s1"><span class="n">01</span> What You Should Have By Now</a></li>
+        <li><a href="#s2"><span class="n">02</span> Workshop Activity</a></li>
+        <li><a href="#s3"><span class="n">03</span> Tips for This Hour</a></li>
+        <li><a href="#s4"><span class="n">04</span> What Happens Next</a></li>
+      </ol>
+    </nav>
 
+    <article>
+      <section class="block reveal" id="s1">
+        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">What You Should Have By Now</h2></div>
+        <ul class="field-notes">
+          <li>A one-sentence problem, a hypothesis ("If I use AI to [specific task], then [specific outcome] will happen for [specific person/group]"), and a goal, from <a href="/day-1/05-problem-statement-discussion.html">Problem Statement</a>.</li>
+          <li>A sense of how a coding design loop works: describe, plan, build, review, test, iterate.</li>
+          <li>A forked repo with a <code>day-1</code> branch, your <code>docs/submissions/your-name/</code> folder, and <code>CLAUDE.md</code> and <code>SUBMISSION.md</code> copied into it, from Fork &amp; Submit.</li>
+          <li>A workshop buddy or two alongside you.</li>
+        </ul>
+        <p>If any of those is missing, tell the instructors.</p>
+      </section>
+
+      <section class="block reveal" id="s2">
+        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">Workshop Activity</h2></div>
         <div class="exercise-box">
           <h3>🎯 Exercise: Try It Out</h3>
-          <p><strong>Time:</strong> 1 hour</p>
-          <p><strong>Description:</strong> <em>TODO</em></p>
-          <p><strong>Deliverable:</strong> <em>TODO</em></p>
-          <p><strong>Buddy pairing:</strong> Workshop buddies, pairs of 2.</p>
+          <p><strong>Time:</strong> 45 minutes, with your workshop buddy.</p>
+          <p><strong>Description:</strong> Open your project folder in Claude Desktop's Code tab. Your <code>CLAUDE.md</code> should guide you through some questions to calibrate your coding experience. Read the file as well. If you don't understand something, ask Claude. Once you are situated, give Claude your problem statement and hypothesis in Plan mode, and see what it proposes before it touches anything. Work alongside your buddy: check in on each other's progress, compare what you're each seeing, and ask each other questions before you ask an instructor.</p>
+          <p><strong>Deliverable:</strong> Real, early progress, committed and pushed through the fork/PR workflow from <a href="/day-1/08-fork-and-submit.html">Fork &amp; Submit</a>.</p>
         </div>
-      </article>
+      </section>
 
-      <aside class="sidebar">
-        <h3>Deliverables</h3>
-        <ul>
-          <li><em>TODO</em></li>
+      <section class="block reveal" id="s3">
+        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">Tips for This Hour</h2></div>
+        <ul class="field-notes">
+          <li>Start in Plan mode, remember to break things up into discrete tasks.</li>
+          <li>Read the diff before you accept it. This is an important habit, and the easiest one to skip when you're moving fast.</li>
+          <li>Stuck? Ask your buddy first, then Claude, then the instructor.</li>
+          <li>Notice friction, flow, and gaps in knowledge.</li>
         </ul>
-        <h3>Related Resources</h3>
-        <ul>
-          <li><em>TODO: links to slides, papers, tools</em></li>
-        </ul>
-      </aside>
-    </div>
+      </section>
+
+      <section class="block reveal" id="s4">
+        <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">What Happens Next</h2></div>
+        <p>Whatever state your project is in at the end of this hour is exactly where Day 2 picks up. Tomorrow is about iteration and depth: prompting well, setting up CLAUDE.md properly, using Skills, planning before you build, and writing a spec instead of prompting straight to code, all applied to the project you started today.</p>
+      </section>
+    </article>
 
     <footer class="topic-nav">
       <a id="prev-link" href="#">← Previous</a>
@@ -59,6 +78,7 @@
   <script src="/js/partials.js"></script>
   <script src="/js/nav.js"></script>
   <script src="/js/topic-metadata.js"></script>
+  <script src="/js/reveal.js"></script>
   <script src="/js/click-effect.js"></script>
 </body>
 </html>

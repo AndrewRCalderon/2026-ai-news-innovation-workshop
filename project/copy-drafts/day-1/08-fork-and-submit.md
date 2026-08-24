@@ -6,7 +6,7 @@
 
 Everything you build today gets submitted the same way: as a Pull Request against the shared workshop repo. This session is the one-time setup that makes that possible — after this, submitting is just asking Claude to commit and open a PR, every day.
 
-This all runs through the GitHub connector you set up in [Explore Claude Desktop](/day-1/07-explore-claude-desktop.html) — no Git, no terminal, no separate app to install.
+This all runs through the GitHub connector you set up during [pre-workshop setup](/setup.html) — no Git, no terminal, no separate app to install.
 
 ## 2. What Is a Fork?
 

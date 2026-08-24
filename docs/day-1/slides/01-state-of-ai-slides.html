@@ -36,18 +36,18 @@
             <p class="cover-dek">We're at the invention phase, not the mature phase — and the rules are still being written.</p>
             <div class="cover-meta"><span>10:00 AM</span><span class="div">·</span><span>15 MIN</span><span class="div">·</span><span>Lecture</span></div>
             <ul class="cover-contents">
-              <li><button type="button" data-jump="s1"><span class="n">01</span> The Moment We're In</button></li>
-              <li><button type="button" data-jump="s2"><span class="n">02</span> What's Changed</button></li>
-              <li><button type="button" data-jump="s3"><span class="n">03</span> Recent History</button></li>
-              <li><button type="button" data-jump="s4"><span class="n">04</span> For Journalists</button></li>
-              <li><button type="button" data-jump="s5"><span class="n">05</span> The Landscape</button></li>
+              <li><button type="button" data-jump="s1"><span class="n">01</span> The Moment</button></li>
+              <li><button type="button" data-jump="s2"><span class="n">02</span> A Cursory Timeline of Recent History</button></li>
+              <li><button type="button" data-jump="s3"><span class="n">03</span> State of the Art</button></li>
+              <li><button type="button" data-jump="s4"><span class="n">04</span> Major Builders & Trends</button></li>
+              <li><button type="button" data-jump="s5"><span class="n">05</span> What This Means for Journalists</button></li>
             </ul>
           </div>
         </section>
 
         <section class="slide" data-slide="s1">
           <div class="slide-inner">
-            <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">The Moment We're In</h2></div>
+            <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">The Moment</h2></div>
             <p class="lede">AI itself isn't new — machine learning has quietly shaped things like fraud detection and recommendation engines for over a decade. What changed is who gets to use it. Large language models turned something that used to require real technical training into something you open in a browser tab. That's worth taking seriously, and worth being skeptical about at the same time — the tools are real, and so is the hype around them.</p>
             <ul class="field-notes">
               <li>AI went from "expert-only" to "something most people have at least tried."</li>
@@ -72,7 +72,24 @@
 
         <section class="slide" data-slide="s2">
           <div class="slide-inner">
-            <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">What's Actually Changed</h2></div>
+            <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">A Cursory Timeline of Recent History</h2></div>
+            <p>The path here wasn't sudden. It's the accumulation of decades of technical milestones and academic research — some at universities, some at big tech companies — that finally broke into public view.</p>
+            <ol class="history">
+              <li><span class="era">2012</span><h3>Deep learning renaissance</h3><p>A neural network called AlexNet wins a major image-recognition contest by a landmark margin, using far more data and computing power than anyone had tried before.<sup class="cite" data-url="https://proceedings.neurips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html" data-note="Krizhevsky, Sutskever & Hinton's original NeurIPS 2012 paper introducing AlexNet — it won by 15.3% error vs. 26.2% for the next-best entry, and is widely credited with kicking off the deep-learning boom.">*</sup> Almost no one outside the field notices at the time — worth sitting with, since it's usually true: the shifts that turn out to matter most rarely look big while they're happening.</p></li>
+              <li><span class="era">2016</span><h3>AlphaGo beats Lee Sedol</h3><p>Google's AI defeats the world Go champion — far more complex than chess. Mainstream news for the first time, but still entirely specialized.</p></li>
+              <li><span class="era">2018–2020</span><h3>BERT, GPT-2, GPT-3</h3><p>Language models get genuinely good at understanding and generating text. GPT-3 introduces few-shot learning — the model picks up a new task from just a few examples shown in the prompt, without retraining.<sup class="cite" data-url="https://arxiv.org/abs/2005.14165" data-note="OpenAI's May 2020 GPT-3 paper, which introduced few-shot learning as a capability.">*</sup> Still gated behind research access.</p></li>
+              <li class="is-hinge"><span class="era">Nov 2022</span><h3>ChatGPT launches</h3><p>Free, open to anyone with an internet connection. Millions playing with AI within days. Newsrooms begin experimenting: brainstorming, drafting, analyzing data.</p></li>
+              <li><span class="era">2023–2024</span><h3>The "Copilot" era</h3><p>AI built into everything. The debate shifts from "is this real?" to "how do we use this responsibly?" First lawsuits over training data land — The New York Times sues OpenAI and Microsoft in December 2023, alleging its articles were used to train ChatGPT without permission.<sup class="cite" data-url="https://en.wikipedia.org/wiki/The_New_York_Times_v._Microsoft_and_OpenAI" data-note="The New York Times v. Microsoft and OpenAI, filed Dec. 27, 2023 in the Southern District of New York.">*</sup></p></li>
+              <li><span class="era">2024–2025</span><h3>Agents get hands</h3><p>Claude gains the ability to move a cursor, click, and type like a person.<sup class="cite" data-url="https://www.anthropic.com/news/developing-computer-use" data-note="Anthropic, Oct 22, 2024: 'computer use,' a research preview letting Claude 3.5 Sonnet operate a computer the way a person does — widely cited as the technical starting gun for the AI-agent wave.">*</sup> OpenAI's Operator becomes the first agent product to break into mainstream tech coverage.<sup class="cite" data-url="https://openai.com/index/introducing-operator/" data-note="OpenAI, Jan 23, 2025: Operator, a general-purpose agent that controls a web browser to book reservations, order groceries, and more.">*</sup> "AI acts on your behalf" stops being theoretical.</p></li>
+              <li><span class="era">2025–2026</span><h3>Skills, then Cowork</h3><p>Anthropic launches Agent Skills, reusable packages of instructions an AI can load on demand.<sup class="cite" data-url="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" data-note="Anthropic, Oct 16, 2025: 'Equipping agents for the real world with Agent Skills.'">*</sup> Cowork brings that same autonomous work into a normal desktop app — no coding background required.<sup class="cite" data-url="https://techcrunch.com/2026/01/12/anthropics-new-cowork-tool-offers-claude-code-without-the-code/" data-note="TechCrunch, Jan 12, 2026: Anthropic previews Claude Cowork; it left research preview and became generally available April 9, 2026.">*</sup></p></li>
+              <li><span class="era">2026</span><h3>The current moment</h3><p>AI embedded in newsrooms with explicit policies. Tone shifts from "AI is coming" to "how do we do this well." Frenetic integration work is underway — people are throwing things at the wall to see what sticks.</p></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="slide" data-slide="s3">
+          <div class="slide-inner">
+            <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">State of the Art</h2></div>
             <p>It's worth separating the hype from what's real.</p>
             <div class="compare-grid">
               <div class="compare-col is-primary">
@@ -101,26 +118,33 @@
           </div>
         </section>
 
-        <section class="slide" data-slide="s3">
+        <section class="slide" data-slide="s4">
           <div class="slide-inner">
-            <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">Key Moments in Recent History</h2></div>
-            <p>The path here wasn't sudden. It's the accumulation of decades of technical milestones and academic research — some at universities, some at big tech companies — that finally broke into public view.</p>
-            <ol class="history">
-              <li><span class="era">2012</span><h3>Deep learning renaissance</h3><p>A neural network called AlexNet wins a major image-recognition contest by a landmark margin, using far more data and computing power than anyone had tried before.<sup class="cite" data-url="https://proceedings.neurips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html" data-note="Krizhevsky, Sutskever & Hinton's original NeurIPS 2012 paper introducing AlexNet — it won by 15.3% error vs. 26.2% for the next-best entry, and is widely credited with kicking off the deep-learning boom.">*</sup> Almost no one outside the field notices at the time — worth sitting with, since it's usually true: the shifts that turn out to matter most rarely look big while they're happening.</p></li>
-              <li><span class="era">2016</span><h3>AlphaGo beats Lee Sedol</h3><p>Google's AI defeats the world Go champion — far more complex than chess. Mainstream news for the first time, but still entirely specialized.</p></li>
-              <li><span class="era">2018–2020</span><h3>BERT, GPT-2, GPT-3</h3><p>Language models get genuinely good at understanding and generating text. GPT-3 introduces few-shot learning — the model picks up a new task from just a few examples shown in the prompt, without retraining.<sup class="cite" data-url="https://arxiv.org/abs/2005.14165" data-note="OpenAI's May 2020 GPT-3 paper, which introduced few-shot learning as a capability.">*</sup> Still gated behind research access.</p></li>
-              <li class="is-hinge"><span class="era">Nov 2022</span><h3>ChatGPT launches</h3><p>Free, open to anyone with an internet connection. Millions playing with AI within days. Newsrooms begin experimenting: brainstorming, drafting, analyzing data.</p></li>
-              <li><span class="era">2023–2024</span><h3>The "Copilot" era</h3><p>AI built into everything. The debate shifts from "is this real?" to "how do we use this responsibly?" First lawsuits over training data land — The New York Times sues OpenAI and Microsoft in December 2023, alleging its articles were used to train ChatGPT without permission.<sup class="cite" data-url="https://en.wikipedia.org/wiki/The_New_York_Times_v._Microsoft_and_OpenAI" data-note="The New York Times v. Microsoft and OpenAI, filed Dec. 27, 2023 in the Southern District of New York.">*</sup></p></li>
-              <li><span class="era">2024–2025</span><h3>Agents get hands</h3><p>Claude gains the ability to move a cursor, click, and type like a person.<sup class="cite" data-url="https://www.anthropic.com/news/developing-computer-use" data-note="Anthropic, Oct 22, 2024: 'computer use,' a research preview letting Claude 3.5 Sonnet operate a computer the way a person does — widely cited as the technical starting gun for the AI-agent wave.">*</sup> OpenAI's Operator becomes the first agent product to break into mainstream tech coverage.<sup class="cite" data-url="https://openai.com/index/introducing-operator/" data-note="OpenAI, Jan 23, 2025: Operator, a general-purpose agent that controls a web browser to book reservations, order groceries, and more.">*</sup> "AI acts on your behalf" stops being theoretical.</p></li>
-              <li><span class="era">2025–2026</span><h3>Skills, then Cowork</h3><p>Anthropic launches Agent Skills, reusable packages of instructions an AI can load on demand.<sup class="cite" data-url="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" data-note="Anthropic, Oct 16, 2025: 'Equipping agents for the real world with Agent Skills.'">*</sup> Cowork brings that same autonomous work into a normal desktop app — no coding background required.<sup class="cite" data-url="https://techcrunch.com/2026/01/12/anthropics-new-cowork-tool-offers-claude-code-without-the-code/" data-note="TechCrunch, Jan 12, 2026: Anthropic previews Claude Cowork; it left research preview and became generally available April 9, 2026.">*</sup></p></li>
-              <li><span class="era">2026</span><h3>The current moment</h3><p>AI embedded in newsrooms with explicit policies. Tone shifts from "AI is coming" to "how do we do this well." Frenetic integration work is underway — people are throwing things at the wall to see what sticks.</p></li>
-            </ol>
+            <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Major Builders & Trends</h2></div>
+            <h3>Who's Building It</h3>
+            <dl class="roster">
+              <div class="roster-row"><dt>Tech giants</dt><dd>OpenAI (ChatGPT, GPT-4), Google (Gemini), Meta (Llama), Anthropic (Claude).</dd></div>
+              <div class="roster-row"><dt>Specialized</dt><dd>Hugging Face, Midjourney (images), 11Labs (audio).</dd></div>
+              <div class="roster-row"><dt>Open-source</dt><dd>Anyone can download and run some models locally.</dd></div>
+            </dl>
+            <p>"Best" depends on the task — Claude is strong at reasoning and writing, others excel at images or code, and open-source is closing the gap faster than most people expect. The names will change; the pattern — new capability, then months to figure out what to do with it — probably won't.</p>
+            <h3>Who's Using It in Journalism</h3>
+            <p>A different layer — newsrooms building on the tools above, not building foundation models themselves.</p>
+            <dl class="roster">
+              <div class="roster-row"><dt>Large newsrooms</dt><dd>The New York Times' internal "Echo"<sup class="cite" data-url="https://techcrunch.com/2025/02/17/the-new-york-times-has-greenlit-ai-tools-for-product-and-edit-staff/" data-note="TechCrunch, Feb 2025: an internal beta tool that summarizes articles, suggests headlines, and generates social copy — staff cannot use it to draft or substantially revise articles.">*</sup> tool, The Washington Post's "Ember"<sup class="cite" data-url="https://www.semafor.com/article/12/14/2025/iterate-through-why-the-washington-post-launched-an-error-ridden-ai-product" data-note="Semafor, Dec 2025: an AI writing coach for outside op-ed contributors that gives structural feedback on submissions — it doesn't write for them.">*</sup> writing coach.</dd></div>
+              <div class="roster-row"><dt>Small newsrooms</dt><dd>Sahan Journal<sup class="cite" data-url="https://www.niemanlab.org/2025/06/minnesotas-sahan-journal-dives-into-ai-with-strategic-goals-and-open-eyes/" data-note="Nieman Lab, June 2025: a Minnesota nonprofit newsroom that built a custom ChatGPT-based tool to personalize advertiser media kits and uses AI for story summaries and data analysis.">*</sup>, Outlier Media<sup class="cite" data-url="https://wdet.org/2024/09/11/outlier-medias-new-sms-service-aims-to-address-information-gaps-in-detroit/" data-note="WDET, Sept 2024: a Detroit newsroom whose AI-assisted SMS service connects thousands of residents weekly to housing and municipal data.">*</sup> — same tools, very different scale.</dd></div>
+            </dl>
+            <div class="stakes">
+              <div class="stakes-item"><span class="who">For journalism</span><p>Efficiency gains, new storytelling possibilities, and genuinely hard ethical questions, all at once.</p></div>
+              <div class="stakes-item"><span class="who">For society</span><p>Labor disruption, misinformation risk, the environmental cost of training, and whose voices get amplified.</p></div>
+              <div class="stakes-item"><span class="who">For you</span><p>Understanding this technology is turning into a basic job skill, the same way Google Docs, Slack, and spreadsheets did.</p></div>
+            </div>
           </div>
         </section>
 
-        <section class="slide" data-slide="s4">
+        <section class="slide" data-slide="s5">
           <div class="slide-inner">
-            <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">What This Means for Journalists</h2></div>
+            <div class="block-head"><span class="block-eyebrow">05</span><h2 class="block-title">What This Means for Journalists</h2></div>
             <p>AI is a tool in your kit now, the way Google Docs or Slack is.</p>
             <div class="compare-grid">
               <div class="compare-col is-primary">
@@ -145,30 +169,6 @@
               </div>
             </div>
             <blockquote class="pull-question">Not "will AI replace me?" but "what does this let me try that I couldn't before?"</blockquote>
-          </div>
-        </section>
-
-        <section class="slide" data-slide="s5">
-          <div class="slide-inner">
-            <div class="block-head"><span class="block-eyebrow">05</span><h2 class="block-title">The Broader Landscape</h2></div>
-            <h3>Who's Building It</h3>
-            <dl class="roster">
-              <div class="roster-row"><dt>Tech giants</dt><dd>OpenAI (ChatGPT, GPT-4), Google (Gemini), Meta (Llama), Anthropic (Claude).</dd></div>
-              <div class="roster-row"><dt>Specialized</dt><dd>Hugging Face, Midjourney (images), 11Labs (audio).</dd></div>
-              <div class="roster-row"><dt>Open-source</dt><dd>Anyone can download and run some models locally.</dd></div>
-            </dl>
-            <p>"Best" depends on the task — Claude is strong at reasoning and writing, others excel at images or code, and open-source is closing the gap faster than most people expect. The names will change; the pattern — new capability, then months to figure out what to do with it — probably won't.</p>
-            <h3>Who's Using It in Journalism</h3>
-            <p>A different layer — newsrooms building on the tools above, not building foundation models themselves.</p>
-            <dl class="roster">
-              <div class="roster-row"><dt>Large newsrooms</dt><dd>The New York Times' internal "Echo"<sup class="cite" data-url="https://techcrunch.com/2025/02/17/the-new-york-times-has-greenlit-ai-tools-for-product-and-edit-staff/" data-note="TechCrunch, Feb 2025: an internal beta tool that summarizes articles, suggests headlines, and generates social copy — staff cannot use it to draft or substantially revise articles.">*</sup> tool, The Washington Post's "Ember"<sup class="cite" data-url="https://www.semafor.com/article/12/14/2025/iterate-through-why-the-washington-post-launched-an-error-ridden-ai-product" data-note="Semafor, Dec 2025: an AI writing coach for outside op-ed contributors that gives structural feedback on submissions — it doesn't write for them.">*</sup> writing coach.</dd></div>
-              <div class="roster-row"><dt>Small newsrooms</dt><dd>Sahan Journal<sup class="cite" data-url="https://www.niemanlab.org/2025/06/minnesotas-sahan-journal-dives-into-ai-with-strategic-goals-and-open-eyes/" data-note="Nieman Lab, June 2025: a Minnesota nonprofit newsroom that built a custom ChatGPT-based tool to personalize advertiser media kits and uses AI for story summaries and data analysis.">*</sup>, Outlier Media<sup class="cite" data-url="https://wdet.org/2024/09/11/outlier-medias-new-sms-service-aims-to-address-information-gaps-in-detroit/" data-note="WDET, Sept 2024: a Detroit newsroom whose AI-assisted SMS service connects thousands of residents weekly to housing and municipal data.">*</sup> — same tools, very different scale.</dd></div>
-            </dl>
-            <div class="stakes">
-              <div class="stakes-item"><span class="who">For journalism</span><p>Efficiency gains, new storytelling possibilities, and genuinely hard ethical questions, all at once.</p></div>
-              <div class="stakes-item"><span class="who">For society</span><p>Labor disruption, misinformation risk, the environmental cost of training, and whose voices get amplified.</p></div>
-              <div class="stakes-item"><span class="who">For you</span><p>Understanding this technology is turning into a basic job skill, the same way Google Docs, Slack, and spreadsheets did.</p></div>
-            </div>
           </div>
         </section>
 

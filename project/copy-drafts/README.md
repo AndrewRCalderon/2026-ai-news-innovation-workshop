@@ -11,9 +11,12 @@ content, not the pre-rewrite version. **Day 1 (`day-1/`) ported
 `people-to-follow` resource page) — see `day-1/README.md` for a
 cross-page pattern summary specific to that pass, pulled from
 `project/content-architecture-notes.md`. `09-project-assignments.html`
-is still a TODO stub, not ported. If a repeatable skill for generating/
-refreshing these drafts gets built, it's worth doing now that three days
-have gone through this by hand.
+was still a TODO stub as of that pass, so `09-project-assignments.md`
+(added 2026-08-23) started as original content, not an extraction; it's
+since been implemented into the briefing template (matching 01-08) and
+the draft re-synced from that live HTML the same day. If a repeatable
+skill for generating/refreshing these drafts gets built, it's worth
+doing now that three days have gone through this by hand.
 
 ## Why this exists
 

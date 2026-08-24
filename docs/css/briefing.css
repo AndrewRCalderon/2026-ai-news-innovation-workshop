@@ -275,6 +275,7 @@ html.briefing-deck, body.briefing-deck { height: 100%; overflow: hidden; margin:
 .resource-table { width: 100%; border-collapse: collapse; margin: var(--sp-4) 0; font-size: 0.92rem; }
 .resource-table th { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); text-align: left; padding: 0 var(--sp-3) var(--sp-2) 0; border-bottom: 2px solid var(--border-strong); }
 .resource-table td { padding: var(--sp-3) var(--sp-3) var(--sp-3) 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+.resource-table tr:last-child td { border-bottom: none; }
 .resource-table td:last-child, .resource-table th:last-child { padding-right: 0; }
 .resource-table td a { font-weight: 600; }
 .resource-table .type { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent-primary-strong); white-space: nowrap; }
