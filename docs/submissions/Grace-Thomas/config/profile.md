@@ -1,0 +1,14 @@
+# Reporter profile
+
+Edit this once. Every email uses it. Anything marked TODO will make Claude stop and ask.
+
+- **Name:** TODO — your full byline name
+- **Title:** Reporter
+- **Outlet:** TODO — e.g. NYCity News Service / CUNY Graduate School of Journalism
+- **Email:** tkc.intern2@journalism.cuny.edu
+- **Phone:** TODO — a number you'll actually pick up on deadline
+- **Signal / WhatsApp:** TODO — optional, delete the line if unused
+- **Gmail account index:** 0
+  <!-- If tkc.intern2@journalism.cuny.edu is the first Google account you're signed into,
+       leave this at 0. If it's your second account, set it to 1, and so on. This controls
+       the /u/0/ part of the Gmail compose links so drafts open in the right account. -->
