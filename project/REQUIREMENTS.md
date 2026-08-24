@@ -1120,12 +1120,15 @@ map cleanly to one.
       to be fixed by hand. Worth reconsidering if this happens again as more
       slides pages accumulate; the fix would be a small schedule-fetch added
       to `deck.js` for just the cover-meta fields.
-- [ ] "After class: end-of-day resources email (including recommended
+- [x] ~~"After class: end-of-day resources email (including recommended
       newsletters)" is real Day 1 content but isn't an in-class scheduled
       session, so it isn't in `schedule.json`. Currently just a static note
       on `day-1/index.html`. The actual newsletter list it should send
       belongs in `resources.html`'s Day 1 section once that's populated
-      (Phase 5) — right now that section is still a TODO placeholder.
+      (Phase 5) — right now that section is still a TODO placeholder.~~ —
+      **Removed 2026-08-23**: user asked to drop the static note from
+      `day-1/index.html` entirely rather than build the feature it was a
+      stand-in for. Nothing to build here anymore.
 - [x] Resolved: "Your Workshop Tech Stack" and "How They Work Together"
       moved out of `07-ai-tools.html` into `08-explore-tech-stack.html`
       (both Overview and Slides). AI Tools is now a clean 5-section, 30-min
