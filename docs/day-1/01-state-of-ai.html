@@ -15,17 +15,17 @@
 
     <header class="masthead">
       <h1 class="masthead-title">State of AI</h1>
-      <p class="masthead-dek">We're at the invention phase, not the mature phase — and the rules are still being written.</p>
+      <p class="masthead-dek">AI is in an invention phase, not a mature one. The practices are still being written.</p>
       <div class="masthead-meta"><span id="topic-time">--</span><span class="div">·</span><span id="topic-duration">--</span><span class="div">·</span><span id="topic-type">--</span></div>
     </header>
 
     <nav class="toc" aria-label="Sections in this briefing">
       <ol>
-        <li><a href="#s1"><span class="n">01</span> The Moment We're In</a></li>
-        <li><a href="#s2"><span class="n">02</span> What's Changed</a></li>
-        <li><a href="#s3"><span class="n">03</span> Recent History</a></li>
-        <li><a href="#s4"><span class="n">04</span> For Journalists</a></li>
-        <li><a href="#s5"><span class="n">05</span> The Landscape</a></li>
+        <li><a href="#s1"><span class="n">01</span> The Moment</a></li>
+        <li><a href="#s2"><span class="n">02</span> A Cursory Timeline of Recent History</a></li>
+        <li><a href="#s3"><span class="n">03</span> State of the Art</a></li>
+        <li><a href="#s4"><span class="n">04</span> Major Builders & Trends</a></li>
+        <li><a href="#s5"><span class="n">05</span> What This Means for Journalists</a></li>
       </ol>
     </nav>
 
@@ -36,11 +36,11 @@
 
     <article>
       <section class="block reveal" id="s1">
-        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">The Moment We're In</h2></div>
-        <p class="lede">AI itself isn't new — machine learning has quietly shaped things like fraud detection and recommendation engines for over a decade. What changed is who gets to use it. Large language models turned something that used to require real technical training into something you open in a browser tab. That's worth taking seriously, and worth being skeptical about at the same time. The tools are real; so is the hype around them. Telling the two apart is most of what this session is about.</p>
+        <div class="block-head"><span class="block-eyebrow">01</span><h2 class="block-title">The Moment</h2></div>
+        <p class="lede">AI itself isn't new. Machine learning (ML) has quietly shaped things like fraud detection and recommendation engines for over a decade, and artificial intelligence dates back to the mid-20th century. What changed is who gets to use it. Large language models turned something that used to require real technical training into something anyone can open on a laptop or phone. It's a foundational sociotechnical shift that demands curiosity and skepticism. The tools are real, and so is the hype around them.</p>
         <ul class="field-notes">
-          <li>AI went from "expert-only" to "something most people have at least tried."</li>
-          <li>We're at the invention phase, not the mature phase. Things are changing every week.</li>
+          <li>AI went from expert-only to something most people have at least tried.</li>
+          <li>Adoption is happening fast, chosen in the best case and forced in the worst, but little about it is settled yet. Things are changing every week.</li>
           <li>The rules, best practices, and ethics are still being written.</li>
         </ul>
         <p>This mirrors other major shifts in how fast a technology went from novelty to normal:</p>
@@ -50,107 +50,77 @@
           <div class="chip"><span class="yr">2010</span><span class="lbl">Social platforms</span></div>
           <div class="chip"><span class="yr">2022</span><span class="lbl">ChatGPT launch</span></div>
         </div>
-        <p>ChatGPT launched with a free version, and within days AI went from a specialist topic to something millions of people were actually trying.</p>
+        <p>ChatGPT launched free, and within days AI went from a specialist topic to something millions of people were actually trying.</p>
         <div class="stat-pull">
           <span class="num">1M</span>
           <span class="cap">Users in 5 days<sup class="cite" data-url="https://x.com/gdb/status/1599683104142430208" data-note="OpenAI co-founders Sam Altman and Greg Brockman both confirmed on X that ChatGPT hit 1 million users five days after its Nov 30, 2022 launch.">*</sup></span>
-          <p class="aside">One of the fastest consumer product launches ever — and it left one question hanging over everything since: what can I actually do with this?</p>
+          <p class="aside">One of the fastest consumer product launches ever. It left one question hanging over everything since: what can this actually do for me?</p>
+        </div>
+        <div class="stakes">
+          <div class="stakes-item"><span class="who">For journalism</span><p>Efficiency gains, new storytelling and product possibilities, and genuinely hard ethical questions, all at once.</p></div>
+          <div class="stakes-item"><span class="who">For society</span><p>Labor disruption, misinformation risk, the environmental cost of training & usage, and frenetic adoption.</p></div>
+          <div class="stakes-item"><span class="who">For you</span><p>Understanding this technology is turning into a basic job skill.</p></div>
         </div>
       </section>
 
       <section class="block reveal" id="s2">
-        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">What's Actually Changed</h2></div>
-        <p>It's worth separating the hype from what's real.</p>
+        <div class="block-head"><span class="block-eyebrow">02</span><h2 class="block-title">A Cursory Timeline of Recent History</h2></div>
+        <p>The path to LLMs wasn't sudden. It's the accumulation of decades of technical milestones and academic research, some at universities, some at big tech companies, some inside newsrooms themselves, that finally broke into public view.</p>
+        <ol class="history">
+          <li><span class="era">2012</span><h3>Deep learning renaissance</h3><p>A neural network called AlexNet wins a major image-recognition contest by a landmark margin, using far more data and computing power than anyone had tried before.<sup class="cite" data-url="https://proceedings.neurips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html" data-note="Krizhevsky, Sutskever & Hinton's original NeurIPS 2012 paper introducing AlexNet — it won by 15.3% error vs. 26.2% for the next-best entry, and is widely credited with kicking off the deep-learning boom.">*</sup></p></li>
+          <li><span class="era">2014</span><h3>Newsrooms automate their first beat</h3><p>The Associated Press starts using Automated Insights' Wordsmith to write corporate earnings stories, expanding coverage from about 300 companies a quarter to more than 4,700 and freeing an estimated three full-time-equivalent reporters a year for other work.<sup class="cite" data-url="https://www.poynter.org/reporting-editing/2015/robot-writing-increased-aps-earnings-stories-by-tenfold/" data-note="Poynter, 2015: AP's Automated Insights partnership expanded earnings-story coverage from about 300 to about 4,700 companies a quarter, freeing an estimated three full-time-equivalent reporters annually.">*</sup></p></li>
+          <li><span class="era">2016</span><h3>AlphaGo beats Lee Sedol</h3><p>Google's AI defeats the world Go champion at a game far more probabilistically complex than chess, in a match watched by over 200 million people.<sup class="cite" data-url="https://deepmind.google/research/alphago/" data-note="DeepMind: AlphaGo's 4-1 victory over Lee Sedol in Seoul, March 2016, was watched by over 200 million people worldwide.">*</sup></p></li>
+          <li><span class="era">2018–2020</span><h3>BERT, GPT-2, GPT-3</h3><p>Language models get genuinely good at understanding and generating text. GPT-3 introduces few-shot learning: the model picks up a new task from just a few examples shown in the prompt, without retraining.<sup class="cite" data-url="https://arxiv.org/abs/2005.14165" data-note="OpenAI's May 2020 GPT-3 paper, which introduced few-shot learning as a capability.">*</sup> Still gated behind research access.</p></li>
+          <li class="is-hinge"><span class="era">Nov 2022</span><h3>ChatGPT launches</h3><p>Free, open to anyone with an internet connection. Millions try AI within days. Newsrooms begin experimenting: brainstorming, drafting, analyzing data.</p></li>
+          <li><span class="era">Dec 2023</span><h3>The first major AI copyright suit lands</h3><p>The New York Times sues OpenAI and Microsoft, alleging its articles were used to train ChatGPT without permission and seeking billions in damages.<sup class="cite" data-url="https://www.cnbc.com/2023/12/27/new-york-times-sues-microsoft-chatgpt-maker-openai-over-copyright-infringement.html" data-note="CNBC, Dec 27, 2023: The New York Times sued OpenAI and Microsoft in the Southern District of New York (case No. 1:23-cv-11195), alleging verbatim reproduction of its journalism and seeking billions in damages.">*</sup></p></li>
+          <li><span class="era">2024–2025</span><h3>Agentic becomes a household word</h3><p>Anthropic's Claude gains the ability to move a cursor, click, and type.<sup class="cite" data-url="https://www.anthropic.com/news/developing-computer-use" data-note="Anthropic, Oct 22, 2024: 'computer use,' a research preview letting Claude 3.5 Sonnet operate a computer the way a person does — widely cited as the technical starting gun for the AI-agent wave.">*</sup> Three months later, OpenAI's Operator becomes the first agent product that can browse the web and complete a task on its own.<sup class="cite" data-url="https://openai.com/index/introducing-operator/" data-note="OpenAI, Jan 23, 2025: Operator, a general-purpose agent that controls a web browser to book reservations, order groceries, and more.">*</sup> AI acting on your behalf stops being theoretical.</p></li>
+          <li><span class="era">2025–2026</span><h3>Skills, then Cowork</h3><p>Anthropic launches Agent Skills as reusable packages of instructions AI can load on demand for a specialized task, instead of being taught from scratch every time.<sup class="cite" data-url="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" data-note="Anthropic, Oct 16, 2025: 'Equipping agents for the real world with Agent Skills.'">*</sup> Months later, Cowork brings that same autonomous, multi-step work into a normal desktop app: describe an outcome, and Claude reads, edits, and creates files on its own, no coding background required.<sup class="cite" data-url="https://techcrunch.com/2026/01/12/anthropics-new-cowork-tool-offers-claude-code-without-the-code/" data-note="TechCrunch, Jan 12, 2026: Anthropic previews Claude Cowork; it left research preview and became generally available April 9, 2026.">*</sup></p></li>
+          <li><span class="era">2026</span><h3>At present</h3><p>Cowork expands to web and mobile, and most people using it aren't coding at all.<sup class="cite" data-url="https://techcrunch.com/2026/07/07/the-coding-agent-wars-are-spilling-into-the-rest-of-the-office-claude-cowork/" data-note="TechCrunch, July 7, 2026: Cowork expands to web and mobile; most users aren't coding with it.">*</sup> Anthropic, OpenAI, and Google all ship major model updates within weeks of each other.<sup class="cite" data-url="https://www.anthropic.com/news/claude-opus-5" data-note="Anthropic, July 24, 2026: Claude Opus 5 launches, near-frontier performance at half the price of Opus 4.8, part of a dense mid-2026 release window that also included GPT-5.6 and updated Gemini models.">*</sup> In newsrooms specifically, 82% of journalists now use AI tools regularly<sup class="cite" data-url="https://www.globenewswire.com/news-release/2026/03/19/3259178/0/en/muck-rack-s-2026-state-of-journalism-report-finds-82-of-journalists-use-ai.html" data-note="Muck Rack, 'The State of Journalism 2026' (March 19, 2026).">*</sup>, and more than 2,300 US and UK newsroom jobs were cut in the first half of 2026 alone, about a third faster than all of 2025 combined. Automation is cited explicitly at some outlets; at others it's tangled up with a longer industry decline.<sup class="cite" data-url="https://mediacopilot.ai/journalisms-workforce-shrinks-as-ai-and-new-consumer-habits-reshape-the-industry/" data-note="MediaCopilot tracker: 2,300+ US/UK newsroom jobs cut in H1 2026, roughly 34% ahead of 2025's full-year pace. A Columbia journalism-school analysis found AI so far 'aids news workers rather than replaces them,' with cuts also tangled up with referral-traffic collapse and a longer-run industry decline.">*</sup></p></li>
+        </ol>
+      </section>
+
+      <section class="block reveal" id="s3">
+        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">State of the Art</h2></div>
+        <p>It's worth separating the hype from what's real, matched change for change against its real limit.</p>
         <div class="compare-grid">
           <div class="compare-col is-primary">
             <h3>Changed</h3>
             <ul>
-              <li><strong>Speed of deployment</strong> — prototyping now takes minutes, not months.<sup class="cite" data-url="https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/unleashing-developer-productivity-with-generative-ai" data-note="Generative AI meaningfully speeds up prototyping — McKinsey measured roughly 10-50% time savings on coding tasks, varying by task complexity.">*</sup></li>
-              <li><strong>Accessibility</strong> — no ML background needed, and adoption shows it: about half of U.S. adults now use AI chatbots, up from roughly a quarter in 2023.<sup class="cite" data-url="https://www.pewresearch.org/internet/2026/06/17/americans-and-ai-2026-chatbots-smart-devices-and-views-on-impact/" data-note="Pew Research, June 2026: 49% of U.S. adults now use AI chatbots, up from 23% in 2023.">*</sup></li>
-              <li><strong>Capability scale</strong> — reasoning, coding, document analysis, all far beyond what these models could do three years ago.<sup class="cite" data-url="https://hai.stanford.edu/ai-index/2025-ai-index-report" data-note="Stanford's 2025 AI Index found steep one-year benchmark jumps: real coding-task success (SWE-bench) rose from 4.4% to 71.7%, with similar leaps in graduate-level reasoning and multimodal understanding.">*</sup></li>
-              <li><strong>Cost</strong> — cheap enough for students and small newsrooms to experiment.<sup class="cite" data-url="https://hai.stanford.edu/ai-index/2025-ai-index-report" data-note="Stanford's 2025 AI Index found the cost to query a GPT-3.5-level model fell about 280-fold in 18 months — from $20.00 to $0.07 per million tokens.">*</sup></li>
-              <li><strong>Public conversation</strong> — no longer niche: 95% of U.S. adults have heard of AI, and those who've heard "a lot" nearly doubled in three years.<sup class="cite" data-url="https://www.pewresearch.org/science/2025/09/17/ai-in-americans-lives-awareness-experiences-and-attitudes/" data-note="Pew Research, Sept 2025: 95% of U.S. adults have heard at least a little about AI; the share who've heard 'a lot' rose from 26% (2022) to 47% (2025).">*</sup></li>
-              <li><strong>Privacy tooling</strong> — enterprise AI plans now offer training opt-outs and data-retention controls, even if newsroom-grade guarantees are still maturing.<sup class="cite" data-url="https://www.anthropic.com/news/updates-to-our-consumer-terms" data-note="Anthropic's 2025 policy update excludes Work/Enterprise/Education/Government and API usage from training entirely, with new opt-in/opt-out controls for consumer plans.">*</sup></li>
+              <li><strong>Speed of deployment</strong>: prototyping now takes minutes, not months.<sup class="cite" data-url="https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/unleashing-developer-productivity-with-generative-ai" data-note="Generative AI meaningfully speeds up prototyping. McKinsey measured roughly 10-50% time savings on coding tasks, varying by task complexity.">*</sup></li>
+              <li><strong>Accessibility</strong>: no ML background needed, and adoption shows it. 49% of U.S. adults now use an AI chatbot, up from just 18% three years ago.<sup class="cite" data-url="https://www.pewresearch.org/internet/2026/06/17/americans-and-ai-2026-chatbots-smart-devices-and-views-on-impact/" data-note="Pew Research, June 2026 (fielded Feb 2026, n=5,119): 49% of U.S. adults use an AI chatbot, up from 18% in 2023, climbing steadily each year since.">*</sup> Journalists are ahead of that curve: 82% now use AI tools regularly, up from 77% last year.<sup class="cite" data-url="https://www.globenewswire.com/news-release/2026/03/19/3259178/0/en/muck-rack-s-2026-state-of-journalism-report-finds-82-of-journalists-use-ai.html" data-note="Muck Rack, 'The State of Journalism 2026' (March 19, 2026; n=897 journalists, fielded Jan 30-Mar 2, 2026): 82% of journalists use AI tools regularly, up from 77%. ChatGPT leads at 47%, Gemini 22%, Claude 12% (up from 6%).">*</sup></li>
+              <li><strong>Capability scale</strong>: coding-benchmark performance nearly doubled in a year. Leading coding evaluation framework, SWE-bench Verified, went from 60% to close to 100% between the 2025 and 2026 AI Index.<sup class="cite" data-url="https://hai.stanford.edu/ai-index/2026-ai-index-report" data-note="Stanford HAI's 2026 AI Index (April 13, 2026): SWE-bench Verified rose from 60% to near 100% between the 2025 and 2026 editions.">*</sup></li>
+              <li><strong>Cost</strong>: cheap enough for students and small newsrooms to experiment. Querying a GPT-3.5-level model got about 280 times cheaper in 18 months.<sup class="cite" data-url="https://hai.stanford.edu/ai-index/2025-ai-index-report" data-note="Stanford's 2025 AI Index found the cost to query a GPT-3.5-level model fell about 280-fold in 18 months, from $20.00 to $0.07 per million tokens.">*</sup></li>
+              <li><strong>Public conversation</strong>: no longer niche. The share of U.S. adults who've heard "a lot" about AI nearly doubled in four years, from 26% to 47%.<sup class="cite" data-url="https://www.pewresearch.org/short-reads/2026/03/12/key-findings-about-how-americans-view-artificial-intelligence/" data-note="Pew Research, March 2026: the share of U.S. adults who've heard 'a lot' about AI rose from 26% (2022) to 47% (2025).">*</sup></li>
+              <li><strong>Privacy tooling</strong>: enterprise AI plans now offer training opt-outs and data-retention controls, plus baked-in security checks while coding.<sup class="cite" data-url="https://www.anthropic.com/news/updates-to-our-consumer-terms" data-note="Anthropic's 2025 policy update excludes Work/Enterprise/Education/Government and API usage from training entirely, with new opt-in/opt-out controls for consumer plans.">*</sup></li>
             </ul>
           </div>
           <div class="compare-col is-secondary">
             <h3>Caveat</h3>
             <ul>
-              <li>AI still hallucinates — confidently wrong, sometimes.<sup class="cite" data-url="https://arxiv.org/abs/2509.04664" data-note="A Sept 2025 OpenAI/Georgia Tech paper argues models hallucinate partly because training rewards confident guessing over admitting uncertainty.">*</sup></li>
-              <li>It isn't "thinking" like humans; it's pattern-matching at scale.<sup class="cite" data-url="https://machinelearning.apple.com/research/illusion-of-thinking" data-note="Apple's 2025 'Illusion of Thinking' study found top reasoning models collapse on novel, complex logic puzzles — though the test design itself is debated among researchers.">*</sup></li>
-              <li>It can amplify biases already in its training data.<sup class="cite" data-url="https://arxiv.org/abs/1707.09457" data-note="A foundational 2017 study found models don't just reflect but amplify training-data bias — one gender association went from 33% in the data to 68% in the model's predictions.">*</sup></li>
-              <li>Best on well-defined tasks, less so open-ended creative work.<sup class="cite" data-url="https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/" data-note="METR, March 2025: AI agents succeed on nearly 100% of short, well-specified tasks but under 10% of tasks that take humans 4+ hours — performance drops sharply as tasks get longer and less defined.">*</sup></li>
-              <li>Privacy and data security remain genuinely thorny.<sup class="cite" data-url="https://hai.stanford.edu/assets/files/hai_ai-index-report-2025_chapter3_final.pdf" data-note="Stanford's 2025 AI Index recorded a 56% year-over-year rise in AI-related privacy incidents, while public trust in AI companies to protect personal data declined.">*</sup></li>
-              <li>We don't fully understand why these models work this well.<sup class="cite" data-url="https://darioamodei.com/post/the-urgency-of-interpretability" data-note="Anthropic CEO Dario Amodei has written that even the companies building these models don't yet understand their internal workings well enough to fully explain their behavior.">*</sup></li>
+              <li><strong>Still confidently wrong</strong>: AI hallucinates with total confidence.<sup class="cite" data-url="https://arxiv.org/abs/2509.04664" data-note="A Sept 2025 OpenAI/Georgia Tech paper argues models hallucinate partly because training rewards confident guessing over admitting uncertainty.">*</sup></li>
+              <li><strong>Adoption outpaces trust, even among journalists</strong>: 62% of UK journalists see AI as a large threat to journalism; only 15% call it a large opportunity.<sup class="cite" data-url="https://reutersinstitute.politics.ox.ac.uk/ai-adoption-uk-journalists-and-their-newsrooms-surveying-applications-approaches-and-attitudes" data-note="Reuters Institute, Nov 27, 2025 (n=1,004 UK journalists): 62% see AI as a large or very large threat to journalism; 15% see it as a large opportunity. 60% are 'extremely concerned' about its effect on public trust.">*</sup></li>
+              <li><strong>Benchmarks overstate real-world reliability</strong>: the same 2026-era model that scores 81% on the standard SWE-bench test drops to 46% on a harder test variant.<sup class="cite" data-url="https://hai.stanford.edu/ai-index/2026-ai-index-report" data-note="Independent benchmark tracking cited alongside Stanford's 2026 AI Index: Claude Opus 4.5 scores 80.9% on the standard SWE-bench Verified but only 45.9% on the harder, less contamination-prone SWE-bench Pro variant.">*</sup></li>
+              <li><strong>Bias rides along, amplified</strong>: tested against real labor-market data, for example, current models are 3 to 6 times more likely to assign a stereotypically gendered occupation than actual employment statistics would predict.<sup class="cite" data-url="https://arxiv.org/abs/2308.14921" data-note="Kotek, Dockum & Sun, 'Gender Bias and Stereotypes in Large Language Models' (2023): tested against real U.S. Bureau of Labor Statistics employment data, four 2023-era LLMs were 3-6 times more likely to select a stereotypically gender-matched occupation than actual employment distributions would predict.">*</sup></li>
+              <li><strong>Awareness exacerbates the trust gap</strong>: only 20% of people globally trust AI chatbot answers, against 37% who trust the news itself.<sup class="cite" data-url="https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/dnr-executive-summary" data-note="Reuters Institute Digital News Report 2026 (June 16, 2026): 20% of people globally trust AI chatbot answers, versus 37% who trust the news itself, a 17-point gap as low as 6% in the UK.">*</sup></li>
+              <li><strong>Even its builders don't fully understand it</strong>: the companies training these models say so themselves.<sup class="cite" data-url="https://darioamodei.com/post/the-urgency-of-interpretability" data-note="Anthropic CEO Dario Amodei has written that even the companies building these models don't yet understand their internal workings well enough to fully explain their behavior.">*</sup></li>
             </ul>
           </div>
         </div>
-      </section>
-
-      <section class="block reveal" id="s3">
-        <div class="block-head"><span class="block-eyebrow">03</span><h2 class="block-title">Key Moments in Recent History</h2></div>
-        <p>The path here wasn't sudden. It's the accumulation of decades of technical milestones and academic research — some at universities, some at big tech companies — that finally broke into public view.</p>
-        <ol class="history">
-          <li><span class="era">2012</span><h3>Deep learning renaissance</h3><p>A neural network called AlexNet wins a major image-recognition contest by a landmark margin, using far more data and computing power than anyone had tried before.<sup class="cite" data-url="https://proceedings.neurips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html" data-note="Krizhevsky, Sutskever & Hinton's original NeurIPS 2012 paper introducing AlexNet — it won by 15.3% error vs. 26.2% for the next-best entry, and is widely credited with kicking off the deep-learning boom.">*</sup> Almost no one outside the field notices at the time — worth sitting with, since it's usually true: the shifts that turn out to matter most rarely look big while they're happening.</p></li>
-          <li><span class="era">2016</span><h3>AlphaGo beats Lee Sedol</h3><p>Google's AI defeats the world Go champion — far more complex than chess. Mainstream news for the first time, but still entirely specialized.</p></li>
-          <li><span class="era">2018–2020</span><h3>BERT, GPT-2, GPT-3</h3><p>Language models get genuinely good at understanding and generating text. GPT-3 introduces few-shot learning — the model picks up a new task from just a few examples shown in the prompt, without retraining.<sup class="cite" data-url="https://arxiv.org/abs/2005.14165" data-note="OpenAI's May 2020 GPT-3 paper, which introduced few-shot learning as a capability.">*</sup> Still gated behind research access.</p></li>
-          <li class="is-hinge"><span class="era">Nov 2022</span><h3>ChatGPT launches</h3><p>Free, open to anyone with an internet connection. Millions playing with AI within days. Newsrooms begin experimenting: brainstorming, drafting, analyzing data.</p></li>
-          <li><span class="era">2023–2024</span><h3>The "Copilot" era</h3><p>AI built into everything. The debate shifts from "is this real?" to "how do we use this responsibly?" First lawsuits over training data land — The New York Times sues OpenAI and Microsoft in December 2023, alleging its articles were used to train ChatGPT without permission.<sup class="cite" data-url="https://en.wikipedia.org/wiki/The_New_York_Times_v._Microsoft_and_OpenAI" data-note="The New York Times v. Microsoft and OpenAI, filed Dec. 27, 2023 in the Southern District of New York.">*</sup></p></li>
-          <li><span class="era">2024–2025</span><h3>Agents get hands</h3><p>Anthropic's Claude gains the ability to move a cursor, click, and type like a person would.<sup class="cite" data-url="https://www.anthropic.com/news/developing-computer-use" data-note="Anthropic, Oct 22, 2024: 'computer use,' a research preview letting Claude 3.5 Sonnet operate a computer the way a person does — widely cited as the technical starting gun for the AI-agent wave.">*</sup> Three months later, OpenAI's Operator becomes the first agent product to break into mainstream tech coverage — an AI that can browse the web and actually complete a task for you, not just describe how.<sup class="cite" data-url="https://openai.com/index/introducing-operator/" data-note="OpenAI, Jan 23, 2025: Operator, a general-purpose agent that controls a web browser to book reservations, order groceries, and more.">*</sup> "AI acts on your behalf" stops being theoretical.</p></li>
-          <li><span class="era">2025–2026</span><h3>Skills, then Cowork</h3><p>Anthropic launches Agent Skills — reusable packages of instructions an AI can load on demand for a specialized task, instead of being taught from scratch every time.<sup class="cite" data-url="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" data-note="Anthropic, Oct 16, 2025: 'Equipping agents for the real world with Agent Skills.'">*</sup> Months later, Cowork brings that same autonomous, multi-step work into a normal desktop app — describe an outcome, and Claude reads, edits, and creates files on its own, no coding background required.<sup class="cite" data-url="https://techcrunch.com/2026/01/12/anthropics-new-cowork-tool-offers-claude-code-without-the-code/" data-note="TechCrunch, Jan 12, 2026: Anthropic previews Claude Cowork; it left research preview and became generally available April 9, 2026.">*</sup></p></li>
-          <li><span class="era">2026</span><h3>The current moment</h3><p>AI embedded in newsrooms with explicit policies. Tone shifts from "AI is coming" to "how do we do this well." Frenetic integration work is underway — people are throwing things at the wall to see what sticks.</p></li>
-        </ol>
       </section>
 
       <section class="block reveal" id="s4">
-        <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">What This Means for Journalists</h2></div>
-        <p>AI is a tool in your kit now, the way Google Docs or Slack is.</p>
-        <div class="compare-grid">
-          <div class="compare-col is-primary">
-            <h3>You Can</h3>
-            <ul>
-              <li>Draft initial story outlines.</li>
-              <li>Analyze large datasets you feed it.</li>
-              <li>Brainstorm headlines or angles.</li>
-              <li>Explain complex topics so you understand them better.</li>
-              <li>Fact-check claims — imperfectly.</li>
-              <li>Generate ideas for visual presentation.</li>
-            </ul>
-          </div>
-          <div class="compare-col is-secondary">
-            <h3>You Should Not</h3>
-            <ul>
-              <li>Replace reporting — it synthesizes, it doesn't originate.</li>
-              <li>Publish AI text unvetted — it's confidently wrong, often.</li>
-              <li>Use it without disclosure.</li>
-              <li>Assume it's objective — trained on biased human text.</li>
-            </ul>
-          </div>
-        </div>
-        <blockquote class="pull-question">Not "will AI replace me?" but "what does this let me try that I couldn't before?"</blockquote>
+        <div class="block-head"><span class="block-eyebrow">04</span><h2 class="block-title">Major Builders & Trends</h2></div>
+        <dl class="roster">
+          <div class="roster-row"><dt>Tech giants</dt><dd>OpenAI (ChatGPT, GPT-4/5), Google (Gemini), Meta (Llama), Anthropic (Claude). Among the paying businesses, Anthropic passed OpenAI for the first time in April 2026 and kept extending the lead. About 44% of U.S. businesses paid for Anthropic subscriptions or tokens by July 2026, versus 39.7% for OpenAI, a fast reversal from a year earlier when Anthropic's share was roughly a quarter of OpenAI's.<sup class="cite" data-url="https://ramp.com/data/ai-index-august-2026" data-note="Ramp AI Index, August 2026: Anthropic passed OpenAI on U.S. business spend share in April 2026 and extended its lead to 43.5% versus 39.7% by July 2026.">*</sup></dd></div>
+          <div class="roster-row"><dt>Specialized</dt><dd>Hugging Face (2 million-plus public models, 500,000-plus datasets, 13 million users as of spring 2026)<sup class="cite" data-url="https://huggingface.co/blog/huggingface/state-of-os-hf-spring-2026" data-note="Hugging Face's Spring 2026 state-of-open-source report: over 2 million public models, 500,000-plus datasets, 13 million users.">*</sup>, Midjourney (images), ElevenLabs (audio, valued at $11 billion as of a February 2026 raise).<sup class="cite" data-url="https://techcrunch.com/2026/02/04/elevenlabs-raises-500m-from-sequioia-at-a-11-billion-valuation/" data-note="TechCrunch, Feb 4, 2026: ElevenLabs raised $500 million from Sequoia at an $11 billion valuation.">*</sup></dd></div>
+          <div class="roster-row"><dt>Open-source</dt><dd>Anyone can download and run some models locally, and the performance gap to closed frontier models is narrowing fast. On one independent benchmark, the best open-weight models trailed the leading proprietary model by about 13 points in early 2025; by April 2026 that gap had closed to about 6 points, though open models still lag noticeably on the hardest reasoning tests and on hallucination measures specifically.<sup class="cite" data-url="https://artificialanalysis.ai/articles/recent-open-weights-model-launches" data-note="Artificial Analysis, April 30, 2026: the best open-weight models (Kimi K2.6, MiMo V2.5 Pro) scored 54 on its Intelligence Index versus 60 for the leading proprietary model, a 6-point gap, down from roughly 13 points a year earlier; open models still trail by 8-11 points on Humanity's Last Exam and score negative on hallucination measures where proprietary leaders score positive.">*</sup></dd></div>
+        </dl>
       </section>
 
       <section class="block reveal" id="s5">
-        <div class="block-head"><span class="block-eyebrow">05</span><h2 class="block-title">The Broader Landscape</h2></div>
-        <h3>Who's Building It</h3>
-        <dl class="roster">
-          <div class="roster-row"><dt>Tech giants</dt><dd>OpenAI (ChatGPT, GPT-4), Google (Gemini), Meta (Llama), Anthropic (Claude).</dd></div>
-          <div class="roster-row"><dt>Specialized</dt><dd>Hugging Face, Midjourney (images), 11Labs (audio).</dd></div>
-          <div class="roster-row"><dt>Open-source</dt><dd>Anyone can download and run some models locally.</dd></div>
-        </dl>
-        <p>"Best" depends on the task — Claude is strong at reasoning and writing, others excel at images or code, and open-source is closing the gap faster than most people expect. The specific names on this list will probably look different in six months. The pattern — new capability arrives, then it takes months for anyone to figure out what to actually do with it — probably won't.</p>
-
-        <h3>Who's Using It in Journalism</h3>
-        <p>Different layer entirely — these are newsrooms building on top of the tools above, not building foundation models themselves.</p>
-        <dl class="roster">
-          <div class="roster-row"><dt>Large newsrooms</dt><dd>The New York Times' internal "Echo"<sup class="cite" data-url="https://techcrunch.com/2025/02/17/the-new-york-times-has-greenlit-ai-tools-for-product-and-edit-staff/" data-note="TechCrunch, Feb 2025: an internal beta tool that summarizes articles, suggests headlines, and generates social copy — staff cannot use it to draft or substantially revise articles.">*</sup> tool, The Washington Post's "Ember"<sup class="cite" data-url="https://www.semafor.com/article/12/14/2025/iterate-through-why-the-washington-post-launched-an-error-ridden-ai-product" data-note="Semafor, Dec 2025: an AI writing coach for outside op-ed contributors that gives structural feedback on submissions — it doesn't write for them.">*</sup> writing coach.</dd></div>
-          <div class="roster-row"><dt>Small newsrooms</dt><dd>Sahan Journal<sup class="cite" data-url="https://www.niemanlab.org/2025/06/minnesotas-sahan-journal-dives-into-ai-with-strategic-goals-and-open-eyes/" data-note="Nieman Lab, June 2025: a Minnesota nonprofit newsroom that built a custom ChatGPT-based tool to personalize advertiser media kits and uses AI for story summaries and data analysis.">*</sup>, Outlier Media<sup class="cite" data-url="https://wdet.org/2024/09/11/outlier-medias-new-sms-service-aims-to-address-information-gaps-in-detroit/" data-note="WDET, Sept 2024: a Detroit newsroom whose AI-assisted SMS service connects thousands of residents weekly to housing and municipal data.">*</sup> — same underlying tools as the newsrooms above, at a very different scale.</dd></div>
-        </dl>
-        <div class="stakes">
-          <div class="stakes-item"><span class="who">For journalism</span><p>Efficiency gains, new storytelling possibilities, and genuinely hard ethical questions, all at once.</p></div>
-          <div class="stakes-item"><span class="who">For society</span><p>Labor disruption, misinformation risk, the environmental cost of training, and whose voices get amplified.</p></div>
-          <div class="stakes-item"><span class="who">For you</span><p>Understanding this technology is turning into a basic job skill, the same way Google Docs, Slack, and spreadsheets did.</p></div>
-        </div>
+        <div class="block-head"><span class="block-eyebrow">05</span><h2 class="block-title">What This Means for Journalists</h2></div>
+        <p class="lede">AI is a tool in your kit now, the way Google Docs or Slack is.</p>
+        <blockquote class="pull-question">The provocation: not "what can AI do for me?" but "what does this let me try that I couldn't before?"</blockquote>
       </section>
     </article>
 

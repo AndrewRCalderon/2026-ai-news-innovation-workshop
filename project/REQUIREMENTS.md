@@ -1085,7 +1085,12 @@ map cleanly to one.
       the user felt they read shallower and more repetitive than Day 2/3.
       `03-use-cases.md` §4/§5 got a lighter, targeted pass in the same
       session. The other 6 Day 1 pages are still queued for the user's own
-      line-by-line pass, unchanged by this. **Resolved 2026-08-21**: this
+      line-by-line pass, unchanged by this. **Update, 2026-08-22**:
+      `01`/`02`/`03`'s corresponding `docs/day-1/*.html` pages were
+      regenerated from these drafts ahead of the line-by-line pass (the
+      user wants to edit against the live rendered site, not the raw
+      markdown) — full detail in the matching 2026-08-22 change-log
+      entry. **Resolved 2026-08-21**: this
       research-first discipline (now used 4 times: Day 2, Day 3, this Day 1
       rewrite, and its own follow-up grounding pass) is now a project skill,
       [`.claude/skills/ground-content/SKILL.md`](../.claude/skills/ground-content/SKILL.md)
@@ -3016,6 +3021,298 @@ questions. Worked Adiel's 3 sources into
 
 ## Change log
 
+- 2026-08-23 — **`docs/data/schedule.json`: Day 1 morning rebalanced
+  (State of AI 15→20 min, Industry Conversation 30→40 min, Product
+  Discussion 90→75 min), after several same-day dead ends that are worth
+  recording so they aren't retried.** The starting ask was simple: take 30
+  min from Product Discussion (90→60) and add two 15-min breaks in the
+  afternoon. That led to three reworks in sequence, each backed out once
+  its consequences became clear: (1) a `day-1/office-hours` slot (optional
+  one-on-one instructor time, no linked page) inserted between Product
+  Discussion and Lunch, which required a real code change to
+  `docs/js/timeline.js` (it skipped rendering `summary` for anything
+  without a `url`) — abandoned once the user found the resulting lunch
+  shift didn't work for them, and `timeline.js` was reverted to its exact
+  original committed state (confirmed via `git diff`, empty); (2) giving
+  those 15 min to Problem Statement instead, and later Industry
+  Conversation instead, while pinning Lunch to a fixed 1:00 PM — this
+  kept producing either a dead gap before lunch, a day that ran past 5:00
+  PM, or both, because a fixed-clock Lunch anchor combined with unequal
+  pre/post-lunch adjustments can't reconcile without the numbers working
+  out exactly; (3) the fix that actually worked: give the second
+  afternoon break's 15 min back to Product Discussion instead of keeping
+  it as a break, landing Product Discussion at 75 min (not 60), which
+  makes it end at exactly 1:00 PM with no gap. Final shape, verified with
+  a script that walks the full session list start-to-end: State of AI
+  10:00-10:20 AM, Industry Conversation 10:20-11:00 AM, Use Cases
+  11:00-11:30 AM, Break 11:30-11:45 AM, Product Discussion 11:45 AM-1:00
+  PM, Lunch 1:00-2:00 PM (unmoved from its original 2026-08-11 confirmed
+  time), then Problem Statement, AI Tools, Explore Claude Desktop, Fork &
+  Submit, and Project Assignments all at their original 2026-08-11
+  confirmed times, ending 5:00 PM. No office-hours slot and no second
+  break survived; Day 1 has exactly one break, same as before this whole
+  pass started. Verified: `schedule.json` parses as valid JSON, no gaps
+  or overlaps anywhere in the session list, `git diff docs/js/timeline.js`
+  is empty, and a grep of `docs/day-1/*.html` / `project/copy-drafts/
+  day-1/*.md` for hardcoded times found none, every page reads its time
+  from `schedule.json`.
+- 2026-08-23 — **`docs/data/schedule.json`: Day 1 afternoon break added.**
+  The morning rebalance above left the afternoon with no break at all
+  (the two that had been tried there earlier in the day both got backed
+  out). Fix: Explore Claude Desktop shrank from 55 to 45 min, funding a
+  new 10-min `day-1/break-2` at 2:55-3:05 PM, immediately before it.
+  Because Fork & Submit already started exactly when Explore Claude
+  Desktop used to end (3:50 PM), pulling the 10 min directly out of
+  Explore Claude Desktop needed no other reshuffling, Fork & Submit and
+  Project Assignments are unchanged. Day 1 now has two breaks total
+  (`day-1/break-1` at 11:30-11:45 AM, `day-1/break-2` at 2:55-3:05 PM).
+  Verified: `schedule.json` parses as valid JSON, and a script walking
+  the full Day 1 session list start-to-end confirmed no gaps or overlaps
+  and an exact 5:00 PM end time.
+- 2026-08-23 — **`docs/day-1/02-industry-conversation.html` fully
+  regenerated from `project/copy-drafts/day-1/02-industry-conversation.md`
+  after the user's own line-by-line hand-edit pass on the draft.** The
+  hand-edit pass reordered sections (physical order became 1, 3, 5, 2)
+  without renumbering the headings, renamed two sections ("Where News
+  Workers Stand" → "Where News Workers & Students Stand", "What's Actually
+  at Stake" → "What's at Stake", "The Scaling Debate" → "The Scaling Debate
+  in Tech"), and deleted §4 "Where Newsrooms Actually Stand" entirely
+  (the Reuters Institute UK survey, UMD/Pangram 186,507-article scan, CNTI
+  policy synthesis, and Global South stat). Asked 2 questions before
+  touching anything: confirmed the final section order/numbering should
+  match physical placement (renumbered markdown headings to 1 Talking
+  About, 2 News Workers & Students, 3 What's at Stake, 4 Scaling Debate),
+  and confirmed the §4 deletion was intentional, not accidental. Also
+  fixed one typo while porting ("convinving" → "convincing" in the "For
+  the public" stakes line), consistent with past practice of silently
+  fixing clear spelling errors during HTML implementation (see the
+  "Agenctic" → "Agentic" fix in `01-state-of-ai.html`'s history entry).
+  Converted all inline `[n]` citations to the site's `<sup class="cite"
+  data-url="..." data-note="...">` pattern, matching `01-state-of-ai.html`'s
+  established format; double quotes inside quoted material were converted
+  to single quotes inside `data-note` attributes to keep valid HTML (the
+  attribute itself is double-quoted). Verified: parsed the output HTML
+  with Python's `html.parser` (no errors, 33 citation `<sup>` tags found,
+  matching the 23+6+1+3 count across the four sections), grepped for
+  leftover `[n]`-style brackets (none) and stray em-dashes outside the
+  `<title>` tag (none), and confirmed every TOC anchor (`#s1`-`#s4`)
+  matches a section `id`.
+  **Not done**: `slides/02-industry-conversation-slides.html` was not
+  updated to reflect the new section order/count, out of scope for this
+  pass.
+- 2026-08-23 — **`project/copy-drafts/day-1/02-industry-conversation.md`:
+  new §3 "Where News Workers Stand" added, §4 converted to bullets, final
+  section renumbered, per two more inline `{Claude note: ...}` flags the
+  user left in the draft.** By the time this pass started, the user had
+  already deleted the old §3 ("Where Journalism Splits") and §5
+  ("Questions Without Settled Answers") sections by hand, leaving a
+  numbering gap (1, 2, [gap], 4, [gap], 6). Asked 3 scoping questions
+  before writing (per standing "ask directly when ambiguous" practice):
+  confirmed the new section should be seeded by the orphaned
+  "newsrooms cut more than 2,300 jobs" paragraph then sitting at the end
+  of §2, confirmed it should include fresh research and not just
+  synthesize existing page content, and confirmed the final section
+  ("What's Actually at Stake") should renumber down to close the gap.
+  Ran the `ground-content` skill: 2 parallel background research agents,
+  one on newsworker displacement/freelancer-specific accounts, one on
+  newsworker sentiment and skill-anxiety data, both with an explicit
+  dedup list covering everything already cited on this page and sibling
+  Day 1 pages. New §3 bullets, each with live, dated, named sources: job
+  losses tangled with pre-AI trends (the moved MediaCopilot paragraph,
+  citation carried over from §2), freelance commissions being quietly
+  reassigned to AI (named freelancers Chris Sutcliffe, Sarah Scoles, Arif
+  Ullah Sheikh via Reuters Institute), false AI-detector flags costing
+  real freelancers their income (Kimberly Gasuras and a pseudonymous
+  "Mark" via Gizmodo, a third via Authory), fabricated AI "freelancers"
+  crowding out real ones (the Margaux Blanchard hoax and City AM editor
+  Steve Dinneen's reaction, plus Ben Touati's byline hijacked by AI
+  content after ClickOut Media fired him for declining to use it, both
+  via Press Gazette), burnout and AI concern compounding in the same
+  journalist population (a 436-journalist European survey via
+  WAN-IFRA/Taktak), and a seniority/geography split in how personally
+  threatened journalists feel (Poynter's named journalism students, CNTI's
+  Global North/South sentiment split). The research agent flagged several
+  leads it could not verify live and excluded rather than guessed:
+  NewsGuild-CWA's Nov 2023 AI member survey (PDF wouldn't parse), a Nieman
+  Lab piece that 403'd, a CJR piece that predates generative AI, and an
+  EFJ/TWIIID report where only one stat (64.5% want AI training)
+  corroborated across two fetches. §4 ("Where Newsrooms Actually Stand")
+  converted from three flowing paragraphs into 6 bullets, same facts and
+  citations, no new research needed, purely a compaction/readability
+  pass. Final section ("What's Actually at Stake") renumbered from 6 to
+  5. Verified: `grep "—"` clean (only inside citation lines), no
+  first-person-plural outside a direct quote, dedup grep clean against
+  sibling files for all newly-named individuals, and a live spot-check of
+  8 new citation URLs (6×200, 2×403 on Poynter and CNTI, both normal
+  bot-blocking).
+  **Not done**: `docs/day-1/02-industry-conversation.html` still not
+  regenerated from any of this week's markdown changes, markdown-only per
+  this task's scope.
+- 2026-08-23 — **`project/copy-drafts/day-1/02-industry-conversation.md` §1
+  ("What Everyone's Talking About") rewritten from a generic tech-industry
+  tension list into a journalism-specific one, per the user's inline
+  `{Claude note: ...}` left in the draft.** Ran the `ground-content` skill:
+  4 parallel background research agents plus 2 follow-up verification
+  agents (the user asked to specifically re-vet the "Accuracy vs. Speed"
+  and "Adoption vs. Readiness" bullets, both confirmed accurate, with one
+  correction: the arXiv 2510.18774 paper's affiliation was wrong on the
+  site, "University of Maryland/Pangram Labs" should be "University of
+  Maryland, Simon Fraser University, and Pangram Labs" since co-author
+  Karpinska is at Simon Fraser, not UMD, fixed in both §1 and §4 of this
+  file). The old list (Progress vs. Caution/Grok 4, Accessibility vs.
+  Concentration, Efficiency vs. Humanity/Klarna) was deleted outright, not
+  archived, after a mid-session direction change: the user first asked for
+  a collapsible "for the curious" module to preserve it, then reversed
+  that and said to just remove it. New bullets, each grounded with live,
+  dated, named sources not already used elsewhere on the site: License vs.
+  Litigate (News Corp/Dotdash Meredith licensing deals vs. Alden
+  Global/Ziff Davis lawsuits), Traffic vs. Answers (Pew's AI Overview
+  click-through study, Condé Nast/Dotdash Meredith executives on "Google
+  Zero," Perplexity/Cloudflare monetization workarounds), Labor
+  Protections vs. Management Control (the G/O Media/WGAE 2023 dispute, The
+  New Republic and Ziff Davis union AI clauses, the POLITICO arbitration
+  ruling, NewsGuild-CWA's ~90-contract count), and Custom Tools vs.
+  Off-the-Shelf (BloombergGPT, Reuters' internal AI platform and Fact
+  Genie, the TUM "Automation Divide" framing). Deliberately excluded from
+  all of the above: the NYT v. OpenAI suit, the Sports Illustrated/CNET/
+  Gannett/Chicago Sun-Times/Tagesspiegel/BBC Eye incidents, and the Cody
+  Enterprise/Ars Technica fabricated-quotes cases, since each is already
+  used elsewhere on this page or on sibling Day 1 pages (checked via grep
+  across `project/copy-drafts/day-1/*.md`, confirmed clean). Section 2
+  ("The Scaling Debate") is untouched, mid-edit by the user for a
+  different, separate future task (a planned new section on AI's effect
+  on journalism specifically); left alone per instruction not to clobber
+  concurrent edits. Verified: `grep "—"` clean (only inside `N. URL —
+  description` citation lines), no first-person-plural outside a direct
+  quote, dedup grep clean against sibling files, and a live spot-check of
+  8 new citation URLs (7×200, 1×403 on newsguild.org, which is normal
+  bot-blocking since the research agent live-fetched that page directly).
+  **Follow-up same day**: the user asked whether "Accuracy vs. Speed" and
+  "Adoption vs. Readiness" (the two carried-over bullets) were still the
+  most representative choices, or thinner than the other four. Judged
+  both still central to the actual conversation and worth keeping, so
+  built each out to matching depth (one citation each before, four after)
+  via 2 more background research agents: Accuracy vs. Speed gained AP's
+  own "unvetted source material" standard (Amanda Barrett quote), the
+  NewsBreak/Bridgeton, NJ fabricated-shooting-story incident (Dec 2023),
+  and a Reuters Institute 2025 stat on how rarely people believe AI
+  output gets checked before publishing; Adoption vs. Readiness gained
+  the LA Times "Insights" tool's one-day KKK-sympathetic-content pullback
+  (March 2025), a Trint survey on unsanctioned AI use (42.3%), and the
+  Suncoast Searchlight editor secretly running reporter drafts through
+  ChatGPT (Nov 2025). Same verification pass re-run clean on the
+  additions (5 new URLs spot-checked, 2×403 on Poynter/Nieman Lab, both
+  normal bot-blocking).
+  **Not done**: this page's own live `docs/day-1/02-industry-conversation.html`
+  was NOT regenerated from this draft, markdown-only per this task's scope.
+- 2026-08-23 (later) — **`02-industry-conversation.md`/`.html` §1/§2 evidence
+  format iterated down to plain single-source bullets; §3 stakes wording
+  synced; a from-scratch verification pass then caught stale section titles
+  on two other Day 1 pages and their Slides decks, plus a standing gap
+  between Slides decks and their Overview pages.** Continuing the same
+  day's line-by-line pass on `02`: §1 ("What Everyone's Talking About")
+  and §2 ("Where News Workers & Students Stand") went through several
+  format iterations in one sitting — collapsible-wrapped multi-sentence
+  bullets → single-sentence bullets with combined citations → a two-column
+  `.resource-table` (Observation/Evidence) → the Evidence column
+  reformatted as bullets → landed on a plain `<ul class="field-notes">`
+  with exactly one, preferentially report-over-news-story, citation per
+  bullet, matching the density the rest of the page already uses. Caught
+  and fixed a misattribution along the way: §2's last bullet credited a
+  Global North/South sentiment stat to Poynter, that finding is actually
+  CNTI's; the Poynter-only quotes were dropped and the bullet re-cited to
+  CNTI alone. §3 ("What's at Stake") had three bullets (journalists, news
+  organizations, for you) that the user had already hand-trimmed in the
+  markdown but that hadn't been ported to the live HTML yet — synced.
+  - **Full Day 1 reconciliation re-verification, all 9 Overview pages +
+    `people-to-follow`**: re-ran the ad-hoc MD/HTML diff script used
+    throughout this session's earlier reconciliation work and found it had
+    a real bug — `**Sources**.*` with `re.S` matched past the *first*
+    `**Sources**` heading to the end of the file, so any page with more
+    than one Sources block (i.e., citations attached to more than one
+    section) silently dropped everything after the first block from the
+    comparison. Fixed the script, re-ran it against all 9 pages, and
+    manually read full file pairs where the fix surfaced new diffs. Found
+    stale section titles the earlier reconciliation pass had missed
+    because of this bug: `03-use-cases.html` had 3 (`Not a Good Use Case
+    (Yet)` → `Not a Refined Use Case (Yet)`, `The Pattern` → `The Emergent
+    Patterns`, `The Practical Question` → `The Practical Questions`) plus
+    two bullets carrying wording the markdown no longer had; `05-problem-
+    statement-discussion.html` had 1 (`Get Specific` → `Get Curious with
+    Hypothesis Testing`). All fixed in both files' Overview HTML. Also
+    found two small punctuation typos in `09-project-assignments.md`
+    itself (a dropped period, a dropped comma) where the live HTML already
+    had the grammatically correct version — fixed the markdown to match
+    rather than degrade the HTML, since these read as accidental drops,
+    not deliberate edits.
+  - **Slides decks found to be a standing, silent drift risk, not just a
+    one-off staleness**: Slides pages are separate, hand-authored HTML,
+    not generated from the Overview page or its markdown draft, so when an
+    Overview page's sections get renamed/reordered/cut (as `03` and `05`
+    just were, and as `02` has been over this whole session), nothing
+    updates the matching Slides deck automatically. Per direct user
+    instruction ("they should be the same," headings and order both),
+    brought every Day 1 Slides deck in line with its Overview page's
+    current section titles and order: `03-use-cases-slides.html` and
+    `05-problem-statement-discussion-slides.html` got the same title fixes
+    as their Overview pages (03's deck also had a whole stale intro slide,
+    "What Does AI Actually Do?", already dropped from the Overview page
+    earlier this session — removed, remaining slides renumbered, cover
+    contents and slide counter updated). `01-state-of-ai-slides.html` had
+    the same 5 topics as its Overview page but in the wrong order and
+    partly mistitled — reordered (Moment → Timeline → State of the Art →
+    Builders → Journalists) and retitled to match exactly, slide body
+    content untouched. `02-industry-conversation-slides.html` needed a
+    real rebuild, not just a reorder: its old deck had 6 sections, 3 with
+    no Overview-page equivalent at all (a generic optimist/skeptic scaling
+    framing, a newsroom-adoption-by-size breakdown, a named-tools section),
+    running content from before this session's citation rework. Rebuilt to
+    the Overview page's current 4 sections in order, each slide's body
+    ported from the current Overview text with its citations intact.
+    `07-explore-claude-desktop-slides.html` had 2 titles truncated
+    (`Getting Oriented` / `The Code Environment`, missing their
+    Overview-page subtitles) — restored in full. Verified via a script
+    diffing each Slides deck's `block-title`s against its Overview page's,
+    in order — every Day 1 page now matches (`09-project-assignments` has
+    no Slides deck by design, confirmed via its Overview page's missing
+    `slides-cta` block).
+  - **`docs/instructors.html`**: the Andrew Calderón card's `<h3>` read
+    "Andrew Calderón," shorter than the full name ("Andrew Rodríguez
+    Calderón") already used in the card's own bio paragraph — updated the
+    heading to match, per direct user request.
+  - **Not done**: `04`-`09` and `people-to-follow`'s own line-by-line pass
+    is still the user's own queued work, unaffected by this entry — see
+    the 2026-08-22 entry below for that standing status.
+- 2026-08-22 — **`docs/day-1/01-state-of-ai.html` and
+  `02-industry-conversation.html` fully regenerated from the 2026-08-21
+  research-first `project/copy-drafts/day-1/*.md` rewrite; `03-use-cases.html`
+  §3/§4/§5/§6 updated for the same session's citation swaps and new
+  incidents.** The user wants to do their line-by-line edit pass by
+  looking at the live site rather than the raw markdown, so implementation
+  came before the edit pass this time (reversing the usual
+  draft-then-edit-then-implement order). `01` and `02`'s section order
+  and structure changed substantially from what was live, not just the
+  prose: `01`'s old §4/§5 (For Journalists / The Landscape) swapped
+  content, with the `.stakes` block moving into §1; `02` dropped its old
+  compare-grid optimist/skeptic framing entirely and gained a new §3
+  ("Where Journalism Splits," newsroom incidents that weren't on the
+  site before: Sports Illustrated, CNET, Gannett, Chicago Sun-Times,
+  Tagesspiegel, BBC Eye) and a data-driven §4 replacing the old
+  perception-based small/mid/large newsroom breakdown. `03-use-cases.html`
+  §3 got its three swapped 2023+ citations (AAE moderation, healthcare
+  transcription, Copilot vulnerability rate), §4 gained the Cody
+  Enterprise/Ars Technica fabricated-quotes bullet (with em-dashes in
+  that list's existing bullets converted to periods to match), §5 gained
+  its benchmarked-pattern lede paragraph, and §6 got the
+  "Questions to Ask Before Reaching for AI" `<h3>` the draft had already
+  resolved. Verified by diffing tag counts (`<section>`, `<div>`, `<sup>`,
+  `<ul>`, `<dl>`, `<ol>`) and checking for unescaped quotes inside
+  `data-note` attributes, plus a local `http.server` smoke test (all
+  three pages 200). **Not done**: no visual/browser check beyond that,
+  since a browser automation tool wasn't invoked this session; the user
+  should eyeball the rendered pages before treating this as final. The
+  other 6 Day 1 pages are untouched and still queued for the user's own
+  line-by-line pass per the 2026-08-21 entry below.
 - 2026-08-22 — **`instructors.html` implemented for real (was a
   placeholder stub) and the home page updated to link to it.** Ported
   both bios from `project/copy-drafts/instructors.md` (finalized by the

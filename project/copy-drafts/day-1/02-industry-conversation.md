@@ -1,117 +1,91 @@
 # Industry Conversation
 
-> The conversation about AI isn't happening in one place. It's countless conversations, large and small, happening at once.
+> The conversation about AI isn't happening in one place. It's countless, concentric conversations. It's no different in the news industry.
 
 ## 1. What Everyone's Talking About
 
-AI's role in journalism is polyvalent. Some newsrooms are all-in; others are skeptical; others want to jump in and don't know where to start. In tech, the conversation is dizzying: some technologists think they're building artificial general intelligence that will dominate the planet, others think the field is overhyped and about to plateau. On the ethics side, some argue AI will amplify inequality; others argue it's a democratizing tool.
+AI's role in journalism is complicated. Some newsrooms are all-in; others are skeptical; others want to jump in and don't know where to start. In tech, the conversation is dizzying: some technologists think they're building artificial general intelligence that will dominate the planet, others think the field is overhyped and about to plateau. On the ethics side, some argue AI will amplify inequality, while others argue it's a democratizing tool.
+
+We compiled a list of people, orgs, newsletters and more to follow to keep up with developments in AI and news, on the [People to Follow](/day-1/people-to-follow.html) page.
 
 > **Exercise: Before You Look**
 >
-> - Description: Where do you think people actually disagree about AI's role in journalism? Name a few before reading further, then compare your list against the ones below.
+> - Description: What have you heard about AI in journalism right now that's interesting to you? Name a dynamics before reading further. If you have a hot take, please share it.
 
-Here's the list that tends to come up in this conversation:
+Here are some tensions inside journalism specifically:
 
-- **Progress vs. caution**: move fast and experiment, or slow down and get it right. In July 2025, xAI released Grok 4 without publishing a safety report, a document every other frontier lab had published for major releases since a 2023 industry commitment xAI itself had joined. An Anthropic researcher publicly called the omission "reckless." [1]
-- **Accessibility vs. concentration**: is AI democratizing, or does it concentrate power in whoever can afford the best models? Both are true at once. The five most resource-rich labs held under half of global AI compute at the end of 2025 [2], and open-weight models are closing the capability gap fast (see State of AI). At the same time, token prices have fallen roughly 300-fold since GPT-4's 2023 launch, and Hugging Face now hosts over 2 million open models. [3]
-- **Efficiency vs. job displacement**: more productive workers, or fewer jobs. Klarna's AI customer-service assistant did the work of 700 people in its first month in 2024, cutting resolution time from 11 minutes to 2. By 2025, the company was quietly rehiring humans after quality dropped on harder cases; its CEO put it bluntly: "We focused too much on efficiency and cost. The result was lower quality, and that's not sustainable." [4]
-- **Accuracy vs. speed**: can reporting get faster without sacrificing truth? One measured study found AI-labeled news articles were 8.2 times more likely to contain a fabricated claim, an invented quote, wrong statistic, or misdated event, than human-written ones: 41% versus 5%. [5]
-- **Adoption vs. readiness**: AI is already inside most newsrooms, but the training and trust haven't caught up. Most publishers offer no formal AI training at all, and cultural resistance is the single most common barrier newsroom leaders name. [6]
+- **License vs. Litigate**: Newsrooms are split on how to respond to AI companies training on their work. [1]
+
+- **Traffic vs. Answers**: AI search increasingly answers a question instead of sending a reader to the site that reported it. [2]
+
+- **Labor Protections vs. Management Control**: When G/O Media ran AI-written articles at Gizmodo and other outlets in 2023 without bargaining first, its union publicly called AI journalism "an existential threat" to the field. [3]
+
+- **Custom Tools vs. Off-the-Shelf**: Well-funded newsrooms are building their own AI instead of buying it. [4]
+
+- **Accuracy vs. Speed**: Not every newsroom agrees on whether reporting can get faster without sacrificing accuracy. [5]
+
+- **Adoption vs. Readiness**: AI is already inside most newsrooms, but the training and trust haven't caught up. [6]
 
 **Sources**
-1. https://fortune.com/2025/07/17/elon-musk-xai-grok-4-no-safety-report — Fortune, July 17, 2025: xAI released Grok 4 without a public safety report, breaking from a July 2023 industry disclosure commitment it had joined in May 2024; Anthropic researcher Samuel Marks called the omission "reckless" and a break from "industry best practices."
-2. https://epoch.ai/gradient-updates/frontier-labs-dont-use-most-ai-compute — Epoch AI, May 20, 2026: as of end-2025, the five most resource-rich AI developers (OpenAI, Anthropic, xAI, Google, Meta) together held under half of global operational AI compute, with OpenAI alone accounting for roughly 10-15%.
-3. https://www.deeplearning.ai/the-batch/falling-llm-token-prices-and-what-they-mean-for-ai-companies — DeepLearning.AI, The Batch: token prices fell roughly 300-fold since GPT-4 launched at $30 per million tokens in March 2023. Also: https://huggingface.co/blog/huggingface/state-of-os-hf-spring-2026 — Hugging Face's Spring 2026 report counts over 2 million public models.
-4. https://www.forbes.com/sites/jackkelly/2024/03/04/klarnas-ai-assistant-is-doing-the-job-of-700-workers-company-says/ — Forbes, March 4, 2024: Klarna's OpenAI-built assistant did the work of 700 full-time agents, handling 2.3 million conversations in its first month and cutting resolution time from 11 to 2 minutes. Also: https://www.forbes.com/sites/quickerbettertech/2025/05/18/business-tech-news-klarna-reverses-on-ai-says-customers-like-talking-to-people/ — Forbes, May 18, 2025: CEO Sebastian Siemiatkowski said Klarna was rehiring humans after AI-driven quality problems on complex cases; Klarna later disputed the framing.
-5. https://arxiv.org/html/2510.18774v4 — Russell, Karpinska & Iyyer (University of Maryland/Pangram Labs), rev. April 26, 2026: manually reviewing 100 AI-labeled and 100 human-written news articles, AI-labeled articles were 8.2 times more likely to contain a hallucination (41% versus 5%, Fisher's exact test p=2.3×10⁻⁹).
+1. https://www.niemanlab.org/reading/openai-and-news-corp-strike-a-content-deal-valued-at-over-250-million/ — Nieman Lab, May 22, 2024: News Corp signed a five-year content-licensing deal with OpenAI valued at more than $250 million in cash and technology credits, covering the Wall Street Journal, Barron's, MarketWatch, and the New York Post.
+2. https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/ — Pew Research Center, July 22, 2025: tracking 68,879 real Google searches from a panel of 900 U.S. adults, users clicked a traditional search result 15% of the time when no AI summary appeared, versus 8% when one did; only 1% clicked a link inside the AI summary itself.
+3. https://www.wgaeast.org/wgae-condemns-use-of-ai-generated-articles/ — Writers Guild of America East, July 12, 2023: WGAE publicly demanded G/O Media stop publishing AI-generated articles at Gizmodo and other outlets, calling AI journalism "an oxymoron that we cannot allow to take hold," after management proceeded without bargaining over the change.
+4. https://ieai.sot.tum.de — TUM Institute for Ethics in Artificial Intelligence, "The Automation Divide," July 30, 2026: large national publishers "have the financial capacity to develop in-house AI models," while smaller outlets "rely on off-the-shelf tools" and lack the technical staff to maintain custom systems.
+5. https://reutersinstitute.politics.ox.ac.uk/generative-ai-and-news-report-2025-how-people-think-about-ais-role-journalism-and-society — Reuters Institute, "Generative AI and News Report 2025" (Oct 7, 2025), Simon, Nielsen & Fletcher: across six countries surveyed, only 33% of respondents believe journalists "always" or "often" check AI outputs before publishing, as low as 25% in the UK and as high as 42-44% in Japan and Argentina.
 6. https://pressgazette.co.uk/publishing-services-content/cultural-resistance-hampers-use-of-ai-in-newsrooms-new-global-survey-finds/ — FT Strategies/WAN-IFRA "Future Newsrooms Study 2026" (July 20, 2026; 448 newsroom leaders, 86 countries): 61% offer no formal AI training, 52% cite cultural resistance or skepticism as a barrier, and 43% anticipate staffing cuts within three years despite adoption.
 
-## 2. The Scaling Debate
+## 2. Where News Workers & Students Stand
 
-One specific, narrower argument is worth knowing on its own, separate from the broader debate below: does today's approach of more data and more compute keep producing better models, or is it running out of room? The people actually building these systems don't agree.
+- **The job losses are real, but tangled up with older trends.** Newsrooms cut more than 2,300 jobs in the first half of 2026 alone. Unlike coding, that decline is tangled up with a referral-traffic collapse and a newsroom-employment slide that predates AI by over a decade, which makes AI's specific role harder to isolate. [1]
 
-**Ilya Sutskever**, an OpenAI co-founder now running Safe Superintelligence Inc., argues the "age of scaling" that defined 2020-2025 is ending. Pretrained models, he says, "generalize dramatically worse than people," and he expects the next gains to come from a return to research, not from bigger training runs. [1]
+- **Freelance work is quietly drying up.** UK journalist Chris Sutcliffe told Reuters that he now submits his own Google Docs version history to prove he wrote his work. US science journalist Sarah Scoles describes "decreasing rates, more instability," and Pakistan-based writer Arif Ullah Sheikh says clients pay him less on the assumption AI has cut his work time, whether or not he uses it. [2]
 
-**Dario Amodei**, Anthropic's CEO, disagrees. He's held the same view since 2017, that intelligence is fundamentally a matter of scale, and he now sees the same pattern showing up in reinforcement learning that once showed up in pretraining. In his words, scaling "has not hit a wall at all." [2]
+- **False AI-detection flags are costing real freelancers their income.** Gizmodo reported that freelance writer Kimberly Gasuras, with 24 years of experience, was suspended from a freelance platform after an AI detector wrongly flagged her work despite proof of manual authorship. Another freelancer, writing under the pseudonym "Mark," lost 90% of his income when a 95%-AI-likelihood false flag ended a three-year client relationship. [3]
 
-**Yann LeCun**, who left Meta to found AMI Labs, thinks both of them are missing the point. He calls large language models a "detour," architecturally incapable of real understanding no matter how much they scale, and predicts they'll be largely obsolete within five years. He raised over $1 billion in 2026 to build something else entirely. [3]
+- **Fabricated AI "freelancers" are crowding out real ones.** In 2025, a fake byline built around AI-generated pitches placed articles in WIRED and Business Insider before being exposed as a hoax. City AM editor Steve Dinneen said the fallout pushes editors to "retrench and go again to the people that you've worked with before and trust... which is sad, because then you end up without new voices." [4]
 
-**Gary Marcus**, a longtime AI critic, has argued for years that scaling laws are "empirical generalizations, not physical laws" that eventually plateau, and that using more compute at inference time is an expensive patch, not a fix. [4]
+- **Burnout and AI concern now reinforce each other.** A 2025 survey of 436 journalists across 33 European countries found 60% report burnout and 52% are concerned about AI's impact on journalism, the first data to show the two feelings compounding in the same newsroom population rather than sitting apart. [5]
 
-The honest summary: the argument has shifted from "does scaling work" to "which kind of scaling," pretraining versus inference-time compute, and even the researchers who think pretraining has plateaued don't think progress overall has.
+- **The fear splits by seniority and geography.** Globally, journalists in wealthier countries feel negative about AI's effect on their own work nearly three times as often as positive, while journalists in the Global South report the opposite, roughly five times more positive than negative. [6]
 
-Where there's less disagreement is what's already happening to jobs. Software development is the clearest, most measurable case of AI-linked hiring disruption so far: early-career workers in AI-exposed roles are measurably below expected employment since ChatGPT's launch. [5] Journalism is being hit too, newsrooms cut more than 2,300 jobs in the first half of 2026 alone, but unlike coding, that decline is tangled up with a referral-traffic collapse and a newsroom-employment slide that predates AI by over a decade, which makes AI's specific role harder to isolate. [6]
+**Sources**
+1. https://mediacopilot.ai/journalisms-workforce-shrinks-as-ai-and-new-consumer-habits-reshape-the-industry/ — MediaCopilot tracker: 2,300+ US/UK newsroom job cuts in H1 2026. A Columbia journalism-school analysis found AI so far "aids news workers rather than replaces them," with cuts also tangled up with referral-traffic collapse and newsroom employment down more than 50% since 2008.
+2. https://reutersinstitute.politics.ox.ac.uk/news/speed-hoaxes-and-mistrust-how-ai-transforming-freelance-journalism — Reuters Institute, Feb 10, 2026: named freelancers describe AI's direct effect on their income and work, including commissions "farmed out to GenAI tools," declining rates, and clients assuming AI has cut the time a job takes.
+3. https://gizmodo.com/ai-detectors-inaccurate-freelance-writers-fired-1851529820 — Gizmodo, June 12, 2024: a 24-year freelance writer was suspended from a freelance platform after an AI detector wrongly flagged her work despite proof of manual authorship; a second freelancer lost 90% of his income after a 95%-AI-likelihood false flag ended a three-year client relationship.
+4. https://pressgazette.co.uk/news/ai-hoaxer-a-fake-x-account-and-the-case-of-margaux-blanchard/ — Press Gazette, Aug/Sept 2025: a fabricated freelance journalist placed AI-generated pieces in WIRED and Business Insider before being exposed as a hoax; City AM editor Steve Dinneen said the fallout pushes editors to "retrench and go again to the people that you've worked with before and trust."
+5. https://wan-ifra.org/2025/04/new-survey-finds-europes-journalists-marked-by-burnout-fearful-of-ai-yet-still-passionate-professionals/ — WAN-IFRA, citing a Taktak Media/Display Europe survey of 436 journalists across 33 European countries, April 4, 2025: 60% report burnout and 52% are concerned about AI's impact on journalism, with 62% needing side income to stay in the job.
+6. https://cnti.org/2024-journalist-survey/technology/ — Center for News, Technology & Innovation, fielded Oct-Dec 2024 (433 journalists, 63 countries): journalists in the Global North feel negative about AI's effect on their own work nearly three times as often as positive, while Global South journalists feel positive roughly five times as often as negative.
+
+
+## 3. What's at Stake
+
+**For journalists**: Finding truth, interviewing sources, telling stories, that skill is more valuable, not less. Learning to use AI well is becoming a job requirement, the way learning to use Google once was. The industry is dramatically changing and it's hard to predict career trajectories.
+
+**For news organizations**: Can they get more efficient without sacrificing quality or trust, and will labor disruptions further undermine the industry or force a healthy restructuring? 
+
+**For the public**: Only 20% trust AI's answers about the news, but a growing share is asking it anyway. [1] Whether journalism survives that gap depends on readers' perceptions of AI and whether newsrooms can find convincing uses.
+
+**For the planet**: Data centers powering AI and other computing consumed about 1.2 trillion gallons of water and emitted 208 million tons of carbon dioxide in 2025, roughly Argentina's entire annual output. [2] AI's share of that energy use is on track to double, from 20% to 40%, by 2030. [2]
+
+**For you**: There's a real opportunity to be among the people who figure out responsible, effective AI use in journalism early.
+
+**Sources**
+1. https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/dnr-executive-summary — Reuters Institute Digital News Report 2026: 20% of people globally trust AI chatbot answers about the news, versus 37% who trust the news itself; global chatbot use for news rose from 7% to 10% year over year.
+2. https://www.pbs.org/newshour/science/energy-water-use-and-pollution-of-ai-and-data-centers-rival-most-countries — Associated Press via PBS NewsHour, June 4, 2026: reporting on the first UN University report to comprehensively assess AI's global environmental footprint, data centers consumed about 1.2 trillion gallons of water and emitted 208 million tons of carbon dioxide in 2025, roughly Argentina's entire annual output, with AI's share of data-center energy use projected to double from 20% to 40% by 2030.
+
+## 4. The Scaling Debate in Tech
+
+One specific, narrower argument in tech is worth knowing. Does today's approach of more data and more compute keep producing better models, or is it running out of room? 
+
+The people actually building these systems don't agree, and the implications matter.
+
+**Ilya Sutskever**, an OpenAI co-founder now running Safe Superintelligence Inc., argues the "age of scaling" that defined 2020-2025 is ending. Pretrained models, he says, "generalize dramatically worse than people," and he expects the next gains to come from a return to research, not from bigger training runs. [1] **No, it won't**
+
+**Dario Amodei**, Anthropic's CEO, disagrees. He's held the same view since 2017, that intelligence is fundamentally a matter of scale, and he now sees the same pattern showing up in reinforcement learning that once showed up in pretraining. In his words, scaling "has not hit a wall at all." [2] **Yes, it will**
+
+**Yann LeCun**, who left Meta to found AMI Labs, thinks both of them are missing the point. He calls large language models a "detour," architecturally incapable of real understanding no matter how much they scale, and predicts they'll be largely obsolete within five years. He raised over $1 billion in 2026 to build something else entirely. [3] **Asking the wrong question**
 
 **Sources**
 1. https://www.dwarkesh.com/p/ilya-sutskever-2 — Dwarkesh Podcast, Nov 25, 2025: Ilya Sutskever argues the "age of scaling" is ending, and that pretrained models "generalize dramatically worse than people."
 2. https://www.dwarkesh.com/p/dario-amodei-2 — Dwarkesh Podcast, Feb 13, 2026: Dario Amodei says scaling "has not hit a wall at all," and reports seeing the same log-linear scaling pattern now in reinforcement learning that pretraining showed earlier.
 3. https://www.bloomberg.com/news/videos/2026-05-21/the-next-phase-of-artificial-intelligence — Bloomberg, May 21, 2026: Yann LeCun calls LLMs a "detour" and predicts they'll be largely obsolete within five years; he raised $1.03B in March 2026 to build AMI Labs around a different architecture.
-4. https://garymarcus.substack.com/p/a-new-ai-scaling-law-shell-game — Gary Marcus, Substack, Nov 24, 2024: argues scaling laws are "empirical generalizations, not physical laws," and that inference-time compute is an expensive patch rather than a fix.
-5. https://digitaleconomy.stanford.edu/publication/canaries-in-the-coal-mine-six-facts-about-the-recent-employment-effects-of-artificial-intelligence/ — Stanford Digital Economy Lab, updated Aug 12, 2026: early-career workers (22-25) in AI-exposed occupations are 19% below expected employment, with software development among the most exposed, concentrated in reduced hiring rather than layoffs.
-6. https://mediacopilot.ai/journalisms-workforce-shrinks-as-ai-and-new-consumer-habits-reshape-the-industry/ — MediaCopilot tracker: 2,300+ US/UK newsroom job cuts in H1 2026. A Columbia journalism-school analysis found AI so far "aids news workers rather than replaces them," with cuts also tangled up with referral-traffic collapse and newsroom employment down more than 50% since 2008.
-
-## 3. Where Journalism Splits
-
-The scaling debate above is about the technology in the abstract. This is about what's actually happened when newsrooms used AI in production, not what might happen.
-
-**When it went wrong**
-- **Sports Illustrated, Nov 2023.** Its publisher ran product reviews under fabricated bylines, complete with AI-generated headshots. The parent company fired its CEO and three other executives within weeks. [1]
-- **CNET, Jan 2023.** Quietly ran 77 AI-written financial explainers; more than half needed correction once errors surfaced, and CNET paused the program. [2]
-- **Gannett, Aug 2023.** An AI tool published high school sports recaps with unresolved placeholder text and wrong scores. Public mockery forced the chain to pause it. [3]
-- **Chicago Sun-Times, May 2025.** A syndicated summer reading list recommended 15 books; 10 didn't exist. A freelancer had used AI without disclosing it. [4]
-- **Tagesspiegel, Germany, 2026.** A former editor-in-chief's AI-drafted opinion columns contained fabricated quotes and false claims. The paper pulled them and reviewed its practices. [5]
-
-Five newsrooms, five different countries and sizes, one recurring failure: AI-generated claims published without enough human verification to catch what wasn't true.
-
-**When it worked**
-- **BBC Eye, 2023-2024.** A two-person investigative team used a multi-agent AI system to sift roughly 10,000 Russian-language social media posts, a task its own reporters called "impossible manually," and surfaced contradictions between soldiers' real conditions and official reports. The resulting documentary drew over 3 million views. [6]
-
-The difference isn't the technology itself. It's scope, and how much verification stood between the AI's output and publication. That, more than any position on whether AI is "good" or "bad" for journalism, is what actually separates these two lists.
-
-**Sources**
-1. https://futurism.com/sports-illustrated-ai-generated-writers — Futurism, Nov 27, 2023: Sports Illustrated published product reviews under fabricated AI-generated author profiles; parent company Arena Group fired CEO Ross Levinsohn and three other executives in the following weeks.
-2. https://futurism.com/cnet-ai-errors — Futurism, Jan 2023: CNET had quietly run 77 AI-generated financial explainers since Nov 2022; editor-in-chief Connie Guglielmo confirmed corrections on 41 of the 77 and paused the program.
-3. https://www.cnn.com/2023/08/30/tech/gannett-ai-experiment-paused — CNN, Aug 30, 2023: Gannett paused its AI sports-recap tool after it published unresolved placeholder text and wrong scores.
-4. https://www.axios.com/2025/05/20/ai-summer-reading-books-chicago-sun-times — Axios, May 20, 2025: a syndicated Chicago Sun-Times reading list recommended 15 books, 10 of which didn't exist; freelancer Marco Buscaglia admitted using AI without disclosure.
-5. https://oecd.ai/en/incidents/2026-06-12-39cd — OECD.AI incident database, 2026: Tagesspiegel removed opinion pieces by former editor-in-chief Stephan-Andreas Casdorff after he used AI to draft columns containing fabricated quotes and false claims.
-6. https://reutersinstitute.politics.ox.ac.uk/news/how-bbc-eye-built-multi-agent-ai-system-sift-through-ten-thousand-russian-social-media-posts — Reuters Institute (Oxford): BBC Eye's small team used a multi-agent AI system to sift roughly 10,000 Russian-language social media posts, surfacing contradictions with official reports; the resulting documentary drew over 3 million views.
-
-## 4. Where Newsrooms Actually Stand
-
-Most coverage of newsroom AI adoption assumes a size-based hierarchy: small newsrooms lag, large ones lead. The actual data doesn't support that.
-
-A 2025 Reuters Institute survey of UK journalists found 56% use AI professionally at least weekly, but at the newsroom level, integration stays shallow. 85% of outlets report "none" or "limited" AI integration into actual workflows, and only 4% call it moderate to full. [1] What predicts whether a newsroom has real AI governance isn't size. It's ownership: publicly-owned outlets are far more likely to have AI protocols than privately-owned ones (70% versus 40%) and to offer staff training (57% versus 29%). [1]
-
-A separate, measured study, a direct scan of what newsrooms actually published rather than a survey of what they say, found something close to the opposite of the assumed size pattern. Testing 186,507 articles from 1,528 US newspapers for AI-generated content, papers under 100,000 circulation showed more detectable AI use (9.3%) than papers over that threshold (1.7%). [2] Smaller newsrooms aren't behind. They may be using AI more, just less visibly.
-
-Disclosure is the real gap, at every size. In that same study, 96.5% of AI-flagged articles carried no disclosure, and only 12 of the 200 newspapers sampled had any public AI policy at all. [2] A broader synthesis of 97 newsroom AI policies across 22 countries found the same priorities recur everywhere, transparency, human oversight, human verification, but the language is often vague enough that it's unclear what it actually requires in practice. [3] The gap is sharpest outside wealthy countries: about 80% of Global South journalists surveyed in one study said their newsroom has no AI policy at all. [4]
-
-**Sources**
-1. https://reutersinstitute.politics.ox.ac.uk/ai-adoption-uk-journalists-and-their-newsrooms-surveying-applications-approaches-and-attitudes — Reuters Institute, Nov 27, 2025 (n=1,004 UK journalists): 56% use AI professionally at least weekly; 85% of newsrooms report none-or-limited AI integration; publicly-owned outlets are far more likely than private ones to have AI protocols (70% vs. 40%) and training (57% vs. 29%).
-2. https://arxiv.org/html/2510.18774v4 — Russell, Karpinska & Iyyer (University of Maryland/Pangram Labs), arXiv:2510.18774, rev. April 26, 2026: scanning 186,507 articles from 1,528 US newspapers, 9.1% showed AI-generated or mixed authorship; papers under 100K circulation showed 9.3% AI use versus 1.7% for papers over 100K. 96.5% of flagged articles had no disclosure; only 12 of 200 sampled papers had a public AI policy.
-3. https://cnti.org/reports/newsroom-policies-for-ai-in-journalism-2/ — CNTI synthesis of 97 newsroom AI policies across 22 countries: transparency, human oversight, and human verification recur as priorities, but the underlying studies note the language is often vague and unoperationalized.
-4. https://cnti.org/reports/newsroom-policies-for-ai-in-journalism-2/ — Same CNTI synthesis, citing a Thomson Reuters Foundation survey of 221 Global South journalists (late 2024): about 80% said their newsroom has no AI policy at all.
-
-## 5. Questions Without Settled Answers
-
-Newsrooms that do have AI guidelines are weakest specifically on fairness and bias: just 27% of outlets with any AI protocols cover it, the lowest of the four areas measured. [1] That gap shows up as real, unresolved questions for individual journalists too:
-
-- When do I disclose that I used AI in my reporting?
-- Can I trust AI's analysis of a dataset, or do I need to verify everything myself?
-- If I use AI to brainstorm story ideas, is that still "real" journalism?
-
-Many journalists fear AI will be used to replace them. Publishers like the efficiency argument. The honest answer depends entirely on how it's used, and right now, most of that "how" is still being decided newsroom by newsroom.
-
-**Sources**
-1. https://reutersinstitute.politics.ox.ac.uk/ai-adoption-uk-journalists-and-their-newsrooms-surveying-applications-approaches-and-attitudes — Reuters Institute, Nov 27, 2025: among UK newsrooms with any AI guidelines, only 27% cover bias or fairness, the weakest of four measured areas (also: 44% human-oversight protocols, 43% data-privacy/security).
-
-## 6. What's Actually at Stake
-
-[Maps to `.stakes`, not `.roster`]
-**For journalists**: Finding truth, interviewing sources, telling stories, that skill is more valuable, not less. What changes is how fast the routine research gets done. Learning to use AI well is becoming a job requirement, the way learning to use Google once was.
-**For news organizations**: Can they get more efficient without sacrificing quality or trust, and stay competitive with organizations moving faster?
-**For the public**: Only 20% trust AI's answers about the news, but a growing share is asking it anyway. [1] Whether journalism survives that gap depends on whether readers can tell where AI actually played a role.
-**For you**: The question isn't "will AI replace me?" It's "will I know how to use it?" There's a real opportunity to be among the people who figure out responsible, effective AI use in journalism early.
-
-**Sources**
-1. https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/dnr-executive-summary — Reuters Institute Digital News Report 2026: 20% of people globally trust AI chatbot answers about the news, versus 37% who trust the news itself; global chatbot use for news rose from 7% to 10% year over year.

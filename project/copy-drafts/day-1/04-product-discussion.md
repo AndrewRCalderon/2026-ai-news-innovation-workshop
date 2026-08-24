@@ -6,7 +6,7 @@
 
 ## 1. Why We Start Out Loud
 
-You came in today with a project idea — maybe more than one. Before you spend the afternoon shaping one on your own, share it with the group and hear what people think.
+You came in today with a project idea. Maybe more than one. Before you spend the afternoon shaping one on your own, share it with the group and hear what people think.
 
 - You'll hear which part of your idea actually lands with other people.
 - A question from the group can surface a gap you hadn't noticed.
@@ -15,10 +15,10 @@ You came in today with a project idea — maybe more than one. Before you spend 
 
 ## 2. Workshop Activity
 
-You likely came in with more than one idea. Pick the one you're most excited about — that's the one you'll build.
+Pick one idea that is most exciting to you that you plan to build out in the workshop.
 
 > **Exercise: Group Discussion: Share Your Idea**
 >
 > - Time: The rest of this session.
 > - Description: Going around the room, share the idea you picked — what it is, and why it's the one you want to build. Then the group asks questions and reacts.
-> - Deliverable: None — you'll turn this into an actual problem statement, hypothesis, and goal on your own this afternoon, in Problem Statement.
+> - Deliverable: None — you'll turn this into an actual problem statement, hypothesis, and goal on your own this afternoon, in [Problem Statement](/day-1/05-problem-statement-discussion.html).
