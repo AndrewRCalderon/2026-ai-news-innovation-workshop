@@ -22,11 +22,12 @@ and [`SPEC.md`](SPEC.md).
   written out in full, with a do-not-touch list and a check that no staged path
   escapes `docs/submissions/michael-flowers/`. Corrected `CLAUDE.md`, which
   named the symlink `~/.claude/skills/wrapup` where it meant
-  `dissonance_close`. What this does not settle: the old `wrapup` Skill is
-  still on disk and still symlinked, so two wrap-ups still answer to the same
-  request until it's deleted by hand; and the lead's repo-root `chat_close`
-  was deliberately left in place, since deleting a tracked upstream file would
-  show up as a deletion in any PR.
+  `dissonance_close`. Deleted the older duplicate `wrapup` Skill and its
+  symlink after `/dissonance_close` ran clean, so only one Skill now answers
+  to a wrap-up request. What this does not settle: the lead's repo-root
+  `chat_close` was deliberately left in place, since deleting a tracked
+  upstream file would show up as a deletion in any PR — if it ever fires by
+  mistake, the tell is that it starts editing `project/tasks.md`.
 
 - 2026-08-25 — **Added the reader view and corrected the discrimination ratio
   to 6.80×.** Built `viewer.html` and `viewer.js` to show the matched FT pair

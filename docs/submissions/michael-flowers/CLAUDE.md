@@ -95,14 +95,11 @@ runs, so this one carries a name nothing else can claim.
   load.
 - `/chat_close` still exists and still belongs to the lead. Don't use it.
 
-**Left over:** `.claude/skills/wrapup/` is the earlier version of this same
-Skill. `/dissonance_close` has now been run successfully (Aug 25 2026), so the
-fallback has served its purpose — but `wrapup` is still on disk and still
-symlinked, which means two wrap-up Skills answer to "wrapping up." It is
-untracked in git, so removing it leaves no history to clean up:
-
-    rm ~/.claude/skills/wrapup
-    rm .claude/skills/wrapup/SKILL.md && rmdir .claude/skills/wrapup
+**Resolved Aug 25 2026:** an earlier duplicate of this Skill, `wrapup`, was
+deleted along with its symlink once `/dissonance_close` had been run
+successfully. Two Skills answering to "wrapping up" made it unknowable which
+one would fire. `~/.claude/skills/` should now hold exactly two links,
+`dissonance` and `dissonance_close`.
 
 ---
 
