@@ -43,16 +43,24 @@ Answered on Day 2 of the workshop. These replace the questions that were here; r
 - Keep it accurate as things change. If the pitch or what you're building shifts, update `SUBMISSION.md` in the same commit, don't let it go stale.
 - If you restructure the project, keep `SUBMISSION.md` in that same folder and keep it filled in, rather than losing track of it in the shuffle.
 
-## How the dissonance Skill actually loads
+## How this folder's Skills actually load
 
-The Skill lives in this folder at `.claude/skills/dissonance/`, but that is
-**not** where Claude Code finds it. Submission folders are never scanned for
+This folder holds my own Skills — `dissonance` (the detector) and
+`dissonance_close` (end-of-session wrap-up) — in `.claude/skills/`. That is
+**not** where Claude Code finds them. Submission folders are never scanned for
 Skills — a `SKILL.md` sitting here is inert on its own.
 
-It loads because `~/.claude/skills/dissonance` is a **symlink** pointing at
-`docs/submissions/michael-flowers/.claude/skills/dissonance`. That symlink
-lives outside the repo, so nothing in this project shows that it exists. There
-is only one copy of the file; the symlink is a signpost to it, not a duplicate.
+They load because `~/.claude/skills/dissonance` and
+`~/.claude/skills/dissonance_close`
+are **symlinks** pointing into this folder. Those symlinks live outside the
+repo, so nothing in this project shows that they exist — and a fresh clone on
+another machine won't have them until they're recreated:
+
+    ln -s "$PWD/.claude/skills/dissonance" ~/.claude/skills/dissonance
+    ln -s "$PWD/.claude/skills/dissonance_close" ~/.claude/skills/dissonance_close
+
+There is only one copy of each file; a symlink is a signpost to it, not a
+duplicate.
 
 Consequences, confirmed by testing on Aug 25 2026:
 
@@ -65,9 +73,36 @@ Consequences, confirmed by testing on Aug 25 2026:
 - **The Skill's name comes from the directory name, not the `name:` field in
   the frontmatter.** To rename the Skill, rename the symlink — editing the
   frontmatter alone does nothing.
-- `.claude/skills/chat_close/` in this folder is a reference copy of the
-  workshop's own Skill. It does not load from here; the working one is at the
-  repo root. Don't rely on this copy staying current.
+- **A new symlink registers mid-session** — no restart needed. Confirmed
+  Aug 25 2026: `dissonance_close` became available in the same session it was
+  linked.
+
+### Why the wrap-up Skill is called `dissonance_close`
+
+Use **`/dissonance_close`** to close out a session. It is scoped to this
+folder — `SUBMISSION.md`, `SPEC.md`, this folder's `CHANGELOG.md` — and asks
+before pushing.
+
+It is deliberately **not** called `chat_close`. The workshop lead's own
+`chat_close` Skill lives at the repo root in `.claude/skills/`, and that one
+writes to the repo's `project/` files, which belong to them. Two Skills with
+the same name in the two scanned locations would make it unknowable which one
+runs, so this one carries a name nothing else can claim.
+
+- Never move this Skill into the repo-root `.claude/skills/`. That directory
+  is the lead's and is tracked upstream — writing there means a merge conflict
+  on every pull. This folder is the right home; the symlink is what makes it
+  load.
+- `/chat_close` still exists and still belongs to the lead. Don't use it.
+
+**Left over:** `.claude/skills/wrapup/` is the earlier version of this same
+Skill. `/dissonance_close` has now been run successfully (Aug 25 2026), so the
+fallback has served its purpose — but `wrapup` is still on disk and still
+symlinked, which means two wrap-up Skills answer to "wrapping up." It is
+untracked in git, so removing it leaves no history to clean up:
+
+    rm ~/.claude/skills/wrapup
+    rm .claude/skills/wrapup/SKILL.md && rmdir .claude/skills/wrapup
 
 ---
 
