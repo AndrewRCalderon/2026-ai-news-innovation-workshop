@@ -26,7 +26,11 @@ and no conclusion could be drawn about either.
 | Op-ed | 768 | 12 | 0 | 12 | **1.56** |
 | News | 1,305 | 6 | 3 | 3 | **0.23** |
 
-**Ratio: 6.78×** — passes, with more than twice the margin the spec required.
+**Ratio: 6.80×** — passes, with more than twice the margin the spec required.
+
+The ratio is computed from the unrounded densities (12/768 ÷ 3/1305 = 6.797), not
+from the two-decimal figures in the table. Dividing the rounded values gives
+6.78×, which is where an earlier draft of this file got that number.
 
 Every span in both analyses was verified programmatically: verbatim presence in
 the source, technique on the taxonomy, no overlapping spans. All checks passed.

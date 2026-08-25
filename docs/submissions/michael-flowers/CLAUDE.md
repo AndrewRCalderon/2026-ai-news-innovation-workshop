@@ -43,6 +43,32 @@ Answered on Day 2 of the workshop. These replace the questions that were here; r
 - Keep it accurate as things change. If the pitch or what you're building shifts, update `SUBMISSION.md` in the same commit, don't let it go stale.
 - If you restructure the project, keep `SUBMISSION.md` in that same folder and keep it filled in, rather than losing track of it in the shuffle.
 
+## How the dissonance Skill actually loads
+
+The Skill lives in this folder at `.claude/skills/dissonance/`, but that is
+**not** where Claude Code finds it. Submission folders are never scanned for
+Skills — a `SKILL.md` sitting here is inert on its own.
+
+It loads because `~/.claude/skills/dissonance` is a **symlink** pointing at
+`docs/submissions/michael-flowers/.claude/skills/dissonance`. That symlink
+lives outside the repo, so nothing in this project shows that it exists. There
+is only one copy of the file; the symlink is a signpost to it, not a duplicate.
+
+Consequences, confirmed by testing on Aug 25 2026:
+
+- **Moving or renaming this folder breaks the Skill silently.** No error, no
+  warning — it just stops appearing. This already happened once.
+- Before moving anything in this submission folder, run `ls -la ~/.claude/skills/`
+  to see what points into it. Afterward, check that
+  `~/.claude/skills/dissonance/SKILL.md` still resolves and repoint the symlink
+  if it doesn't.
+- **The Skill's name comes from the directory name, not the `name:` field in
+  the frontmatter.** To rename the Skill, rename the symlink — editing the
+  frontmatter alone does nothing.
+- `.claude/skills/chat_close/` in this folder is a reference copy of the
+  workshop's own Skill. It does not load from here; the working one is at the
+  repo root. Don't rely on this copy staying current.
+
 ---
 
 Update this file as the project grows. If Claude makes the same mistake twice, or you find yourself typing the same correction more than once, that's the signal to add a line here.

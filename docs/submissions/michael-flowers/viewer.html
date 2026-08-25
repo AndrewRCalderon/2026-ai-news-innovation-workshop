@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Dissonance — Opinion vs News</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/briefing.css">
+  <link rel="stylesheet" href="viewer.css">
+</head>
+<body>
+  <div id="nav"></div>
+
+  <main>
+    <div class="breadcrumb"><a href="/">Home</a> &gt; <a href="/students/">Students</a> &gt; Project Dissonance</div>
+
+    <h1>Where the persuasion is</h1>
+    <p class="lede">Two articles from the same newspaper, about the same announcement, in the same week. One is an opinion column, one is a news report. Project Dissonance names the persuasion technique in each, quotes the exact words doing the work, and leaves the judgment to you.</p>
+
+    <section class="result-banner" aria-labelledby="result-heading">
+      <h2 id="result-heading" class="sr-only">Test result</h2>
+      <p class="result-headline" id="ratio">—</p>
+      <p class="result-caption" id="ratio-caption">Loading analysis…</p>
+      <div class="result-figures" id="figures"></div>
+    </section>
+
+    <h2>Side by side</h2>
+    <p>Every finding below quotes text that appears verbatim in the source. Findings marked <em>attributed</em> are persuasive language the article is <strong>quoting</strong> rather than using — those belong to the speaker, not the paper, and are excluded from the density figure.</p>
+
+    <div class="comparison" id="comparison"></div>
+
+    <h2>The same fifteen words, judged two ways</h2>
+    <section class="callout">
+      <p class="callout-phrase">“the single greatest financial offensive ever marshalled against an adversary”</p>
+      <div class="callout-split">
+        <div class="callout-side">
+          <p class="callout-verdict">Flagged — loaded language</p>
+          <p class="doc-meta">In the op-ed, Bessent writes this himself. A superlative asserting unprecedented scale, with no comparison offered against any previous sanctions programme. It is his claim.</p>
+        </div>
+        <div class="callout-side attributed">
+          <p class="callout-verdict">Attributed — not counted</p>
+          <p class="doc-meta">In the news report, the same words sit inside quotation marks, credited to Bessent by name. The paper is reporting the claim, not making it.</p>
+        </div>
+      </div>
+      <p class="doc-meta" style="margin-top:1.2rem">Identical words, opposite verdict — because the relationship between writer and language changed. Without this rule the news report scores 0.46 instead of 0.23, and the tool ends up penalising a newspaper for quoting a source accurately.</p>
+    </section>
+
+    <h2>See it in the text</h2>
+    <section class="paste-panel">
+      <p>The articles themselves aren't published here — the Financial Times owns them. Paste one in and the flagged phrases light up where they actually sit.</p>
+      <div class="paste-controls">
+        <label for="analysis-select">Apply findings from</label>
+        <select id="analysis-select">
+          <option value="opinion">The op-ed — Bessent, 23 Aug</option>
+          <option value="news">The news report — FT desk, 25 Aug</option>
+        </select>
+        <button type="button" id="sample-btn">Use sample text</button>
+        <button type="button" id="clear-btn">Clear</button>
+      </div>
+      <label for="article-input" class="sr-only">Article text</label>
+      <textarea id="article-input" placeholder="Paste the article text here…"></textarea>
+      <p class="privacy-note">Nothing is uploaded, saved, or sent anywhere. The matching runs in your browser and disappears when you close the tab.</p>
+      <div id="match-report"></div>
+      <div class="highlighted-output" id="highlighted"></div>
+    </section>
+
+    <h2>What this doesn't prove</h2>
+    <section class="caveats">
+      <ul>
+        <li><strong>The control is news analysis, not a wire report.</strong> Analysis carries more interpretation than a bare account of what happened, so this is a conservative comparison — a straight AP or Reuters story would likely score lower still, widening the gap rather than narrowing it.</li>
+        <li><strong>One pair is not validation.</strong> This shows the detector <em>can</em> separate opinion from reporting on these two articles. It does not establish that it does so reliably across topics, outlets, or languages.</li>
+        <li><strong>The op-ed is close to a best case.</strong> A serving cabinet secretary arguing for his own policy is unusually rich material. A subtler column would be a harder test, and is the obvious next one.</li>
+      </ul>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/js/partials.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="viewer.js"></script>
+  <script src="/js/click-effect.js"></script>
+</body>
+</html>
