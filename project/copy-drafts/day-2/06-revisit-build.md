@@ -26,7 +26,13 @@ Once you are confident in your plan and you have a clear set of tasks, get to bu
 > **Exercise: Build Time**
 > - Time: The rest of this session.
 > - Description: Build from the plan you just reviewed. Update your CLAUDE.md if it needs it, write or revise a spec for what you're building next, then build.
-> - Deliverable: Visible progress on your project. Something to show and talk about next.
+> - Deliverable: Visible progress on your project, checked against the list below. Something to show and talk about next.
+>   - A `CLAUDE.md` file, reviewed and up to date
+>   - At least one Skill
+>   - `requirements.md` or `specifications.md`
+>   - `architecture.md`
+>   - `tasks.md`
+>   - A working mockup or prototype of your product
 
 ### If you're not sure where to start
 

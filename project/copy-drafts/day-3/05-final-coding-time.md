@@ -8,7 +8,7 @@ An hour isn't much. Resist the urge to add new features, and instead make what y
 
 - Would a stranger understand what this does quickly after they start using it?
 - Is there a broken feature you've been avoiding? Fix that before adding anything new.
-- From this morning: are there considerations you can't address now but you want to flag for show & tell so people know you have them in mind? Is there a rough edge in the experience you'd flag from Product Design? A place a mistake could go unnoticed from Safe & Auditable Design? Automation or human-in-the-loop decisions? Transparency here goes a long way for the demo.
+- From this morning: are there considerations you can't address now but you want to flag for show & tell so people know you have them in mind? A place a mistake could go unnoticed, or a disclosure pattern you didn't get to, from Safe & Auditable Design? Automation or human-in-the-loop decisions from Human-AI Design? Does the decision you made in Build Time still hold up under time pressure? Transparency here goes a long way for the demo.
 
 ## 2. Build
 
