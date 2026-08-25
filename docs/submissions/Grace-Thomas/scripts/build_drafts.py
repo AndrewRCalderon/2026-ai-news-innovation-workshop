@@ -109,12 +109,30 @@ def build_html(data, emails, account_index, signature):
     deadline = data.get("deadline", "")
     rows = []
     for i, em in enumerate(emails, 1):
-        url = gmail_compose_url(em, account_index)
+        method = em.get("contact_method") or ("email" if em.get("to") else "none")
+        url = gmail_compose_url(em, account_index) if method == "email" else ""
         conf = (em.get("confidence") or "MEDIUM").upper()
         color, bg, conf_note = CONF_STYLE.get(conf, CONF_STYLE["MEDIUM"])
-        too_long = len(url) > URL_SAFE_LIMIT
+        too_long = bool(url) and len(url) > URL_SAFE_LIMIT
 
-        if too_long:
+        if method == "form":
+            furl = em.get("form_url") or ""
+            action = (
+                '<div class="warn">No press email published. This company takes press requests '
+                'through a form — open it, then paste the text below.</div>'
+                '<a class="btn" href="%s" target="_blank" rel="noopener">Open %s contact form &rarr;</a>'
+                '<textarea readonly rows="10">%s</textarea>'
+                % (html.escape(furl, quote=True), html.escape(em.get("company", "")),
+                   html.escape("Subject: " + em.get("subject", "") + "\n\n" + em.get("body", "")))
+            )
+        elif method == "none":
+            action = (
+                '<div class="warn">No press email and no contact form found. Someone has to '
+                'find a route by hand before this can go out. The draft is ready below.</div>'
+                '<textarea readonly rows="10">%s</textarea>'
+                % html.escape("Subject: " + em.get("subject", "") + "\n\n" + em.get("body", ""))
+            )
+        elif too_long:
             action = (
                 '<div class="warn">This email is long enough that a pre-filled link may get '
                 'truncated by Gmail. Copy the body below instead.</div>'
@@ -268,7 +286,8 @@ def build_review_md(data, emails, signature):
 
 def write_tracking(path, data, emails):
     """Create the log, or add only genuinely new companies if it already exists."""
-    cols = ["company", "email", "confidence", "drafted", "sent_at", "deadline", "status", "response_notes"]
+    cols = ["company", "email", "contact_method", "form_url", "confidence", "drafted",
+            "sent_at", "deadline", "status", "response_notes"]
     existing = set()
     if os.path.exists(path):
         with open(path, "r", encoding="utf-8", newline="") as fh:
@@ -284,6 +303,8 @@ def write_tracking(path, data, emails):
             {
                 "company": em.get("company", ""),
                 "email": em.get("to", ""),
+                "contact_method": em.get("contact_method", ""),
+                "form_url": em.get("form_url", ""),
                 "confidence": (em.get("confidence") or "").upper(),
                 "drafted": data.get("generated", ""),
                 "sent_at": "",
@@ -337,10 +358,40 @@ FORBIDDEN = [
      "a phone number - RFC Bot never puts one in an email"),
 ]
 
+SUBJECT_FORBIDDEN = [
+    (r"(?i)deadline|response by|respond by|by \d{1,2}\s*(a\.?m|p\.?m)|urgent",
+     "a deadline - subjects are 'Outlet request: topic', the deadline goes in the body"),
+]
+
+
+def check_subject(company, subject):
+    """Warn on subject-line rules. Never blocks."""
+    warns = []
+    for pattern, why in SUBJECT_FORBIDDEN:
+        if re.search(pattern, subject):
+            warns.append("subject contains %s" % why)
+    if not re.match(r"^[A-Za-z0-9 .&'-]+ request: .+", subject):
+        warns.append("subject is not in the form '<Outlet> request: <topic>'")
+    for w in warns:
+        sys.stderr.write("WARNING [%s]: %s\n" % (company, w))
+    return len(warns)
+
 
 def check_body(company, body):
     """Warn about anything the body shouldn't contain. Never blocks."""
     warns = []
+
+    # Sentence 3 identifies the news; it must not brief the company on its own announcement.
+    m = re.search(r"I am writing to request comment on (.+?)(?<![A-Z])\.(?:\s|$)", body, re.S)
+    if m:
+        n = len(m.group(1).split())
+        if n > 30:
+            warns.append("sentence 3 runs %d words - it should identify the news, not "
+                         "summarize it back to them" % n)
+    elif "I am writing to request comment on" not in body:
+        warns.append("sentence 3 does not start 'I am writing to request comment on'")
+    if "My name is" not in body:
+        warns.append("sentence 2 does not start 'My name is <name>, I'm a <title> with <outlet>.'")
 
     words = len(body.split())
     if words > WORD_WARN:
@@ -380,9 +431,24 @@ def main():
     if not emails:
         die("drafts.json has no emails")
 
-    missing = [e.get("company", "?") for e in emails if not e.get("to")]
-    if missing:
-        die("these entries have no email address: %s" % ", ".join(missing))
+    # A company reachable only by a media contact form still gets a full draft — the reporter
+    # pastes the body in. Only an entry with no route at all is a blocker, and even then the
+    # draft is written rather than dropped.
+    for e in emails:
+        if not e.get("contact_method"):
+            e["contact_method"] = "email" if e.get("to") else ("form" if e.get("form_url") else "none")
+
+    forms = [e.get("company", "?") for e in emails if e["contact_method"] == "form"]
+    if forms:
+        sys.stderr.write("\nNOTE: no press email for %s - reachable by contact form only.\n"
+                         "  compose.html links the form and shows the body as copy-paste text.\n"
+                         % ", ".join(forms))
+
+    noroute = [e.get("company", "?") for e in emails if e["contact_method"] == "none"]
+    if noroute:
+        sys.stderr.write("\nBLOCKER: no email address AND no contact form found for: %s\n"
+                         "  The draft is written, but someone has to find a route by hand.\n\n"
+                         % ", ".join(noroute))
 
     signature = read_signature()
     if "TODO" in signature:
@@ -391,16 +457,11 @@ def main():
         sys.stderr.write("WARNING: config/signature.txt contains a phone number. "
                          "RFC Bot does not put phone numbers in emails - remove it.\n")
 
-    unresolved = [e.get("company", "?") for e in emails
-                  if not (e.get("confidence") or "").strip()]
-    if unresolved:
-        sys.stderr.write("\nBLOCKER: no press contact was found for: %s\n"
-                         "  These emails cannot be sent until someone looks the address up "
-                         "by hand.\n\n" % ", ".join(unresolved))
 
     fmt_warnings = 0
     for em in emails:
         fmt_warnings += check_body(em.get("company", "?"), em.get("body", ""))
+        fmt_warnings += check_subject(em.get("company", "?"), em.get("subject", ""))
 
     account_index = read_gmail_account_index()
     from_addr = data.get("from_email", "")

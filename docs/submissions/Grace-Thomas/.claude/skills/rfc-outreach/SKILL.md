@@ -32,127 +32,195 @@ If the brief is missing a **story summary**, **recipient list**, **the question*
 **deadline**, ask for just those. Everything else has a reasonable default. If `profile.md`
 still contains `TODO`, ask for those values before writing any email.
 
-### 2. Resolve the press contact for each company
+### 2. Resolve how to reach each company
 
-For each company, in order:
+The goal is **a usable route to a comms desk for every recipient** — not necessarily an email
+address. A company with only a media contact form still gets a full draft. Nobody is dropped
+and nothing is guessed.
 
-1. **Cache hit.** If `contacts/press-contacts.csv` has a row for the company, use it. Note
-   the `source_date` — if it's more than ~6 months old, re-verify.
+**1. Cache hit.** If `contacts/press-contacts.csv` has a row, use it. Re-verify if
+`source_date` is more than ~6 months old.
 
-2. **Grep the raw HTML. Do this first, before anything else.**
+**2. Otherwise escalate through three tiers. Stop at the first that works.**
 
-   **`WebFetch` is not sufficient on its own and must never be your only attempt.** It converts
-   a page to plain text and **discards link targets**, so an address published as a `mailto:`
-   link — which is how most companies publish one — is invisible to it. It also times out on
-   sites that answer a plain `curl` instantly. Both failure modes have already produced a wrong
-   contact in this project.
+Each tier defeats a failure the tier above it can't. Do not skip to tier 3, and do not stop at
+tier 1 just because it returned *something*.
 
-   Fetch the raw source and search it directly:
+> **Tier 1 — `curl` the raw HTML.** Fast, and it sees `mailto:` links, which is how most
+> companies publish an address.
+>
+> ```bash
+> UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0 Safari/537.36"
+> curl -sL --max-time 30 -A "$UA" "<url>" -o /tmp/page.html -w "%{http_code}\n"
+> grep -ohiE "mailto:[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+" /tmp/page.html | sort -u
+> grep -ohiE "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]*<domain>[A-Za-z0-9.-]*" /tmp/page.html | sort -u
+> ```
+>
+> **Tier 2 — `WebFetch`.** Different network path, so it sometimes succeeds where curl is
+> blocked. **It converts pages to plain text and discards link targets, so it cannot see a
+> `mailto:` address.** Useful for reading what a page *says*; never sufficient on its own.
+>
+> **Tier 3 — the real browser.** Use when tiers 1 and 2 both fail, and specifically whenever
+> you see **HTTP 429, 403, or a near-empty page**. Those mean bot-blocking or a JavaScript-only
+> site, and no amount of extra `curl` headers will fix either — that has already been tried
+> here and does not work. A real browser executes the page's JavaScript and passes the bot
+> check.
+>
+> ```
+> mcp__Claude_Browser__preview_start  { url: "<url>" }
+> ```
+> then run this in the page — it returns addresses **and** contact forms in one pass:
+> ```js
+> (() => {
+>   const html = document.documentElement.outerHTML;
+>   const mailtos = [...new Set([...html.matchAll(/mailto:([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+)/g)].map(m => m[1]))];
+>   const plain = [...new Set([...document.body.innerText.matchAll(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g)].map(m => m[0]))];
+>   const forms = [...document.querySelectorAll('form')].map(f => f.action || '(no action)');
+>   return JSON.stringify({url: location.href, title: document.title, mailtos, plain, forms}, null, 1);
+> })()
+> ```
+>
+> **This is not optional when the first two tiers fail.** `kalshi.com` returns 429 to every
+> `curl` and to `WebFetch` on every path, with or without full browser headers. The browser
+> loaded `kalshi.com/about` and found `media@kalshi.com` immediately. Reporting "no contact
+> found" without trying tier 3 is a false negative, not an honest one.
 
-   ```bash
-   UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0 Safari/537.36"
-   curl -sL --max-time 45 -A "$UA" "<url>" -o /tmp/page.html
-   grep -oE "mailto:[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+" /tmp/page.html | sort -u
-   grep -oE "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]*<domain>[A-Za-z0-9.-]*" /tmp/page.html | sort -u
-   ```
+**3. Where to look.** Corporate site, not the retail one (Nike's is `about.nike.com`):
 
-   Run **both** greps. The second catches addresses rendered as text or injected by JavaScript;
-   the first catches the far more common `mailto:` case. Read what comes back — a page often
-   lists investor relations, sustainability, and regional desks alongside the press inbox, and
-   you want the press one.
+`/about` · `/company` · `/contact` · `/contact-us` · `/newsroom` · `/press` · `/media` ·
+`/media/media-contact` · `/news` · `/imprint` (European companies) · `/tos` and `/terms`
+(footers and legal pages often carry the press inbox when no press page does)
 
-   **Watch the domain.** `corporate.press@adidas.com` and `corporate.press@adidas-group.com`
-   are different addresses, and a secondary source got that wrong here once. Take the domain
-   from the page, character for character. Never normalize it to what looks right.
+`/about` and `/company` lead the list on purpose. Nike publishes on `about.nike.com/en/company`
+and Kalshi on `kalshi.com/about` — **neither on its newsroom or press page.** Don't stop at the
+obvious path.
 
-3. **Where to look.** Try these paths on the corporate site, not the retail one (Nike's is
-   `about.nike.com`, not `nike.com`):
+Prefer a media-relations inbox over a named individual — individuals change jobs, inboxes get
+routed on deadline. Prefer the desk that matches the story.
 
-   `/company` · `/contact` · `/contact-us` · `/newsroom` · `/press` · `/media` ·
-   `/media/media-contact` · `/news` · `/about` · `/imprint` (European companies)
+**4. Watch the domain.** `corporate.press@adidas.com` and `corporate.press@adidas-group.com`
+are different addresses, and a secondary source got that wrong here once. Copy it from the page
+character for character. Never normalize it to what looks right.
 
-   `/company` and `/contact` are listed **first on purpose** — Nike publishes its media address
-   on `about.nike.com/en/company` and on neither `/newsroom` nor `/pages/contact-us`. Don't stop
-   at the newsroom.
+**5. Record how the company can be reached** as `contact_method`:
 
-   Prefer a media-relations inbox over a named individual — individuals change jobs, inboxes get
-   routed on deadline. Prefer the regional desk that matches the story (a global sports story
-   usually wants global or North America comms, not local retail PR).
+| `contact_method` | Meaning | What gets built |
+|---|---|---|
+| `email` | A press address was found | Full pipeline: Gmail button, `.eml`, everything |
+| `form` | No address, but the company publishes a media/press contact form | Draft is still written in full. `to` is empty, `form_url` is set. `compose.html` links the form and shows the body as copy-paste text. Flagged as needing manual submission. |
+| `none` | Neither could be found | Draft still written, `to` empty, reported as a **BLOCKER** |
 
-4. **Assign confidence honestly:**
-   - `HIGH` — you fetched the company's own page and **saw the address in that page's source**.
-   - `MEDIUM` — from a credible secondary source (a wire release, a recent news story, a trade
-     masthead), or from the company's own site but not verified this run.
-   - `LOW` — inferred from a naming pattern (`press@`, `media@`) without seeing it published.
+**A form is a real answer, not a failure.** Plenty of companies route press through one. Write
+the email exactly as you would otherwise — the reporter pastes it into the form.
 
-   A search-engine summary quoting an address is `MEDIUM`, never `HIGH`, no matter how confident
-   it sounds. Only reading the page yourself earns `HIGH`.
+**6. Confidence, honestly:**
 
-5. **If you can't find one, say so loudly.** Still write the email, set `to` to `""`, and set
-   confidence to `""`. Then **flag it to the reporter as an issue, at the top of your report,
-   named as a blocker** — not a footnote at the end of a table. List which companies need a
-   manual lookup, which URLs you tried, and what each one returned (404, timeout, page had no
-   address). Never guess an address to fill the gap, and never quietly drop a recipient.
+- `HIGH` — you loaded the company's own page and **saw the address (or the form) yourself**,
+  by any of the three tiers.
+- `MEDIUM` — a credible secondary source (wire release, recent news story, trade masthead), or
+  the company's own site but not verified this run.
+- `LOW` — inferred from a naming pattern (`press@`, `media@`) without seeing it published.
+  Never written to the contact record.
 
-Report contacts to the reporter as a table (company, address, source URL, confidence)
-**before** moving on, so they can catch a wrong desk early. Say plainly which ones you read
-off the page yourself and which came from somewhere else.
+A search-engine summary quoting an address is `MEDIUM`, never `HIGH`, however confident it
+sounds. Only reading the page yourself earns `HIGH`.
+
+**7. Report before writing.** Give the reporter a table — company, route, address or form URL,
+source URL, confidence — and say plainly which you read yourself and which came from elsewhere.
+Name anything at `MEDIUM` or `form` or `none` **at the top, as a blocker**, with the URLs you
+tried and what each returned (429, 404, timeout, no address on page). Never guess to fill a gap.
 
 ### 3. Write one email per recipient
 
 Every email is individually written. Same core question, but the context paragraph names the
 specific company and what the reporting shows about *them*. Substitute `{COMPANY}` throughout.
 
-**Subject line.** It has to survive a PR inbox on deadline. Pattern:
+**Subject line.** Exactly this shape:
 
-> `<Outlet> query — <specific topic> — response requested by <deadline>`
+> `<Outlet> request: <what the request is about>`
 
-e.g. `Semafor query — Nike's pink World Cup cleats — response by 4 p.m. ET today`
+```
+Semafor request: Kalshi's flight cancellation contracts
+Semafor request: Polymarket's approach to aviation markets
+```
 
-Not "Media inquiry" or "Quick question." Name the outlet, the subject, and the clock.
+**No deadline in the subject.** It's in the body. Not "Media inquiry," not "Quick question."
 
-Keep the subject line **plain ASCII** — use a hyphen, not an em dash. Non-ASCII characters
-get MIME-encoded into `=?utf-8?b?...?=` gibberish in the raw `.eml`, and they bloat the
-Gmail compose URL. Em dashes in the body are fine.
+Keep it **plain ASCII** — a hyphen, never an em dash. Non-ASCII gets MIME-encoded into
+`=?utf-8?b?...?=` gibberish in the raw `.eml`.
 
 **Body.** Plain text. **Four sentences, in this exact order.** Nothing else goes in.
 
 1. **Greeting**, on its own line. `Hello,`
-2. **Who you are.** `I'm <name>, a reporter with <outlet>.` Nothing else in this sentence.
-3. **Why you're writing** — the specific, factual thing this company did, drawn from the
-   brief's "What I already have" field. Plain statement of fact, no framing, no lead-in.
-   `Nike released at least one pink cleat colorway timed to the World Cup.`
-4. **What statement you need**, as prose. Begins `I am looking for a statement on` and runs
-   the reporter's questions together as connected clauses. Never a numbered or bulleted list.
+2. **Who you are**, in exactly this form:
+   `My name is <full name>, I'm a <title> with <outlet>.`
+   Name, title and outlet come from `config/profile.md`. Nothing else in this sentence.
+3. **What you're requesting comment on**, in exactly this form:
+   `I am writing to request comment on <the news, in one clause>.`
+
+   **This is breaking news and the company already knows what they did.** Compress it to the
+   single clause that identifies the event. Do not brief them on their own announcement, do not
+   list the details, do not recite the filing back to them. If your clause runs past about 25
+   words, it is explaining rather than identifying — cut it.
+
+   Right: `I am writing to request comment on Kalshi notifying the CFTC that it self-certified
+   a new class of contracts on airport flight cancellations.`
+
+   Wrong: `Kalshi notified the CFTC on Tuesday that it self-certified a new class of contracts
+   letting traders bet on the percentage of scheduled flights canceled at U.S. airports, and
+   the filing bars airport employees, directors and contractors with nonpublic knowledge of
+   flight operations from trading them.`
+
+4. **What statement you need**, in exactly this form:
+   `I am looking for a statement on <the asks, run together as prose>.`
+
+   **Every ask must tie to the news in sentence 3.** Background, history, and prior incidents
+   are context for the story, not for the request. If an ask would still make sense without the
+   breaking news, it doesn't belong. Never a numbered or bulleted list.
+
 5. **The deadline**, after a blank line, alone on the last line. Nothing after it.
-   `My deadline is 4 ET today.`
+   `My deadline is 4 p.m. ET today.`
+
+   **Use the deadline from the brief. Never invent one.** If the brief has no deadline, or one
+   with no time zone, **stop and ask the reporter** before writing any email. Do not default to
+   4 p.m., do not default to today.
 
 Sentences 2–4 sit in **one continuous paragraph** with no blank lines between them. Only the
 deadline is separated.
 
-**Do not write a thesis sentence.** There is no sentence explaining what the story is about,
-what pattern it examines, or what the reporting indicates across the industry. Openers like
-`The story examines a pattern:` or `My reporting indicates that…` are cut. Sentence 3 states
-what *this company* did, and sentence 4 asks. That is the whole email.
+**Write it to be read in one pass.** Short clauses, plain words, no subordinate pile-ups. A
+comms person is skimming on their own deadline. If a sentence has to be re-read, rewrite it.
 
-**Do not editorialize the ask.** No `I'd like to understand the thinking behind it`, no
-`which is why I'm bringing these questions to you`. Sentence 4 starts with the request.
+**Recipients get different sentence 3s when their involvement differs.** Two companies in the
+same story are rarely being asked about the same thing. Write each from the brief's "What I
+already have" entry for *that* company. `{COMPANY}` substitution is for shared wording only,
+not a substitute for thinking about each recipient.
 
-Length follows from the structure — four sentences is the shape, not a word budget. If a
-clause is needed for accuracy, keep it. **Accuracy outranks brevity**, and the build's length
-warning never blocks or rewrites anything.
-
-Example (Nike, pink cleats):
+Example (Kalshi):
 
 ```
 Hello,
 
-I'm Grace Thomas, a reporter with Semafor. Nike released at least one pink cleat colorway
-timed to the World Cup. I am looking for a statement on why the players wore pink cleats, why
-a consumer release was timed to the same window, and whether Nike relied on market research
-indicating pink would have the highest on-pitch visibility.
+My name is Grace Thomas, I'm a reporter with Semafor. I am writing to request comment on
+Kalshi notifying the CFTC that it self-certified a new class of contracts on airport flight
+cancellations. I am looking for a statement on whether these markets are live yet, what
+Kalshi sees as their purpose, and how Kalshi prevents trading by people with nonpublic
+information about flight operations.
 
-My deadline is 4 ET today.
+My deadline is 4 p.m. ET today.
+```
+
+Example (Polymarket — same story, different ask, because their involvement is different):
+
+```
+Hello,
+
+My name is Grace Thomas, I'm a reporter with Semafor. I am writing to request comment on
+Kalshi notifying the CFTC that it self-certified a new class of contracts on airport flight
+cancellations. I am looking for a statement on Polymarket's response to Kalshi's proposal and
+on Polymarket's own approach to aviation markets.
+
+My deadline is 4 p.m. ET today.
 ```
 
 The line wrapping above is display width only — the middle block is one paragraph. A correct
@@ -171,8 +239,12 @@ because they seem helpful or standard:
 - An offer to take a call, or a phone number.
 - **Numbered or bulleted questions.** The questions run as prose inside the paragraph.
 - **Blank lines between sentences.** The body above the deadline is one paragraph.
-- **A thesis sentence.** No "The story examines…", no "my reporting indicates…". Sentence 3
-  states what this company did; sentence 4 asks. Nothing explains the story at large.
+- **A thesis sentence.** No "The story examines…", no "my reporting indicates…".
+- **A briefing on the company's own news.** They already know what they announced. Sentence 3
+  identifies the event in one clause; it does not summarize it back to them.
+- **Background or prior incidents** that aren't the news you're asking about. Context belongs
+  in the story, not the request.
+- **A deadline in the subject line.**
 - **Editorializing before the ask** — "I'd like to understand the thinking behind it",
   "which is why I'm bringing these questions to you". Sentence 4 opens with the request.
 - Any sentence after the deadline line.

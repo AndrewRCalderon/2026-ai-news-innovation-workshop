@@ -18,14 +18,14 @@
 ## 1. Nike
 
 **To:** media.relations@nike.com  
-**Subject:** Semafor query - Nike's pink World Cup cleats - response by 4 p.m. ET today
+**Subject:** Semafor request: Nike's pink World Cup cleats
 
 ```
 Hello,
 
-I'm Grace Thomas, a reporter with Semafor. Nike released at least one pink cleat colorway timed to the World Cup. I am looking for a statement on why the players wore pink cleats, why a consumer release was timed to the same window, and whether Nike relied on market research indicating pink would have the highest on-pitch visibility.
+My name is Grace Thomas, I'm a reporter with Semafor. I am writing to request comment on Nike releasing pink cleats timed to the World Cup. I am looking for a statement on why the players wore pink cleats, why a consumer release was timed to the same window, and whether Nike relied on market research indicating pink would have the highest on-pitch visibility.
 
-My deadline is 4 ET today.
+My deadline is 4 p.m. ET today.
 
 --
 Grace Thomas
@@ -36,14 +36,14 @@ tkc.intern2@journalism.cuny.edu
 ## 2. Adidas
 
 **To:** corporate.press@adidas-group.com  
-**Subject:** Semafor query - adidas' pink World Cup cleats - response by 4 p.m. ET today
+**Subject:** Semafor request: adidas's pink World Cup cleats
 
 ```
 Hello,
 
-I'm Grace Thomas, a reporter with Semafor. adidas released at least one pink cleat colorway timed to the World Cup. I am looking for a statement on why the players wore pink cleats, why a consumer release was timed to the same window, and whether adidas relied on market research indicating pink would have the highest on-pitch visibility.
+My name is Grace Thomas, I'm a reporter with Semafor. I am writing to request comment on adidas releasing pink cleats timed to the World Cup. I am looking for a statement on why the players wore pink cleats, why a consumer release was timed to the same window, and whether adidas relied on market research indicating pink would have the highest on-pitch visibility.
 
-My deadline is 4 ET today.
+My deadline is 4 p.m. ET today.
 
 --
 Grace Thomas
@@ -54,14 +54,14 @@ tkc.intern2@journalism.cuny.edu
 ## 3. New Balance
 
 **To:** Media.relations@newbalance.com  
-**Subject:** Semafor query - New Balance's pink World Cup cleats - response by 4 p.m. ET today
+**Subject:** Semafor request: New Balance's pink World Cup cleats
 
 ```
 Hello,
 
-I'm Grace Thomas, a reporter with Semafor. New Balance released at least one pink cleat colorway timed to the World Cup. I am looking for a statement on why the players wore pink cleats, why a consumer release was timed to the same window, and whether New Balance relied on market research indicating pink would have the highest on-pitch visibility.
+My name is Grace Thomas, I'm a reporter with Semafor. I am writing to request comment on New Balance releasing pink cleats timed to the World Cup. I am looking for a statement on why the players wore pink cleats, why a consumer release was timed to the same window, and whether New Balance relied on market research indicating pink would have the highest on-pitch visibility.
 
-My deadline is 4 ET today.
+My deadline is 4 p.m. ET today.
 
 --
 Grace Thomas
@@ -72,14 +72,14 @@ tkc.intern2@journalism.cuny.edu
 ## 4. Puma
 
 **To:** mario.almeida@puma.com  
-**Subject:** Semafor query - PUMA's pink World Cup cleats - response by 4 p.m. ET today
+**Subject:** Semafor request: Puma's pink World Cup cleats
 
 ```
 Hello,
 
-I'm Grace Thomas, a reporter with Semafor. Puma released at least one pink cleat colorway timed to the World Cup. I am looking for a statement on why the players wore pink cleats, why a consumer release was timed to the same window, and whether Puma relied on market research indicating pink would have the highest on-pitch visibility.
+My name is Grace Thomas, I'm a reporter with Semafor. I am writing to request comment on Puma releasing pink cleats timed to the World Cup. I am looking for a statement on why the players wore pink cleats, why a consumer release was timed to the same window, and whether Puma relied on market research indicating pink would have the highest on-pitch visibility.
 
-My deadline is 4 ET today.
+My deadline is 4 p.m. ET today.
 
 --
 Grace Thomas

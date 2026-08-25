@@ -213,11 +213,29 @@ What it exposed:
    involvement need per-company facts, which the brief's "What I already have" field handled by
    being written per company. Worth documenting as the expected pattern.
 
-### [ ] 12. Fix what task 11 exposes, then re-run pink cleats
+### [x] 12. Fix what task 11 exposes, then re-run pink cleats
 
 **Why:** a generalization fix that breaks the known-good case isn't a fix.
 
 **Done when:** `SKILL.md` is updated and the cleats output still passes task 6's checks.
+
+**Round 2, 2026-08-25.** Reporter review of the Kalshi drafts drove a second set of changes:
+
+- **Browser tier added to contact research.** `kalshi.com` 429s every `curl` and `WebFetch`
+  request even with a full browser header set — but the real browser loaded `/about` and found
+  `media@kalshi.com` on the first try. Kalshi is now HIGH. Research is a three-tier escalation:
+  curl → fetcher → browser, and 429/403/empty-page means go to tier 3, not give up.
+- **Contact forms are a supported route** (R1a). `contact_method` is `email`, `form`, or
+  `none`; a form-only company still gets a full draft plus a link to the form and copy-paste
+  text. Verified with a synthetic two-company fixture.
+- **Subject is now `<Outlet> request: <topic>`** with no deadline in it.
+- **Sentence 2 is `My name is X, I'm a <title> with <outlet>.`**
+- **Sentence 3 is one clause.** The old version briefed companies on their own announcement.
+  Breaking news means they already know; the sentence identifies the event and stops.
+- **Asks must tie to the news.** The first Polymarket draft led with the Charles de Gaulle
+  trade, which is story context, not what was being asked. Cut.
+- **Deadlines are never defaulted.** No more assuming 4 p.m. today — if the brief doesn't say,
+  ask.
 
 ### [ ] 13. Exercise the follow-up path
 

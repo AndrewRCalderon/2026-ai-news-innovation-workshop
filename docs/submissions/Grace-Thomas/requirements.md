@@ -25,6 +25,18 @@ The system writes files. A human sends. This is not configurable.
 The optional Gmail API path may only ever request the `gmail.compose` scope, which is
 technically incapable of sending.
 
+### R1a — Every recipient gets a draft, whatever the route
+
+A company is never dropped for being hard to reach. Each recipient is recorded with how they
+can be contacted:
+
+- **`email`** — a press address was found. Full pipeline.
+- **`form`** — no address, but the company publishes a media contact form. The draft is written
+  in full, the form URL is recorded and linked, and the body is offered as copy-paste text. A
+  form is a normal answer, not a failure.
+- **`none`** — neither found. The draft is still written, and it is reported as a **BLOCKER**
+  naming what was tried.
+
 ### R2 — One story in, one send-ready package out
 
 Given a filled-in brief, produce for that story:
@@ -49,28 +61,30 @@ tell the email was written to them.
 
 Plain text. **Four sentences, in this exact order**, and nothing else:
 
-1. **Greeting**, on its own line. `Hello,`
-2. **Who you are.** Name and outlet. Nothing else in the sentence.
-3. **Why you're writing** — a plain statement of the specific factual thing *this company*
-   did, from the brief's "What I already have" field. No framing, no lead-in.
-4. **What statement you need**, opening `I am looking for a statement on` and running the
-   reporter's questions together **as prose**. Never a numbered or bulleted list.
+1. **Greeting**, on its own line.
+2. **Who you are:** `My name is <full name>, I'm a <title> with <outlet>.` Name, title and
+   outlet come from the reporter profile.
+3. **What you're requesting comment on:** `I am writing to request comment on <the news, in one
+   clause>.` **This is breaking news — the company already knows what it announced.** The
+   sentence identifies the event; it does not summarize it back to them, list the details, or
+   recite a filing. Past roughly 25 words it is explaining rather than identifying.
+4. **What statement you need:** `I am looking for a statement on <the asks, as prose>.` **Every
+   ask ties to the news in sentence 3.** Background, history and prior incidents are context for
+   the story, not for the request — if an ask would still make sense without the breaking news,
+   it doesn't belong. Never a numbered or bulleted list.
 5. **The deadline**, after a blank line, alone on the last line. Nothing after it.
 
-Sentences 2–4 are one continuous paragraph with no blank lines between them. A correct body
-has exactly two blank lines: after the greeting, and before the deadline.
+Sentences 2–4 are one continuous paragraph. A correct body has exactly two blank lines: after
+the greeting, and before the deadline.
 
-**There is no thesis sentence.** Nothing explains what the story is about at large, what
-pattern it examines, or what the reporting shows across an industry. Sentence 3 states what
-this company did; sentence 4 asks. A recipient learns the story from the question they're
-being asked, not from a summary of it.
+**Readable in one pass.** Short clauses, plain words, no subordinate pile-ups. A comms person is
+skimming on their own deadline; a sentence that has to be re-read gets rewritten.
 
-**Nothing editorializes before the ask.** No "I'd like to understand the thinking behind it,"
-no "which is why I'm bringing these questions to you." Sentence 4 opens with the request.
+**Recipients with different involvement get different sentences.** Two companies in one story
+are rarely being asked the same thing.
 
-Length follows from the structure rather than a word budget. If a clause is needed for
-accuracy, it stays — **accuracy outranks brevity**, and the length warning (R9a) never blocks
-or rewrites a draft.
+**The deadline is never invented.** It comes from the brief. If the brief has no deadline, or
+gives one without a time zone, **the system stops and asks** rather than assuming a default.
 
 ### R5 — Nothing gets added back
 
@@ -86,13 +100,13 @@ These were each cut deliberately. They do not return because they seem standard 
 - Numbered or bulleted questions.
 - Any sentence after the deadline line.
 
-### R6 — Subject lines survive a PR inbox
+### R6 — Subject lines
 
-Name the outlet, the specific topic, and the clock. Not "Media inquiry."
+Exactly `<Outlet> request: <what the request is about>`. **No deadline in the subject** — it
+lives in the body. Not "Media inquiry," not "Quick question."
 
 Plain ASCII only — a hyphen, never an em dash. Non-ASCII gets MIME-encoded into
-`=?utf-8?b?…?=` gibberish in the raw `.eml` and inflates the Gmail compose URL. Em dashes in
-the body are fine.
+`=?utf-8?b?…?=` gibberish in the raw `.eml`.
 
 ### R7 — The signature is supplied once, never twice
 
@@ -122,6 +136,11 @@ Rules that follow from this:
 
 - A guessed address is labeled LOW and says so. It is never presented as verified.
 - Anything below HIGH is named to the reporter as needing confirmation before send.
+- **Research escalates through three tiers, and stops at the first that works:** raw HTML via
+  `curl`; then the text-conversion fetcher; then **a real browser**. Each defeats a failure the
+  one above it can't. A 429, a 403, or a near-empty page means bot-blocking or a
+  JavaScript-only site — neither is fixable with more request headers, and both yield to the
+  browser. Reporting "no contact found" without reaching tier 3 is a false negative.
 - **The raw page source is searched, not just its readable text.** Page-to-text conversion
   discards `mailto:` link targets, which is how most companies publish a press address — so a
   text-only read will report "no address on this page" for a page that plainly has one. It has
