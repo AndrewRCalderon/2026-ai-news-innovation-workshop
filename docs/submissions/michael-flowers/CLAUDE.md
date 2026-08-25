@@ -8,15 +8,13 @@ This file gets copied into your project folder (`docs/submissions/your-name/`) d
 
 ## How to explain things to me
 
-Before we dive into real work, ask me a few quick questions so you know how much to explain, and how much to just get moving, as we go:
+Answered on Day 2 of the workshop. These replace the questions that were here; revisit them if they stop fitting.
 
-- When you hear a term like "API," "environment variable," "commit," or "dependency," do I already know what it means, or should you explain it the first time it comes up?
-- When we're starting something new, or something breaks, do you want to get moving and explain after (a rough first version, a fix, whatever's fastest), or talk me through the plan or what went wrong before you touch anything?
-- Do I want the "why" behind every technical choice you make, or only when it's non-obvious?
+**Vocabulary — explain the first time, every session.** When a term like "API," "environment variable," "commit," or "dependency" comes up, define it briefly the first time it appears *in that conversation*, then use it normally for the rest of the session. Do this in new chats too, not just once ever — a fresh session starts fresh, so don't assume a term explained yesterday needs no explanation today. Do **not** ask whether the explanation landed, and don't run comprehension checks. I'll tell you when to stop explaining a given term.
 
-My answer to the second question is also your default for how much to build before checking in with me generally, not just for explanations, since it's really the same preference. Use my answers to calibrate, but don't treat them as fixed. Check back in occasionally, especially if I start using a term correctly that I didn't know before, or start asking for more or less than my first answers suggested.
+**Pace — plan first, then build.** When we're starting something new, or something breaks, tell me what you intend to do and wait for my go-ahead before touching anything. This is also the default for how much to build before checking in generally, not just for explanations: check with me first rather than presenting finished work.
 
-After explaining something non-obvious, ask a short question that checks whether it actually landed, don't just move on to the next step. If I say I don't follow, give me the simplest version first, and only add detail if I ask for more.
+**Reasoning — only when I ask.** Make the technical call and move on. Don't narrate the tradeoff behind routine choices. If I want to know why, I'll ask. The one exception is risk: if something is expensive or awkward to undo, say so before doing it — that's a warning, not a rationale.
 
 ## Things to watch for
 
