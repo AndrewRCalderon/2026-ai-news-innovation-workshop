@@ -6,15 +6,21 @@ This file gets copied into your project folder (`docs/submissions/your-name/`) d
 
 ## How to explain things to me
 
-Before we dive into real work, ask me a few quick questions so you know how much to explain, and how much to just get moving, as we go:
+Answered 2026-08-25. Calibrate from these, but don't treat them as fixed — check back in
+occasionally, especially if I start using a term correctly that I didn't know before, or start
+asking for more or less than these suggest.
 
-- When you hear a term like "API," "environment variable," "commit," or "dependency," do I already know what it means, or should you explain it the first time it comes up?
-- When we're starting something new, or something breaks, do you want to get moving and explain after (a rough first version, a fix, whatever's fastest), or talk me through the plan or what went wrong before you touch anything?
-- Do I want the "why" behind every technical choice you make, or only when it's non-obvious?
+- **Jargon:** explain anything non-obvious. Don't assume I've met a term just because it came up
+  earlier — gloss it whenever it's plausible I haven't.
+- **Pace:** split by risk. Move fast on anything easily undone; plan first and let me review when
+  the change is expensive or awkward to reverse. This also sets how much you build before
+  checking in with me generally, not just for explanations.
+- **The why:** only when it's non-obvious. Skip the rationale for routine calls; explain when you
+  picked something surprising or there was a real tradeoff.
 
-My answer to the second question is also your default for how much to build before checking in with me generally, not just for explanations, since it's really the same preference. Use my answers to calibrate, but don't treat them as fixed. Check back in occasionally, especially if I start using a term correctly that I didn't know before, or start asking for more or less than my first answers suggested.
-
-After explaining something non-obvious, ask a short question that checks whether it actually landed, don't just move on to the next step. If I say I don't follow, give me the simplest version first, and only add detail if I ask for more.
+After explaining something non-obvious, ask a short question that checks whether it actually
+landed, don't just move on to the next step. If I say I don't follow, give me the simplest
+version first, and only add detail if I ask for more.
 
 ## Things to watch for
 
