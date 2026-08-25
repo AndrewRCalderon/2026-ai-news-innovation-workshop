@@ -55,7 +55,7 @@ on the record, attributed to a named spokesperson
 
 ## Publication
 <!-- Where this runs, and when. -->
-NYCity News Service, publishing this evening
+Semafor, publishing this evening
 
 ## Tone notes
 <!-- Optional. Anything you want emphasized or avoided. -->

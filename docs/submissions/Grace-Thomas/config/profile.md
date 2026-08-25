@@ -4,7 +4,7 @@ Edit this once. Every email uses it. Anything marked TODO will make Claude stop 
 
 - **Name:** Grace Thomas
 - **Title:** Reporter
-- **Outlet:** NYCity News Service
+- **Outlet:** Semafor
 - **Email:** tkc.intern2@journalism.cuny.edu
 - **Phone:** TODO — a number you'll actually pick up on deadline
   <!-- Only used in your signature. The email body no longer offers a phone number,

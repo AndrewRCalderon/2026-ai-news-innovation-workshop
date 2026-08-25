@@ -65,7 +65,7 @@ specific company and what the reporting shows about *them*. Substitute `{COMPANY
 
 > `<Outlet> query — <specific topic> — response requested by <deadline>`
 
-e.g. `NYCity News Service query — Nike's pink World Cup cleats — response by 4 p.m. ET today`
+e.g. `Semafor query — Nike's pink World Cup cleats — response by 4 p.m. ET today`
 
 Not "Media inquiry" or "Quick question." Name the outlet, the subject, and the clock.
 
@@ -73,39 +73,42 @@ Keep the subject line **plain ASCII** — use a hyphen, not an em dash. Non-ASCI
 get MIME-encoded into `=?utf-8?b?...?=` gibberish in the raw `.eml`, and they bloat the
 Gmail compose URL. Em dashes in the body are fine.
 
-**Body.** Plain text. Structure, in this order:
+**Body.** Plain text. **Four sentences, in this exact order.** Nothing else goes in.
 
-1. **A greeting on its own line.** `Hello,`
-2. **One continuous paragraph** — no blank lines inside it — containing, in order:
-   - **Who you are.** Name and outlet. Nothing else.
-   - **The story.** The actual thesis, compressed.
-   - **What it says about them**, drawn from the brief's "What I already have" field, flowing
-     into the questions. This is what makes it a real request for comment rather than a survey.
-   - **The questions themselves, as prose.** Connected clauses inside the same paragraph —
-     never a numbered or bulleted list. Same substance the reporter entered in the brief,
-     rendered as running text.
-3. **The deadline, alone on the last line.** Nothing after it. Format: `My deadline is 4 ET
-   today.`
+1. **Greeting**, on its own line. `Hello,`
+2. **Who you are.** `I'm <name>, a reporter with <outlet>.` Nothing else in this sentence.
+3. **Why you're writing** — the specific, factual thing this company did, drawn from the
+   brief's "What I already have" field. Plain statement of fact, no framing, no lead-in.
+   `Nike released at least one pink cleat colorway timed to the World Cup.`
+4. **What statement you need**, as prose. Begins `I am looking for a statement on` and runs
+   the reporter's questions together as connected clauses. Never a numbered or bulleted list.
+5. **The deadline**, after a blank line, alone on the last line. Nothing after it.
+   `My deadline is 4 ET today.`
 
-**Length is a guideline, not a count.** As short as it can be and still land — a breaking-news
-PR inbox is triaged in seconds and a long email buries the ask. But there is **no fixed
-sentence limit**, and a story that needs another clause to be accurate gets it. **Accuracy
-outranks brevity.** The build warns on an unusually long body; it never blocks or truncates
-one, and you should not cut something true to satisfy a warning.
+Sentences 2–4 sit in **one continuous paragraph** with no blank lines between them. Only the
+deadline is separated.
+
+**Do not write a thesis sentence.** There is no sentence explaining what the story is about,
+what pattern it examines, or what the reporting indicates across the industry. Openers like
+`The story examines a pattern:` or `My reporting indicates that…` are cut. Sentence 3 states
+what *this company* did, and sentence 4 asks. That is the whole email.
+
+**Do not editorialize the ask.** No `I'd like to understand the thinking behind it`, no
+`which is why I'm bringing these questions to you`. Sentence 4 starts with the request.
+
+Length follows from the structure — four sentences is the shape, not a word budget. If a
+clause is needed for accuracy, keep it. **Accuracy outranks brevity**, and the build's length
+warning never blocks or rewrites anything.
 
 Example (Nike, pink cleats):
 
 ```
 Hello,
 
-I'm Grace Thomas, a reporter with NYCity News Service. The story examines a pattern: every
-major athletic brand released pink cleats timed to the 2026 World Cup, and my reporting
-indicates they were working from similar market research concluding that pink offers the
-highest visibility against the green of the pitch. Nike released at least one pink cleat
-colorway timed to the tournament, and I'd like to understand the thinking behind it — why
-pink for the boots worn by players at the World Cup, why a consumer release timed to the
-same window, and whether Nike relied on market research indicating pink would have the
-highest on-pitch visibility, conducted internally or by an outside firm.
+I'm Grace Thomas, a reporter with Semafor. Nike released at least one pink cleat colorway
+timed to the World Cup. I am looking for a statement on why the players wore pink cleats, why
+a consumer release was timed to the same window, and whether Nike relied on market research
+indicating pink would have the highest on-pitch visibility.
 
 My deadline is 4 ET today.
 ```
@@ -126,7 +129,10 @@ because they seem helpful or standard:
 - An offer to take a call, or a phone number.
 - **Numbered or bulleted questions.** The questions run as prose inside the paragraph.
 - **Blank lines between sentences.** The body above the deadline is one paragraph.
-- A fixed sentence count. There is no cap — see the length guideline above.
+- **A thesis sentence.** No "The story examines…", no "my reporting indicates…". Sentence 3
+  states what this company did; sentence 4 asks. Nothing explains the story at large.
+- **Editorializing before the ask** — "I'd like to understand the thinking behind it",
+  "which is why I'm bringing these questions to you". Sentence 4 opens with the request.
 - Any sentence after the deadline line.
 
 The `terms` field in the brief still gets recorded in `drafts.json` for the reporter's own

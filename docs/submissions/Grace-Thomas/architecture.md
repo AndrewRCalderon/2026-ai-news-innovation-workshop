@@ -101,9 +101,16 @@ they apply even outside a skill run.
 - **Questions run as prose, not a numbered list** *(2026-08-25)*. A list is easier for a comms
   person to answer point-by-point and easier to compare across companies; prose reads like a
   person wrote it. The tradeoff was taken knowingly in favor of prose.
-- **No fixed sentence cap** *(2026-08-25)*. An earlier hard "four sentences maximum" rule was
-  replaced by a guideline plus a warning-only length check. The cap was over-specified — the
-  real rule is "no padding," which is a judgment, not a count.
+- **No thesis sentence** *(2026-08-25)*. Emails once opened by explaining the story's pattern
+  across an industry. Cut. A comms person needs to know what their company is being asked
+  about, not what the piece argues — and an industry-wide thesis in writing is an assertion the
+  reporting has to carry. The body is now: who you are, what this company did, what statement
+  you need, deadline.
+- **Outlet is Semafor** *(2026-08-25)*, set in `config/profile.md` and `config/signature.txt`.
+  Earlier drafts said NYCity News Service.
+- **Structure over word count** *(2026-08-25)*. An earlier hard "four sentences maximum" cap
+  was replaced by a fixed four-part structure plus a warning-only length check. The shape is
+  the rule; the length falls out of it. Accuracy still outranks brevity.
 
 ## Known weak points
 

@@ -47,20 +47,30 @@ tell the email was written to them.
 
 ### R4 — Email format
 
-Plain text. In this order:
+Plain text. **Four sentences, in this exact order**, and nothing else:
 
-1. A greeting on its own line.
-2. **One continuous paragraph** containing: who the reporter is and their outlet; the story's
-   thesis; and what the reporting says about this specific company, flowing into the questions.
-3. **The deadline on its own line, last.** Nothing after it.
+1. **Greeting**, on its own line. `Hello,`
+2. **Who you are.** Name and outlet. Nothing else in the sentence.
+3. **Why you're writing** — a plain statement of the specific factual thing *this company*
+   did, from the brief's "What I already have" field. No framing, no lead-in.
+4. **What statement you need**, opening `I am looking for a statement on` and running the
+   reporter's questions together **as prose**. Never a numbered or bulleted list.
+5. **The deadline**, after a blank line, alone on the last line. Nothing after it.
 
-**The questions run as prose inside that paragraph — never as a numbered or bulleted list.**
-The same substance the reporter entered in the brief, rendered as connected clauses.
+Sentences 2–4 are one continuous paragraph with no blank lines between them. A correct body
+has exactly two blank lines: after the greeting, and before the deadline.
 
-**Length is a guideline, not a count.** As short as it can be and still land. A breaking-news PR
-inbox is triaged in seconds and a long email buries the ask — but there is no fixed sentence
-limit, and a story that needs another clause to be accurate gets it. Accuracy outranks brevity.
-The build may *warn* on an unusually long body (see R9); it must never block or truncate one.
+**There is no thesis sentence.** Nothing explains what the story is about at large, what
+pattern it examines, or what the reporting shows across an industry. Sentence 3 states what
+this company did; sentence 4 asks. A recipient learns the story from the question they're
+being asked, not from a summary of it.
+
+**Nothing editorializes before the ask.** No "I'd like to understand the thinking behind it,"
+no "which is why I'm bringing these questions to you." Sentence 4 opens with the request.
+
+Length follows from the structure rather than a word budget. If a clause is needed for
+accuracy, it stays — **accuracy outranks brevity**, and the length warning (R9a) never blocks
+or rewrites a draft.
 
 ### R5 — Nothing gets added back
 

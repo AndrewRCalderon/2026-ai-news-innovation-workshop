@@ -322,6 +322,12 @@ FORBIDDEN = [
      "a statement of terms - those go in the reply thread"),
     (r"(?i)give me a call|happy to (talk|hop on|jump on)|reach me at",
      "a phone offer"),
+    (r"(?i)the story (examines|is about|looks at)|my reporting indicates|"
+     r"examines a pattern|the story explores",
+     "a thesis sentence - state what THIS company did, then ask"),
+    (r"(?i)i'?d like to understand|which is why i'?m|i'?m bringing these questions|"
+     r"i wanted to reach out",
+     "editorializing before the ask - sentence 4 opens with the request"),
 ]
 
 
