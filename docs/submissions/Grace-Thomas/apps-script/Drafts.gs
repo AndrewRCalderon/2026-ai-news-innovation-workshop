@@ -12,10 +12,11 @@
  * @param {string} jsonText   the contents of outreach/<slug>/drafts.json
  * @param {boolean} confirmedReal  the reporter ticked "these are real press
  *                                 addresses". Ignored while TEST_MODE is on.
+ * @param {string} deadline   typed into the sidebar every run. Required.
  * @return {Object} a report the sidebar renders. Never throws for a bad draft;
  *                  each recipient reports its own outcome.
  */
-function createDrafts(jsonText, confirmedReal) {
+function createDrafts(jsonText, confirmedReal, deadline) {
   var data;
   try {
     data = JSON.parse(jsonText);
@@ -28,6 +29,19 @@ function createDrafts(jsonText, confirmedReal) {
     return { fatal: 'No "emails" array in that JSON.' };
   }
 
+  // R4: the deadline is never invented and never defaulted. It used to be the
+  // skill's rule, which meant it held only as long as whoever ran the skill
+  // followed it. Now the tool cannot produce a deadline-less email at all.
+  //
+  // It is typed fresh every run rather than read from drafts.json on purpose.
+  // A deadline is a promise to a source, and the person making that promise
+  // should be typing it, not inheriting it from a file written earlier.
+  deadline = (deadline || '').trim();
+  if (!deadline) {
+    return { fatal: 'Fill in the deadline. Every email needs one, and it is ' +
+                    'never assumed - see R4.' };
+  }
+
   if (!TEST_MODE && !confirmedReal) {
     return {
       fatal: 'TEST_MODE is off, so these drafts would be addressed to real ' +
@@ -35,25 +49,68 @@ function createDrafts(jsonText, confirmedReal) {
     };
   }
 
+  // R4 again: a deadline with no time zone is the case the rule calls out by
+  // name. Warned rather than blocked -- "end of day Friday, Eastern" is a real
+  // thing a reporter writes, and the tool should not argue with the wording.
+  // But it must not go out unnoticed either.
+  var TZ = /\b(ET|EDT|EST|CT|CDT|CST|MT|MDT|MST|PT|PDT|PST|AKT|HST|UTC|GMT|BST|CET|CEST|Eastern|Central|Mountain|Pacific)\b/i;
+
   var report = {
     testMode: TEST_MODE,
     story: data.story_slug || '(no slug)',
-    deadline: data.deadline || '',
+    deadline: deadlineSentence_(deadline),
+    deadlineWarning: TZ.test(deadline) ? '' :
+      'That deadline has no time zone. A source reading "5 p.m." will assume ' +
+      'their own.',
     created: 0,
     skipped: 0,
     results: []
   };
 
   for (var i = 0; i < emails.length; i++) {
-    report.results.push(createOne_(emails[i], report));
+    report.results.push(createOne_(emails[i], report, deadline));
   }
 
   return report;
 }
 
 
+/**
+ * The deadline as it will read in the email.
+ *
+ * Takes the reporter's words as typed. It does not reword, reformat or
+ * normalize them -- what they typed is what a source will be held to.
+ */
+function deadlineSentence_(deadline) {
+  var d = deadline.trim().replace(/[.\s]+$/, '');
+  if (/^my deadline is/i.test(d)) {
+    return d + '.';
+  }
+  return 'My deadline is ' + d + '.';
+}
+
+
+/**
+ * Puts the deadline on its own last line, replacing whatever was there.
+ *
+ * R4: greeting / one paragraph / deadline, nothing after it. If a body somehow
+ * arrives without a deadline block, one is added rather than the email going
+ * out without it.
+ */
+function applyDeadline_(body, deadline) {
+  var blocks = body.split(/\n\s*\n/).filter(function (b) { return b.trim(); });
+  var line = deadlineSentence_(deadline);
+  if (blocks.length >= 3) {
+    blocks[blocks.length - 1] = line;
+  } else {
+    blocks.push(line);
+  }
+  return blocks.join('\n\n');
+}
+
+
 /** Creates a single draft, or explains why it didn't. */
-function createOne_(em, report) {
+function createOne_(em, report, deadline) {
   var company = em.company || '(unnamed)';
   var row = {
     company: company,
@@ -76,7 +133,7 @@ function createOne_(em, report) {
   }
 
   var subject = (em.subject || '').trim();
-  var body = (em.body || '').replace(/\s+$/, '');
+  var body = applyDeadline_((em.body || '').replace(/\s+$/, ''), deadline);
 
   row.warnings = checkDraft_(subject, body);
 

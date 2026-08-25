@@ -185,6 +185,11 @@ The copy-paste steps above still work. Nothing depends on clasp.
 
 ## Using it
 
+**Fill in the Deadline field.** It's required and it's blank every run. Nothing gets created
+while it's empty — R4 says a deadline is never assumed, and this is where that stops being a
+rule someone has to remember. What you type goes in as the last line of every email, word for
+word; the tool doesn't reword it. If it has no time zone you get a warning, not a block.
+
 1. Run the normal pipeline first: `python3 scripts/build_drafts.py outreach/<slug>/drafts.json`.
    That's where the full R4/R5 format checks live. What's in `Drafts.gs` is a safety net, not a
    replacement — see *What this does not check*.

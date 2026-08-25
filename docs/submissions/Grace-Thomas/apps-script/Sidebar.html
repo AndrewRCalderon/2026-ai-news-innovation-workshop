@@ -6,6 +6,9 @@
       body { font: 13px/1.45 -apple-system, "Segoe UI", Roboto, sans-serif;
              margin: 0; padding: 12px; color: #202124; }
       h2 { font-size: 14px; margin: 0 0 8px; }
+      input[type=text] { width: 100%; box-sizing: border-box; padding: 7px;
+                 border: 1px solid #dadce0; border-radius: 4px; font-size: 13px; }
+      .hint { color: #5f6368; font-size: 11px; margin: 4px 0 10px; }
       textarea { width: 100%; height: 160px; box-sizing: border-box;
                  font: 11px/1.35 ui-monospace, Menlo, Consolas, monospace;
                  border: 1px solid #dadce0; border-radius: 4px; padding: 6px; }
@@ -29,6 +32,11 @@
   </head>
   <body>
     <div id="mode" class="mode muted">Checking mode...</div>
+
+    <h2>Deadline</h2>
+    <input id="deadline" type="text" placeholder="4 p.m. ET today">
+    <div class="hint">Goes in as the last line of every email, exactly as you type it.
+      Required - it is never assumed.</div>
 
     <h2>Paste drafts.json</h2>
     <textarea id="json" placeholder="Contents of outreach/&lt;slug&gt;/drafts.json"></textarea>
@@ -64,8 +72,14 @@
 
       document.getElementById('go').onclick = function () {
         var text = document.getElementById('json').value.trim();
+        var deadline = document.getElementById('deadline').value.trim();
         var out = document.getElementById('out');
         out.textContent = '';
+        if (!deadline) {
+          out.textContent = 'Fill in the deadline first.';
+          document.getElementById('deadline').focus();
+          return;
+        }
         if (!text) { out.textContent = 'Paste the JSON first.'; return; }
 
         var box = document.getElementById('confirmReal');
@@ -75,7 +89,7 @@
         google.script.run
           .withSuccessHandler(render)
           .withFailureHandler(function (e) { render({ fatal: e.message }); })
-          .createDrafts(text, box ? box.checked : false);
+          .createDrafts(text, box ? box.checked : false, deadline);
       };
 
       function reset() {
@@ -100,6 +114,8 @@
         if (r.fatal) { line(out, 'err', r.fatal); return; }
 
         line(out, '', r.created + ' draft(s) created, ' + r.skipped + ' skipped.');
+        line(out, 'muted', 'Deadline used: ' + r.deadline);
+        if (r.deadlineWarning) { line(out, 'skip', r.deadlineWarning); }
         line(out, 'muted', 'Nothing was sent.');
 
         r.results.forEach(function (row) {

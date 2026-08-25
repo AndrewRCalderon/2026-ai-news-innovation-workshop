@@ -88,8 +88,16 @@ skimming on their own deadline; a sentence that has to be re-read gets rewritten
 **Recipients with different involvement get different sentences.** Two companies in one story
 are rarely being asked the same thing.
 
-**The deadline is never invented.** It comes from the brief. If the brief has no deadline, or
-gives one without a time zone, **the system stops and asks** rather than assuming a default.
+**The deadline is never invented.** It comes from the reporter. If there is no deadline, or one
+without a time zone, **the system stops and asks** rather than assuming a default.
+
+*(2026-08-25)* This is now enforced by the tool, not only by the skill. The Apps Script sidebar
+has a required **Deadline** field, typed fresh on every run, and refuses to create any draft
+while it is empty. It is deliberately not prefilled from `drafts.json`: a deadline is a promise
+to a source, and the person making it should be typing it rather than inheriting it from a file
+written earlier. Whatever is typed replaces the last line of every body, word for word — the
+tool does not reword or reformat it. A deadline with no recognizable time zone is warned about
+without blocking, since "end of day Friday, Eastern" is a real thing a reporter writes.
 
 ### R5 — Nothing gets added back
 
