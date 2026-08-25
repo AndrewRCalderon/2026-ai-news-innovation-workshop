@@ -44,7 +44,16 @@ add the ones that don't exist yet. `Sidebar.html` is added as an **HTML** file, 
 
 **6. Save, then reload the Doc.** An **RFC Bot** menu appears next to Help.
 
-**7. Authorize.** **RFC Bot → Create Gmail drafts…** the first time will ask for permission.
+**7. Install the commit hook** (once per clone, from anywhere):
+
+```bash
+git -C ~/2026-ai-news-innovation-workshop config core.hooksPath docs/submissions/Grace-Thomas/.githooks
+```
+
+This refuses any commit that adds a way to send mail, or that widens the Gmail scope past
+`gmail.compose`. See *It never sends* below for why that check is the whole guarantee.
+
+**8. Authorize.** **RFC Bot → Create Gmail drafts…** the first time will ask for permission.
 
 > Google will call this app "unverified," because it is — it's your own script, not a published
 > add-on. Click **Advanced → Go to (project name)**. **Authorize with the account you want the
@@ -125,5 +134,11 @@ API accepts it for `users.messages.send`. There is no Gmail scope that writes dr
 permitting send. `gmail.compose` is requested because it's the narrowest scope that can write a
 draft at all.
 
-The guarantee is that nothing here calls send, plus the standing grep in `tasks.md` that checks
-for one. Run it before any commit that touches this folder.
+The guarantee is that nothing here calls send. That's it. So the check for one is automated
+rather than remembered: `.githooks/pre-commit` searches the staged code on every commit and
+refuses any that adds `.send(`, `smtplib`, `sendmail`, or a Gmail scope wider than
+`gmail.compose`. Install it with step 7 above.
+
+**It's a tripwire, not a wall** — `git commit --no-verify` skips it. Saying so plainly matters
+more than pretending otherwise, since overclaiming this exact guarantee is the mistake it was
+written to catch.

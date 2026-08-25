@@ -340,6 +340,35 @@ formatting on the way out.
 drafts both addressed to the dummy address and none addressed to Kalshi or Polymarket, and
 the standing send check comes back clean.
 
+### [x] 21. Make the send check automatic
+
+**Why:** task 14 established that R1 rests on nothing but the absence of a send call in the
+code — Google does not enforce it. A guarantee that depends on someone remembering to run a
+search is not much of a guarantee, and the thing most likely to break it is a future session
+adding a send call in good faith.
+
+**Do:** a committed pre-commit hook that searches **staged** code under `scripts/` and
+`apps-script/` and refuses the commit on `.send(`, `smtplib`, `sendmail`, or a Gmail scope
+wider than `gmail.compose`. Warns without blocking on `TEST_MODE = false`, which is a
+legitimate state during real outreach.
+
+It lives in `.githooks/` and is committed, not dropped in `.git/hooks/` — anything in there is
+invisible to git, wouldn't appear in a PR, and wouldn't survive a fresh clone. Installed with
+`git config core.hooksPath`.
+
+Scoped to code, and markdown is skipped: `tasks.md` and `apps-script/README.md` both quote the
+pattern in prose. **The hook refused its own first commit over exactly this**, which is how the
+markdown exclusion got written. It excludes `.md` rather than allow-listing code extensions, so
+a new kind of code file is checked by default instead of silently skipped.
+
+**`--no-verify` still skips it.** It's a tripwire, not a wall. Recorded plainly rather than
+overclaimed, since overclaiming this exact guarantee is what task 14 had to correct.
+
+**Done when:** a staged send call is refused with the file and line named, a widened scope is
+refused, and a docs-only commit still goes through.
+
+**Done 2026-08-25.** All three verified by running them.
+
 ### [ ] 17. Google Contacts sync — **decision needed first**
 
 **Why:** `contacts/press-contacts.csv` is invisible from Gmail. Pushing it into Google Contacts
@@ -410,7 +439,7 @@ rules and which turned out to be preferences.
 
 ## Standing checks — true after every task
 
-- **Nothing was sent, and nothing can send.** `grep -rnE "\.send\(|smtplib|sendmail" scripts/ apps-script/` returns nothing. Matching on the open paren so that comments *explaining* the rule don't trip it. The scope does not stop a send; only this check does. See task 14.
+- **Nothing was sent, and nothing can send.** Enforced automatically by `.githooks/pre-commit` on every commit (task 21); by hand it's `grep -rnE "\.send\(|smtplib|sendmail" scripts/ apps-script/`, which should return nothing. Matching on the open paren so that comments *explaining* the rule don't trip it. The scope does not stop a send; only this check does. See task 14.
 - Every address in every output traces to a source URL that can be opened.
 - No LOW address appears in `contacts/press-contacts.csv`.
 - Re-running a brief produces identical output and no duplicate tracking rows.

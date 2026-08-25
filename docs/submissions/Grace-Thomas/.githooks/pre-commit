@@ -1,0 +1,104 @@
+#!/bin/bash
+#
+# RFC Bot - refuses any commit that adds a way to send mail.
+#
+# Why this exists: requirements.md R1 says RFC Bot never sends, and that rule
+# rests on nothing except the code containing no send call. Google does not
+# enforce it. gmail.compose is documented as "Manage drafts and send emails,"
+# and users.messages.send accepts it -- there is no Gmail scope that writes
+# drafts without permitting send. So the only thing standing between this
+# project and an automated email is this check.
+#
+# It is a tripwire, not a wall. `git commit --no-verify` skips it. That is
+# said plainly rather than pretended away, because overclaiming this exact
+# guarantee is the mistake it was written to catch.
+#
+# Install once, from anywhere:
+#   git -C ~/2026-ai-news-innovation-workshop config core.hooksPath \
+#       docs/submissions/Grace-Thomas/.githooks
+
+set -u
+
+PROJECT="docs/submissions/Grace-Thomas"
+
+# A send call. Matching on the open paren so that comments *explaining* the
+# rule -- of which there are several on purpose -- do not trip it.
+SEND_RE='\.send\(|smtplib|sendmail'
+
+# Any Gmail scope wider than compose. If the manifest starts asking for these,
+# something has changed that needs a human to look at it.
+SCOPE_RE='mail\.google\.com|gmail\.send|gmail\.modify'
+
+# Only code is checked. tasks.md and apps-script/README.md both quote the
+# pattern in prose, so searching everything blocks every docs commit -- this
+# hook refused its own first commit for exactly that, which is how the .md
+# exclusion below got here. Excluding markdown rather than allow-listing code
+# extensions, so that a new kind of code file is checked by default instead of
+# silently skipped.
+staged=$(git diff --cached --name-only --diff-filter=ACMR \
+           -- "$PROJECT/scripts" "$PROJECT/apps-script")
+
+[ -z "$staged" ] && exit 0
+
+failed=0
+
+while IFS= read -r f; do
+  [ -z "$f" ] && continue
+
+  # Documentation describes the rule; it does not execute.
+  case "$f" in
+    *.md) continue ;;
+  esac
+
+  # Check what is STAGED, not what is on disk. They differ often enough.
+  hits=$(git show ":$f" 2>/dev/null | grep -nE "$SEND_RE")
+  if [ -n "$hits" ]; then
+    if [ "$failed" -eq 0 ]; then
+      echo ""
+      echo "COMMIT REFUSED - this adds a way to send mail."
+      echo ""
+    fi
+    echo "  $f"
+    echo "$hits" | sed 's/^/    /'
+    echo ""
+    failed=1
+  fi
+
+  case "$f" in
+    */appsscript.json)
+      scopes=$(git show ":$f" 2>/dev/null | grep -nE "$SCOPE_RE")
+      if [ -n "$scopes" ]; then
+        if [ "$failed" -eq 0 ]; then
+          echo ""
+          echo "COMMIT REFUSED - the Gmail scope got wider."
+          echo ""
+        fi
+        echo "  $f asks for more than gmail.compose:"
+        echo "$scopes" | sed 's/^/    /'
+        echo ""
+        failed=1
+      fi
+      ;;
+  esac
+
+  # Not a failure. Committing live mode is legitimate during real outreach.
+  # Worth seeing, though: it means whoever next opens that Doc is in live mode.
+  case "$f" in
+    */Config.gs)
+      if git show ":$f" 2>/dev/null | grep -qE '^[[:space:]]*var[[:space:]]+TEST_MODE[[:space:]]*=[[:space:]]*false'; then
+        echo "note: TEST_MODE is false in $f - drafts will use the real addresses."
+      fi
+      ;;
+  esac
+done <<< "$staged"
+
+if [ "$failed" -ne 0 ]; then
+  echo "requirements.md R1: this project writes drafts. A human sends."
+  echo ""
+  echo "If this is a false positive and you are certain, commit with --no-verify"
+  echo "and say in the commit message why."
+  echo ""
+  exit 1
+fi
+
+exit 0
