@@ -3024,6 +3024,41 @@ questions. Worked Adiel's 3 sources into
 
 ## Change log
 
+- 2026-08-25 — **Day 2 afternoon restructured: Your Goal & Plan Mode and
+  Show & Tell + Critique both cut, Spec-Driven Development moved up,
+  Revisit & Build extended to end of day.** Your Goal & Plan Mode
+  (formerly `05`, 12:20-1:00 PM) and Show & Tell + Critique (formerly
+  `08`, 3:30-5:00 PM) were pulled from the schedule at the user's
+  direction and moved — not deleted — to `project/removed-sessions/`
+  (Overview HTML, Slides, and copy-draft for each), a new directory added
+  to `.gitignore` so it stays local and out of the deployed site but is
+  recoverable if either session comes back. Spec-Driven Development moved
+  into the vacated 12:20 PM slot and grew from 30 to 40 min to fill it
+  exactly through to lunch (unchanged at 1:00 PM); renumbered `06`→`05`
+  (file, slides, copy-draft, `data-session-id`, internal slides link, and
+  its Slides deck's cover-meta time/duration). Revisit & Build absorbed
+  all the freed afternoon time — its own original slot plus the old
+  Spec-Driven Development slot plus the old Show & Tell slot — into one
+  2:00-5:00 PM, 180-min block; renumbered `07`→`06` the same way. Day 2
+  still ends at 5:00 PM, matching Day 1/3's shape. Plan mode content isn't
+  actually gone from Day 2: Revisit & Build's existing §1 ("State Your
+  Goal, Then Plan") already walks students through switching to Plan mode
+  as part of the build exercise, so that instruction survives without a
+  dedicated session — confirmed by reading `07-revisit-build.html` (now
+  `06-`) before cutting `05-goal-plan-mode.html` rather than assuming.
+  Updated every place that referenced the old session count/numbering:
+  `docs/data/schedule.json` (entries removed/renumbered/retimed, `note`
+  field appended), `docs/partials/nav.html` (Day 2 flyout menu, two items
+  removed), `docs/resources.html` (two Plan Mode resource attributions
+  changed from "from Your Goal & Plan Mode" to "from Revisit & Build"),
+  and three stale hardcoded "Next section" links in the Slides decks
+  (`04-skills-best-practices-slides.html` → `05-spec-driven-dev.html`,
+  `05-spec-driven-dev-slides.html` → `06-revisit-build.html`,
+  `06-revisit-build-slides.html`'s end-of-day link changed from the now-
+  removed Show & Tell to `/day-3/`, since Day 2 no longer has a session
+  after it). Did not touch Day 2's learning-outcomes copy on
+  `docs/day-2/index.html` — the "Use plan mode..." outcome is still
+  accurate per the point above, so left as-is pending user review.
 - 2026-08-23 — **`docs/data/schedule.json`: Day 1 morning rebalanced
   (State of AI 15→20 min, Industry Conversation 30→40 min, Product
   Discussion 90→75 min), after several same-day dead ends that are worth
