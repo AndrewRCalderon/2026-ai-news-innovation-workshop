@@ -100,11 +100,20 @@ Then **open a new Terminal window** — an existing one won't see it — and che
 node --version && npm --version
 ```
 
-**2. clasp itself:**
+**2. clasp itself.** `/usr/local/lib/node_modules` is owned by root, so a plain `npm install -g`
+would need `sudo` and your password. npm was pointed at a folder in your home directory instead:
 
 ```bash
+npm config set prefix ~/.npm-global
 npm install -g @google/clasp
 ```
+
+and `export PATH="$HOME/.npm-global/bin:$PATH"` was appended to `~/.zshrc` so `clasp` is on your
+path in a new terminal. To undo: delete those lines and run `npm config delete prefix`. A backup
+of the original is at `~/.zshrc.bak-before-clasp`.
+
+Installed version: clasp **3.4.0**. Worth pinning down, because v3 removed commands that older
+tutorials still tell you to run — `clasp setting` among them.
 
 **3. Turn on the Apps Script API** for your account, once, at
 <https://script.google.com/home/usersettings> → **Google Apps Script API: On**. clasp cannot
@@ -121,16 +130,29 @@ This writes an OAuth token to `~/.clasprc.json`. It is a credential. It lives in
 folder, not in the repo, and `.gitignore` covers it anyway.
 
 **5. Point clasp at your project.** In the script editor: **Project Settings** (the gear) →
-copy the **Script ID**. Then, from this folder:
+copy the **Script ID**. Then write `.clasp.json` in this folder by hand:
 
-```bash
-clasp setting scriptId <paste-the-script-id>
+```json
+{ "scriptId": "paste-the-script-id-here", "rootDir": "." }
 ```
 
-That creates `.clasp.json`. It's gitignored — it points at one specific person's Doc, so it
-doesn't belong in a shared repo. This step is how you recreate it on a new machine.
+**Do not use `clasp clone` for this.** It attaches to the project *and* downloads Google's copy
+over your local files. If what's in the browser is a partial paste, cloning replaces your good
+local files with the bad ones, with no undo. Writing the two-line file has no such failure mode.
+
+`.clasp.json` is gitignored — it points at one specific person's Doc, so it doesn't belong in a
+shared repo. Writing it by hand is also how you recreate it on a new machine.
 
 ### Day to day
+
+Check what would go up before it goes up:
+
+```bash
+clasp status
+```
+
+That lists exactly the files `clasp push` would send. If anything unexpected is in the list,
+`.claspignore` needs a look — don't push and find out.
 
 ```bash
 clasp push
