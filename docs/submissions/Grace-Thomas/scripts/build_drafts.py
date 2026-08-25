@@ -328,6 +328,8 @@ FORBIDDEN = [
     (r"(?i)i'?d like to understand|which is why i'?m|i'?m bringing these questions|"
      r"i wanted to reach out",
      "editorializing before the ask - sentence 4 opens with the request"),
+    (r"(?:\+\d[\d\s().-]{8,}|\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4})",
+     "a phone number - RFC Bot never puts one in an email"),
 ]
 
 
@@ -380,6 +382,16 @@ def main():
     signature = read_signature()
     if "TODO" in signature:
         sys.stderr.write("WARNING: config/signature.txt still contains TODO placeholders.\n")
+    if re.search(r"(?:\+\d[\d\s().-]{8,}|\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4})", signature):
+        sys.stderr.write("WARNING: config/signature.txt contains a phone number. "
+                         "RFC Bot does not put phone numbers in emails - remove it.\n")
+
+    unresolved = [e.get("company", "?") for e in emails
+                  if not (e.get("confidence") or "").strip()]
+    if unresolved:
+        sys.stderr.write("\nBLOCKER: no press contact was found for: %s\n"
+                         "  These emails cannot be sent until someone looks the address up "
+                         "by hand.\n\n" % ", ".join(unresolved))
 
     fmt_warnings = 0
     for em in emails:

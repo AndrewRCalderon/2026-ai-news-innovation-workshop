@@ -81,7 +81,8 @@ These were each cut deliberately. They do not return because they seem standard 
 - "If I don't hear back, the story will note that X did not respond by press time."
 - An offer to share the passage before publication for an accuracy check.
 - A statement of terms. The reporter establishes those in the reply thread.
-- An offer to take a call, or a phone number.
+- **Any phone number, anywhere** — in the body or the signature. RFC Bot does not put
+  phone numbers in email. Not the reporter's, not the company's. See R7a.
 - Numbered or bulleted questions.
 - Any sentence after the deadline line.
 
@@ -98,6 +99,15 @@ the body are fine.
 Gmail compose links omit the signature from the body, because Gmail appends the reporter's real
 configured signature. `.eml` files embed the stored signature, because nothing else will.
 
+### R7a — No phone numbers
+
+No phone number appears in any email this produces — not in a body, not in a signature, not as
+an offer to take a call. `config/profile.md` has no phone field. The build warns if one turns
+up in a body or in `config/signature.txt`.
+
+A phone number found during contact research may be kept in the contact record's notes only if
+the reporter asks for it; it never reaches an email.
+
 ### R8 — Contacts are researched honestly, and never invented
 
 Every address carries a source URL, the date it was sourced, and a confidence label:
@@ -112,8 +122,18 @@ Rules that follow from this:
 
 - A guessed address is labeled LOW and says so. It is never presented as verified.
 - Anything below HIGH is named to the reporter as needing confirmation before send.
-- If no address can be found, the email is still written with an empty `to`, and the company is
-  reported as needing a manual lookup. A recipient is never silently dropped.
+- **The raw page source is searched, not just its readable text.** Page-to-text conversion
+  discards `mailto:` link targets, which is how most companies publish a press address — so a
+  text-only read will report "no address on this page" for a page that plainly has one. It has
+  already produced a wrong contact here. HIGH requires seeing the address in the page's own
+  source.
+- **The domain is taken character for character.** `@company.com` and `@company-group.com` are
+  different addresses. A secondary source got exactly that wrong in this project.
+- **A search-engine summary is MEDIUM, never HIGH**, however confident its wording.
+- If no address can be found, the email is still written with an empty `to` and empty
+  confidence, and **the build reports it as a BLOCKER** — named at the top of the report, not
+  buried in a table — listing which URLs were tried and what each returned. A recipient is
+  never silently dropped, and a gap is never filled with a guess.
 - LOW addresses are never written to the contact record. A guess must not harden into a record.
 
 ### R9 — The contact record stays current

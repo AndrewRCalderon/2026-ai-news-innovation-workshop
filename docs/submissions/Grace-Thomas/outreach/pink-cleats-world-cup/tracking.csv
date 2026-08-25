@@ -1,5 +1,5 @@
 company,email,confidence,drafted,sent_at,deadline,status,response_notes
-Nike,media.relations@nike.com,MEDIUM,2026-08-24,,"today, Aug. 24, 2026 at 4:00 p.m. ET",DEMO - never sent,Fixture used to build and test RFC Bot on 2026-08-24. Not real outreach. Deadline has passed.
-Adidas,corporate.press@adidas.com,MEDIUM,2026-08-24,,"today, Aug. 24, 2026 at 4:00 p.m. ET",DEMO - never sent,Fixture used to build and test RFC Bot on 2026-08-24. Not real outreach. Deadline has passed.
+Nike,media.relations@nike.com,HIGH,2026-08-24,,"today, Aug. 24, 2026 at 4:00 p.m. ET",DEMO - never sent,Fixture used to build and test RFC Bot on 2026-08-24. Not real outreach. Deadline has passed.
+Adidas,corporate.press@adidas-group.com,HIGH,2026-08-24,,"today, Aug. 24, 2026 at 4:00 p.m. ET",DEMO - never sent,Fixture used to build and test RFC Bot on 2026-08-24. Not real outreach. Deadline has passed.
 New Balance,Media.relations@newbalance.com,HIGH,2026-08-24,,"today, Aug. 24, 2026 at 4:00 p.m. ET",DEMO - never sent,Fixture used to build and test RFC Bot on 2026-08-24. Not real outreach. Deadline has passed.
 Puma,mario.almeida@puma.com,HIGH,2026-08-24,,"today, Aug. 24, 2026 at 4:00 p.m. ET",DEMO - never sent,Fixture used to build and test RFC Bot on 2026-08-24. Not real outreach. Deadline has passed.

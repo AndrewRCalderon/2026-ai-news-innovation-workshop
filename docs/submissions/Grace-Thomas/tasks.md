@@ -27,13 +27,17 @@ stranger reading the folder in three weeks cannot misread.
 **Done when:** no file in `outreach/pink-cleats-world-cup/` can be read as pending real
 outreach.
 
-### [ ] 2. Clear the `TODO` in `config/profile.md`
+### [x] 2. Clear the `TODO` in `config/profile.md` — *resolved by removing the field*
 
 **Why:** the phone number is still a placeholder. It only affects the `.eml` signature now, so
 it doesn't block a send — but a `TODO` shipping inside an email file is exactly the kind of
 thing that gets noticed by the recipient.
 
 **Done when:** `grep -r TODO config/` returns nothing.
+
+**Resolved 2026-08-25 by deletion.** The reporter decided RFC Bot should never put a phone
+number in an email or signature (requirements R7a), so the field was removed rather than
+filled. The build now warns if a phone number appears in a body or in `config/signature.txt`.
 
 ---
 
@@ -109,7 +113,7 @@ retained. LOW is still never written.
 **Done when:** deliberately changing a saved address, re-running, and finding the row updated
 rather than duplicated — and a LOW result still never reaches the file.
 
-### [x] 8. Confirm the two MEDIUM addresses — *attempted, both stay MEDIUM*
+### [x] 8. Confirm the two MEDIUM addresses — *both now HIGH; one was wrong*
 
 **Why:** Nike and Adidas are both MEDIUM. Adidas's media-contact page timed out on direct fetch;
 Nike's address is cited in their own releases but the newsroom page wasn't read directly. Half
@@ -123,14 +127,30 @@ note says why — the remaining confirmation is a phone call, which is the repor
 **Done when:** both rows are HIGH with a source URL that can be opened and checked, or the row
 explains exactly why it couldn't be promoted.
 
-**Result 2026-08-25 — neither could be promoted. Both remain MEDIUM.** Nike's newsroom and
+**Superseded — see below. Both are now HIGH.**
+
+~~**Result 2026-08-25 — neither could be promoted. Both remain MEDIUM.**~~ Nike's newsroom and
 contact-us pages were fetched and read; neither publishes a media email, and the help directory
 returned 403. The address is corroborated only by Nike's own verified X account and its press
 releases. Adidas's media-contact and imprint pages timed out on direct fetch a second time, and
 news.adidas.com publishes a form rather than an address. **A conflict also surfaced:** secondary
 sources give both `corporate.press@adidas.com` and `corporate.press@adidas-group.com`. That is
-unresolved and must not be guessed. For both companies the remaining confirmation is a phone
-call — Nike 212-367-4447, adidas +49 9132 84-2352 — which is the reporter's to make.
+unresolved and must not be guessed.~~
+
+**Corrected 2026-08-25, same day.** The reporter found both addresses by hand and asked why the
+bot couldn't. Cause: the page-fetch tool converts HTML to plain text and **discards `mailto:`
+link targets**, which is exactly how both companies publish their press address — so it
+truthfully reported "no address on this page" for pages that have one. It had also never tried
+`about.nike.com/en/company`, since the skill's URL list started at `/newsroom`.
+
+Fetching the raw HTML with `curl` and grepping for `mailto:` found both immediately, including
+through the adidas timeout. **Nike `media.relations@nike.com` and adidas
+`corporate.press@adidas-group.com` are both now HIGH, read from the page source.** The adidas
+address was also **wrong in the saved record** — it had `@adidas.com`, not `@adidas-group.com`.
+
+The fix is in the skill, not just the two rows: raw-HTML grep is now the primary research
+method, `/company` and `/contact` lead the URL list, and the domain must be copied character
+for character.
 
 ---
 

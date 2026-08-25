@@ -8,8 +8,8 @@
 
 | # | Company | Email | Confidence | Source |
 |---|---|---|---|---|
-| 1 | Nike | `media.relations@nike.com` | MEDIUM | https://about.nike.com/en/newsroom |
-| 2 | Adidas | `corporate.press@adidas.com` | MEDIUM | https://www.adidas-group.com/en/media/media-contact |
+| 1 | Nike | `media.relations@nike.com` | HIGH | https://about.nike.com/en/company |
+| 2 | Adidas | `corporate.press@adidas-group.com` | HIGH | https://www.adidas-group.com/en/media/media-contact |
 | 3 | New Balance | `Media.relations@newbalance.com` | HIGH | https://newbalance.newsmarket.com/contacts |
 | 4 | Puma | `mario.almeida@puma.com` | HIGH | https://about.puma.com/en/en/newsroom/corporate-news/media-contacts |
 
@@ -30,12 +30,12 @@ My deadline is 4 ET today.
 --
 Grace Thomas
 Reporter | Semafor
-tkc.intern2@journalism.cuny.edu | TODO (555) 555-5555
+tkc.intern2@journalism.cuny.edu
 ```
 
 ## 2. Adidas
 
-**To:** corporate.press@adidas.com  
+**To:** corporate.press@adidas-group.com  
 **Subject:** Semafor query - adidas' pink World Cup cleats - response by 4 p.m. ET today
 
 ```
@@ -48,7 +48,7 @@ My deadline is 4 ET today.
 --
 Grace Thomas
 Reporter | Semafor
-tkc.intern2@journalism.cuny.edu | TODO (555) 555-5555
+tkc.intern2@journalism.cuny.edu
 ```
 
 ## 3. New Balance
@@ -66,7 +66,7 @@ My deadline is 4 ET today.
 --
 Grace Thomas
 Reporter | Semafor
-tkc.intern2@journalism.cuny.edu | TODO (555) 555-5555
+tkc.intern2@journalism.cuny.edu
 ```
 
 ## 4. Puma
@@ -84,5 +84,5 @@ My deadline is 4 ET today.
 --
 Grace Thomas
 Reporter | Semafor
-tkc.intern2@journalism.cuny.edu | TODO (555) 555-5555
+tkc.intern2@journalism.cuny.edu
 ```

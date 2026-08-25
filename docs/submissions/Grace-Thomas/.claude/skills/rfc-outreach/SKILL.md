@@ -38,23 +38,65 @@ For each company, in order:
 
 1. **Cache hit.** If `contacts/press-contacts.csv` has a row for the company, use it. Note
    the `source_date` — if it's more than ~6 months old, re-verify.
-2. **Research.** Otherwise use WebSearch/WebFetch. Look for the company's actual newsroom or
-   media-relations page: `<company>.com/newsroom`, `/press`, `/media`, `/news`, or their
-   corporate site (Nike's is `about.nike.com`, not `nike.com`). Prefer a media-relations
-   inbox over a named individual — individuals change jobs, inboxes get routed on deadline.
-   Prefer the regional desk that matches the story (a global sports story usually wants
-   global or North America comms, not the local retail PR contact).
-3. **Assign confidence honestly:**
-   - `HIGH` — the address is printed on the company's own site or its official press kit,
-     and you fetched that page.
-   - `MEDIUM` — from a credible secondary source (a press release wire, a recent news story,
-     a trade publication's masthead), or from the company's own site but not recently dated.
-   - `LOW` — inferred from a naming pattern (`press@`, `media@`) without seeing it published.
-4. **If you can't find one at all**, still write the email, set `to` to `""`, and tell the
-   reporter which companies need a manual lookup. Don't quietly drop a recipient.
 
-Report contacts to the reporter as a table (company, address, source, confidence) **before**
-moving on, so they can catch a wrong desk early.
+2. **Grep the raw HTML. Do this first, before anything else.**
+
+   **`WebFetch` is not sufficient on its own and must never be your only attempt.** It converts
+   a page to plain text and **discards link targets**, so an address published as a `mailto:`
+   link — which is how most companies publish one — is invisible to it. It also times out on
+   sites that answer a plain `curl` instantly. Both failure modes have already produced a wrong
+   contact in this project.
+
+   Fetch the raw source and search it directly:
+
+   ```bash
+   UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0 Safari/537.36"
+   curl -sL --max-time 45 -A "$UA" "<url>" -o /tmp/page.html
+   grep -oE "mailto:[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+" /tmp/page.html | sort -u
+   grep -oE "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]*<domain>[A-Za-z0-9.-]*" /tmp/page.html | sort -u
+   ```
+
+   Run **both** greps. The second catches addresses rendered as text or injected by JavaScript;
+   the first catches the far more common `mailto:` case. Read what comes back — a page often
+   lists investor relations, sustainability, and regional desks alongside the press inbox, and
+   you want the press one.
+
+   **Watch the domain.** `corporate.press@adidas.com` and `corporate.press@adidas-group.com`
+   are different addresses, and a secondary source got that wrong here once. Take the domain
+   from the page, character for character. Never normalize it to what looks right.
+
+3. **Where to look.** Try these paths on the corporate site, not the retail one (Nike's is
+   `about.nike.com`, not `nike.com`):
+
+   `/company` · `/contact` · `/contact-us` · `/newsroom` · `/press` · `/media` ·
+   `/media/media-contact` · `/news` · `/about` · `/imprint` (European companies)
+
+   `/company` and `/contact` are listed **first on purpose** — Nike publishes its media address
+   on `about.nike.com/en/company` and on neither `/newsroom` nor `/pages/contact-us`. Don't stop
+   at the newsroom.
+
+   Prefer a media-relations inbox over a named individual — individuals change jobs, inboxes get
+   routed on deadline. Prefer the regional desk that matches the story (a global sports story
+   usually wants global or North America comms, not local retail PR).
+
+4. **Assign confidence honestly:**
+   - `HIGH` — you fetched the company's own page and **saw the address in that page's source**.
+   - `MEDIUM` — from a credible secondary source (a wire release, a recent news story, a trade
+     masthead), or from the company's own site but not verified this run.
+   - `LOW` — inferred from a naming pattern (`press@`, `media@`) without seeing it published.
+
+   A search-engine summary quoting an address is `MEDIUM`, never `HIGH`, no matter how confident
+   it sounds. Only reading the page yourself earns `HIGH`.
+
+5. **If you can't find one, say so loudly.** Still write the email, set `to` to `""`, and set
+   confidence to `""`. Then **flag it to the reporter as an issue, at the top of your report,
+   named as a blocker** — not a footnote at the end of a table. List which companies need a
+   manual lookup, which URLs you tried, and what each one returned (404, timeout, page had no
+   address). Never guess an address to fill the gap, and never quietly drop a recipient.
+
+Report contacts to the reporter as a table (company, address, source URL, confidence)
+**before** moving on, so they can catch a wrong desk early. Say plainly which ones you read
+off the page yourself and which came from somewhere else.
 
 ### 3. Write one email per recipient
 
