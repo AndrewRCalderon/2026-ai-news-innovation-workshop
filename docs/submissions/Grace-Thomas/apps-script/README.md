@@ -79,6 +79,88 @@ This refuses any commit that adds a way to send mail, or that widens the Gmail s
 
 ---
 
+## clasp — editing locally instead of pasting
+
+`clasp` is Google's command-line tool for Apps Script. It syncs this folder with the Google
+project, so you edit in VS Code and run one command instead of copying five files by hand.
+
+### One-time setup
+
+**1. Node.** clasp is a Node program and this Mac had none. Installed from the official
+package rather than through a version manager or Homebrew — the least machinery for someone who
+wants clasp, not a JavaScript toolchain.
+
+Download the **macOS Installer (.pkg)** from <https://nodejs.org/en/download> — take the **LTS**
+build, currently `node-v24.19.0.pkg`, about 93 MB. Double-click it and accept the defaults. It
+asks for your Mac password, which is why it can't be done for you.
+
+Then **open a new Terminal window** — an existing one won't see it — and check:
+
+```bash
+node --version && npm --version
+```
+
+**2. clasp itself:**
+
+```bash
+npm install -g @google/clasp
+```
+
+**3. Turn on the Apps Script API** for your account, once, at
+<https://script.google.com/home/usersettings> → **Google Apps Script API: On**. clasp cannot
+talk to your projects until this is on, and the error it gives if you skip it does not say so
+clearly.
+
+**4. Log in.** Opens a browser; authorize with **the same Google account the Doc lives in**:
+
+```bash
+clasp login
+```
+
+This writes an OAuth token to `~/.clasprc.json`. It is a credential. It lives in your home
+folder, not in the repo, and `.gitignore` covers it anyway.
+
+**5. Point clasp at your project.** In the script editor: **Project Settings** (the gear) →
+copy the **Script ID**. Then, from this folder:
+
+```bash
+clasp setting scriptId <paste-the-script-id>
+```
+
+That creates `.clasp.json`. It's gitignored — it points at one specific person's Doc, so it
+doesn't belong in a shared repo. This step is how you recreate it on a new machine.
+
+### Day to day
+
+```bash
+clasp push
+```
+
+From this folder. Uploads the five files and overwrites what's in the Google project. Reload
+the Doc afterwards if you changed `Menu.gs`, since the menu is built when the Doc opens.
+
+`.claspignore` is an allow-list, so only the five real files go up — `README.md` and
+`.clasp.json` stay local. A new file in this folder stays local too until it's added there
+deliberately.
+
+### Two things that will bite
+
+**Pick one place to edit.** `clasp push` overwrites Google with your local files, and
+`clasp pull` overwrites your local files with Google's. If you edit in the browser and then
+push from here, the browser edits are gone with no warning and no undo. Edit locally as the
+default; if you did change something in the browser, `clasp pull` first.
+
+**Run it from the clone**, `~/2026-ai-news-innovation-workshop/docs/submissions/Grace-Thomas/apps-script`,
+not from `~/082626_AI Workshop`. The clone is the copy under version control. There are already
+two copies of this project that have drifted once; Google is now a third, and the way to keep
+that manageable is for pushes to come from the canonical one.
+
+### If clasp breaks
+
+The copy-paste steps above still work. Nothing depends on clasp.
+
+---
+
 ## Using it
 
 1. Run the normal pipeline first: `python3 scripts/build_drafts.py outreach/<slug>/drafts.json`.
