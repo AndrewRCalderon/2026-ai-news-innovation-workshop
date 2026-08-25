@@ -22,29 +22,42 @@ find it.
 **3. Show the manifest.** Left sidebar → **Project Settings** (the gear) → tick
 **"Show 'appsscript.json' manifest file in editor."**
 
-**4. Add the Gmail advanced service.** Left sidebar → **Services** → **+** → pick **Gmail API**
-→ leave the identifier as `Gmail` → **Add**.
+**4. Go back to the Editor.** Step 3 left you in Project Settings. Click the **`< >`** icon in
+the narrow strip of icons on the far left — that's the Editor. Everything from here on happens
+there. `appsscript.json` should now be sitting in the **Files** list next to `Code.gs`; if it
+isn't, step 3 didn't take.
+
+**5. Add the Gmail advanced service.** In the Editor's left panel there are three stacked
+headings: **Files**, **Libraries**, **Services**. Hover over **Services** and a **+** appears
+("Add a service"). Click it → scroll to **Gmail API** → leave the Identifier as `Gmail` →
+**Add**.
 
 > **Why the advanced service and not `GmailApp`.** `GmailApp.createDraft()` is one line, but
 > Apps Script authorizes its methods under `https://mail.google.com/` — full mailbox access,
 > including permanent delete. The advanced service goes through the Gmail API, which lets the
 > manifest ask for `gmail.compose` and nothing more.
 
-**5. Paste in the five files.** Replace the contents of each; use the **+** next to *Files* to
-add the ones that don't exist yet. `Sidebar.html` is added as an **HTML** file, the rest as
-**Script** files (Apps Script drops the `.gs`, so `Config.gs` here becomes `Config` there).
+**6. Get the five files in.** You don't create all five — two already exist, and you replace
+what's in them. Open this folder in VS Code to copy from; each file is Cmd-A, Cmd-C.
 
-| This folder | In the editor |
-|---|---|
-| `appsscript.json` | `appsscript.json` |
-| `Config.gs` | `Config` |
-| `Drafts.gs` | `Drafts` |
-| `Menu.gs` | `Menu` |
-| `Sidebar.html` | `Sidebar` (HTML) |
+Nothing is typed with an extension. Apps Script adds `.gs` to a Script file and `.html` to an
+HTML file, so you type `Drafts`, not `Drafts.gs`.
 
-**6. Save, then reload the Doc.** An **RFC Bot** menu appears next to Help.
+| This folder | In the editor | How |
+|---|---|---|
+| `appsscript.json` | `appsscript.json` | Already there after step 3. Select all, paste over it. |
+| `Config.gs` | `Config` | Rename `Code.gs`: its **⋮** menu → **Rename** → `Config`. Select all, paste over the `myFunction` stub. |
+| `Drafts.gs` | `Drafts` | **+** next to *Files* → **Script** → name it `Drafts`. Paste over the stub. |
+| `Menu.gs` | `Menu` | **+** → **Script** → `Menu`. Paste over the stub. |
+| `Sidebar.html` | `Sidebar` | **+** → **HTML** — not Script → `Sidebar`. Paste over the boilerplate. |
 
-**7. Install the commit hook** (once per clone, from anywhere):
+File order doesn't matter, even though it looks like it should. Apps Script loads every `.gs`
+file into one shared space, so `Drafts` can see the settings in `Config` wherever it sits.
+
+**7. Save, then reload the Doc.** Cmd-S saves all the files at once. Then reload the Doc tab —
+an **RFC Bot** menu appears next to Help.
+
+**8. Install the commit hook** (once per clone, from anywhere):
 
 ```bash
 git -C ~/2026-ai-news-innovation-workshop config core.hooksPath docs/submissions/Grace-Thomas/.githooks
@@ -53,7 +66,7 @@ git -C ~/2026-ai-news-innovation-workshop config core.hooksPath docs/submissions
 This refuses any commit that adds a way to send mail, or that widens the Gmail scope past
 `gmail.compose`. See *It never sends* below for why that check is the whole guarantee.
 
-**8. Authorize.** **RFC Bot → Create Gmail drafts…** the first time will ask for permission.
+**9. Authorize.** **RFC Bot → Create Gmail drafts…** the first time will ask for permission.
 
 > Google will call this app "unverified," because it is — it's your own script, not a published
 > add-on. Click **Advanced → Go to (project name)**. **Authorize with the account you want the
