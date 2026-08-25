@@ -237,7 +237,7 @@ What it exposed:
 - **Deadlines are never defaulted.** No more assuming 4 p.m. today — if the brief doesn't say,
   ask.
 
-### [ ] 13. Exercise the follow-up path
+### [ ] 13. Exercise the follow-up path — **PAUSED 2026-08-25, scope in question**
 
 **Why:** requirements R11. It's written and has never been run.
 
@@ -245,6 +245,28 @@ What it exposed:
 
 **Done when:** `outreach/<slug>-followup/` exists with correct original-send times and a
 restated deadline, and the non-responders are the right ones.
+
+**Paused 2026-08-25 — this may not belong in the product.** The reporter's point: RFC Bot is
+for **day-of, breaking-news turnarounds**. The story files at 4 p.m. A chaser that lands the
+next morning has nothing to chase — by then the piece has already run with "did not respond by
+press time." The follow-up path was designed for a multi-day reporting rhythm this tool doesn't
+serve.
+
+**Decide before building:** is the follow-up feature in scope at all? If it stays, it probably
+means *same-day* chasers measured in hours, not days, which is a different feature from what
+`SKILL.md` currently describes.
+
+If it does stay, four things are still undefined:
+
+1. **Sentence 2.** `My name is X, I'm a <title> with <outlet>.` is wrong on a second email —
+   they already have it.
+2. **The deadline.** A follow-up usually means the original is close or blown. Restate, or
+   require a new one in the brief?
+3. **The subject.** Reuse the original so it reads as one conversation, or prefix
+   `Following up:`? Note a Gmail compose link cannot attach to an existing thread — it arrives
+   as a new message either way.
+4. **Does it write back to `tracking.csv`?** Log that a chaser went out, or keep the log as a
+   record of the first ask only?
 
 ---
 
