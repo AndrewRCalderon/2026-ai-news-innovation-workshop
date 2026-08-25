@@ -45,6 +45,37 @@ After explaining something non-obvious, ask a short question that checks whether
 - Keep it accurate as things change. If the pitch or what you're building shifts, update `SUBMISSION.md` in the same commit, don't let it go stale.
 - If you restructure the project, keep `SUBMISSION.md` in that same folder and keep it filled in, rather than losing track of it in the shuffle.
 
+## When I say the tool is broken, check these first
+
+These are the four things I have reported more than once. Work through them in
+this order before debugging anything else, and tell me which one it turned out
+to be.
+
+1. **"It keeps sending me duplicates."** `seen.json` keys on the raw article URL
+   (`seen[entry.link]` in `monitor.py`), and nothing normalizes that URL first.
+   The same story arriving with a tracking parameter, over `http` instead of
+   `https`, with a trailing slash, or syndicated onto a second wire is a
+   *different key* and will send again. Look for near-identical URLs in
+   `seen.json` before concluding the dedup logic itself broke.
+
+2. **"Useful things aren't coming through."** Usually a cap or a filter, not a
+   failed fetch. Check in order: the per-feed recency window; `max_per_feed` and
+   `max_articles_per_run` starving one busy feed; and the geo gate, which drops
+   an item from a nationwide feed unless its title or dateline names somewhere in
+   the region list. Confirm the item was actually fetched before assuming it was
+   never published.
+
+3. **"The 9am wide sweep didn't catch what it missed."** `daily_sweep` fires on
+   the first run at or after `hour: 9` — but launchd only runs while the Mac is
+   awake. If the laptop was asleep at 9, the sweep slides to whenever it wakes,
+   and `max_age_days` is what decides whether the overnight gap is still covered.
+   Read the log for the actual sweep time before assuming it never ran.
+
+4. **"Is it still running?"** `launchctl list | grep autonews` lists both jobs;
+   the second column is the last exit code, where `0` is healthy. Logs are at
+   `~/Library/Logs/autonews.log` (Houston) and `~/Library/Logs/autonews-nyc.log`
+   (New York). Answer from what the log actually says, not from a guess.
+
 ---
 
 Update this file as the project grows. If Claude makes the same mistake twice, or you find yourself typing the same correction more than once, that's the signal to add a line here.
