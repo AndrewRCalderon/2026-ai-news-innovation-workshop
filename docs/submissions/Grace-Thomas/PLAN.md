@@ -33,6 +33,11 @@ their own press pages), Nike and Adidas at MEDIUM (Adidas' media-contact page ti
 direct fetch; Nike's address is cited in their own releases but the newsroom page wasn't read
 directly). Nothing sent.
 
+**The bot does not verify the premise.** The emails assert that every major brand released pink
+cleats and that they used similar market research. Both came from `BRIEF.md`, not from
+independent checking. Whatever goes in the brief gets put to a comms team in writing, so the
+reporting has to support it before a send.
+
 **Design decisions worth not re-litigating:**
 
 - *Never sends.* No SMTP, no browser automation that clicks Send. The skill writes files.

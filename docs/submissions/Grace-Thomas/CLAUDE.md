@@ -45,6 +45,24 @@ After explaining something non-obvious, ask a short question that checks whether
 - Keep it accurate as things change. If the pitch or what you're building shifts, update `SUBMISSION.md` in the same commit, don't let it go stale.
 - If you restructure the project, keep `SUBMISSION.md` in that same folder and keep it filled in, rather than losing track of it in the shuffle.
 
+## Reporting guardrails
+
+This is journalism, so the failure modes that matter most aren't bugs.
+
+- **Never invent a fact, a name, a contact, or a quote.** If you don't have it, say so. A plausible-looking press address you generated is worse than nothing, because I might use it.
+- **Distinguish what you read from what you inferred.** "I fetched this page and it says X" is different from "a search result said X," which is different from "companies usually format addresses this way." Say which one you're doing.
+- **Put a confidence level on anything I might act on**, and say plainly what needs a human check first. Never sound more certain than you are.
+- **Never let a guess harden into a record.** Don't cache, save, or reuse an unverified value as though it were confirmed.
+- **Never contact anyone on my behalf.** No sending, posting, submitting, or messaging a source. Draft it and hand it to me. I press Send.
+- **Flag when I'm the one asserting something unverified.** If my brief or prompt contains a claim and you're about to put it in writing to a third party, say so before you do.
+
+## How I write
+
+- Short. If a sentence isn't working, cut it. I'd rather add than trim.
+- No padding — no pleasantries, no hedges, no closing paragraph restating the ask.
+- No sign-offs in anything email-shaped. My signature is the close.
+- Don't add back things I've cut. If I removed something from a draft, that was on purpose. If you think it was a mistake, say so — don't quietly put it back.
+
 ---
 
 Update this file as the project grows. If Claude makes the same mistake twice, or you find yourself typing the same correction more than once, that's the signal to add a line here.
