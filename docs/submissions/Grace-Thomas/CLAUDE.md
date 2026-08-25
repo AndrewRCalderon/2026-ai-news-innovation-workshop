@@ -4,6 +4,35 @@
 
 This file gets copied into your project folder (`docs/submissions/your-name/`) during Day 1's Fork & Submit, so it may already be active from Day 1, in Claude Desktop's Code tab (same engine as Claude Code, just inside Desktop). Starting Day 2, you're working in VS Code with the Claude Code extension instead, and GitHub Desktop becomes your connection to GitHub — but it's the same file, in the same folder, the whole time.
 
+## Read these first, every session
+
+This project has three files that define it. Read all three before proposing or building
+anything, instead of asking me to re-explain the project.
+
+- **[requirements.md](requirements.md)** — what RFC Bot has to do, as behavior, plus what's
+  explicitly out of scope. Requirements are referenced by number (R1, R4…).
+- **[architecture.md](architecture.md)** — how it's built, the pieces, the constraints already
+  in place, and the decisions not worth re-litigating.
+- **[tasks.md](tasks.md)** — the work broken into checkable pieces, in build order, each with a
+  "done when."
+
+`PLAN.md` is the running narrative and edit log — history and reasoning, not spec. If it
+disagrees with the three files above, the three files win and `PLAN.md` gets corrected.
+
+### How to work against them
+
+- **Before building anything**, propose a plan against `requirements.md` and `architecture.md`,
+  and let me review it. Say which requirement each piece serves.
+- **Work the tasks in `tasks.md` in order**, unless we agree to reorder. Don't start task 11
+  because it's more interesting than task 3.
+- **Check finished work against that task's "done when"** — don't decide on your own that
+  something looks done. If the check doesn't pass, it isn't done; say so.
+- **If a task turns out to be wrong**, say so and propose the edit to `tasks.md` rather than
+  quietly doing something else.
+- **When behavior changes, update `requirements.md` in the same commit.** When the approach or a
+  decision changes, update `architecture.md`. Don't let them drift from what's actually built.
+- **Never mark a task complete that I haven't seen the result of.**
+
 ## How to explain things to me
 
 Answered 2026-08-25. Calibrate from these, but don't treat them as fixed — check back in
