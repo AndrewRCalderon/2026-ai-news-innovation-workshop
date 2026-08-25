@@ -1,0 +1,31 @@
+{
+  "story_slug": "kalshi-flight-cancellation-markets",
+  "deadline": "today, Aug. 25, 2026 at 4:00 p.m. ET",
+  "terms": "on the record, attributed to a named spokesperson",
+  "generated": "2026-08-25",
+  "from_email": "tkc.intern2@journalism.cuny.edu",
+  "emails": [
+    {
+      "company": "Kalshi",
+      "contact_name": "Kalshi Media",
+      "to": "media@kalshi.com",
+      "cc": "",
+      "source_url": "https://www.mlb.com/press-release/los-angeles-dodgers-and-kalshi-announce-multi-year-partnership",
+      "source_date": "2026-08-25",
+      "confidence": "MEDIUM",
+      "subject": "Semafor query - Kalshi's flight cancellation contracts - response by 4 p.m. ET today",
+      "body": "Hello,\n\nI'm Grace Thomas, a reporter with Semafor. Kalshi notified the CFTC on Tuesday that it self-certified a new class of contracts letting traders bet on the percentage of scheduled flights canceled at U.S. airports, and the filing bars airport employees, directors and contractors with nonpublic knowledge of flight operations from trading them. I am looking for a statement on whether these markets are live yet, what Kalshi sees as their purpose, and how Kalshi prevents trading by people with nonpublic information about flight operations.\n\nMy deadline is 4 ET today."
+    },
+    {
+      "company": "Polymarket",
+      "contact_name": "Polymarket Press",
+      "to": "press@polymarket.com",
+      "cc": "",
+      "source_url": "https://polymarket.com/tos",
+      "source_date": "2026-08-25",
+      "confidence": "HIGH",
+      "subject": "Semafor query - Polymarket's aviation markets - response by 4 p.m. ET today",
+      "body": "Hello,\n\nI'm Grace Thomas, a reporter with Semafor. Polymarket runs active aviation markets on the total number of flight delays and cancellations on specific days, and a Polymarket trader turned a $119 weather position into more than $21,000 after an unexplained temperature spike at a Charles de Gaulle Airport sensor that French authorities investigated for possible tampering without reaching a definitive conclusion. I am looking for a statement on Kalshi's filing to list flight-cancellation contracts, whether Polymarket plans similar markets, and how Polymarket prevents trading by people with nonpublic information about flight operations.\n\nMy deadline is 4 ET today."
+    }
+  ]
+}

@@ -180,7 +180,7 @@ broke.
 
 ## Phase 5 — The real test
 
-### [ ] 11. Run a second, unrelated story end to end
+### [x] 11. Run a second, unrelated story end to end
 
 **Why:** the single biggest risk in the project. Everything works on one story that the system
 was built alongside. Whether it generalizes or is quietly shaped around pink cleats is currently
@@ -191,6 +191,27 @@ peer competitors. Fill in the brief, run it, use nothing but what a stranger wou
 
 **Done when:** a full `outreach/<new-slug>/` exists, and every place the skill assumed something
 cleats-specific has been written down.
+
+**Run 2026-08-25: `kalshi-flight-cancellation-markets`.** A real NBC News story the reporter
+published on 2026-07-15, re-run as if the outreach hadn't happened yet. Two recipients, not four
+peer competitors, and each needed a *different* factual sentence 3 rather than one templated
+line with the name swapped.
+
+What it exposed:
+
+1. **Subject-header folding bug.** The Polymarket subject was long enough that the `.eml` writer
+   broke the header immediately after `Subject:`, leaving the line starting with whitespace —
+   which some clients render as a leading space in the subject. Never surfaced on cleats because
+   those subjects were shorter. Fixed in `write_eml` by raising the policy line limit; subjects
+   are ASCII by rule, so nothing needs encoding. Verified across all six drafts.
+2. **A site can block the research method entirely.** `kalshi.com` returns HTTP 429 to
+   automated requests on every path tried, and to `WebFetch` too. The address came from a
+   Kalshi-issued press release via MLB, so it is MEDIUM, not HIGH. The skill handled this
+   correctly — it labeled honestly rather than guessing — but "the company's own site refuses
+   to be read" is a case worth naming explicitly in the skill.
+3. **`{COMPANY}` substitution doesn't fit every brief.** Two recipients with genuinely different
+   involvement need per-company facts, which the brief's "What I already have" field handled by
+   being written per company. Worth documenting as the expected pattern.
 
 ### [ ] 12. Fix what task 11 exposes, then re-run pink cleats
 

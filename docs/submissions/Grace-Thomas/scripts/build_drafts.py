@@ -19,6 +19,7 @@ import json
 import os
 import re
 import sys
+from email import policy as email_policy
 from email.message import EmailMessage
 from urllib.parse import urlencode
 
@@ -74,7 +75,11 @@ def gmail_compose_url(email, account_index):
 
 def write_eml(path, email, signature, from_addr):
     """Standalone .eml — signature IS embedded, since no client will add it here."""
-    msg = EmailMessage()
+    # Long subjects get folded across lines by the default policy, and it sometimes breaks
+    # immediately after "Subject:", leaving the line starting with whitespace. Some clients
+    # render that as a leading space in the subject. Raise the limit so subjects stay on one
+    # line -- they are plain ASCII by rule (see SKILL.md), so nothing needs encoding.
+    msg = EmailMessage(policy=email_policy.SMTP.clone(max_line_length=998))
     msg["To"] = email.get("to", "")
     if email.get("cc"):
         msg["Cc"] = email["cc"]
