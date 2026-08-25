@@ -115,6 +115,24 @@ they apply even outside a skill run.
   you need, deadline.
 - **Outlet is Semafor** *(2026-08-25)*, set in `config/profile.md` and `config/signature.txt`.
   Earlier drafts said NYCity News Service.
+- **The Docs sidebar hands off; it does not think** *(2026-08-25)*. The reporter works in
+  Google Docs while the story is still moving, so the input needed to become a live draft rather
+  than a filled-in form. Two ways to do that: the sidebar calls the Claude API and writes the
+  emails itself, or it reads the draft and hands it to Claude Code, where the skill already runs.
+
+  **Handoff won.** Calling the API from Apps Script would have meant a copy of `SKILL.md`'s rules
+  living in a prompt string, drifting from the real one; a paid API key and roughly a dime a run;
+  and — the deciding one — **worse contact research.** Apps Script has no browser, and research
+  escalates curl → fetcher → real browser. `kalshi.com` returns 429 to everything above that last
+  tier, which is the only reason `media@kalshi.com` was ever found. A sidebar that researched
+  contacts would be quietly weakest at the job that most needs to be right.
+
+  Cost of the choice: two pastes instead of none — the draft out, `drafts.json` back. Taken
+  knowingly.
+
+  What the draft turned out to contain: **the recipient list, already written by the reporter**,
+  as inline notes ("Kalshi statement on this"). Nothing has to be inferred about who to contact.
+
 - **Structure over word count** *(2026-08-25)*. An earlier hard "four sentences maximum" cap
   was replaced by a fixed four-part structure plus a warning-only length check. The shape is
   the rule; the length falls out of it. Accuracy still outranks brevity.

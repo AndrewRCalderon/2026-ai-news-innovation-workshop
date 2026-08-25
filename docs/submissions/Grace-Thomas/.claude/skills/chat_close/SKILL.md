@@ -1,6 +1,6 @@
 ---
 name: chat_close
-description: End-of-session wrap-up for RFC Bot. Updates tasks.md (checkboxes, newly discovered tasks), adds a dated entry to PLAN.md's edit log, and updates requirements.md / architecture.md / SUBMISSION.md if this session changed behavior, an approach, or the pitch — then splits the session's work into logical commits and pushes to the current branch. Use when the user says they're wrapping up, switching tasks, done for now, or invokes /chat_close.
+description: End-of-session wrap-up for RFC Bot. Works only on the files in docs/submissions/Grace-Thomas/, never the maintainer's repo-root copies. Updates tasks.md (checkboxes, newly discovered tasks), adds a dated entry to PLAN.md's edit log, refreshes SUBMISSION.md to reflect current project status, and updates requirements.md / architecture.md if this session changed behavior or an approach — then splits the session's work into logical commits and pushes to the current branch. Use when the user says they're wrapping up, switching tasks, done for now, or invokes /chat_close.
 ---
 
 # Chat close
@@ -8,6 +8,36 @@ description: End-of-session wrap-up for RFC Bot. Updates tasks.md (checkboxes, n
 Run this at the end of a session, before switching tasks, so nothing worked on
 this session only lives in the conversation. Docs first, then commits, so the
 doc updates ride along in the push.
+
+## Which files this skill touches
+
+**Every file named in this skill lives in Grace's submission folder:**
+
+```
+~/2026-ai-news-innovation-workshop/docs/submissions/Grace-Thomas/
+```
+
+Repo-relative, that's `docs/submissions/Grace-Thomas/`. Read and write:
+
+| Referred to as     | Actual path                                             |
+| ------------------ | ------------------------------------------------------- |
+| `tasks.md`         | `docs/submissions/Grace-Thomas/tasks.md`                |
+| `requirements.md`  | `docs/submissions/Grace-Thomas/requirements.md`         |
+| `architecture.md`  | `docs/submissions/Grace-Thomas/architecture.md`         |
+| `PLAN.md`          | `docs/submissions/Grace-Thomas/PLAN.md`                 |
+| `SUBMISSION.md`    | `docs/submissions/Grace-Thomas/SUBMISSION.md`           |
+| `CLAUDE.md`        | `docs/submissions/Grace-Thomas/CLAUDE.md`               |
+
+**Never** the copies at the repo root. The clone root has its own
+`SUBMISSION.md`, `CLAUDE.md`, `README.md`, and `project/REQUIREMENTS.md` —
+those are the workshop maintainer's templates and starter files, not Grace's
+project, and editing them would put unrelated changes in her PR. If you find
+yourself opening a bare `SUBMISSION.md` from the repo root, you have the wrong
+file: it's about 1KB of unfilled template. Hers is several KB of real prose.
+
+Resolve paths explicitly rather than relying on the working directory, since
+this skill can be invoked from either the repo root or from inside the
+submission folder.
 
 ## Step 0 — Establish what actually happened
 
@@ -17,7 +47,7 @@ conversation recall and actual diffs drift, especially in a long session.
 Note what was tried and reverted (worth a line in the edit log) versus what's
 actually still in the tree.
 
-Two things to confirm before anything else, because this repo has a twin:
+Two things to confirm before anything else, because this project has a twin:
 
 - You are in the git clone, not the copy. The version-controlled folder is
   `~/2026-ai-news-innovation-workshop/docs/submissions/Grace-Thomas/`.
@@ -44,7 +74,7 @@ This is the active list of what's open, in build order, each task with a
 - If a task turned out to be wrong, propose the edit to `tasks.md` rather than
   quietly doing something else — same rule as during the session.
 - Keep entries short. History and reasoning belong in the `PLAN.md` edit log
-  (Step 3), not piled into `tasks.md`.
+  (Step 4), not piled into `tasks.md`.
 
 Skip this step if the session's work genuinely doesn't map to anything tracked
 here — don't force an edit.
@@ -59,13 +89,34 @@ Per `CLAUDE.md`, these change in the same commit as the work, not later:
 - **`architecture.md`** — if the approach, a component, or a decision changed,
   including a deviation from a decision already recorded there. Write down what
   was decided and why, so it isn't re-litigated next session.
-- **`SUBMISSION.md`** — if the pitch or what's being built shifted. It's meant
-  to stay accurate as things change, not be filled in at the end.
 
 Most sessions (a bug fix, a copy pass, a regenerated set of drafts) won't need
-any of these. Skip what doesn't apply.
+either of these. Skip what doesn't apply.
 
-## Step 3 — Edit log: `PLAN.md`
+## Step 3 — Project status: `SUBMISSION.md`
+
+Check `SUBMISSION.md` every session and bring it in line with where the
+project actually is now. This is the public showcase card, pulled live from
+the file, so a stale one misrepresents the work to anyone reading it.
+
+Re-read it against what's actually true after this session and update the
+fields that have drifted — typically **What you're building**, **Solution**,
+and **Known limits**. If the pitch or hypothesis itself shifted, update those
+too.
+
+**Keep it concise.** Edit in place at the existing length; don't let the file
+grow a session's worth of detail each time. Tighten or replace a sentence
+rather than appending one — the running history belongs in the `PLAN.md` edit
+log (Step 4), not here. If a change doesn't alter what a reader should
+understand about the project, it doesn't belong in `SUBMISSION.md` at all.
+
+Per `CLAUDE.md`, don't quietly restore anything Grace cut from this file. If
+you think a cut was a mistake, say so instead of putting it back.
+
+If nothing about the project's public description changed this session, say
+you checked and it's still accurate — don't edit for the sake of editing.
+
+## Step 4 — Edit log: `PLAN.md`
 
 `PLAN.md` is the running narrative and history — not spec. If it ever
 disagrees with `requirements.md` / `architecture.md` / `tasks.md`, those three
@@ -85,10 +136,10 @@ Add one dated entry under the `## Edit log` header, newest first:
 - Also refresh `## Where things stand` / `## Next up` / `## Open questions` if
   this session moved them.
 
-## Step 4 — Commit and push
+## Step 5 — Commit and push
 
 - Group the diff into logically separate commits — a content change and an
-  unrelated fix are two commits, not one. Doc updates from Steps 1–3 can ride
+  unrelated fix are two commits, not one. Doc updates from Steps 1–4 can ride
   in their own commit or the last content commit, whichever reads more
   naturally.
 - Write each message around *why*, matching this repo's log style
@@ -96,8 +147,10 @@ Add one dated entry under the `## Edit log` header, newest first:
   follow-ups may not fit a day-of turnaround" — not "update tasks.md".
 - Stage files by name, never `git add -A` or `git add .` — then re-read
   `git status` to make sure no stray temp file, credential, or unrelated edit
-  got in. If anything holds a real key or token, stop and say so rather than
-  committing it.
+  got in. Every staged path should start with `docs/submissions/Grace-Thomas/`;
+  anything outside that folder is almost certainly a maintainer file you
+  shouldn't be committing, so stop and ask. If anything holds a real key or
+  token, stop and say so rather than committing it.
 - Push to the current branch: `git push -u origin <branch-name>`. Auth is SSH;
   if it fails with `Permission denied (publickey)`, check `ssh-add -l` — an
   empty agent is the usual cause, and the fix is Grace running

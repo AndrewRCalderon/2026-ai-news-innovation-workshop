@@ -388,7 +388,7 @@ record. The CSV stays canonical. Nothing reads back.
 
 ## Phase 7 — Start from the draft, not from a form
 
-### [ ] 18. Decide where the judgment lives — **Plan Mode, before any code**
+### [x] 18. Decide where the judgment lives — **decided: hand off, don't think**
 
 **Why:** the real workflow is a reporter part-way through a story in Google Docs, asking for the
 outreach while the draft is still moving. That changes the input from "a form you fill in" to
@@ -402,6 +402,24 @@ of `SKILL.md`, keeping one source of truth at the cost of a Drive dependency and
 
 **Done when:** the decision and its reasoning are in `architecture.md`.
 
+**Decided 2026-08-25: (a), the handoff.** `apps-script/Doc.gs` reads the body of the bound Doc;
+the sidebar's step 1 shows it with a Copy button and a header saying it is an unverified draft in
+progress. Claude Code does the research and the writing; step 2 takes the resulting
+`drafts.json` back.
+
+(b) and (c) both meant calling the Claude API from Apps Script. Rejected on three counts, the
+third decisive: a copy of the rules drifting inside a prompt string, a paid key at roughly a dime
+a run, and **no browser tier for contact research** — `kalshi.com` 429s everything below it, and
+that tier is the only reason `media@kalshi.com` was ever found. Reasoning is in
+`architecture.md`.
+
+Cost taken knowingly: two pastes instead of none.
+
+**What the first real draft showed:** the recipient list was already written in it, as the
+reporter's own inline notes — "Kalshi statement on this", "Polymarket comment on Kalshi's
+proposal or on its own approach." A scanner doesn't have to work out who to contact. It has to
+notice the placeholders.
+
 ### [ ] 19. R13 — a claim pulled from an unfinished draft is not a verified claim
 
 **Why:** `CLAUDE.md` already says to flag when the reporter is the one asserting something
@@ -410,9 +428,14 @@ the *normal* case rather than the exception: half-written sentences, placeholder
 notes-to-self all look like assertions to a scanner, and sentence 3 of every email is exactly
 where one would land.
 
-**Do:** anything the scanner lifts out of the draft is shown back with the source sentence
-quoted and requires the reporter to confirm it before it reaches an email. Write it into
-`requirements.md` as R13.
+**Do:** anything lifted out of the draft is shown back with the source sentence quoted and
+confirmed before it reaches an email. Write it into `requirements.md` as R13.
+
+**Reshaped by task 18's outcome.** With the handoff design, this confirmation happens in
+conversation with Claude rather than in the sidebar — which is a stronger place for it, since
+Claude can quote the line and say what it read versus inferred. What the sidebar does carry is
+the header on the copied text: *"In-progress draft. Nothing in it is verified."* That is the
+lightweight half. R13 itself is still unwritten.
 
 **Done when:** R13 exists, and no scanned claim can reach a draft body unconfirmed.
 

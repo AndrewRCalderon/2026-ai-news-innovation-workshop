@@ -37,7 +37,7 @@ headings: **Files**, **Libraries**, **Services**. Hover over **Services** and a 
 > including permanent delete. The advanced service goes through the Gmail API, which lets the
 > manifest ask for `gmail.compose` and nothing more.
 
-**6. Get the five files in.** You don't create all five — two already exist, and you replace
+**6. Get the six files in.** You don't create all six — two already exist, and you replace
 what's in them. Open this folder in VS Code to copy from; each file is Cmd-A, Cmd-C.
 
 Nothing is typed with an extension. Apps Script adds `.gs` to a Script file and `.html` to an
@@ -49,6 +49,7 @@ HTML file, so you type `Drafts`, not `Drafts.gs`.
 | `Config.gs` | `Config` | Rename `Code.gs`: its **⋮** menu → **Rename** → `Config`. Select all, paste over the `myFunction` stub. |
 | `Drafts.gs` | `Drafts` | **+** next to *Files* → **Script** → name it `Drafts`. Paste over the stub. |
 | `Menu.gs` | `Menu` | **+** → **Script** → `Menu`. Paste over the stub. |
+| `Doc.gs` | `Doc` | **+** → **Script** → `Doc`. Paste over the stub. |
 | `Sidebar.html` | `Sidebar` | **+** → **HTML** — not Script → `Sidebar`. Paste over the boilerplate. |
 
 File order doesn't matter, even though it looks like it should. Apps Script loads every `.gs`
@@ -158,10 +159,10 @@ That lists exactly the files `clasp push` would send. If anything unexpected is 
 clasp push
 ```
 
-From this folder. Uploads the five files and overwrites what's in the Google project. Reload
+From this folder. Uploads the six files and overwrites what's in the Google project. Reload
 the Doc afterwards if you changed `Menu.gs`, since the menu is built when the Doc opens.
 
-`.claspignore` is an allow-list, so only the five real files go up — `README.md` and
+`.claspignore` is an allow-list, so only the six real files go up — `README.md` and
 `.clasp.json` stay local. A new file in this folder stays local too until it's added there
 deliberately.
 
@@ -184,6 +185,24 @@ The copy-paste steps above still work. Nothing depends on clasp.
 ---
 
 ## Using it
+
+The sidebar has two steps, and they bracket a trip through Claude.
+
+**Step 1 - the story draft.** Click **Read this document**, then **Copy**. That pulls the text
+out of the Doc with a short header on it saying what it is and that nothing in it is verified.
+Paste it to Claude and ask for the outreach. Claude researches the press contacts - the full
+three-tier escalation, browser included - writes an email per recipient, and gives you back a
+`drafts.json`.
+
+Why it hands off rather than doing the writing itself: Apps Script has no browser, and
+`kalshi.com` returns 429 to everything else. `media@kalshi.com` was only ever found by a real
+browser. A sidebar that researched its own contacts would be weakest at the job that most needs
+to be right. Full reasoning in `architecture.md`.
+
+Worth knowing: the recipient list is usually already in your draft, as your own inline notes -
+"Kalshi statement on this". Those are what Claude looks for first.
+
+**Step 2 - the emails.** Deadline, paste the `drafts.json`, create the drafts.
 
 **Fill in the Deadline field.** It's required and it's blank every run. Nothing gets created
 while it's empty — R4 says a deadline is never assumed, and this is where that stops being a

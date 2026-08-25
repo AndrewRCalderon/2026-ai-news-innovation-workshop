@@ -1,15 +1,18 @@
 /**
  * RFC Bot - the menu in the Google Doc that opens the sidebar.
  *
- * The script is bound to a Doc rather than standing alone because Phase 7 puts
- * "scan this draft" in this same menu. One project, one authorization, one
- * setup -- done once rather than twice.
+ * The script is bound to a Doc rather than standing alone because the sidebar
+ * reads the story draft out of that Doc (see Doc.gs). One project, one
+ * authorization, one setup.
+ *
+ * One menu item, one sidebar, two steps: get the draft out to Claude, then
+ * put the emails Claude wrote back into Gmail.
  */
 
 function onOpen() {
   DocumentApp.getUi()
     .createMenu('RFC Bot')
-    .addItem('Create Gmail drafts...', 'showSidebar')
+    .addItem('Draft requests for comment...', 'showSidebar')
     .addToUi();
 }
 

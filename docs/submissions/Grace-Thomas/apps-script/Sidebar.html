@@ -28,12 +28,32 @@
       .warn { color: #b06000; display: block; margin-left: 8px; }
       .muted { color: #5f6368; }
       code { font-size: 11px; word-break: break-all; }
+      .step { border-top: 2px solid #e8eaed; margin-top: 18px; padding-top: 12px; }
+      .step:first-of-type { border-top: 0; margin-top: 0; padding-top: 0; }
+      .num { color: #5f6368; font-size: 11px; letter-spacing: .06em;
+             text-transform: uppercase; margin-bottom: 2px; }
+      button.plain { background: #f1f3f4; color: #202124; }
+      #docText { height: 110px; }
     </style>
   </head>
   <body>
     <div id="mode" class="mode muted">Checking mode...</div>
 
-    <h2>Deadline</h2>
+    <div class="step">
+      <div class="num">Step 1</div>
+      <h2>The story draft</h2>
+      <div class="hint">Pulls the text out of this document so you can hand it to Claude.
+        Claude does the contact research and writes the emails, then gives you back a
+        drafts.json to paste into step 2.</div>
+      <button id="read" class="plain">Read this document</button>
+      <textarea id="docText" placeholder="The draft appears here." readonly></textarea>
+      <button id="copy" class="plain" style="display:none">Copy</button>
+      <div id="copyNote" class="hint"></div>
+    </div>
+
+    <div class="step">
+      <div class="num">Step 2</div>
+      <h2>Deadline</h2>
     <input id="deadline" type="text" placeholder="4 p.m. ET today">
     <div class="hint">Goes in as the last line of every email, exactly as you type it.
       Required - it is never assumed.</div>
@@ -50,6 +70,7 @@
 
     <button id="go">Create drafts</button>
     <div id="out"></div>
+    </div>
 
     <script>
       var MODE = null;
@@ -69,6 +90,69 @@
         }
         el.textContent += ' Drafting into ' + m.account + '.';
       }).getMode();
+
+      var DOC = null;
+
+      document.getElementById('read').onclick = function () {
+        var btn = this;
+        btn.disabled = true;
+        btn.textContent = 'Reading...';
+        google.script.run
+          .withSuccessHandler(function (d) {
+            DOC = d;
+            // The header travels with the text so the handoff describes itself.
+            // The last line is doing real work: a draft in progress is full of
+            // half-written sentences and notes-to-self that read like
+            // assertions, and sentence 3 of every RFC is where one would land.
+            var stamp = new Date().toString();
+            document.getElementById('docText').value =
+              '--- RFC Bot: story draft from Google Docs ---\n' +
+              'Document: ' + d.name + '\n' +
+              'Read: ' + stamp + '\n' +
+              'In-progress draft. Nothing in it is verified.\n' +
+              '---\n\n' + d.text;
+            btn.disabled = false;
+            btn.textContent = 'Read this document';
+            document.getElementById('copy').style.display = 'block';
+            document.getElementById('copyNote').textContent =
+              d.text.length + ' characters. Copy this, paste it to Claude.';
+          })
+          .withFailureHandler(function (e) {
+            btn.disabled = false;
+            btn.textContent = 'Read this document';
+            document.getElementById('copyNote').textContent = 'Could not read: ' + e.message;
+          })
+          .readDocument();
+      };
+
+      // Sidebars run in a sandboxed iframe, and it is not obvious which
+      // clipboard route survives that. Try the modern API, fall back to the
+      // old one, and if both fail say what to do by hand -- a button that
+      // silently does nothing is the worst of the three outcomes.
+      document.getElementById('copy').onclick = function () {
+        var box = document.getElementById('docText');
+        var note = document.getElementById('copyNote');
+        var done = function () { note.textContent = 'Copied. Paste it to Claude.'; };
+        var manual = function () {
+          box.removeAttribute('readonly');
+          box.focus();
+          box.select();
+          note.textContent = 'Could not copy for you - the box is selected, press Cmd-C.';
+        };
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(box.value).then(done, function () {
+              box.select();
+              if (document.execCommand('copy')) { done(); } else { manual(); }
+            });
+            return;
+          }
+          box.select();
+          if (document.execCommand('copy')) { done(); } else { manual(); }
+        } catch (e) {
+          manual();
+        }
+      };
 
       document.getElementById('go').onclick = function () {
         var text = document.getElementById('json').value.trim();
