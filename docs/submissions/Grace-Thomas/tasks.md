@@ -256,6 +256,12 @@ serve.
 means *same-day* chasers measured in hours, not days, which is a different feature from what
 `SKILL.md` currently describes.
 
+**Recommendation, 2026-08-25: drop it from scope and say so in `requirements.md`.** The tool
+is for day-of turnarounds; a chaser that lands tomorrow morning has nothing to chase. Cutting a
+feature that was never run costs nothing and removes a section of `SKILL.md` that would
+otherwise rot. **This needs the reporter's yes before R11 is deleted.** Until then it stays
+here, unbuilt.
+
 If it does stay, four things are still undefined:
 
 1. **Sentence 2.** `My name is X, I'm a <title> with <outlet>.` is wrong on a second email —
@@ -270,9 +276,141 @@ If it does stay, four things are still undefined:
 
 ---
 
+## Phase 6 — Get it into Google
+
+Everything so far produces files on a laptop. The reporter works in Gmail and Google Docs. This
+phase moves the output into the tools the work actually happens in.
+
+### [x] 14. Correct the `gmail.compose` claim
+
+**Why:** `requirements.md` R1, `architecture.md` and `scripts/gmail_drafts.py` all stated that
+`gmail.compose` is "technically incapable of sending," and R1 leaned on it as an architectural
+guarantee. **It is false.** Google's scope table documents `gmail.compose` as *"Manage drafts
+and send emails,"* and `users.messages.send` lists it as an accepted scope. There is no Gmail
+scope that writes drafts without permitting send.
+
+Caught while checking the scope for task 15, before building the Apps Script path on the same
+false premise.
+
+**Done when:** all three files say the barrier is the absence of a send call in the code, and a
+standing check greps for one.
+
+**Done 2026-08-25.**
+
+### [ ] 15. Apps Script that writes RFC drafts into Gmail
+
+**Why:** `compose.html` opens a pre-filled compose window, which is fine but transient — close
+the tab and it's gone. A real Gmail draft survives, syncs to phone, and is what a reporter
+actually expects. `gmail_drafts.py` already does this, but it needs a Google Cloud project, an
+OAuth consent screen and two `pip` installs. Apps Script needs none of that.
+
+**Do:** an Apps Script project **bound to a Google Doc**, not standalone — Phase 7 puts a
+sidebar in that same doc, and binding now means one project, one authorization, one setup, done
+once. It reads a `drafts.json` payload and creates one Gmail draft per recipient via the
+**advanced Gmail service** with explicit `oauthScopes` in the manifest, so the requested
+permission is the narrowest that can write a draft rather than whatever Apps Script
+auto-detects. `GmailApp` is not used: its methods pull `https://mail.google.com/`, which is
+full-mailbox access including permanent delete.
+
+Skips any recipient with an empty `to` (a `form` or `none` route, per R1a) and says which.
+
+**Done when:** pasting a real `drafts.json` produces one correctly formatted Gmail draft per
+`email` recipient, in the right account, with the signature appearing exactly once.
+
+### [ ] 16. Test mode, locked to a dummy address
+
+**Why:** the pipeline can't be tested end to end without a real send, and a real send during
+testing must be impossible to aim at a press desk by accident. The mistake this prevents is
+mundane and fatal: testing with the real `drafts.json` still loaded.
+
+**Do:** a `TEST_MODE` flag in the script config. When on, **every** recipient is rewritten to
+the configured dummy address, `Cc` is dropped, the subject is prefixed `[TEST]`, and the real
+intended recipient is preserved in an `X-RFC-Bot-Test-Original-To` header. **The body is left
+byte-identical** — the point is to review the exact text that would go out. When off, the
+sidebar requires an explicit confirmation that these are real press addresses.
+
+The dummy address is `tkc.intern2@journalism.cuny.edu` — the reporter's own, so a test lands in
+the same inbox it was drafted from.
+
+**The script still never sends.** The test send is the reporter opening the `[TEST]` draft and
+pressing Send to themselves, which is also the only honest way to see what Gmail does to the
+formatting on the way out.
+
+**Done when:** running with `TEST_MODE = true` against the Kalshi `drafts.json` produces two
+drafts both addressed to the dummy address and none addressed to Kalshi or Polymarket, and
+`grep -rn "send" apps-script/` turns up no send call.
+
+### [ ] 17. Google Contacts sync — **decision needed first**
+
+**Why:** `contacts/press-contacts.csv` is invisible from Gmail. Pushing it into Google Contacts
+would make press desks autocomplete in the compose window.
+
+**Decide before building:** Contacts has no field for `confidence` or `source_url`, and both are
+load-bearing (R8). A two-way sync could also let an unlabeled address flow back into the CSV as
+though it were verified, which is exactly what R8 and R9 exist to prevent.
+
+Recommended shape: **one-way, CSV → Contacts**, into a single labeled group, with confidence,
+source URL and source date written into the contact's notes field so they travel with the
+record. The CSV stays canonical. Nothing reads back.
+
+**Done when:** decided, then built to whatever was decided.
+
+---
+
+## Phase 7 — Start from the draft, not from a form
+
+### [ ] 18. Decide where the judgment lives — **Plan Mode, before any code**
+
+**Why:** the real workflow is a reporter part-way through a story in Google Docs, asking for the
+outreach while the draft is still moving. That changes the input from "a form you fill in" to
+"a document that isn't finished," which is a different product.
+
+**Decide:** does the Docs sidebar (a) extract the draft and hand off to the `rfc-outreach`
+skill, which keeps every judgment rule in `SKILL.md` where it can be argued with; or (b) call
+the Anthropic API directly from Apps Script, which duplicates all of `SKILL.md` into a prompt
+and guarantees the two drift apart; or (c) call the API but read the prompt from a synced copy
+of `SKILL.md`, keeping one source of truth at the cost of a Drive dependency and an API key.
+
+**Done when:** the decision and its reasoning are in `architecture.md`.
+
+### [ ] 19. R13 — a claim pulled from an unfinished draft is not a verified claim
+
+**Why:** `CLAUDE.md` already says to flag when the reporter is the one asserting something
+unverified and it's about to go to a third party in writing. Scanning a live draft makes that
+the *normal* case rather than the exception: half-written sentences, placeholder figures and
+notes-to-self all look like assertions to a scanner, and sentence 3 of every email is exactly
+where one would land.
+
+**Do:** anything the scanner lifts out of the draft is shown back with the source sentence
+quoted and requires the reporter to confirm it before it reaches an email. Write it into
+`requirements.md` as R13.
+
+**Done when:** R13 exists, and no scanned claim can reach a draft body unconfirmed.
+
+---
+
+## Phase 8 — More than one reporter
+
+### [ ] 20. Split the rules into invariant and voice
+
+**Why:** the format rules currently mix two different kinds of thing. Some are what make the
+tool safe — the four-part structure (R4), the honest confidence labels (R8), never inventing a
+deadline. Others are one reporter's taste: no sign-offs, the signature as the close, how the
+deadline is phrased. A second reporter will disagree with the second set and should be able to,
+without touching the first.
+
+**Do:** move voice into `config/profiles/<name>.md`, alongside two or three of that reporter's
+own real sent RFCs as examples. Invariants stay in `SKILL.md` and `requirements.md`.
+
+**Done when:** a second profile with a visibly different voice produces emails in that voice
+with the R4 structure intact — and it is written down which of R5's items turned out to be
+rules and which turned out to be preferences.
+
+---
+
 ## Standing checks — true after every task
 
-- Nothing was sent. No SMTP, no send scope, no automation that clicked Send.
+- **Nothing was sent, and nothing can send.** `grep -rniE "messages\.send|smtplib|sendmail|GmailApp\.send|\.send\(" scripts/ apps-script/` returns no send call. The scope does not stop this; only this check does. See task 14.
 - Every address in every output traces to a source URL that can be opened.
 - No LOW address appears in `contacts/press-contacts.csv`.
 - Re-running a brief produces identical output and no duplicate tracking rows.
