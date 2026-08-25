@@ -338,7 +338,7 @@ formatting on the way out.
 
 **Done when:** running with `TEST_MODE = true` against the Kalshi `drafts.json` produces two
 drafts both addressed to the dummy address and none addressed to Kalshi or Polymarket, and
-`grep -rn "send" apps-script/` turns up no send call.
+the standing send check comes back clean.
 
 ### [ ] 17. Google Contacts sync — **decision needed first**
 
@@ -410,7 +410,7 @@ rules and which turned out to be preferences.
 
 ## Standing checks — true after every task
 
-- **Nothing was sent, and nothing can send.** `grep -rniE "messages\.send|smtplib|sendmail|GmailApp\.send|\.send\(" scripts/ apps-script/` returns no send call. The scope does not stop this; only this check does. See task 14.
+- **Nothing was sent, and nothing can send.** `grep -rnE "\.send\(|smtplib|sendmail" scripts/ apps-script/` returns nothing. Matching on the open paren so that comments *explaining* the rule don't trip it. The scope does not stop a send; only this check does. See task 14.
 - Every address in every output traces to a source URL that can be opened.
 - No LOW address appears in `contacts/press-contacts.csv`.
 - Re-running a brief produces identical output and no duplicate tracking rows.

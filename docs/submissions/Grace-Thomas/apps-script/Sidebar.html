@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body { font: 13px/1.45 -apple-system, "Segoe UI", Roboto, sans-serif;
+             margin: 0; padding: 12px; color: #202124; }
+      h2 { font-size: 14px; margin: 0 0 8px; }
+      textarea { width: 100%; height: 160px; box-sizing: border-box;
+                 font: 11px/1.35 ui-monospace, Menlo, Consolas, monospace;
+                 border: 1px solid #dadce0; border-radius: 4px; padding: 6px; }
+      button { margin-top: 8px; width: 100%; padding: 8px; border: 0;
+               border-radius: 4px; background: #1a73e8; color: #fff;
+               font-size: 13px; cursor: pointer; }
+      button:disabled { background: #c6c6c6; cursor: default; }
+      .mode { padding: 8px; border-radius: 4px; margin-bottom: 10px; font-size: 12px; }
+      .test { background: #e6f4ea; border: 1px solid #34a853; }
+      .live { background: #fce8e6; border: 1px solid #d93025; }
+      .confirm { margin: 8px 0; font-size: 12px; }
+      .row { border-top: 1px solid #eee; padding: 7px 0; font-size: 12px; }
+      .co { font-weight: 600; }
+      .ok { color: #137333; }
+      .skip { color: #b06000; }
+      .err { color: #c5221f; }
+      .warn { color: #b06000; display: block; margin-left: 8px; }
+      .muted { color: #5f6368; }
+      code { font-size: 11px; word-break: break-all; }
+    </style>
+  </head>
+  <body>
+    <div id="mode" class="mode muted">Checking mode...</div>
+
+    <h2>Paste drafts.json</h2>
+    <textarea id="json" placeholder="Contents of outreach/&lt;slug&gt;/drafts.json"></textarea>
+
+    <div id="confirmWrap" class="confirm" style="display:none">
+      <label>
+        <input type="checkbox" id="confirmReal">
+        I have checked every address. These are the real press desks.
+      </label>
+    </div>
+
+    <button id="go">Create drafts</button>
+    <div id="out"></div>
+
+    <script>
+      var MODE = null;
+
+      google.script.run.withSuccessHandler(function (m) {
+        MODE = m;
+        var el = document.getElementById('mode');
+        if (m.testMode) {
+          el.className = 'mode test';
+          el.textContent = 'TEST MODE - every draft goes to ' + m.testRecipient +
+                           '. No press desk can be reached.';
+        } else {
+          el.className = 'mode live';
+          el.textContent = 'LIVE - drafts will be addressed to the real recipients ' +
+                           'in the JSON. Nothing is sent; you still press Send.';
+          document.getElementById('confirmWrap').style.display = 'block';
+        }
+        el.textContent += ' Drafting into ' + m.account + '.';
+      }).getMode();
+
+      document.getElementById('go').onclick = function () {
+        var text = document.getElementById('json').value.trim();
+        var out = document.getElementById('out');
+        out.textContent = '';
+        if (!text) { out.textContent = 'Paste the JSON first.'; return; }
+
+        var box = document.getElementById('confirmReal');
+        this.disabled = true;
+        this.textContent = 'Creating...';
+
+        google.script.run
+          .withSuccessHandler(render)
+          .withFailureHandler(function (e) { render({ fatal: e.message }); })
+          .createDrafts(text, box ? box.checked : false);
+      };
+
+      function reset() {
+        var b = document.getElementById('go');
+        b.disabled = false;
+        b.textContent = 'Create drafts';
+      }
+
+      function line(parent, cls, text) {
+        var d = document.createElement('div');
+        if (cls) { d.className = cls; }
+        d.textContent = text;
+        parent.appendChild(d);
+        return d;
+      }
+
+      function render(r) {
+        reset();
+        var out = document.getElementById('out');
+        out.textContent = '';
+
+        if (r.fatal) { line(out, 'err', r.fatal); return; }
+
+        line(out, '', r.created + ' draft(s) created, ' + r.skipped + ' skipped.');
+        line(out, 'muted', 'Nothing was sent.');
+
+        r.results.forEach(function (row) {
+          var d = document.createElement('div');
+          d.className = 'row';
+          var head = document.createElement('span');
+          head.className = 'co';
+          head.textContent = row.company;
+          d.appendChild(head);
+
+          if (row.confidence && row.confidence !== 'HIGH') {
+            line(d, 'skip', row.confidence + ' confidence - confirm this address before sending.');
+          }
+
+          if (row.status === 'created') {
+            line(d, 'ok', 'draft to ' + row.detail);
+            if (row.redirectedFrom) {
+              line(d, 'muted', 'would have gone to ' + row.redirectedFrom);
+            }
+          } else if (row.status === 'skipped') {
+            line(d, 'skip', row.detail);
+          } else {
+            line(d, 'err', row.detail);
+          }
+
+          (row.warnings || []).forEach(function (w) { line(d, 'warn', w); });
+          out.appendChild(d);
+        });
+      }
+    </script>
+  </body>
+</html>

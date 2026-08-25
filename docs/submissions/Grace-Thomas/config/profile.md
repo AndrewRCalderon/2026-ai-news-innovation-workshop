@@ -1,6 +1,6 @@
 # Reporter profile
 
-Edit this once. Every email uses it. Anything marked TODO will make Claude stop and ask.
+Edit this once. Every email uses it. Anything left as a placeholder will make Claude stop and ask.
 
 - **Name:** Grace Thomas
 - **Title:** Reporter
