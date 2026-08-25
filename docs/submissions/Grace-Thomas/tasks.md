@@ -462,7 +462,7 @@ rules and which turned out to be preferences.
 
 ## Standing checks — true after every task
 
-- **Nothing was sent, and nothing can send.** Enforced automatically by `.githooks/pre-commit` on every commit (task 21); by hand it's `grep -rnE "\.send\(|smtplib|sendmail" scripts/ apps-script/`, which should return nothing. Matching on the open paren so that comments *explaining* the rule don't trip it. The scope does not stop a send; only this check does. See task 14.
+- **Nothing was sent, and nothing can send.** Enforced automatically by `.githooks/pre-commit` on every commit (task 21); by hand it's `grep -rnE --include='*.gs' --include='*.py' --include='*.html' --include='*.json' "\.send\(|smtplib|sendmail" scripts/ apps-script/`, which should return nothing. The `--include` filters match the hook, which skips markdown -- `apps-script/README.md` documents the pattern in prose, so a check without them reports a hit every time and stops being read. Matching on the open paren so that comments *explaining* the rule don't trip it. The scope does not stop a send; only this check does. See task 14.
 - Every address in every output traces to a source URL that can be opened.
 - No LOW address appears in `contacts/press-contacts.csv`.
 - Re-running a brief produces identical output and no duplicate tracking rows.
