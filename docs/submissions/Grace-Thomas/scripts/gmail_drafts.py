@@ -2,8 +2,12 @@
 """
 UPGRADE PATH — writes real drafts into your Gmail Drafts folder via the Gmail API.
 
-This creates drafts. It does NOT send. The scope requested (gmail.compose) does not
-grant send permission at all, so a bug here cannot mail anyone.
+This creates drafts. It does NOT send -- because this file contains no send call.
+
+IMPORTANT, corrected 2026-08-25: gmail.compose is NOT a send barrier. Google documents it
+as "Manage drafts and send emails," and users.messages.send accepts it. It is requested
+here because it is the narrowest Gmail scope that can write a draft at all. Nothing in this
+file calls send, and nothing added to it should. That is the guarantee.
 
 One-time setup (~15 min):
 

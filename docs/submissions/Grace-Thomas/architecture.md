@@ -71,9 +71,16 @@ why it must never be written into the body. See R7.
 into several.
 
 **Credentials are gitignored, and must stay that way.** `.gitignore` covers
-`config/gcp_credentials.json` and `config/gmail_token.json`. `gmail_drafts.py` requests only
-`gmail.compose` — a scope that cannot send. That's an architectural guarantee of R1, not a
-setting.
+`config/gcp_credentials.json` and `config/gmail_token.json`.
+
+**The `gmail.compose` scope is not a send barrier** *(corrected 2026-08-25)*. Both this file and
+`requirements.md` used to say it was "technically incapable of sending." That is false, and it
+was load-bearing, so it is worth stating plainly: Google's scope table describes
+`gmail.compose` as *"Manage drafts and send emails,"* and `users.messages.send` lists it as an
+accepted scope. There is no narrower Gmail scope that writes drafts without allowing send.
+`gmail_drafts.py` and the Apps Script project request it because it is the least-permissive
+scope that does the job. **R1 is guaranteed by there being no send call in any file**, checked
+by grep as a standing check — not by the permission model.
 
 **The project exists in two places.** The git home is
 `~/2026-ai-news-innovation-workshop/docs/submissions/Grace-Thomas/` (branch `day-2`, fork

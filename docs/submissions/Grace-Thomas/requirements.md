@@ -22,8 +22,13 @@ judgment. The reporter reads every draft and presses Send.
 No SMTP, no mail-sending tool, no browser automation that clicks Send, no `mailto:` execution.
 The system writes files. A human sends. This is not configurable.
 
-The optional Gmail API path may only ever request the `gmail.compose` scope, which is
-technically incapable of sending.
+**The barrier is the code, not the scope.** Google publishes no Gmail scope that grants
+draft-writing without also granting send. `gmail.compose` is documented as *"Manage drafts and
+send emails,"* and the Gmail API accepts it for `users.messages.send`. The Gmail API path and
+the Apps Script path request `gmail.compose` because it is the narrowest scope that can write a
+draft at all — **not** because it is incapable of sending. An earlier version of this document
+claimed it was. R1 holds because no send call exists anywhere in this project, and a standing
+check greps for one.
 
 ### R1a — Every recipient gets a draft, whatever the route
 
