@@ -9,6 +9,11 @@ Leave a field blank if it doesn't apply — Claude will ask about anything criti
 <!-- Short kebab-case name. Becomes the output folder name. -->
 pink-cleats-world-cup
 
+> **⚠️ THIS IS A DEMO, NOT A LIVE STORY.** Filled in on 2026-08-24 to build and test RFC Bot.
+> The four drafts in `outreach/pink-cleats-world-cup/` were never sent and are not pending
+> outreach — the deadline in them has passed. Overwrite this whole file with a real story
+> before using it for anything.
+
 ## What the story is about
 <!-- 2-4 sentences, plain English. This is what gets translated into the context paragraph
      each recipient reads, so include the *thesis*, not just the topic. -->
@@ -25,13 +30,14 @@ Adidas
 New Balance
 Puma
 
-## The question(s) I need answered
-<!-- Number them. Keep them the same across recipients so answers are comparable.
+## What I need answered
+<!-- Write this as prose, not a numbered list — it goes into the email as running text.
+     Keep the substance the same across recipients so answers are comparable.
      Swap the company name in with {COMPANY} — Claude substitutes per recipient. -->
-1. Why did {COMPANY} choose pink for the cleats worn by players at the World Cup?
-2. Why did {COMPANY} release pink cleats for consumers to purchase during this period?
-3. Did {COMPANY} rely on market research indicating pink would have the highest visibility on
-   the pitch, and if so, was that research conducted internally or by an outside firm?
+Why {COMPANY} chose pink for the cleats worn by players at the World Cup, why it also released
+pink cleats for consumers to buy during the same period, and whether it relied on market
+research indicating pink would have the highest visibility on the pitch — and if so, whether
+that research was conducted internally or by an outside firm.
 
 ## What I already have that involves them
 <!-- Optional but important. If you're putting a specific claim to a company, state it here —

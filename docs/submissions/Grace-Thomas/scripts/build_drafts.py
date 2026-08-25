@@ -299,6 +299,60 @@ def write_tracking(path, data, emails):
     return len(new_rows)
 
 
+# --- Format checks (requirements R4, R5) ---------------------------------
+# All warning-level, on purpose. A journalist on deadline should never have a
+# build refuse to produce a draft because of a style rule. Accuracy outranks
+# brevity, so nothing here blocks or rewrites anything.
+
+WORD_WARN = 150
+
+# (regex, what rule it breaks). Applied to the body only.
+FORBIDDEN = [
+    (r"(?im)^\s*(thank you|thanks|best|sincerely|regards|cheers)\b[,.]?\s*$",
+     "a sign-off - the signature is the close"),
+    (r"(?im)^\s*\d+[.)]\s+",
+     "a numbered question - questions run as prose"),
+    (r"(?im)^\s*[-*•]\s+",
+     "a bulleted question - questions run as prose"),
+    (r"(?i)press time",
+     "the 'did not respond by press time' line"),
+    (r"(?i)accuracy check|before publication|share the passage",
+     "an accuracy-check offer"),
+    (r"(?i)on the record|on background",
+     "a statement of terms - those go in the reply thread"),
+    (r"(?i)give me a call|happy to (talk|hop on|jump on)|reach me at",
+     "a phone offer"),
+]
+
+
+def check_body(company, body):
+    """Warn about anything the body shouldn't contain. Never blocks."""
+    warns = []
+
+    words = len(body.split())
+    if words > WORD_WARN:
+        warns.append("%d words (over ~%d) - check nothing in it is padding"
+                     % (words, WORD_WARN))
+
+    for pattern, why in FORBIDDEN:
+        if re.search(pattern, body):
+            warns.append("contains %s" % why)
+
+    # Structure: greeting, one paragraph, deadline alone on the last line.
+    blocks = [b for b in body.split("\n\n") if b.strip()]
+    if len(blocks) != 3:
+        warns.append("has %d blocks, expected 3 (greeting / one paragraph / deadline)"
+                     % len(blocks))
+    if blocks and not re.search(r"(?i)deadline", blocks[-1]):
+        warns.append("last line is not the deadline")
+    if len(blocks) >= 2 and re.search(r"(?i)deadline", " ".join(blocks[:-1])):
+        warns.append("deadline appears before the last line")
+
+    for w in warns:
+        sys.stderr.write("WARNING [%s]: %s\n" % (company, w))
+    return len(warns)
+
+
 def main():
     if len(sys.argv) != 2:
         die("usage: python3 scripts/build_drafts.py outreach/<slug>/drafts.json")
@@ -321,6 +375,10 @@ def main():
     if "TODO" in signature:
         sys.stderr.write("WARNING: config/signature.txt still contains TODO placeholders.\n")
 
+    fmt_warnings = 0
+    for em in emails:
+        fmt_warnings += check_body(em.get("company", "?"), em.get("body", ""))
+
     account_index = read_gmail_account_index()
     from_addr = data.get("from_email", "")
     outdir = os.path.dirname(os.path.abspath(src))
@@ -342,6 +400,9 @@ def main():
     print("  *.eml          drafts for Apple Mail / Outlook")
     print("  REVIEW.md      read-through copy")
     print("  tracking.csv   %d new row(s)" % added)
+    if fmt_warnings:
+        print("  %d format warning(s) above - review, then decide. Nothing was changed."
+              % fmt_warnings)
     flagged = [e.get("company") for e in emails if (e.get("confidence") or "").upper() != "HIGH"]
     if flagged:
         print("\n  CONFIRM THESE ADDRESSES BEFORE SENDING: %s" % ", ".join(flagged))

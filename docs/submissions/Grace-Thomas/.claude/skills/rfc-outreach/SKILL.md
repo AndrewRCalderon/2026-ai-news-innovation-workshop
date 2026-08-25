@@ -73,41 +73,45 @@ Keep the subject line **plain ASCII** — use a hyphen, not an em dash. Non-ASCI
 get MIME-encoded into `=?utf-8?b?...?=` gibberish in the raw `.eml`, and they bloat the
 Gmail compose URL. Em dashes in the body are fine.
 
-**Body.** Plain text. **Four sentences maximum**, not counting the numbered questions.
-Breaking-news PR inboxes get triaged in seconds — a long email buries the ask. Exactly this
-structure, in this order:
+**Body.** Plain text. Structure, in this order:
 
-1. **Who you are** — one sentence. Name and outlet. Nothing else.
-2. **The story** — one sentence. The actual thesis, compressed. If it takes three sentences to
-   explain, compress it; do not spend a second sentence here.
-3. **What it says about them** — one sentence, ending in the handoff to the questions. Drawn
-   from the brief's "What I already have" field. This is what makes it a real request for
-   comment rather than a survey.
-4. **The numbered questions**, company name substituted in. These don't count toward the four.
-5. **The deadline** — one sentence, last line, nothing after it. Format: `My deadline is 4 ET
+1. **A greeting on its own line.** `Hello,`
+2. **One continuous paragraph** — no blank lines inside it — containing, in order:
+   - **Who you are.** Name and outlet. Nothing else.
+   - **The story.** The actual thesis, compressed.
+   - **What it says about them**, drawn from the brief's "What I already have" field, flowing
+     into the questions. This is what makes it a real request for comment rather than a survey.
+   - **The questions themselves, as prose.** Connected clauses inside the same paragraph —
+     never a numbered or bulleted list. Same substance the reporter entered in the brief,
+     rendered as running text.
+3. **The deadline, alone on the last line.** Nothing after it. Format: `My deadline is 4 ET
    today.`
+
+**Length is a guideline, not a count.** As short as it can be and still land — a breaking-news
+PR inbox is triaged in seconds and a long email buries the ask. But there is **no fixed
+sentence limit**, and a story that needs another clause to be accurate gets it. **Accuracy
+outranks brevity.** The build warns on an unusually long body; it never blocks or truncates
+one, and you should not cut something true to satisfy a warning.
 
 Example (Nike, pink cleats):
 
 ```
 Hello,
 
-I'm Grace Thomas, a reporter with NYCity News Service.
-
-The story examines a pattern: every major athletic brand released pink cleats timed to
-the 2026 World Cup, and my reporting indicates they were working from similar market
-research concluding that pink offers the highest visibility against the green of the pitch.
-
-Nike released at least one pink cleat colorway timed to the tournament, which is why I'm
-bringing these questions to you:
-
-1. Why did Nike choose pink for the boots worn by players at the World Cup?
-2. Why did Nike release pink cleats for consumers to purchase during this period?
-3. Did Nike rely on market research indicating pink would have the highest on-pitch
-   visibility, and if so, was that research conducted internally or by an outside firm?
+I'm Grace Thomas, a reporter with NYCity News Service. The story examines a pattern: every
+major athletic brand released pink cleats timed to the 2026 World Cup, and my reporting
+indicates they were working from similar market research concluding that pink offers the
+highest visibility against the green of the pitch. Nike released at least one pink cleat
+colorway timed to the tournament, and I'd like to understand the thinking behind it — why
+pink for the boots worn by players at the World Cup, why a consumer release timed to the
+same window, and whether Nike relied on market research indicating pink would have the
+highest on-pitch visibility, conducted internally or by an outside firm.
 
 My deadline is 4 ET today.
 ```
+
+The line wrapping above is display width only — the middle block is one paragraph. A correct
+body has exactly two blank lines: after the greeting, and before the deadline.
 
 **Do not include any of the following.** Each was deliberately cut. Do not add them back
 because they seem helpful or standard:
@@ -120,6 +124,9 @@ because they seem helpful or standard:
 - A statement of terms ("on the record, attributed to a named spokesperson"). The reporter
   chose to leave terms out of the email and establish them in the reply thread.
 - An offer to take a call, or a phone number.
+- **Numbered or bulleted questions.** The questions run as prose inside the paragraph.
+- **Blank lines between sentences.** The body above the deadline is one paragraph.
+- A fixed sentence count. There is no cap — see the length guideline above.
 - Any sentence after the deadline line.
 
 The `terms` field in the brief still gets recorded in `drafts.json` for the reporter's own
@@ -166,11 +173,24 @@ python3 scripts/build_drafts.py outreach/<story-slug>/drafts.json
 That writes `compose.html` (Gmail buttons), one `.eml` per contact, `REVIEW.md`, and
 `tracking.csv`.
 
-### 6. Update the contact cache
+### 6. Update the contact record
 
-Append any **HIGH or MEDIUM** contact that isn't already in `contacts/press-contacts.csv`,
-with its source URL and date. Never cache a `LOW` address — that's how a guess becomes
-permanent.
+`contacts/press-contacts.csv` is a living record, not an append-only log. For each company you
+researched this run:
+
+- **Not in the file** — add a row, if the contact is `HIGH` or `MEDIUM`.
+- **In the file, and what you found differs** — **overwrite that row in place** with the new
+  address, contact name, confidence, source URL, and today's date. Do not add a second row for
+  the same company, and do not keep the old value. A confirmed `MEDIUM` becoming `HIGH` is an
+  overwrite, not a new row.
+- **In the file and unchanged** — leave it. Refresh `source_date` only if you actually
+  re-verified it this run.
+- **Older than roughly six months** — re-verify before using, then apply the rules above.
+
+Never write a `LOW` address to this file at all. That's how a guess becomes permanent.
+
+Note in your report to the reporter which rows you added and which you overwrote, and say what
+changed on each overwrite.
 
 ### 7. Report back
 

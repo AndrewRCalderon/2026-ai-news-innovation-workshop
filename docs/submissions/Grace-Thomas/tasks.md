@@ -12,7 +12,7 @@ Last revised 2026-08-25.
 
 ## Phase 1 — Stop lying about state
 
-### [ ] 1. Mark pink cleats as a fixture
+### [x] 1. Mark pink cleats as a fixture
 
 **Why:** `outreach/pink-cleats-world-cup/tracking.csv` has four rows reading `not sent` against
 a deadline of Aug. 24, 2026, 4:00 p.m. ET — which has passed. Nothing in the file says whether
@@ -42,7 +42,7 @@ thing that gets noticed by the recipient.
 Order matters: these change what the bot produces, so they land before the second story, so the
 second story exercises the final format.
 
-### [ ] 3. Replace the four-sentence cap with a guideline
+### [x] 3. Replace the four-sentence cap with a guideline
 
 **Why:** "Four sentences maximum" in `SKILL.md:76` is over-specified. The real rule is no
 padding, which is judgment, not arithmetic. A story that needs one more clause to be accurate
@@ -56,7 +56,7 @@ reinstated later from history.
 **Done when:** no file states a fixed sentence count as a rule, and `SKILL.md` states the
 guideline plus "accuracy outranks brevity."
 
-### [ ] 4. Switch questions from a numbered list to prose
+### [x] 4. Switch questions from a numbered list to prose
 
 **Why:** requirements R4. Touches four places: the rule at `SKILL.md:76` and `:86`, the worked
 example in `SKILL.md`, the instruction to the reporter at `BRIEF.md:29`, and the decision record
@@ -69,7 +69,7 @@ or bulleted questions" to the do-not-add-back list in `SKILL.md`.
 **Done when:** the worked example in `SKILL.md` contains no numbered list, `BRIEF.md` asks for
 prose, and the do-not-add-back list names it.
 
-### [ ] 5. One paragraph, deadline on its own line
+### [x] 5. One paragraph, deadline on its own line
 
 **Why:** requirements R4. The current format puts a blank line between every sentence, which
 reads as a list of fragments. The deadline stays separate because it's the line that most needs
@@ -81,7 +81,7 @@ the last line, nothing after it.
 **Done when:** a generated `.eml` body has exactly two blank lines — after the greeting, and
 before the deadline.
 
-### [ ] 6. Regenerate the pink-cleats emails in the new format
+### [x] 6. Regenerate the pink-cleats emails in the new format
 
 **Why:** proves tasks 3–5 work on input whose correct output is already known, before betting a
 new story on them.
@@ -95,7 +95,7 @@ duplicate tracking rows.
 
 ## Phase 3 — Make the contact record actually a record
 
-### [ ] 7. Upsert the contact record instead of appending
+### [x] 7. Upsert the contact record instead of appending
 
 **Why:** requirements R9. `SKILL.md` step 6 currently only adds a company that isn't already in
 `contacts/press-contacts.csv`. If an address changes, or a MEDIUM is confirmed to HIGH, the
@@ -109,7 +109,7 @@ retained. LOW is still never written.
 **Done when:** deliberately changing a saved address, re-running, and finding the row updated
 rather than duplicated — and a LOW result still never reaches the file.
 
-### [ ] 8. Confirm the two MEDIUM addresses
+### [x] 8. Confirm the two MEDIUM addresses — *attempted, both stay MEDIUM*
 
 **Why:** Nike and Adidas are both MEDIUM. Adidas's media-contact page timed out on direct fetch;
 Nike's address is cited in their own releases but the newsroom page wasn't read directly. Half
@@ -123,11 +123,20 @@ note says why — the remaining confirmation is a phone call, which is the repor
 **Done when:** both rows are HIGH with a source URL that can be opened and checked, or the row
 explains exactly why it couldn't be promoted.
 
+**Result 2026-08-25 — neither could be promoted. Both remain MEDIUM.** Nike's newsroom and
+contact-us pages were fetched and read; neither publishes a media email, and the help directory
+returned 403. The address is corroborated only by Nike's own verified X account and its press
+releases. Adidas's media-contact and imprint pages timed out on direct fetch a second time, and
+news.adidas.com publishes a form rather than an address. **A conflict also surfaced:** secondary
+sources give both `corporate.press@adidas.com` and `corporate.press@adidas-group.com`. That is
+unresolved and must not be guessed. For both companies the remaining confirmation is a phone
+call — Nike 212-367-4447, adidas +49 9132 84-2352 — which is the reporter's to make.
+
 ---
 
 ## Phase 4 — Guardrails that outlive attention
 
-### [ ] 9. Add a warning-only length check to `build_drafts.py`
+### [x] 9. Add a warning-only length check to `build_drafts.py`
 
 **Why:** with the hard cap gone, drift back toward long emails is invisible over months. A
 warning catches it without overriding judgment.
@@ -136,7 +145,7 @@ warning catches it without overriding judgment.
 
 **Done when:** an over-length draft prints a warning and still builds completely.
 
-### [ ] 10. Add a format check for the do-not-add-back list
+### [x] 10. Add a format check for the do-not-add-back list
 
 **Why:** those items are currently caught by reading. Reading stops happening.
 
