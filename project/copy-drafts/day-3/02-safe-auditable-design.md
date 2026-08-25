@@ -62,3 +62,36 @@ Drawn from NIST's AI Risk Management Framework, the actual US government standar
 3. https://airc.nist.gov/airmf-resources/airmf/5-sec-core/ — NIST AI RMF, MAP 3.1/3.2: potential benefits and potential costs from AI errors must both be examined and documented.
 4. https://airc.nist.gov/airmf-resources/airmf/5-sec-core/ — NIST AI RMF, MANAGE 2.4: mechanisms exist to supersede, disengage, or deactivate AI systems that demonstrate performance or outcomes inconsistent with intended use.
 5. https://airc.nist.gov/airmf-resources/airmf/5-sec-core/ — NIST AI RMF, MANAGE 4.1: post-deployment monitoring plans exist, including mechanisms for capturing and evaluating input from users, appeal, redress, and override.
+
+## 5. Design for Transparency
+
+Everything above is about what you can explain after the fact. This last piece is about what you tell people up front: telling readers you used AI is an interface decision, and the details of that decision measurably change trust.
+
+In one narrow and controlled study (40 participants), detailed disclosures actually made readers slightly less trusting than a simple one-line label, even though most readers said they preferred the detailed version anyway. [1] This is being described in human-computer interaction and news spaces as the "transparency dilemma." [1]
+
+One recent study, from researchers at Oxford and Stanford, makes the case concretely and expands it to source transparency. [2] Florent Daudens' write-up of the same study is worth reading directly. [3]
+
+The researchers pitted AI-written articles against several human-written pieces on the same event. 93% of the AI article's claims linked directly back to the data or citation behind them, versus 25% for the human-written comparisons. Readers rated it higher on transparency and on how well its claims lined up with its data.
+
+So what are our options? [4]
+
+- **Highlight-for-glancing**: Highlighting key steps in which AI was involved while maintaining a higher level of detail for a thorough inspection if needed. This design allows for a quick visual scan to grasp AI involvement without interrupting the reading flow.
+- **Info button**: A brief disclosure with a small interactive element (e.g., an "i" icon) that readers can click or hover over to access detailed disclosure information. Readers choose when they read detailed information (e.g., based on the news type, topic, or their own interest) rather than having it imposed upfront.
+- **Outlet-level disclosure**: Transparency at the news organization level ("this outlet uses AI in the following ways...") rather than per-article labels, reducing repetitive disclosure fatigue. Readers can read this statement whenever they need to understand the outlet's AI use policy. This design is also in line with existing work that an outlet's brand reputation matters for trust in AI use.
+- **Proportional AI-ratio visualization**: A visual representation, such as a partially colored page (e.g., 30% of the page highlighted for 30% AI contribution) or a percentage bar, showing the proportion of AI involvement. Paired with a brief statement such as "AI was used in the final editorial layer," it helps visualize how thick the AI layer is.
+- **Visual trust stamp**: A recognizable seal or badge indicating responsible AI use, analogous to organic food labels or verified account badges.
+- **"No AI used" label**: An explicit statement that no AI tools were used, reframing disclosure as a signal that works in both directions.
+
+![Six AI-disclosure patterns mocked up on the same sample article: highlight-for-glancing, info button, outlet-level disclosure, proportional AI-ratio visualization, visual trust stamp, and "no AI used" label](/assets/images/product-design-disclosure-patterns.png)
+[Structural note: center this image when implemented in the actual page.]
+
+> **Exercise: Apply This**
+> - Time: A few minutes, individually.
+> - Description: For your own project: Draft a disclosure plan for AI use and for sourcing. What approach will you experiment with and why?
+> - Deliverable: Share your thoughts with the group.
+
+**Sources**
+1. https://arxiv.org/abs/2601.09620 — Prajod et al., "Full Disclosure, Less Trust?", arXiv:2601.09620, submitted Jan 14 2026: trust declined specifically with detailed disclosures, not one-line ones, though about 67% of participants preferred detailed disclosure despite the trust cost.
+2. https://arxiv.org/abs/2606.11176 — Lin, EI, Shi, Lu, Torr (Oxford), & Zou (Stanford), "Data Journalist Agent: Transforming Data into Verifiable Multimodal Stories," arXiv:2606.11176, June 9 2026: 93% of visible claims in the system's AI-generated articles resolved to a traceable binding between the text and its underlying evidence, versus 25% for a text-only audit of the human-written comparison articles, across 18 paired human/AI articles on the same events.
+3. https://fdaudens.substack.com/p/is-ai-better-at-our-jobs-than-us — Florent Daudens, "The half of journalism AI can't do yet," June 23 2026: reporting on the Oxford/Stanford study above; readers rated the AI article higher on transparency and claim-data alignment.
+4. https://arxiv.org/html/2606.11116 — Prajod, "Designed by Journalists, but Is It for Readers?", arXiv:2606.11116, June 2026 CHIWORK workshop paper. Six reader-sourced disclosure patterns: detail-on-demand, highlight-for-glancing, proportional visualization, outlet-level transparency, trust badges, and "no AI used" labels. Core insight: readers want agency over when and how deeply they engage with AI-transparency information.

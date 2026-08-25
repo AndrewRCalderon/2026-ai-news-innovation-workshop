@@ -1,4 +1,35 @@
-# Requirements & Task Log
+# Changelog
+
+This file is the historical record of how this repo got built: dated
+narrative, decisions made and later reconsidered, review passes, what broke
+and how it got fixed. It is **not** the place to check current status —
+that split off on 2026-08-25 into two current, actively-maintained files:
+
+- [`specifications.md`](specifications.md) — what this product is and what
+  it requires. Changes rarely.
+- [`tasks.md`](tasks.md) — what's actually open right now. Changes often,
+  stays short on purpose.
+
+Durable architecture *decisions* (the "why") live in [`project/adr/`](adr/),
+unchanged by this split.
+
+This file is kept for reference, not read by default at the start of a
+session (unlike `specifications.md`/`tasks.md`) — consult it the same way
+you'd consult `project/adr/`, when you need the reasoning behind something
+past, not as standing context. Everything below this line predates the
+split and was formerly `project/REQUIREMENTS.md` in its entirety, including
+its own now-superseded Phase 1-5 build checklist and "Newly identified
+tasks" list — both kept here for the historical detail baked into each
+entry (dates, what was tried and reconsidered), even though the current,
+clean version of what's still open now lives in `tasks.md` instead. Where
+the two disagree on whether something is done, trust `tasks.md`, not this
+file — several items below were resolved by later work without their
+checkbox being updated to match, which is exactly the kind of drift the
+split was meant to fix.
+
+---
+
+# Requirements & Task Log (historical, superseded — see note above)
 
 **Current focus (2026-08-04, status updated 2026-08-15):** paused backend
 work (Phase 2, and the remaining Vercel-connection item in Phase 1) to
@@ -3023,6 +3054,117 @@ questions. Worked Adiel's 3 sources into
 ---
 
 ## Change log
+
+- 2026-08-25 — **Day 3 morning restructured: Product Design cut, its
+  disclosure section relocated into Safe & Auditable Design, Recap grows,
+  and a new additional "Build Time" block added before lunch.** Product
+  Design (formerly `02`, 10:30-11:15 AM) is removed from the schedule —
+  archived (not deleted) to `project/removed-sessions/day-3/` (Overview,
+  Slides, copy-draft), the same gitignored pattern used for the Day 2
+  restructure above. Its "Design for Transparency" section (reader-facing
+  AI-disclosure UI patterns: highlight-for-glancing, info button,
+  outlet-level disclosure, proportional AI-ratio visualization, trust
+  stamp, "no AI used" label) was the only part still needed, so it moved
+  verbatim into Safe & Auditable Design as a new closing section (`04`
+  block-eyebrow → `05`), with one new bridge sentence added since Safe &
+  Auditable's existing s1-s4 are all inward-facing (audit trails,
+  incidents, policy enforcement) and s5 pivots to reader-facing UI.
+  Citation numbering needed no manual fix — confirmed `docs/js/citations.js`
+  numbers `.cite` elements sequentially by DOM order at load time, not by
+  a hardcoded index.
+
+  This closes a long-standing gap first flagged 2026-08-13 (see the
+  "VS Code/Claude Code/Git content has no scheduled home on any of the 3
+  days" entries below): Recap grew (30→40 min) to add two new sections —
+  a short "Platforms You'll See" awareness list (Vercel, Chainlit, Supabase,
+  Turso, framed explicitly as awareness not tutorial) and "Getting to Know
+  VS Code," which deep-links to `docs/setup.html#vscode` (a new anchor id
+  added to that page's existing section 4) rather than duplicating its
+  install steps. This gives VS Code its first real in-class touchpoint, on
+  Day 3, not Day 2 as `STUDENT_CLAUDE_GUIDE.md` previously (inaccurately)
+  claimed — see below.
+
+  Time for Recap's growth, Build Time's new session, and everything else
+  came from: the 45 min freed by cutting Product Design, plus 5 min
+  trimmed from Safe & Auditable Design (45→40) and 10 min from Human-AI
+  Design (45→35, content untouched, per explicit user direction to keep it
+  as-is) — both denser per minute now, flagged during planning but not
+  reversed, per the user's explicit numbers. Full math: Recap 40 + Break
+  15 + Safe & Auditable 40 + Human-AI 35 + Build Time 50 = 180 min,
+  10:00 AM–1:00 PM, matching the old AM block's total exactly. Both the
+  1:00 PM lunch anchor and 5:00 PM day-end are unchanged, matching Day 1/2.
+
+  Build Time (new `04`) is an *additional* hands-on block, not a
+  replacement for the existing 2:00 PM Final Coding Time (renumbered
+  `06`→`05`) — the explicit goal was more total build time, not the same
+  amount moved earlier. Its content asks students to implement one
+  concrete decision from Safe & Auditable Design or Human-AI Design (a
+  kill switch, a human checkpoint, a disclosure pattern), framed to
+  connect forward to Final Coding Time rather than duplicate it. Final
+  Coding Time's own "flag from Product Design" prompt (in both its
+  Overview and Slides deck) was rewritten to reference Safe & Auditable
+  Design, Human-AI Design, and Build Time instead, since Product Design no
+  longer exists to flag from.
+
+  Renumbering also fixed a pre-existing mismatch: `06-final-coding-time`
+  ran at 2:00 PM, clock-*before* `05-where-you-can-take-this` at 3:15 PM;
+  swapping their numbers (`06`→`05`, `05`→`06`) resolves it while already
+  touching both files. Updated in the same pass: `docs/data/schedule.json`
+  (entries removed/renumbered/retimed, `note` field appended),
+  `docs/partials/nav.html` (Day 3 flyout, was already in file-number not
+  clock order — also fixed), `docs/resources.html` (two "from Product
+  Design" entries deleted outright, confirmed neither citation appears in
+  the surviving Design for Transparency section), `docs/day-3/index.html`
+  (intro paragraph and learning outcome #1, which had no home once
+  Product Design was cut), and every stale hardcoded "Next section →" link
+  across the Day 3 Slides decks (`01-recap`→`02-safe-auditable-design`,
+  `02-safe-auditable-design`→`03-ai-human-design`,
+  `03-ai-human-design`→`04-build-time`, `04-build-time`→`05-final-coding-time`,
+  `05-final-coding-time`→`06-where-you-can-take-this`, unchanged
+  `06-where-you-can-take-this`→`07-final-show-and-tell`).
+
+  Follow-up same day: Recap's two new sections were reordered (VS Code
+  before Platforms, since VS Code is the more actionable one) and its
+  Platforms bullet for Vercel was rewritten to point forward at Build
+  Time rather than just naming it. Build Time itself picked up a genuine
+  new first section, "Get Set Up: Deploy to Vercel" — real signup/import/
+  deploy steps (sign up free at vercel.com with GitHub, import the
+  project's repo, set a Root Directory if the code lives in a subfolder
+  like a class-repo submission folder, deploy, save the live URL) — since
+  the user wants each student's own live URL, not just a shared path on
+  this course site, in anticipation of a later task to surface that URL
+  on the auto-generated submission cards (`docs/students/index.html`, see
+  [ADR 0023](adr/0023-auto-generated-submission-cards.md)). Build Time's
+  other two sections renumbered `s1`→`s2`, `s2`→`s3` to make room; both
+  its Overview and Slides deck updated in lockstep, copy-draft too.
+  Re-verified after: no new slide-parity issues, valid JSON, all pages
+  still 200.
+
+  Separately, while reviewing this restructure the user confirmed GitHub
+  Desktop is never actually used anywhere in the taught workshop (Day 1's
+  Fork & Submit runs through Claude Desktop's own GitHub connector; Claude
+  Code runs git commands directly from Day 2 on) and asked for it dropped.
+  `docs/setup.html` section "5. GitHub Desktop" (4 of its 18 checklist
+  items) was archived, not deleted, to
+  `project/removed-sessions/setup-page/05-github-desktop.html`; the live
+  page's progress counter updated 18→14, and its "Days 2 and 3" group
+  heading/intro reworded to "Day 3" now that VS Code (section 4, which
+  gained a new `id="vscode"` anchor) is the only item left under it and is
+  genuinely a Day-3, not Day-2, touchpoint. `STUDENT_CLAUDE_GUIDE.md`'s
+  "Where this file kicks in" section and its git-workflow bullet were
+  corrected to match: VS Code starts Day 3 (not Day 2), and git happens
+  through Claude Code directly (GitHub Desktop dropped as an offered
+  option).
+
+  Verified: `schedule.json` parses as valid JSON, a full session walk of
+  Day 3 shows no gaps or overlaps end to end (10:00 AM–5:00 PM),
+  `project/scripts/check-slide-parity.js` shows no new mismatches (the one
+  pre-existing mismatch on `03-ai-human-design.html` predates this change,
+  its content was never touched, only its filename/number), a local
+  server spot-check confirmed every renamed/new Day 3 page and its Slides
+  deck returns 200 and `02-product-design.html` now 404s, and a grep of
+  `docs/` confirmed zero remaining references to any of the old
+  file/session names or to "GitHub Desktop."
 
 - 2026-08-25 — **Day 2 afternoon restructured: Your Goal & Plan Mode and
   Show & Tell + Critique both cut, Spec-Driven Development moved up,
