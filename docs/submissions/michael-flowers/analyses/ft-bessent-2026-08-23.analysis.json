@@ -1,0 +1,164 @@
+{
+  "source": {
+    "title": "Scott Bessent: an economic D-Day is coming for Iran",
+    "outlet": "Financial Times",
+    "section": "Opinion — US foreign policy",
+    "author": "Scott Bessent, US Secretary of the Treasury",
+    "date": "2026-08-23",
+    "url": "https://www.ft.com/content/cb865200-1a06-40be-86a3-10ee2bb05804",
+    "type": "opinion",
+    "wordCount": 768,
+    "note": "Source text held locally and not committed — FT terms prohibit redistribution. Only short spans quoted here, for criticism."
+  },
+
+  "fact": [
+    {
+      "claim": "Trump and the US military 'significantly dismantled Iran's military capabilities and weakened its nuclear programme'.",
+      "verifyWith": "IAEA verification and monitoring reports on Iran; Defense Department and DIA battle damage assessments. Note the op-ed states this without citing either."
+    },
+    {
+      "claim": "'the rial has never been weaker and inflation has rarely been higher'",
+      "verifyWith": "Central Bank of Iran official rate plus open-market rial quotes; Statistical Centre of Iran CPI series. Check whether 'never been weaker' is nominal or inflation-adjusted — the two give different answers."
+    },
+    {
+      "claim": "The Islamic Republic has existed for 47 years.",
+      "verifyWith": "Founded 1979; arithmetic holds for 2026."
+    },
+    {
+      "claim": "The Allied powers convened the Tehran Conference in 1943, where Roosevelt and Churchill weighed the campaign leading to the Normandy landings.",
+      "verifyWith": "Standard historical record. Accurate, and doing rhetorical work — see the unity finding below."
+    }
+  ],
+
+  "persuasion": [
+    {
+      "technique": "unity",
+      "span": "As Roosevelt and Churchill weighed a campaign that would culminate in the Normandy landings",
+      "mechanism": "Places present-day sanctions policy inside the Allied coalition of the Second World War, so that cooperating reads as joining a historically righteous alliance and declining reads as breaking from it.",
+      "neutral": "The United States is coordinating economic measures with allied governments.",
+      "confidence": "high",
+      "attributed": false
+    },
+    {
+      "technique": "scarcity",
+      "span": "At dawn begins an economic D-Day",
+      "mechanism": "Sets an imminent deadline, compressing the time a government has to weigh alternatives and making deliberation itself look like hesitation.",
+      "neutral": "The sanctions programme takes effect immediately.",
+      "confidence": "medium",
+      "attributed": false
+    },
+    {
+      "technique": "loaded-language",
+      "span": "the single greatest financial offensive ever marshalled against an adversary",
+      "mechanism": "Superlative plus military vocabulary asserts unprecedented scale as established fact, with no comparison offered against prior sanctions programmes.",
+      "neutral": "a broader sanctions programme than previous ones",
+      "confidence": "high",
+      "attributed": false
+    },
+    {
+      "technique": "loaded-language",
+      "span": "a malignant force in the world",
+      "mechanism": "Disease metaphor carries a moral verdict the sentence never evidences, and frames the subject as something to be excised rather than negotiated with.",
+      "neutral": "an adversary of the United States",
+      "confidence": "high",
+      "attributed": false
+    },
+    {
+      "technique": "us-them-sorting",
+      "span": "Iran's enablers",
+      "mechanism": "Recasts sovereign states with commercial ties as accomplices, assigning them to the adversary's side before any argument about their conduct is made.",
+      "neutral": "countries that trade with Iran",
+      "confidence": "high",
+      "attributed": false
+    },
+    {
+      "technique": "loaded-language",
+      "span": "the self-deception of fearful nations",
+      "mechanism": "Attributes a psychological failing to states that disagree, so that disagreement reads as cowardice rather than as a different reading of their own interests.",
+      "neutral": "governments that have chosen to maintain relations with Iran",
+      "confidence": "high",
+      "attributed": false
+    },
+    {
+      "technique": "authority",
+      "span": "French philosopher Blaise Pascal",
+      "mechanism": "Borrows philosophical weight for a policy threat. Pascal's wager concerns belief under uncertainty about salvation, not compliance with sanctions; the analogy lends gravity without supplying an argument.",
+      "neutral": "Governments must weigh the risk of continued dealings with Iran.",
+      "confidence": "medium",
+      "attributed": false
+    },
+    {
+      "technique": "straw-man",
+      "span": "the political class accepted an endless cycle of provocation instead of advancing American interests",
+      "mechanism": "Restates decades of containment policy as passive acceptance, a position no policymaker held in those terms, which makes it easy to dismiss without engaging the actual reasoning.",
+      "neutral": "previous administrations pursued containment rather than regime collapse",
+      "confidence": "medium",
+      "attributed": false
+    },
+    {
+      "technique": "appeal-to-fear",
+      "span": "the menace of fanatics",
+      "mechanism": "Substitutes a threat characterisation for a threat assessment, raising perceived severity without stating likelihood or capability.",
+      "neutral": "the Iranian government's stated hostility toward the United States",
+      "confidence": "high",
+      "attributed": false
+    },
+    {
+      "technique": "false-dilemma",
+      "span": "The alternative for those who tether themselves to Tehran is the foreclosure of any path to lasting prosperity.",
+      "mechanism": "Presents two outcomes as exhaustive — sever ties and prosper, or keep them and be ruined — excluding partial compliance, negotiated exemptions, or simply absorbing the cost.",
+      "neutral": "Countries that continue trading with Iran may face restricted access to US financial markets.",
+      "confidence": "high",
+      "attributed": false
+    },
+    {
+      "technique": "agent-deletion",
+      "span": "Any remaining tie to Tehran will hasten the economic ostracism of countries and entities",
+      "mechanism": "Ostracism arrives as though by natural process. The US Treasury, which would decide and impose it, is absent from the sentence — so the consequence looks inevitable rather than chosen.",
+      "neutral": "The Treasury Department will sanction countries and entities that maintain ties to Tehran.",
+      "confidence": "high",
+      "attributed": false
+    },
+    {
+      "technique": "agent-deletion",
+      "span": "where confidence has collapsed",
+      "mechanism": "The collapse is presented as an ambient condition rather than the intended effect of the policy being announced in this very piece.",
+      "neutral": "where US sanctions have cut off access to legitimate finance",
+      "confidence": "medium",
+      "attributed": false
+    }
+  ],
+
+  "actionable": [
+    {
+      "question": "Does severing ties with Iran actually deepen a country's access to global capital, as the piece promises?",
+      "how": "Compare sovereign spreads and capital inflows for states that exited Iranian trade under earlier sanctions rounds against those that didn't. The claim is empirical and checkable."
+    },
+    {
+      "question": "What specifically counts as a 'tie' that triggers secondary sanctions?",
+      "how": "The op-ed names no threshold anywhere. OFAC designation notices and FAQ guidance carry the actual criteria — read those instead of the article."
+    },
+    {
+      "question": "Is the rial claim nominal or real?",
+      "how": "'Never been weaker' against a currency in high inflation is close to trivially true in nominal terms. Check the inflation-adjusted series before treating it as evidence of policy effect."
+    },
+    {
+      "question": "Who is not quoted here?",
+      "how": "The piece contains no opposing voice, no cost estimate for third countries, and no named source. That is normal for an op-ed — worth noticing that it is being read alongside news coverage that looks similar on the page."
+    }
+  ],
+
+  "unclassified": [
+    {
+      "span": "are Iran's enablers willing to wager their future against it?",
+      "note": "Direct rhetorical address to the reader, closing on a question that presumes its own framing. No taxonomy category covers second-person address. Candidate for v0.2."
+    }
+  ],
+
+  "density": {
+    "findings": 12,
+    "attributedFindings": 0,
+    "words": 768,
+    "per100Words": 1.56
+  }
+}
