@@ -265,7 +265,7 @@ Create `outreach/<story-slug>/drafts.json`:
   "deadline": "today, Aug. 24, at 4:00 p.m. ET",
   "terms": "on the record, attributed to a named spokesperson",
   "generated": "2026-08-24",
-  "from_email": "tkc.intern2@journalism.cuny.edu",
+  "from_email": "graceathomas5@gmail.com",
   "emails": [
     {
       "company": "Nike",

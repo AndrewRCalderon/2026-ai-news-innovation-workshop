@@ -15,7 +15,7 @@ One-time setup (~15 min):
   2. Go to https://console.cloud.google.com → create a project (any name).
   3. APIs & Services → Library → search "Gmail API" → Enable.
   4. APIs & Services → OAuth consent screen → External → fill in the required fields →
-     under "Test users" add tkc.intern2@journalism.cuny.edu.
+     under "Test users" add graceathomas5@gmail.com.
   5. APIs & Services → Credentials → Create Credentials → OAuth client ID →
      Application type: Desktop app → Create → Download JSON.
   6. Save that file as config/gcp_credentials.json in this project.

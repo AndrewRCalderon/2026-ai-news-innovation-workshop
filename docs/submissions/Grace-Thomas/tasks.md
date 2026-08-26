@@ -329,8 +329,10 @@ intended recipient is preserved in an `X-RFC-Bot-Test-Original-To` header. **The
 byte-identical** — the point is to review the exact text that would go out. When off, the
 sidebar requires an explicit confirmation that these are real press addresses.
 
-The dummy address is `tkc.intern2@journalism.cuny.edu` — the reporter's own, so a test lands in
-the same inbox it was drafted from.
+The dummy address is `tkc.intern2@journalism.cuny.edu` *(rationale corrected 2026-08-26)*. Drafts
+are composed in `graceathomas5@gmail.com`, so this is the reporter's other address, not the
+sending one. That is better than the original reasoning: a test that lands in a different
+inbox proves the mail actually moved, where one addressed to the sending account proves less.
 
 **The script still never sends.** The test send is the reporter opening the `[TEST]` draft and
 pressing Send to themselves, which is also the only honest way to see what Gmail does to the

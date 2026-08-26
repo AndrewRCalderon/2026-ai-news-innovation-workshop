@@ -16,8 +16,10 @@
 
 var TEST_MODE = true;
 
-// Where test drafts go. Your own address, so a test lands in the same inbox it
-// was drafted from.
+// Where test drafts go. Deliberately NOT the account the drafts are written
+// from: they are composed in graceathomas5@gmail.com and addressed here, so a
+// test lands in a different inbox and actually proves the mail moved. An
+// address that is your own but not the sending account is the useful case.
 var TEST_RECIPIENT = 'tkc.intern2@journalism.cuny.edu';
 
 
@@ -59,7 +61,7 @@ var SIGNATURE = [
   '--',
   'Grace Thomas',
   'Reporter | Semafor',
-  'tkc.intern2@journalism.cuny.edu'
+  'graceathomas5@gmail.com'
 ].join('\n');
 
 
