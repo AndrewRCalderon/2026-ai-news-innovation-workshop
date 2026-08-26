@@ -3,78 +3,68 @@
   <head>
     <base target="_top">
     <style>
-      body { font: 13px/1.45 -apple-system, "Segoe UI", Roboto, sans-serif;
-             margin: 0; padding: 12px; color: #202124; }
-      h2 { font-size: 14px; margin: 0 0 8px; }
-      input[type=text] { width: 100%; box-sizing: border-box; padding: 7px;
-                 border: 1px solid #dadce0; border-radius: 4px; font-size: 13px; }
-      .hint { color: #5f6368; font-size: 11px; margin: 4px 0 10px; }
-      textarea { width: 100%; height: 160px; box-sizing: border-box;
-                 font: 11px/1.35 ui-monospace, Menlo, Consolas, monospace;
-                 border: 1px solid #dadce0; border-radius: 4px; padding: 6px; }
-      button { margin-top: 8px; width: 100%; padding: 8px; border: 0;
-               border-radius: 4px; background: #1a73e8; color: #fff;
+      body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+             font-size: 13px; color: #202124; margin: 0; padding: 14px; }
+      h2 { font-size: 13px; margin: 0 0 6px; }
+      label.q { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+      input[type=text] { width: 100%; box-sizing: border-box; padding: 7px 8px;
+                         border: 1px solid #dadce0; border-radius: 4px; font-size: 13px; }
+      button { width: 100%; box-sizing: border-box; padding: 9px; margin-top: 10px;
+               border: 0; border-radius: 4px; background: #1a73e8; color: #fff;
                font-size: 13px; cursor: pointer; }
-      button:disabled { background: #c6c6c6; cursor: default; }
-      .mode { padding: 8px; border-radius: 4px; margin-bottom: 10px; font-size: 12px; }
-      .test { background: #e6f4ea; border: 1px solid #34a853; }
-      .live { background: #fce8e6; border: 1px solid #d93025; }
-      .confirm { margin: 8px 0; font-size: 12px; }
-      .row { border-top: 1px solid #eee; padding: 7px 0; font-size: 12px; }
-      .co { font-weight: 600; }
-      .ok { color: #137333; }
-      .skip { color: #b06000; }
-      .err { color: #c5221f; }
-      .warn { color: #b06000; display: block; margin-left: 8px; }
-      .muted { color: #5f6368; }
-      code { font-size: 11px; word-break: break-all; }
-      .step { border-top: 2px solid #e8eaed; margin-top: 18px; padding-top: 12px; }
-      .step:first-of-type { border-top: 0; margin-top: 0; padding-top: 0; }
-      .num { color: #5f6368; font-size: 11px; letter-spacing: .06em;
-             text-transform: uppercase; margin-bottom: 2px; }
       button.plain { background: #f1f3f4; color: #202124; }
-      #docText { height: 110px; }
+      button:disabled { opacity: .6; cursor: default; }
+      textarea { width: 100%; box-sizing: border-box; height: 110px; margin-top: 8px;
+                 font-family: ui-monospace, Menlo, monospace; font-size: 11px;
+                 border: 1px solid #dadce0; border-radius: 4px; padding: 6px; }
+      .muted { color: #5f6368; font-size: 11px; margin-top: 6px; }
+      .warn { color: #b06000; font-size: 11px; margin-top: 6px; }
+      .err  { color: #c5221f; font-size: 11px; margin-top: 6px; }
+      .ok   { color: #137333; font-size: 11px; }
+      .skip { color: #b06000; font-size: 11px; }
+      .mode { padding: 7px 8px; border-radius: 4px; font-size: 11px; margin-bottom: 10px; }
+      .mode.test { background: #e6f4ea; color: #137333; }
+      .mode.live { background: #fce8e6; color: #c5221f; }
+      #after { border-top: 2px solid #e8eaed; margin-top: 18px; padding-top: 14px; }
+      .row { border-top: 1px solid #e8eaed; padding: 7px 0; }
+      .co { font-weight: 600; }
     </style>
   </head>
   <body>
-    <div id="mode" class="mode muted">Checking mode...</div>
 
-    <div class="step">
-      <div class="num">Step 1</div>
-      <h2>The story draft</h2>
-      <div class="hint">Pulls the text out of this document so you can hand it to Claude.
-        Claude does the contact research and writes the emails, then gives you back a
-        drafts.json to paste into step 2.</div>
-      <button id="read" class="plain">Read this document</button>
-      <textarea id="docText" placeholder="The draft appears here." readonly></textarea>
-      <button id="copy" class="plain" style="display:none">Copy</button>
-      <div id="copyNote" class="hint"></div>
-    </div>
+    <!-- Two things, and only two things, when the sidebar opens. Everything
+         below is hidden until the button has been pressed, because the paste
+         back from Claude cannot happen before Claude has been given anything. -->
 
-    <div class="step">
-      <div class="num">Step 2</div>
-      <h2>Deadline</h2>
-    <input id="deadline" type="text" placeholder="4 p.m. ET today">
-    <div class="hint">Goes in as the last line of every email, exactly as you type it.
-      Required - it is never assumed.</div>
+    <label class="q" for="deadline">When is the deadline?</label>
+    <input id="deadline" type="text" placeholder="3 p.m. ET today">
 
-    <h2>Paste drafts.json</h2>
-    <textarea id="json" placeholder="Contents of outreach/&lt;slug&gt;/drafts.json"></textarea>
+    <button id="send">Send text to Claude</button>
+    <div id="note" class="muted"></div>
 
-    <div id="confirmWrap" class="confirm" style="display:none">
-      <label>
-        <input type="checkbox" id="confirmReal">
-        I have checked every address. These are the real press desks.
-      </label>
-    </div>
+    <div id="after">
+      <textarea id="payload" readonly></textarea>
+      <button id="copy" class="plain">Copy again</button>
 
-    <button id="go">Create drafts</button>
-    <div id="out"></div>
+      <div style="margin-top:18px">
+        <div class="mode" id="mode"></div>
+        <h2>Paste what Claude gives you</h2>
+        <textarea id="json" placeholder="Contents of outreach/&lt;slug&gt;/drafts.json"></textarea>
+        <div id="confirmWrap" style="display:none; margin-top:8px">
+          <label>
+            <input type="checkbox" id="confirmReal">
+            These are real press addresses and I mean to draft to them.
+          </label>
+        </div>
+        <button id="go">Create drafts</button>
+        <div id="out"></div>
+      </div>
     </div>
 
     <script>
-      var MODE = null;
+      document.getElementById('after').style.display = 'none';
 
+      var MODE = null;
       google.script.run.withSuccessHandler(function (m) {
         MODE = m;
         var el = document.getElementById('mode');
@@ -91,54 +81,100 @@
         el.textContent += ' Drafting into ' + m.account + '.';
       }).getMode();
 
-      var DOC = null;
 
-      document.getElementById('read').onclick = function () {
+      /**
+       * A deadline without a time zone is a promise nobody can keep -- 3 p.m.
+       * where? This warns rather than blocks, because "end of day Friday,
+       * Eastern" is a real thing a reporter writes and a regex should not get
+       * a vote on it. Claude asks about anything genuinely ambiguous.
+       */
+      function zoneHint(d) {
+        if (/\b(ET|EST|EDT|CT|CST|CDT|MT|PT|PST|PDT|UTC|GMT|Eastern|Central|Mountain|Pacific)\b/i.test(d)) {
+          return '';
+        }
+        return 'No time zone in that deadline. Claude will ask before it goes in an email.';
+      }
+
+
+      document.getElementById('send').onclick = function () {
         var btn = this;
+        var note = document.getElementById('note');
+        var deadline = document.getElementById('deadline').value.trim();
+
+        note.className = 'muted';
+        note.textContent = '';
+
+        // R4: the deadline is never invented, and never inherited from a file
+        // written earlier. It is typed here, every run, or nothing happens.
+        if (!deadline) {
+          note.className = 'err';
+          note.textContent = 'Type the deadline first. It goes in every email.';
+          document.getElementById('deadline').focus();
+          return;
+        }
+
         btn.disabled = true;
-        btn.textContent = 'Reading...';
+        btn.textContent = 'Reading the document...';
+
         google.script.run
           .withSuccessHandler(function (d) {
-            DOC = d;
-            // The header travels with the text so the handoff describes itself.
-            // The last line is doing real work: a draft in progress is full of
-            // half-written sentences and notes-to-self that read like
-            // assertions, and sentence 3 of every RFC is where one would land.
-            var stamp = new Date().toString();
-            document.getElementById('docText').value =
-              '--- RFC Bot: story draft from Google Docs ---\n' +
+            // The header travels with the text so the handoff describes
+            // itself. The "nothing is verified" line is doing real work: a
+            // draft in progress is full of half-written sentences and
+            // notes-to-self that read like assertions, and sentence 3 of
+            // every RFC is exactly where one would land.
+            var payload =
+              '--- RFC Bot: request for comment ---\n' +
               'Document: ' + d.name + '\n' +
-              'Read: ' + stamp + '\n' +
+              'Read: ' + new Date().toString() + '\n' +
+              'Deadline: ' + deadline + '\n' +
               'In-progress draft. Nothing in it is verified.\n' +
-              '---\n\n' + d.text;
+              '---\n\n' +
+              'Run the rfc-outreach skill on the draft below. Use the deadline ' +
+              'exactly as written above - do not reword it or supply your own.\n\n' +
+              d.text;
+
+            document.getElementById('payload').value = payload;
+            document.getElementById('after').style.display = 'block';
             btn.disabled = false;
-            btn.textContent = 'Read this document';
-            document.getElementById('copy').style.display = 'block';
-            document.getElementById('copyNote').textContent =
-              d.text.length + ' characters. Copy this, paste it to Claude.';
+            btn.textContent = 'Send text to Claude';
+            copyPayload(d.text.length, zoneHint(deadline));
           })
           .withFailureHandler(function (e) {
             btn.disabled = false;
-            btn.textContent = 'Read this document';
-            document.getElementById('copyNote').textContent = 'Could not read: ' + e.message;
+            btn.textContent = 'Send text to Claude';
+            note.className = 'err';
+            note.textContent = 'Could not read the document: ' + e.message;
           })
           .readDocument();
       };
 
-      // Sidebars run in a sandboxed iframe, and it is not obvious which
-      // clipboard route survives that. Try the modern API, fall back to the
-      // old one, and if both fail say what to do by hand -- a button that
-      // silently does nothing is the worst of the three outcomes.
-      document.getElementById('copy').onclick = function () {
-        var box = document.getElementById('docText');
-        var note = document.getElementById('copyNote');
-        var done = function () { note.textContent = 'Copied. Paste it to Claude.'; };
+
+      document.getElementById('copy').onclick = function () { copyPayload(null, ''); };
+
+
+      /**
+       * Sidebars run in a sandboxed iframe and it is not obvious which
+       * clipboard route survives that. Try the modern API, fall back to the
+       * old one, and if both fail select the text and say to press Cmd-C. A
+       * button that silently does nothing is the worst of the three outcomes.
+       */
+      function copyPayload(chars, hint) {
+        var box = document.getElementById('payload');
+        var note = document.getElementById('note');
+
+        var done = function () {
+          note.className = hint ? 'warn' : 'muted';
+          note.textContent = 'Copied' + (chars ? ' ' + chars + ' characters' : '') +
+                             '. Paste it into Claude Code.' + (hint ? ' ' + hint : '');
+        };
         var manual = function () {
-          box.removeAttribute('readonly');
           box.focus();
           box.select();
-          note.textContent = 'Could not copy for you - the box is selected, press Cmd-C.';
+          note.className = 'warn';
+          note.textContent = 'Could not copy for you - the text is selected, press Cmd-C.';
         };
+
         try {
           if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(box.value).then(done, function () {
@@ -152,13 +188,15 @@
         } catch (e) {
           manual();
         }
-      };
+      }
+
 
       document.getElementById('go').onclick = function () {
         var text = document.getElementById('json').value.trim();
         var deadline = document.getElementById('deadline').value.trim();
         var out = document.getElementById('out');
         out.textContent = '';
+
         if (!deadline) {
           out.textContent = 'Fill in the deadline first.';
           document.getElementById('deadline').focus();
@@ -175,6 +213,7 @@
           .withFailureHandler(function (e) { render({ fatal: e.message }); })
           .createDrafts(text, box ? box.checked : false, deadline);
       };
+
 
       function reset() {
         var b = document.getElementById('go');
@@ -211,7 +250,8 @@
           d.appendChild(head);
 
           if (row.confidence && row.confidence !== 'HIGH') {
-            line(d, 'skip', row.confidence + ' confidence - confirm this address before sending.');
+            line(d, 'skip', row.confidence + ' confidence - the subject is marked ' +
+                            'and will not send until you clear the marker.');
           }
 
           if (row.status === 'created') {

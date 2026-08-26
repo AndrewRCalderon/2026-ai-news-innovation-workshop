@@ -3,7 +3,7 @@
 How it's built and why. What it has to do is in [requirements.md](requirements.md); the order of
 work is in [tasks.md](tasks.md).
 
-Last revised 2026-08-25.
+Last revised 2026-08-26.
 
 ## The shape of it
 
@@ -132,6 +132,22 @@ they apply even outside a skill run.
 
   What the draft turned out to contain: **the recipient list, already written by the reporter**,
   as inline notes ("Kalshi statement on this"). Nothing has to be inferred about who to contact.
+
+- **The Apps Script is a standalone add-on, not bound to one Doc** *(2026-08-26, reversing the
+  2026-08-25 decision)*. It was originally bound to a single Google Doc so that Phase 7's sidebar
+  would be one project with one authorization. That was the right trade when the sidebar existed
+  to serve one test document, and the wrong one for real use: **a bound script only ever runs in
+  its own container**, so RFC Bot was unavailable in every other Doc the reporter writes in.
+  Rebuilt as a standalone project installed as an editor add-on, so the menu appears under
+  Extensions in any Doc. The scope is unchanged — `documents.currentonly` reads the Doc that is
+  open and no other file in the account. Cost: an add-on has to be installed once, and shows an
+  "unverified app" warning on first authorization because it is not published to the Marketplace.
+
+- **The sidebar opens with two controls and nothing else** *(2026-08-26)*. A deadline field and
+  one button. The paste-back that puts drafts into Gmail is hidden until the button has been
+  pressed, because it cannot be used before Claude has been handed anything. This is a real
+  constraint on what the sidebar may grow into, not a coat of paint: the reporter asked for two
+  things on open, and anything added later goes below the fold or not at all.
 
 - **Structure over word count** *(2026-08-25)*. An earlier hard "four sentences maximum" cap
   was replaced by a fixed four-part structure plus a warning-only length check. The shape is

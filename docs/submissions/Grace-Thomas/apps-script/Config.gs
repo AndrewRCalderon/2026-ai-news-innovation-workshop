@@ -22,6 +22,23 @@ var TEST_RECIPIENT = 'tkc.intern2@journalism.cuny.edu';
 
 
 // ---------------------------------------------------------------------------
+// UNVERIFIED ADDRESS MARKER
+// ---------------------------------------------------------------------------
+//
+// An address is HIGH only if it was read off the company's own press page on
+// this run (requirements R8). Anything less -- a news article citing it, a
+// search result, a page that could not be fetched -- is MEDIUM or LOW, and a
+// MEDIUM address that is quietly wrong is a statement you never get.
+//
+// A draft with such an address still gets created, because dropping a company
+// is worse than flagging one. Its subject is prefixed with this, so it cannot
+// be sent looking normal until you have opened the source URL, checked the
+// address, and deleted the marker by hand.
+
+var UNVERIFIED_MARKER = '[UNVERIFIED ADDRESS - check source]';
+
+
+// ---------------------------------------------------------------------------
 // SIGNATURE
 // ---------------------------------------------------------------------------
 //

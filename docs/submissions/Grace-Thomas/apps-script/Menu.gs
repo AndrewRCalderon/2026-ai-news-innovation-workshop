@@ -1,19 +1,33 @@
 /**
- * RFC Bot - the menu in the Google Doc that opens the sidebar.
+ * RFC Bot - the menu that opens the sidebar.
  *
- * The script is bound to a Doc rather than standing alone because the sidebar
- * reads the story draft out of that Doc (see Doc.gs). One project, one
- * authorization, one setup.
+ * This project is STANDALONE and installed as an editor add-on, not bound to
+ * one Document. That is the whole reason it appears in every Doc you open
+ * rather than only in the one it was written against. A bound script can only
+ * ever run in its own container.
  *
- * One menu item, one sidebar, two steps: get the draft out to Claude, then
- * put the emails Claude wrote back into Gmail.
+ * createAddonMenu() rather than createMenu(): an installed add-on puts its menu
+ * under Extensions, and Google reserves that placement for add-on menus.
+ *
+ * The scope is still documents.currentonly. The add-on can read the Doc you
+ * have open and no other file in the account.
  */
 
-function onOpen() {
+function onOpen(e) {
   DocumentApp.getUi()
-    .createMenu('RFC Bot')
+    .createAddonMenu()
     .addItem('Draft requests for comment...', 'showSidebar')
     .addToUi();
+}
+
+
+/**
+ * Runs once, when the add-on is installed. Without this the menu does not
+ * appear until the next time a document is opened, which reads as "it didn't
+ * work."
+ */
+function onInstall(e) {
+  onOpen(e);
 }
 
 
@@ -23,7 +37,7 @@ function showSidebar() {
 }
 
 
-/** The sidebar asks for this on load so it can show which mode it is in. */
+/** The sidebar asks for this so it can show which mode it is in. */
 function getMode() {
   return {
     testMode: TEST_MODE,
@@ -34,7 +48,7 @@ function getMode() {
 
 
 /**
- * Which Google account authorized this script -- i.e. whose Drafts folder the
+ * Which Google account authorized this add-on -- i.e. whose Drafts folder the
  * drafts land in. Worth showing: the reporter is signed into more than one
  * account, which is why config/profile.md carries a Gmail account index at all.
  *

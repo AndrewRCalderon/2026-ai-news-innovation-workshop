@@ -137,6 +137,17 @@ function createOne_(em, report, deadline) {
 
   row.warnings = checkDraft_(subject, body);
 
+  // R8: below HIGH means nobody read this address off the company's own page
+  // on this run. Mark it in the subject rather than refusing to draft it --
+  // the marker has to be deleted by hand, so the check happens at the moment
+  // of sending, which is the moment that matters. An empty confidence counts
+  // as unverified; every address is supposed to carry one.
+  var confidence = (em.confidence || '').trim().toUpperCase();
+  if (confidence !== 'HIGH') {
+    subject = UNVERIFIED_MARKER + ' ' + subject;
+    row.marked = true;
+  }
+
   var to = realTo;
   var cc = (em.cc || '').trim();
   var headers = [];

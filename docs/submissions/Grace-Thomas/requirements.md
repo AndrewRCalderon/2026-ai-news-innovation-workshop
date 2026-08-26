@@ -3,7 +3,7 @@
 What this has to do, described as behavior. Implementation lives in
 [architecture.md](architecture.md); the order of work lives in [tasks.md](tasks.md).
 
-Last revised 2026-08-25.
+Last revised 2026-08-26.
 
 ## The job
 
@@ -167,6 +167,12 @@ Rules that follow from this:
   buried in a table — listing which URLs were tried and what each returned. A recipient is
   never silently dropped, and a gap is never filled with a guess.
 - LOW addresses are never written to the contact record. A guess must not harden into a record.
+- **An address below HIGH is marked in the draft itself** *(2026-08-26)*. The Apps Script
+  prefixes that draft's subject with `[UNVERIFIED ADDRESS - check source]`. The draft is still
+  created — dropping a company is worse than flagging one — but it cannot be sent looking normal
+  until the reporter has opened the source URL, checked the address, and deleted the marker by
+  hand. The check lands at the moment of sending, which is the moment it matters. An empty
+  confidence counts as unverified: every address is supposed to carry one.
 
 ### R9 — The contact record stays current
 
