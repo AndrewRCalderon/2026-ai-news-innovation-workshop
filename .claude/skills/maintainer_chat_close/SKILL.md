@@ -1,6 +1,6 @@
 ---
-name: chat_close
-description: End-of-session wrap-up for this repo. Updates project/tasks.md (checkboxes, newly discovered tasks) and project/CHANGELOG.md (dated entry) if relevant, adds a new ADR under project/adr/ if a non-trivial technical decision was made this session, then splits the session's work into logical commits and pushes them to the current branch. Use when the user says they're wrapping up, switching tasks, done for now, or invokes /chat_close.
+name: maintainer_chat_close
+description: End-of-session wrap-up for this repo. Updates project/tasks.md (checkboxes, newly discovered tasks) and project/CHANGELOG.md (dated entry) if relevant, adds a new ADR under project/adr/ if a non-trivial technical decision was made this session, then splits the session's work into logical commits and pushes them to the current branch. Use when the user says they're wrapping up, switching tasks, done for now, or invokes /maintainer_chat_close.
 ---
 
 # Chat close
