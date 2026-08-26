@@ -304,9 +304,13 @@ the tab and it's gone. A real Gmail draft survives, syncs to phone, and is what 
 actually expects. `gmail_drafts.py` already does this, but it needs a Google Cloud project, an
 OAuth consent screen and two `pip` installs. Apps Script needs none of that.
 
-**Do:** an Apps Script project **bound to a Google Doc**, not standalone — Phase 7 puts a
-sidebar in that same doc, and binding now means one project, one authorization, one setup, done
-once. It reads a `drafts.json` payload and creates one Gmail draft per recipient via the
+**Do:** ~~an Apps Script project **bound to a Google Doc**, not standalone~~ — **reversed
+2026-08-26.** Binding was chosen so Phase 7's sidebar would be one project with one
+authorization. That was right for one test document and wrong for real use: a bound script only
+ever runs in its own container, so RFC Bot was missing from every other Doc. It is now a
+**standalone project installed as an editor add-on**, script ID
+`1UxZV5hKEXwLyAdBbPkSaAB61nx2CNEAeOOZZilNdwfffEC-BOi9GQCQy`. See task 22 for what that still
+does not solve. It reads a `drafts.json` payload and creates one Gmail draft per recipient via the
 **advanced Gmail service** with explicit `oauthScopes` in the manifest, so the requested
 permission is the narrowest that can write a draft rather than whatever Apps Script
 auto-detects. `GmailApp` is not used: its methods pull `https://mail.google.com/`, which is
@@ -383,6 +387,67 @@ though it were verified, which is exactly what R8 and R9 exist to prevent.
 Recommended shape: **one-way, CSV → Contacts**, into a single labeled group, with confidence,
 source URL and source date written into the contact's notes field so they travel with the
 record. The CSV stays canonical. Nothing reads back.
+
+**Done when:** decided, then built to whatever was decided.
+
+---
+
+### [ ] 22. RFC Bot in every Doc — **decision needed first**
+
+**Why:** task 15 made it a standalone add-on, which was necessary but not sufficient. A **test
+deployment is tied to one document** — Google's words: "A test deployment is the combination of
+an add-on and a test document." So today it appears in whichever single Doc the test points at,
+which is not what was asked for.
+
+**The blocker is the Gmail permission.** Being in every Doc means publishing. Publishing
+privately to a domain skips Google's review but needs a Workspace admin, and the project lives
+in a personal `@gmail.com` account with no domain. That leaves public publishing, which triggers
+a security review because `gmail.compose` is a **restricted** scope.
+
+**Decide between:**
+
+1. **Template Doc.** Bind a copy of the script to one "RFC Bot — story template" Doc and start
+   each story with File → Make a copy. Zero publishing, works today, and every story Doc has it.
+   Cost: existing copies keep old code, so a change means starting new stories from a fresh copy.
+2. **Publish unlisted.** Requires task 23 first, so the add-on holds no Gmail scope and needs no
+   restricted-scope review. Then a Cloud project, a Marketplace listing, a privacy policy URL.
+
+**Done when:** decided, then built to whatever was decided.
+
+### [ ] 23. Move draft creation out of the sidebar
+
+**Why:** two things want the same change. The reporter pastes twice — the draft out, `drafts.json`
+back — and the second paste exists only because the *sidebar* creates the Gmail drafts. And the
+Gmail scope that requires is what blocks task 22's publishing route.
+
+**Do:** finish the `scripts/gmail_drafts.py` path — the one-time Google Cloud setup documented at
+the top of that file. Then the add-on needs only `documents.currentonly` and
+`script.container.ui`, neither of which is sensitive.
+
+**`gmail_drafts.py` has no test mode.** `TEST_MODE`, the recipient rewrite, the `[TEST]` prefix
+and the `X-RFC-Bot-Test-Original-To` header all live in `apps-script/Drafts.gs`. They have to move
+across with the feature or task 16's protection is silently lost. Same for the
+`[UNVERIFIED ADDRESS - check source]` marker.
+
+**Weigh the cost honestly:** today Claude cannot put anything in the mailbox without the reporter
+pasting. That is a real safety property, and this task removes it.
+
+**Done when:** a run from Claude Code creates the drafts directly, `TEST_MODE` still rewrites every
+recipient, and the standing send check is clean.
+
+### [ ] 24. Button-to-Claude bridge — **deferred 2026-08-26**
+
+**Why:** what the reporter actually asked for is clicking a button in Docs and having the text
+arrive in Claude Code without opening it or pasting. Apps Script runs on Google's servers and
+cannot reach a laptop, so the sidebar can only put text on the clipboard.
+
+**Shape if built:** the button writes the request to Drive; a watcher running on the Mac polls,
+then opens a Claude Code session with the text already loaded. Needs the `claude` CLI installed
+(it isn't), task 23's credentials, and a background process at login.
+
+**Deferred on time, not merit.** Also worth weighing: a fully unattended run has nowhere to ask
+about a missing address, a deadline with no time zone, or a claim pulled from an unfinished
+draft — three things `CLAUDE.md` requires a human for. The visible-session version keeps them.
 
 **Done when:** decided, then built to whatever was decided.
 
