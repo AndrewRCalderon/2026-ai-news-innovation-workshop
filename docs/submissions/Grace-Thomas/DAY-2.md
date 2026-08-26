@@ -4,6 +4,7 @@
 whether it actually worked, or only looked like it did.
 
 Short answer: it didn't, in three specific ways — and finding them is most of what happened.
+The rest of the day moved it into the tools the work actually happens in: Gmail and Google Docs.
 
 ---
 
@@ -162,9 +163,95 @@ would need answering if it stays.
 
 ---
 
+## 8. Real Gmail drafts, and a test mode that rewrites
+
+`compose.html` opens a pre-filled compose window, which works but is transient — close the tab and
+it's gone. A real Gmail draft survives, syncs to the phone, and is what a reporter expects.
+
+An Apps Script project now writes them. **Bound to a Google Doc, not standalone**, because section
+10 puts a sidebar in that same doc — one project, one authorization, set up once. It uses the
+advanced Gmail service with explicit `oauthScopes` rather than `GmailApp`, whose methods quietly
+pull `https://mail.google.com/`: full-mailbox access, including permanent delete.
+
+**Test mode is on by default, and it rewrites rather than checks.** With `TEST_MODE = true`, every
+recipient becomes the reporter's own address, `Cc` is dropped, the subject gets a `[TEST]` prefix,
+and the real intended recipient is kept in an `X-RFC-Bot-Test-Original-To` header. The body is left
+byte-identical, because the point is to read the exact text that would go out.
+
+Rewriting matters more than it sounds. A check against a list of known-test addresses still lets a
+real press desk through if the wrong `drafts.json` is loaded — which is exactly the mundane,
+fatal mistake this exists to prevent. Rewriting has no such path.
+
+**The script still never sends.** A test send is the reporter opening the `[TEST]` draft and
+pressing Send to themselves, which is also the only honest way to see what Gmail does to the
+formatting on the way out.
+
+Both of these are **built but not checked off**. Their "done when" is a real run in a real Gmail
+account, and that run hasn't been recorded.
+
+---
+
+## 9. The guarantee stopped depending on memory
+
+Task 14 established that R1 — never sends — rests on nothing but the absence of a send call in the
+code. Google does not enforce it. A guarantee that depends on someone remembering to run a search
+is not much of a guarantee, and the thing most likely to break it is a future session adding a send
+call in perfectly good faith.
+
+So it became a committed pre-commit hook. It searches **staged** code for `.send(`, `smtplib`,
+`sendmail`, or a Gmail scope wider than `gmail.compose`, and refuses the commit naming the file and
+line.
+
+Two details worth keeping:
+
+- **It's committed, in `.githooks/`, not dropped in `.git/hooks/`.** Anything in there is invisible
+  to git, wouldn't show up in a PR, and wouldn't survive a fresh clone.
+- **It refused its own first commit** — `tasks.md` and `apps-script/README.md` both quote the
+  pattern in prose. That's how the markdown exclusion got written. It excludes `.md` rather than
+  allow-listing code extensions, so a new kind of code file gets checked by default instead of
+  silently skipped.
+
+**`--no-verify` still skips it.** It's a tripwire, not a wall. Recorded plainly rather than
+overclaimed, because overclaiming this exact guarantee is what task 14 had to correct.
+
+---
+
+## 10. Start from the draft, not from a form
+
+The real workflow isn't a reporter filling in a form. It's a reporter part-way through a story in
+Google Docs, asking for the outreach while the draft is still moving. That changes the input from
+"a form you fill in" to "a document that isn't finished," which is a different product.
+
+Two ways to build it: the sidebar calls the Claude API and writes the emails itself, or it reads
+the draft and hands it to Claude Code, where the skill already runs.
+
+**Handoff won**, on three counts. A copy of `SKILL.md`'s rules would have lived inside a prompt
+string and drifted from the real one. It would have needed a paid API key at roughly a dime a run.
+And — the decisive one — **Apps Script has no browser.** Contact research escalates curl → fetcher
+→ real browser, and `kalshi.com` returns 429 to everything above that last tier. That tier is the
+only reason `media@kalshi.com` was ever found. A sidebar that researched its own contacts would
+have been quietly weakest at the job that most needs to be right.
+
+Cost of the choice, taken knowingly: two pastes instead of none — the draft out, `drafts.json`
+back.
+
+**What the first real draft showed.** The recipient list was already in it, written by the reporter
+as inline notes: "Kalshi statement on this," "Polymarket comment on Kalshi's proposal or on its own
+approach." Nothing has to be inferred about who to contact. What the scanner has to do is notice
+the placeholders — which is why anything lifted out of a live draft gets quoted back and confirmed
+before it reaches an email. That rule is task 19, still unwritten as R13.
+
+**One more thing came out of it: the deadline is now a required field**, typed fresh in the sidebar
+on every run and deliberately *not* prefilled from `drafts.json`. A deadline is a promise to a
+source, and the person making it should be typing it rather than inheriting it from a file written
+earlier.
+
+---
+
 ## What still holds
 
-- **Nothing has ever been sent.** No SMTP, no send scope, no automation that clicks Send.
+- **Nothing has ever been sent.** No SMTP, no send call anywhere — and as of today a commit hook
+  that refuses to let one in.
 - **Two stories, six drafts, all contacts HIGH**, every one read from the company's own page.
 - **`CLAUDE.md` gained one rule** that generalizes past this project: *never assume a deadline, a
   date, or a time zone — if it isn't specified, ask.* A guessed deadline in a message to a source
@@ -172,6 +259,15 @@ would need answering if it stays.
 
 ## Next
 
-Apps Script work: Gmail drafts and sending — guarded so test sends **rewrite** every recipient to a
-dummy address rather than merely checking against a list — then a Google Docs script so a reporter
-can generate outreach from a story draft in progress. Then reporter-specific voice settings.
+Open, in `tasks.md`:
+
+- **Run tasks 15 and 16 for real.** Both are built; neither has been run against a live Gmail
+  account and seen to pass its "done when."
+- **Two decisions before any building.** Task 13 — is the follow-up path in scope at all, on a
+  day-of tool? Task 17 — does the contact record sync into Google Contacts, given that Contacts
+  has no field for confidence or source URL and both are load-bearing under R8?
+- **Task 19 — write R13.** A claim pulled out of an unfinished draft is not a verified claim.
+  Scanning a live draft makes that the normal case rather than the exception.
+- **Task 20 — split the rules into invariant and voice.** The format rules currently mix what
+  makes the tool safe with one reporter's taste. A second reporter should be able to disagree
+  with the second set without touching the first.
