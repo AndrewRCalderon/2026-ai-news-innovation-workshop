@@ -1,3 +1,11 @@
 config/gcp_credentials.json
 config/gmail_token.json
 .DS_Store
+
+# clasp. .clasprc.json holds an OAuth token for your Google account -- it is a
+# credential and must never be committed. .clasp.json is not secret (the script
+# ID is visible in the editor URL) but it points at one specific person's Doc,
+# so it stays local too; apps-script/README.md says how to recreate it.
+.clasprc.json
+**/.clasprc.json
+apps-script/.clasp.json

@@ -19,6 +19,7 @@ import json
 import os
 import re
 import sys
+from email import policy as email_policy
 from email.message import EmailMessage
 from urllib.parse import urlencode
 
@@ -74,7 +75,11 @@ def gmail_compose_url(email, account_index):
 
 def write_eml(path, email, signature, from_addr):
     """Standalone .eml — signature IS embedded, since no client will add it here."""
-    msg = EmailMessage()
+    # Long subjects get folded across lines by the default policy, and it sometimes breaks
+    # immediately after "Subject:", leaving the line starting with whitespace. Some clients
+    # render that as a leading space in the subject. Raise the limit so subjects stay on one
+    # line -- they are plain ASCII by rule (see SKILL.md), so nothing needs encoding.
+    msg = EmailMessage(policy=email_policy.SMTP.clone(max_line_length=998))
     msg["To"] = email.get("to", "")
     if email.get("cc"):
         msg["Cc"] = email["cc"]
@@ -104,12 +109,30 @@ def build_html(data, emails, account_index, signature):
     deadline = data.get("deadline", "")
     rows = []
     for i, em in enumerate(emails, 1):
-        url = gmail_compose_url(em, account_index)
+        method = em.get("contact_method") or ("email" if em.get("to") else "none")
+        url = gmail_compose_url(em, account_index) if method == "email" else ""
         conf = (em.get("confidence") or "MEDIUM").upper()
         color, bg, conf_note = CONF_STYLE.get(conf, CONF_STYLE["MEDIUM"])
-        too_long = len(url) > URL_SAFE_LIMIT
+        too_long = bool(url) and len(url) > URL_SAFE_LIMIT
 
-        if too_long:
+        if method == "form":
+            furl = em.get("form_url") or ""
+            action = (
+                '<div class="warn">No press email published. This company takes press requests '
+                'through a form — open it, then paste the text below.</div>'
+                '<a class="btn" href="%s" target="_blank" rel="noopener">Open %s contact form &rarr;</a>'
+                '<textarea readonly rows="10">%s</textarea>'
+                % (html.escape(furl, quote=True), html.escape(em.get("company", "")),
+                   html.escape("Subject: " + em.get("subject", "") + "\n\n" + em.get("body", "")))
+            )
+        elif method == "none":
+            action = (
+                '<div class="warn">No press email and no contact form found. Someone has to '
+                'find a route by hand before this can go out. The draft is ready below.</div>'
+                '<textarea readonly rows="10">%s</textarea>'
+                % html.escape("Subject: " + em.get("subject", "") + "\n\n" + em.get("body", ""))
+            )
+        elif too_long:
             action = (
                 '<div class="warn">This email is long enough that a pre-filled link may get '
                 'truncated by Gmail. Copy the body below instead.</div>'
@@ -263,7 +286,8 @@ def build_review_md(data, emails, signature):
 
 def write_tracking(path, data, emails):
     """Create the log, or add only genuinely new companies if it already exists."""
-    cols = ["company", "email", "confidence", "drafted", "sent_at", "deadline", "status", "response_notes"]
+    cols = ["company", "email", "contact_method", "form_url", "confidence", "drafted",
+            "sent_at", "deadline", "status", "response_notes"]
     existing = set()
     if os.path.exists(path):
         with open(path, "r", encoding="utf-8", newline="") as fh:
@@ -279,6 +303,8 @@ def write_tracking(path, data, emails):
             {
                 "company": em.get("company", ""),
                 "email": em.get("to", ""),
+                "contact_method": em.get("contact_method", ""),
+                "form_url": em.get("form_url", ""),
                 "confidence": (em.get("confidence") or "").upper(),
                 "drafted": data.get("generated", ""),
                 "sent_at": "",
@@ -299,6 +325,98 @@ def write_tracking(path, data, emails):
     return len(new_rows)
 
 
+# --- Format checks (requirements R4, R5) ---------------------------------
+# All warning-level, on purpose. A journalist on deadline should never have a
+# build refuse to produce a draft because of a style rule. Accuracy outranks
+# brevity, so nothing here blocks or rewrites anything.
+
+WORD_WARN = 150
+
+# (regex, what rule it breaks). Applied to the body only.
+FORBIDDEN = [
+    (r"(?im)^\s*(thank you|thanks|best|sincerely|regards|cheers)\b[,.]?\s*$",
+     "a sign-off - the signature is the close"),
+    (r"(?im)^\s*\d+[.)]\s+",
+     "a numbered question - questions run as prose"),
+    (r"(?im)^\s*[-*•]\s+",
+     "a bulleted question - questions run as prose"),
+    (r"(?i)press time",
+     "the 'did not respond by press time' line"),
+    (r"(?i)accuracy check|before publication|share the passage",
+     "an accuracy-check offer"),
+    (r"(?i)on the record|on background",
+     "a statement of terms - those go in the reply thread"),
+    (r"(?i)give me a call|happy to (talk|hop on|jump on)|reach me at",
+     "a phone offer"),
+    (r"(?i)the story (examines|is about|looks at)|my reporting indicates|"
+     r"examines a pattern|the story explores",
+     "a thesis sentence - state what THIS company did, then ask"),
+    (r"(?i)i'?d like to understand|which is why i'?m|i'?m bringing these questions|"
+     r"i wanted to reach out",
+     "editorializing before the ask - sentence 4 opens with the request"),
+    (r"(?:\+\d[\d\s().-]{8,}|\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4})",
+     "a phone number - RFC Bot never puts one in an email"),
+]
+
+SUBJECT_FORBIDDEN = [
+    (r"(?i)deadline|response by|respond by|by \d{1,2}\s*(a\.?m|p\.?m)|urgent",
+     "a deadline - subjects are 'Outlet request: topic', the deadline goes in the body"),
+]
+
+
+def check_subject(company, subject):
+    """Warn on subject-line rules. Never blocks."""
+    warns = []
+    for pattern, why in SUBJECT_FORBIDDEN:
+        if re.search(pattern, subject):
+            warns.append("subject contains %s" % why)
+    if not re.match(r"^[A-Za-z0-9 .&'-]+ request: .+", subject):
+        warns.append("subject is not in the form '<Outlet> request: <topic>'")
+    for w in warns:
+        sys.stderr.write("WARNING [%s]: %s\n" % (company, w))
+    return len(warns)
+
+
+def check_body(company, body):
+    """Warn about anything the body shouldn't contain. Never blocks."""
+    warns = []
+
+    # Sentence 3 identifies the news; it must not brief the company on its own announcement.
+    m = re.search(r"I am writing to request comment on (.+?)(?<![A-Z])\.(?:\s|$)", body, re.S)
+    if m:
+        n = len(m.group(1).split())
+        if n > 30:
+            warns.append("sentence 3 runs %d words - it should identify the news, not "
+                         "summarize it back to them" % n)
+    elif "I am writing to request comment on" not in body:
+        warns.append("sentence 3 does not start 'I am writing to request comment on'")
+    if "My name is" not in body:
+        warns.append("sentence 2 does not start 'My name is <name>, I'm a <title> with <outlet>.'")
+
+    words = len(body.split())
+    if words > WORD_WARN:
+        warns.append("%d words (over ~%d) - check nothing in it is padding"
+                     % (words, WORD_WARN))
+
+    for pattern, why in FORBIDDEN:
+        if re.search(pattern, body):
+            warns.append("contains %s" % why)
+
+    # Structure: greeting, one paragraph, deadline alone on the last line.
+    blocks = [b for b in body.split("\n\n") if b.strip()]
+    if len(blocks) != 3:
+        warns.append("has %d blocks, expected 3 (greeting / one paragraph / deadline)"
+                     % len(blocks))
+    if blocks and not re.search(r"(?i)deadline", blocks[-1]):
+        warns.append("last line is not the deadline")
+    if len(blocks) >= 2 and re.search(r"(?i)deadline", " ".join(blocks[:-1])):
+        warns.append("deadline appears before the last line")
+
+    for w in warns:
+        sys.stderr.write("WARNING [%s]: %s\n" % (company, w))
+    return len(warns)
+
+
 def main():
     if len(sys.argv) != 2:
         die("usage: python3 scripts/build_drafts.py outreach/<slug>/drafts.json")
@@ -313,13 +431,37 @@ def main():
     if not emails:
         die("drafts.json has no emails")
 
-    missing = [e.get("company", "?") for e in emails if not e.get("to")]
-    if missing:
-        die("these entries have no email address: %s" % ", ".join(missing))
+    # A company reachable only by a media contact form still gets a full draft — the reporter
+    # pastes the body in. Only an entry with no route at all is a blocker, and even then the
+    # draft is written rather than dropped.
+    for e in emails:
+        if not e.get("contact_method"):
+            e["contact_method"] = "email" if e.get("to") else ("form" if e.get("form_url") else "none")
+
+    forms = [e.get("company", "?") for e in emails if e["contact_method"] == "form"]
+    if forms:
+        sys.stderr.write("\nNOTE: no press email for %s - reachable by contact form only.\n"
+                         "  compose.html links the form and shows the body as copy-paste text.\n"
+                         % ", ".join(forms))
+
+    noroute = [e.get("company", "?") for e in emails if e["contact_method"] == "none"]
+    if noroute:
+        sys.stderr.write("\nBLOCKER: no email address AND no contact form found for: %s\n"
+                         "  The draft is written, but someone has to find a route by hand.\n\n"
+                         % ", ".join(noroute))
 
     signature = read_signature()
     if "TODO" in signature:
         sys.stderr.write("WARNING: config/signature.txt still contains TODO placeholders.\n")
+    if re.search(r"(?:\+\d[\d\s().-]{8,}|\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4})", signature):
+        sys.stderr.write("WARNING: config/signature.txt contains a phone number. "
+                         "RFC Bot does not put phone numbers in emails - remove it.\n")
+
+
+    fmt_warnings = 0
+    for em in emails:
+        fmt_warnings += check_body(em.get("company", "?"), em.get("body", ""))
+        fmt_warnings += check_subject(em.get("company", "?"), em.get("subject", ""))
 
     account_index = read_gmail_account_index()
     from_addr = data.get("from_email", "")
@@ -342,6 +484,9 @@ def main():
     print("  *.eml          drafts for Apple Mail / Outlook")
     print("  REVIEW.md      read-through copy")
     print("  tracking.csv   %d new row(s)" % added)
+    if fmt_warnings:
+        print("  %d format warning(s) above - review, then decide. Nothing was changed."
+              % fmt_warnings)
     flagged = [e.get("company") for e in emails if (e.get("confidence") or "").upper() != "HIGH"]
     if flagged:
         print("\n  CONFIRM THESE ADDRESSES BEFORE SENDING: %s" % ", ".join(flagged))

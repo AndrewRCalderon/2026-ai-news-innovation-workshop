@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+             font-size: 13px; color: #202124; margin: 0; padding: 14px; }
+      h2 { font-size: 13px; margin: 0 0 6px; }
+      label.q { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+      input[type=text] { width: 100%; box-sizing: border-box; padding: 7px 8px;
+                         border: 1px solid #dadce0; border-radius: 4px; font-size: 13px; }
+      button { width: 100%; box-sizing: border-box; padding: 9px; margin-top: 10px;
+               border: 0; border-radius: 4px; background: #1a73e8; color: #fff;
+               font-size: 13px; cursor: pointer; }
+      button.plain { background: #f1f3f4; color: #202124; }
+      button:disabled { opacity: .6; cursor: default; }
+      textarea { width: 100%; box-sizing: border-box; height: 110px; margin-top: 8px;
+                 font-family: ui-monospace, Menlo, monospace; font-size: 11px;
+                 border: 1px solid #dadce0; border-radius: 4px; padding: 6px; }
+      .muted { color: #5f6368; font-size: 11px; margin-top: 6px; }
+      .warn { color: #b06000; font-size: 11px; margin-top: 6px; }
+      .err  { color: #c5221f; font-size: 11px; margin-top: 6px; }
+      .ok   { color: #137333; font-size: 11px; }
+      .skip { color: #b06000; font-size: 11px; }
+      .mode { padding: 7px 8px; border-radius: 4px; font-size: 11px; margin-bottom: 10px; }
+      .mode.test { background: #e6f4ea; color: #137333; }
+      .mode.live { background: #fce8e6; color: #c5221f; }
+      #after { border-top: 2px solid #e8eaed; margin-top: 18px; padding-top: 14px; }
+      .row { border-top: 1px solid #e8eaed; padding: 7px 0; }
+      .co { font-weight: 600; }
+    </style>
+  </head>
+  <body>
+
+    <!-- Two things, and only two things, when the sidebar opens. Everything
+         below is hidden until the button has been pressed, because the paste
+         back from Claude cannot happen before Claude has been given anything. -->
+
+    <label class="q" for="deadline">When is the deadline?</label>
+    <input id="deadline" type="text" placeholder="3 p.m. ET today">
+
+    <button id="send">Send text to Claude</button>
+    <div id="note" class="muted"></div>
+
+    <div id="after">
+      <textarea id="payload" readonly></textarea>
+      <button id="copy" class="plain">Copy again</button>
+
+      <div style="margin-top:18px">
+        <div class="mode" id="mode"></div>
+        <h2>Paste what Claude gives you</h2>
+        <textarea id="json" placeholder="Contents of outreach/&lt;slug&gt;/drafts.json"></textarea>
+        <div id="confirmWrap" style="display:none; margin-top:8px">
+          <label>
+            <input type="checkbox" id="confirmReal">
+            These are real press addresses and I mean to draft to them.
+          </label>
+        </div>
+        <button id="go">Create drafts</button>
+        <div id="out"></div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('after').style.display = 'none';
+
+      var MODE = null;
+      google.script.run.withSuccessHandler(function (m) {
+        MODE = m;
+        var el = document.getElementById('mode');
+        if (m.testMode) {
+          el.className = 'mode test';
+          el.textContent = 'TEST MODE - every draft goes to ' + m.testRecipient +
+                           '. No press desk can be reached.';
+        } else {
+          el.className = 'mode live';
+          el.textContent = 'LIVE - drafts will be addressed to the real recipients ' +
+                           'in the JSON. Nothing is sent; you still press Send.';
+          document.getElementById('confirmWrap').style.display = 'block';
+        }
+        el.textContent += ' Drafting into ' + m.account + '.';
+      }).getMode();
+
+
+      /**
+       * A deadline without a time zone is a promise nobody can keep -- 3 p.m.
+       * where? This warns rather than blocks, because "end of day Friday,
+       * Eastern" is a real thing a reporter writes and a regex should not get
+       * a vote on it. Claude asks about anything genuinely ambiguous.
+       */
+      function zoneHint(d) {
+        if (/\b(ET|EST|EDT|CT|CST|CDT|MT|PT|PST|PDT|UTC|GMT|Eastern|Central|Mountain|Pacific)\b/i.test(d)) {
+          return '';
+        }
+        return 'No time zone in that deadline. Claude will ask before it goes in an email.';
+      }
+
+
+      document.getElementById('send').onclick = function () {
+        var btn = this;
+        var note = document.getElementById('note');
+        var deadline = document.getElementById('deadline').value.trim();
+
+        note.className = 'muted';
+        note.textContent = '';
+
+        // R4: the deadline is never invented, and never inherited from a file
+        // written earlier. It is typed here, every run, or nothing happens.
+        if (!deadline) {
+          note.className = 'err';
+          note.textContent = 'Type the deadline first. It goes in every email.';
+          document.getElementById('deadline').focus();
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Reading the document...';
+
+        google.script.run
+          .withSuccessHandler(function (d) {
+            // The header travels with the text so the handoff describes
+            // itself. The "nothing is verified" line is doing real work: a
+            // draft in progress is full of half-written sentences and
+            // notes-to-self that read like assertions, and sentence 3 of
+            // every RFC is exactly where one would land.
+            var payload =
+              '--- RFC Bot: request for comment ---\n' +
+              'Document: ' + d.name + '\n' +
+              'Read: ' + new Date().toString() + '\n' +
+              'Deadline: ' + deadline + '\n' +
+              'In-progress draft. Nothing in it is verified.\n' +
+              '---\n\n' +
+              'Run the rfc-outreach skill on the draft below. Use the deadline ' +
+              'exactly as written above - do not reword it or supply your own.\n\n' +
+              d.text;
+
+            document.getElementById('payload').value = payload;
+            document.getElementById('after').style.display = 'block';
+            btn.disabled = false;
+            btn.textContent = 'Send text to Claude';
+            copyPayload(d.text.length, zoneHint(deadline));
+          })
+          .withFailureHandler(function (e) {
+            btn.disabled = false;
+            btn.textContent = 'Send text to Claude';
+            note.className = 'err';
+            note.textContent = 'Could not read the document: ' + e.message;
+          })
+          .readDocument();
+      };
+
+
+      document.getElementById('copy').onclick = function () { copyPayload(null, ''); };
+
+
+      /**
+       * Sidebars run in a sandboxed iframe and it is not obvious which
+       * clipboard route survives that. Try the modern API, fall back to the
+       * old one, and if both fail select the text and say to press Cmd-C. A
+       * button that silently does nothing is the worst of the three outcomes.
+       */
+      function copyPayload(chars, hint) {
+        var box = document.getElementById('payload');
+        var note = document.getElementById('note');
+
+        var done = function () {
+          note.className = hint ? 'warn' : 'muted';
+          note.textContent = 'Copied' + (chars ? ' ' + chars + ' characters' : '') +
+                             '. Paste it into Claude Code.' + (hint ? ' ' + hint : '');
+        };
+        var manual = function () {
+          box.focus();
+          box.select();
+          note.className = 'warn';
+          note.textContent = 'Could not copy for you - the text is selected, press Cmd-C.';
+        };
+
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(box.value).then(done, function () {
+              box.select();
+              if (document.execCommand('copy')) { done(); } else { manual(); }
+            });
+            return;
+          }
+          box.select();
+          if (document.execCommand('copy')) { done(); } else { manual(); }
+        } catch (e) {
+          manual();
+        }
+      }
+
+
+      document.getElementById('go').onclick = function () {
+        var text = document.getElementById('json').value.trim();
+        var deadline = document.getElementById('deadline').value.trim();
+        var out = document.getElementById('out');
+        out.textContent = '';
+
+        if (!deadline) {
+          out.textContent = 'Fill in the deadline first.';
+          document.getElementById('deadline').focus();
+          return;
+        }
+        if (!text) { out.textContent = 'Paste the JSON first.'; return; }
+
+        var box = document.getElementById('confirmReal');
+        this.disabled = true;
+        this.textContent = 'Creating...';
+
+        google.script.run
+          .withSuccessHandler(render)
+          .withFailureHandler(function (e) { render({ fatal: e.message }); })
+          .createDrafts(text, box ? box.checked : false, deadline);
+      };
+
+
+      function reset() {
+        var b = document.getElementById('go');
+        b.disabled = false;
+        b.textContent = 'Create drafts';
+      }
+
+      function line(parent, cls, text) {
+        var d = document.createElement('div');
+        if (cls) { d.className = cls; }
+        d.textContent = text;
+        parent.appendChild(d);
+        return d;
+      }
+
+      function render(r) {
+        reset();
+        var out = document.getElementById('out');
+        out.textContent = '';
+
+        if (r.fatal) { line(out, 'err', r.fatal); return; }
+
+        line(out, '', r.created + ' draft(s) created, ' + r.skipped + ' skipped.');
+        line(out, 'muted', 'Deadline used: ' + r.deadline);
+        if (r.deadlineWarning) { line(out, 'skip', r.deadlineWarning); }
+        line(out, 'muted', 'Nothing was sent.');
+
+        r.results.forEach(function (row) {
+          var d = document.createElement('div');
+          d.className = 'row';
+          var head = document.createElement('span');
+          head.className = 'co';
+          head.textContent = row.company;
+          d.appendChild(head);
+
+          if (row.confidence && row.confidence !== 'HIGH') {
+            line(d, 'skip', row.confidence + ' confidence - the subject is marked ' +
+                            'and will not send until you clear the marker.');
+          }
+
+          if (row.status === 'created') {
+            line(d, 'ok', 'draft to ' + row.detail);
+            if (row.redirectedFrom) {
+              line(d, 'muted', 'would have gone to ' + row.redirectedFrom);
+            }
+          } else if (row.status === 'skipped') {
+            line(d, 'skip', row.detail);
+          } else {
+            line(d, 'err', row.detail);
+          }
+
+          (row.warnings || []).forEach(function (w) { line(d, 'warn', w); });
+          out.appendChild(d);
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+# Deny everything, then allow only the files that belong in the Apps Script
+# project. An allow-list on purpose: a new file in this folder stays local
+# until someone deliberately adds it here, rather than silently appearing in
+# the Google project.
+**/**
+
+!appsscript.json
+!Config.gs
+!Doc.gs
+!Drafts.gs
+!Menu.gs
+!Sidebar.html

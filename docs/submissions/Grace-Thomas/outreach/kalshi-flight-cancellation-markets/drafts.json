@@ -1,0 +1,35 @@
+{
+  "story_slug": "kalshi-flight-cancellation-markets",
+  "deadline": "today, Aug. 25, 2026 at 4:00 p.m. ET",
+  "terms": "on the record, attributed to a named spokesperson",
+  "generated": "2026-08-25",
+  "from_email": "tkc.intern2@journalism.cuny.edu",
+  "emails": [
+    {
+      "company": "Kalshi",
+      "contact_name": "Kalshi Media",
+      "to": "media@kalshi.com",
+      "cc": "",
+      "contact_method": "email",
+      "form_url": "",
+      "source_url": "https://kalshi.com/about",
+      "source_date": "2026-08-25",
+      "confidence": "HIGH",
+      "subject": "Semafor request: Kalshi's flight cancellation contracts",
+      "body": "Hello,\n\nMy name is Grace Thomas, I'm a reporter with Semafor. I am writing to request comment on Kalshi notifying the CFTC that it self-certified a new class of contracts on airport flight cancellations. I am looking for a statement on whether these markets are live yet, what Kalshi sees as their purpose, and how Kalshi prevents trading by people with nonpublic information about flight operations.\n\nMy deadline is 4 p.m. ET today."
+    },
+    {
+      "company": "Polymarket",
+      "contact_name": "Polymarket Press",
+      "to": "press@polymarket.com",
+      "cc": "",
+      "contact_method": "email",
+      "form_url": "",
+      "source_url": "https://polymarket.com/tos",
+      "source_date": "2026-08-25",
+      "confidence": "HIGH",
+      "subject": "Semafor request: Polymarket's approach to aviation markets",
+      "body": "Hello,\n\nMy name is Grace Thomas, I'm a reporter with Semafor. I am writing to request comment on Kalshi notifying the CFTC that it self-certified a new class of contracts on airport flight cancellations. I am looking for a statement on Polymarket's response to Kalshi's proposal and on Polymarket's own approach to aviation markets.\n\nMy deadline is 4 p.m. ET today."
+    }
+  ]
+}

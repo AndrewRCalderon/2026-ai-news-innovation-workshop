@@ -8,8 +8,8 @@
 
 | # | Company | Email | Confidence | Source |
 |---|---|---|---|---|
-| 1 | Nike | `media.relations@nike.com` | MEDIUM | https://about.nike.com/en/newsroom |
-| 2 | Adidas | `corporate.press@adidas.com` | MEDIUM | https://www.adidas-group.com/en/media/media-contact |
+| 1 | Nike | `media.relations@nike.com` | HIGH | https://about.nike.com/en/company |
+| 2 | Adidas | `corporate.press@adidas-group.com` | HIGH | https://www.adidas-group.com/en/media/media-contact |
 | 3 | New Balance | `Media.relations@newbalance.com` | HIGH | https://newbalance.newsmarket.com/contacts |
 | 4 | Puma | `mario.almeida@puma.com` | HIGH | https://about.puma.com/en/en/newsroom/corporate-news/media-contacts |
 
@@ -18,103 +18,71 @@
 ## 1. Nike
 
 **To:** media.relations@nike.com  
-**Subject:** NYCity News Service query - Nike's pink World Cup cleats - response by 4 p.m. ET today
+**Subject:** Semafor request: Nike's pink World Cup cleats
 
 ```
 Hello,
 
-I'm Grace Thomas, a reporter with NYCity News Service.
+My name is Grace Thomas, I'm a reporter with Semafor. I am writing to request comment on Nike releasing pink cleats timed to the World Cup. I am looking for a statement on why the players wore pink cleats, why a consumer release was timed to the same window, and whether Nike relied on market research indicating pink would have the highest on-pitch visibility.
 
-The story examines a pattern: every major athletic brand released pink cleats timed to the 2026 World Cup, and my reporting indicates they were working from similar market research concluding that pink offers the highest visibility against the green of the pitch.
-
-Nike released at least one pink cleat colorway timed to the tournament, which is why I'm bringing these questions to you:
-
-1. Why did Nike choose pink for the boots worn by players at the World Cup?
-2. Why did Nike release pink cleats for consumers to purchase during this period?
-3. Did Nike rely on market research indicating pink would have the highest on-pitch visibility, and if so, was that research conducted internally or by an outside firm?
-
-My deadline is 4 ET today.
+My deadline is 4 p.m. ET today.
 
 --
 Grace Thomas
-Reporter | NYCity News Service
-tkc.intern2@journalism.cuny.edu | TODO (555) 555-5555
+Reporter | Semafor
+tkc.intern2@journalism.cuny.edu
 ```
 
 ## 2. Adidas
 
-**To:** corporate.press@adidas.com  
-**Subject:** NYCity News Service query - adidas' pink World Cup cleats - response by 4 p.m. ET today
+**To:** corporate.press@adidas-group.com  
+**Subject:** Semafor request: adidas's pink World Cup cleats
 
 ```
 Hello,
 
-I'm Grace Thomas, a reporter with NYCity News Service.
+My name is Grace Thomas, I'm a reporter with Semafor. I am writing to request comment on adidas releasing pink cleats timed to the World Cup. I am looking for a statement on why the players wore pink cleats, why a consumer release was timed to the same window, and whether adidas relied on market research indicating pink would have the highest on-pitch visibility.
 
-The story examines a pattern: every major athletic brand released pink cleats timed to the 2026 World Cup, and my reporting indicates they were working from similar market research concluding that pink offers the highest visibility against the green of the pitch.
-
-adidas released at least one pink cleat colorway timed to the tournament, which is why I'm bringing these questions to you:
-
-1. Why did adidas choose pink for the boots worn by players at the World Cup?
-2. Why did adidas release pink cleats for consumers to purchase during this period?
-3. Did adidas rely on market research indicating pink would have the highest on-pitch visibility, and if so, was that research conducted internally or by an outside firm?
-
-My deadline is 4 ET today.
+My deadline is 4 p.m. ET today.
 
 --
 Grace Thomas
-Reporter | NYCity News Service
-tkc.intern2@journalism.cuny.edu | TODO (555) 555-5555
+Reporter | Semafor
+tkc.intern2@journalism.cuny.edu
 ```
 
 ## 3. New Balance
 
 **To:** Media.relations@newbalance.com  
-**Subject:** NYCity News Service query - New Balance's pink World Cup cleats - response by 4 p.m. ET today
+**Subject:** Semafor request: New Balance's pink World Cup cleats
 
 ```
 Hello,
 
-I'm Grace Thomas, a reporter with NYCity News Service.
+My name is Grace Thomas, I'm a reporter with Semafor. I am writing to request comment on New Balance releasing pink cleats timed to the World Cup. I am looking for a statement on why the players wore pink cleats, why a consumer release was timed to the same window, and whether New Balance relied on market research indicating pink would have the highest on-pitch visibility.
 
-The story examines a pattern: every major athletic brand released pink cleats timed to the 2026 World Cup, and my reporting indicates they were working from similar market research concluding that pink offers the highest visibility against the green of the pitch.
-
-New Balance released at least one pink cleat colorway timed to the tournament, which is why I'm bringing these questions to you:
-
-1. Why did New Balance choose pink for the boots worn by players at the World Cup?
-2. Why did New Balance release pink cleats for consumers to purchase during this period?
-3. Did New Balance rely on market research indicating pink would have the highest on-pitch visibility, and if so, was that research conducted internally or by an outside firm?
-
-My deadline is 4 ET today.
+My deadline is 4 p.m. ET today.
 
 --
 Grace Thomas
-Reporter | NYCity News Service
-tkc.intern2@journalism.cuny.edu | TODO (555) 555-5555
+Reporter | Semafor
+tkc.intern2@journalism.cuny.edu
 ```
 
 ## 4. Puma
 
 **To:** mario.almeida@puma.com  
-**Subject:** NYCity News Service query - PUMA's pink World Cup cleats - response by 4 p.m. ET today
+**Subject:** Semafor request: Puma's pink World Cup cleats
 
 ```
 Hello,
 
-I'm Grace Thomas, a reporter with NYCity News Service.
+My name is Grace Thomas, I'm a reporter with Semafor. I am writing to request comment on Puma releasing pink cleats timed to the World Cup. I am looking for a statement on why the players wore pink cleats, why a consumer release was timed to the same window, and whether Puma relied on market research indicating pink would have the highest on-pitch visibility.
 
-The story examines a pattern: every major athletic brand released pink cleats timed to the 2026 World Cup, and my reporting indicates they were working from similar market research concluding that pink offers the highest visibility against the green of the pitch.
-
-PUMA released at least one pink cleat colorway timed to the tournament, which is why I'm bringing these questions to you:
-
-1. Why did PUMA choose pink for the boots worn by players at the World Cup?
-2. Why did PUMA release pink cleats for consumers to purchase during this period?
-3. Did PUMA rely on market research indicating pink would have the highest on-pitch visibility, and if so, was that research conducted internally or by an outside firm?
-
-My deadline is 4 ET today.
+My deadline is 4 p.m. ET today.
 
 --
 Grace Thomas
-Reporter | NYCity News Service
-tkc.intern2@journalism.cuny.edu | TODO (555) 555-5555
+Reporter | Semafor
+tkc.intern2@journalism.cuny.edu
 ```

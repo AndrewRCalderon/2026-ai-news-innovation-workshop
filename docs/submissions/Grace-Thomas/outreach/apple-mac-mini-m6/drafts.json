@@ -1,0 +1,21 @@
+{
+  "story_slug": "apple-mac-mini-m6",
+  "deadline": "3 pm ET today",
+  "terms": "",
+  "generated": "2026-08-26",
+  "from_email": "graceathomas5@gmail.com",
+  "emails": [
+    {
+      "company": "Apple",
+      "contact_name": "Apple Media Helpline (cc: Michelle Del Rio, Starlayne Meza)",
+      "to": "media.help@apple.com",
+      "cc": "mr_delrio@apple.com, starlayne_meza@apple.com",
+      "source_url": "https://www.apple.com/newsroom/2026/08/apple-unveils-a-more-powerful-mac-mini-featuring-the-all-new-m6-and-m5-pro/",
+      "source_date": "2026-08-26",
+      "confidence": "HIGH",
+      "contact_method": "email",
+      "subject": "Semafor request: Apple's AI performance claims for the new Mac mini",
+      "body": "Hello,\n\nMy name is Grace Thomas, I'm a reporter with Semafor. I am writing to request comment on Apple's announcement of the new Mac mini with the all-new M6 and M5 Pro chips. I am looking for a statement on the AI claims in that announcement: how Apple arrived at up to 4x faster AI performance, what investment in silicon and Apple Intelligence sits behind it, and what always-on agentic computing means for the enterprise customers the release describes.\n\nMy deadline is 3 pm ET today."
+    }
+  ]
+}
