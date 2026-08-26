@@ -36,12 +36,13 @@ story:
 a Google Doc by the Apps Script sidebar and handed to Claude. The sidebar hands off rather than
 calling the Claude API itself - task 18 has the reasoning, `architecture.md` has the decision.
 
-**A Google layer, as of 2026-08-25.** An Apps Script project bound to a Doc writes real Gmail
-drafts rather than transient compose windows, defaults to a test mode that rewrites every
-recipient to the reporter's own address, and requires the deadline to be typed fresh on every
-run. A committed `.githooks/pre-commit` refuses any commit that adds a way to send. **Tasks 15
-and 16 are built but not checked off** - both "done when" conditions describe a real run in
-Gmail, and no such run is recorded.
+**A Google layer, rebuilt 2026-08-26.** A standalone Apps Script project, installed as an editor
+add-on, writes real Gmail drafts rather than transient compose windows. Its sidebar opens with
+two controls - the deadline, and one button - and reveals the paste-back only after the button is
+pressed. Test mode is on by default and rewrites every recipient to the reporter's other address;
+an address below HIGH is marked in the draft subject; a committed `.githooks/pre-commit` refuses
+any commit that adds a way to send. **Tasks 15 and 16 are built but not checked off** - both
+"done when" conditions describe a real Gmail draft, and none has been created yet.
 
 **Stories run:** pink cleats at the 2026 World Cup (Nike, Adidas, New Balance, Puma) and Kalshi /
 Polymarket on flight-cancellation markets. Six drafts, **every contact HIGH**, each read from the
@@ -74,6 +75,10 @@ Two of those are **decisions before they are work**, and both need Grace, not a 
 - **Task 17 - Google Contacts sync.** Contacts has no field for confidence or source URL, and
   both are load-bearing under R8. Recommended shape is one-way, CSV to Contacts, with confidence
   and source in the notes field. Undecided.
+- **Task 22 - RFC Bot in every Doc.** An unpublished add-on works in one document at a time.
+  Template Doc plus "Make a copy", or publish unlisted, which needs task 23 first. Undecided.
+- **Task 24 - the button-to-Claude bridge.** Deferred on time, not merit. Read the note about
+  what an unattended run cannot ask before picking it up.
 
 ## Open questions
 
@@ -92,6 +97,41 @@ Two of those are **decisions before they are work**, and both need Grace, not a 
   reporter's taste, mixed in with the rules that make the tool safe. Task 20.
 
 ## Edit log
+
+**2026-08-26 — Day 3: RFC Bot rebuilt as an add-on, the sidebar cut to two controls, and the
+history files brought current.**
+
+Two halves. The first was catching up the record: `PLAN.md`'s edit log stopped at 2026-08-24 and
+its `## Next up` list was entirely done or paused, and `DAY-2.md` still described the Apps Script
+and Docs work as upcoming though it had landed the same day. Both fixed, and the task list moved
+to `tasks.md` where it belongs rather than living in two places.
+
+The second was a redesign the reporter asked for, which changed three things:
+
+- **Standalone editor add-on, not a bound script.** A bound script only runs in its own
+  container, so RFC Bot existed in exactly one Doc. Reversed in `architecture.md` and in task 15.
+- **The sidebar opens with two controls** — "When is the deadline?" and one button. The
+  paste-back that creates the Gmail drafts is hidden until the button has been pressed.
+- **Below-HIGH addresses are marked in the draft subject** (R8). The reporter picked marking over
+  being asked: it interrupts nothing, and the marker has to be deleted by hand, so the check
+  lands at the moment of sending.
+
+**Corrected:** the sending address. Signature, profile and the Apps Script all carried the CUNY
+address while the drafts are written in `graceathomas5@gmail.com` — a source hitting Reply and a
+source reading the signature would have reached two different inboxes. Task 16's rationale was
+wrong in the same way and was rewritten rather than left standing.
+
+**Ran it end to end on a third story** — Apple's Mac mini M6 release. Contacts came off the press
+release itself at HIGH; Apple prints named press contacts at the foot of each newsroom post, and
+publishes nothing on `/newsroom` or `/contact`. The general helpline turned up on `/leadership`,
+which no reasonable person would check. A first attempt was refused: the draft named no actual
+news, and sentence 3 cannot be invented.
+
+**Not done, and worth being plain about it:** the reporter asked for a button that puts the text
+into Claude Code without her pasting. That is not possible from Apps Script — Google's servers
+cannot reach a laptop — and the bridge that would do it is deferred as task 24. "Every Doc" also
+turned out to need publishing, which the Gmail scope blocks; that is task 22. Tasks 15 and 16
+stay unchecked: no Gmail draft has been created yet.
 
 **2026-08-25 — Day 2: a spec, a rewritten email, fixed contact research, and a way into Google.**
 
