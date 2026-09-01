@@ -68,7 +68,7 @@ AP's own newsroom rule states the same idea plainly: any AI output is "unvetted 
 
 ## 3. Humans can make things better or worse
 
-**Zillow Offers** originally had pricing experts vet every algorithm-generated home value estimate. Under growth pressure in 2021, "Project Ketchup" explicitly barred those experts from adjusting the algorithm's numbers. Purchase volume doubled the next quarter. Then the algorithm's blind spots, no longer caught by anyone, caught up: a $421 million loss in a single quarter, the business shut down, about 25% of the company laid off.[1]
+**Zillow Offers** originally had pricing experts vet every algorithm-generated home value estimate. Under growth pressure in 2021, "Project Ketchup" explicitly barred those experts from adjusting the algorithm's numbers. Purchase volume doubled the next quarter. Then the algorithm's blind spots, no longer caught by anyone, caught up: a $421 million loss in a single quarter, Zillow Offers shut down, about 25% of the company laid off.[1]
 
 This doesn't mean that automation beats humans. It means that whether you keep the human or remove them, it's a specific, testable design choice for each task, not a value you apply uniformly everywhere.
 
