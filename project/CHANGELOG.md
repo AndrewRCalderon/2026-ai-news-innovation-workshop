@@ -3055,6 +3055,29 @@ questions. Worked Adiel's 3 sources into
 
 ## Change log
 
+- 2026-09-01 — **Submissions gallery temporarily taken down; added a
+  `Project Repo` field instead of a live-run feature.** Students created
+  their own standalone project repos (separate from their fork of this
+  class repo) and asked to link them from the gallery. That grew into a
+  bigger question — running each project live on click — which two rounds
+  of research ruled out: no service today does "anonymous visitor clicks,
+  real backend runs" cleanly (StackBlitz is JS/WASM-only; GitHub Codespaces
+  needs the visitor's own GitHub login; CodeSandbox's GitHub-import and
+  GitHub Spark, the two products that did both, are both being shut down
+  in 2026), building it ourselves means new backend infrastructure this
+  repo has deliberately avoided (ADR 0023), and one real submission
+  (Grace-Thomas's) sends live email via Gmail's API — running that for an
+  anonymous clicker is something no credible framework (Google's own OAuth
+  policy, CI/CD's plan-then-approve norm, current agent-safety guidance)
+  endorses. Landed instead: `SUBMISSION.md` gained a `Project Repo` field
+  alongside the existing `Fork URL`; `docs/js/submissions-gallery.js`'s
+  `buildCard` renders both as separate links when present. The gallery
+  page itself (`docs/students/index.html`) and its three site entry points
+  (nav, footer, home page card) were removed in a separate, already-merged
+  PR while this rework was in progress — no one had the URL, so a bare
+  404 was an acceptable interim state. Restoring the page is a follow-up
+  task once the three real students' repo URLs are supplied and the field
+  is verified end to end.
 - 2026-08-25 — **Day 3 morning restructured: Product Design cut, its
   disclosure section relocated into Safe & Auditable Design, Recap grows,
   and a new additional "Build Time" block added before lunch.** Product

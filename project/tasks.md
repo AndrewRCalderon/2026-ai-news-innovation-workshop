@@ -38,24 +38,28 @@ Status: `[ ]` not started · `[~]` in progress
 
 ## Student submissions
 
-- [ ] **Add a live-URL field to `SUBMISSION.md` and the auto-generated
-      cards.** Day 3's Build Time session now walks students through
-      deploying their own project to Vercel and saving the live URL (see
-      `docs/day-3/04-build-time.html` s1) — `SUBMISSION.md`'s field set and
-      `docs/js/submissions-gallery.js`'s parser/render logic need a
-      matching field so that URL actually surfaces on the student's
-      submission card instead of just living in their own notes. See
-      [ADR 0023](adr/0023-auto-generated-submission-cards.md) for how the
-      card pipeline currently works.
+- [x] **Add a `Project Repo` field to `SUBMISSION.md` and the
+      auto-generated cards**, for a student's own standalone project repo
+      (distinct from `Fork URL`, which points at their fork of this class
+      repo). `docs/js/submissions-gallery.js`'s `buildCard` now renders
+      both link fields when present. A live-URL/deploy-triggered feature
+      was considered and deliberately dropped — see the 2026-09-01
+      changelog entry for why (no clean anonymous-execution service
+      exists, it would require backend infrastructure this repo has
+      avoided per ADR 0023, and one real submission has real-world side
+      effects, e.g. sending live email, making "run it for any visitor"
+      unsafe regardless of infrastructure).
+- [ ] **Populate the new field for the 3 real submissions**
+      (`Grace-Thomas`, `ambra-schuster`, `chrissy-wang`) once their actual
+      project-repo URLs are supplied.
+- [ ] **Restore the submissions gallery** (`docs/students/index.html` plus
+      its nav/footer/home-page links, all removed in the 2026-09-01
+      takedown) once the new field is verified working end to end.
 - [ ] **`SUBMISSION.md` field set is still provisional.** Flagged as
       wanting to be seen in real use before finalizing — now that
       rendering is automated (ADR 0023), a field rename has a real
       downstream parsing cost, so batch any further field changes rather
       than iterating one at a time.
-- [ ] **Demo-path field decision.** Was in the original submission-card
-      scope, dropped from the current field set — unclear if that was
-      deliberate. Revisit once the live-URL field above is added, they may
-      turn out to be the same thing.
 
 ## Infrastructure
 

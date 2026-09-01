@@ -60,14 +60,20 @@
       card.appendChild(p);
     });
 
-    if (fields['Fork URL']) {
-      var link = document.createElement('a');
-      link.href = fields['Fork URL'];
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      link.textContent = "View " + (fields['Student Name'] || 'this') + "'s fork →";
-      card.appendChild(link);
-    }
+    var LINKS = [
+      { key: 'Project Repo', text: "View " + (fields['Student Name'] || 'this') + "'s project repo →" },
+      { key: 'Fork URL', text: "View " + (fields['Student Name'] || 'this') + "'s fork →" }
+    ];
+    LINKS.forEach(function (l) {
+      if (fields[l.key]) {
+        var link = document.createElement('a');
+        link.href = fields[l.key];
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = l.text;
+        card.appendChild(link);
+      }
+    });
 
     return card;
   }

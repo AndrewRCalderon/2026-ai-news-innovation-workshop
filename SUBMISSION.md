@@ -9,6 +9,8 @@
 
 - **Fork URL:** *e.g. `https://github.com/jordanlee/2026-ai-news-innovation-workshop`*
 
+- **Project Repo:** *If your project lives in its own separate repo (not just inside your fork's submission folder), link it here. e.g. `https://github.com/jordanlee/city-council-digest`*
+
 - **Hypothesis or problem statement:** *What problem are you trying to address, or what is the hypothesis that your product is meant to test? e.g. "Local reporters spend hours a week manually checking city council agendas for newsworthy items — a daily digest could surface those automatically."*
 
 - **What you're building:** *A short description of what you are building. e.g. "A tool that scans public meeting agendas and emails a same-day summary of anything a reporter should look into."*
