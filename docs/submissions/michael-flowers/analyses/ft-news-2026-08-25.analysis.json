@@ -1,0 +1,114 @@
+{
+  "source": {
+    "title": "Can Trump's 'economic D-day' force Iran to capitulate?",
+    "outlet": "Financial Times",
+    "section": "News — Middle East war",
+    "author": "Andrew England in London, Najmeh Bozorgmehr in Tehran and Joseph Leahy in Beijing",
+    "date": "2026-08-25",
+    "url": "https://www.ft.com/content/b6009dd2-7e97-4bbc-941d-cd0b8fc046b6",
+    "type": "news-analysis",
+    "wordCount": 1305,
+    "role": "Control text for the discrimination test. Same outlet, same event, same week as the Bessent op-ed — news desk rather than opinion page, so genre is the only variable that changes.",
+    "caveat": "This is news analysis, not a straight wire report. Analysis carries more interpretation than a bare account of what happened, so this is a conservative control — a pure wire story would likely score lower still.",
+    "note": "Source text held locally and not committed — FT terms prohibit redistribution. Only short spans quoted here, for criticism."
+  },
+
+  "fact": [
+    {
+      "claim": "China imported $11bn of goods from Iran and exported $13.4bn in the Iranian financial year to March; UAE trade totalled $21bn; Turkey $13.5bn.",
+      "verifyWith": "Attributed in-text to Iranian government data. Cross-check against Iranian customs administration figures and IMF Direction of Trade Statistics."
+    },
+    {
+      "claim": "Year-on-year inflation is 'soaring towards 90 per cent' and the rial is hitting record lows almost daily.",
+      "verifyWith": "Statistical Centre of Iran CPI; open-market rial quotes. Note the op-ed made a similar claim without any source; this piece states a figure."
+    },
+    {
+      "claim": "Trump withdrew from the 2015 nuclear accord in May 2018, beginning the 'maximum pressure' campaign.",
+      "verifyWith": "Standard record. Load-bearing for the article's argument, since the whole piece turns on comparison with that campaign."
+    },
+    {
+      "claim": "'maximum pressure' failed to force concessions and fostered a more hardline stance in Tehran.",
+      "verifyWith": "IAEA enrichment records for the period; the claim is contestable and is asserted in the article's own voice rather than attributed."
+    },
+    {
+      "claim": "The UAE suspended all trade and financial transactions with Iran last week.",
+      "verifyWith": "UAE government statements; attributed in-text."
+    }
+  ],
+
+  "persuasion": [
+    {
+      "technique": "loaded-language",
+      "span": "force the Islamic regime to cave to its demands and lift its chokehold over the Strait of Hormuz",
+      "mechanism": "Two metaphors in the paper's own voice — 'cave' and 'chokehold' — assign posture and aggression rather than describing the blockade in neutral terms.",
+      "neutral": "press Iran to accept US terms and reopen the Strait of Hormuz",
+      "confidence": "medium",
+      "attributed": false
+    },
+    {
+      "technique": "agent-deletion",
+      "span": "the pain being heaped on the nation of about 90mn people",
+      "mechanism": "Passive construction with no 'by' phrase. Pain is heaped, but the sanctions regime doing the heaping is absent from the sentence.",
+      "neutral": "the pain US sanctions and the war are imposing on a nation of about 90mn people",
+      "confidence": "high",
+      "attributed": false
+    },
+    {
+      "technique": "loaded-language",
+      "span": "hundreds of swingeing sanctions",
+      "mechanism": "Severity asserted through an adjective rather than through the measures' scope or effect.",
+      "neutral": "hundreds of sanctions",
+      "confidence": "low",
+      "attributed": false
+    },
+    {
+      "technique": "loaded-language",
+      "span": "the single greatest financial offensive ever marshalled against an adversary",
+      "mechanism": "Same superlative flagged in the op-ed. Here it sits inside quotation marks and is explicitly credited to Bessent, so the language belongs to the source, not the paper.",
+      "neutral": "No rewrite needed — the article is reporting the claim, not making it.",
+      "confidence": "high",
+      "attributed": true
+    },
+    {
+      "technique": "loaded-language",
+      "span": "remedy bad behaviour",
+      "mechanism": "Casts sovereign trading decisions as misconduct requiring correction. Bessent's framing, quoted and attributed.",
+      "neutral": "No rewrite needed — quoted and credited.",
+      "confidence": "high",
+      "attributed": true
+    },
+    {
+      "technique": "appeal-to-fear",
+      "span": "as an act of war",
+      "mechanism": "Escalation framing, attributed to Iran's top security official and presented as his characterisation rather than the paper's.",
+      "neutral": "No rewrite needed — quoted and credited.",
+      "confidence": "high",
+      "attributed": true
+    }
+  ],
+
+  "actionable": [
+    {
+      "question": "Did 'maximum pressure' actually fail, or did it achieve different aims than the ones being measured?",
+      "how": "The article asserts failure in its own voice. Compare Iranian oil export volumes, enrichment levels, and proxy funding across 2018-2021 — the answer differs depending on which metric is treated as the goal."
+    },
+    {
+      "question": "Who is quoted, and who is not?",
+      "how": "Named sources here include a former Israeli military intelligence analyst, a Chatham House fellow, an Iranian analyst, and Iran's central bank governor — critics and Iranian voices both present. No serving US official is quoted beyond Bessent's public remarks. Compare against the op-ed, which quotes no one."
+    },
+    {
+      "question": "Is the 90 per cent inflation figure official or estimated?",
+      "how": "Iranian official statistics and independent estimates diverge substantially. Check which is being used."
+    }
+  ],
+
+  "unclassified": [],
+
+  "density": {
+    "findings": 6,
+    "attributedFindings": 3,
+    "unattributedFindings": 3,
+    "words": 1305,
+    "per100Words": 0.23
+  }
+}
